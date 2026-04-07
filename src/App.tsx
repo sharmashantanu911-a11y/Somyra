@@ -71,6 +71,7 @@ import { SavedLibrary } from './features/SavedLibrary';
 import { Terms } from './components/Terms';
 import { Privacy } from './components/Privacy';
 import { Contact } from './components/Contact';
+import { Analytics } from '@vercel/analytics/react';
 
 const dailyTips = [
   "LinkedIn's algorithm favors conversational posts that start with a strong hook. Avoid using more than 3 hashtags.",
@@ -1962,6 +1963,8 @@ export default function App() {
         isOpen={showChangelog}
         onClose={() => setShowChangelog(false)}
       />
+
+      <Analytics />
     </div>
   );
 }
