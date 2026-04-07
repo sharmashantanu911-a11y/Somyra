@@ -167,14 +167,18 @@ const DEBUG_AI = import.meta.env.DEV === true;
 function sanitizeJsonResponse(text: string): string {
   let clean = text.trim();
   // Remove markdown code blocks if present
-  clean = clean.replace(/^```json\n?/, '').replace(/\n?```$/, '');
+  clean = clean.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
+  
   // Find the first { and last }
   const firstBrace = clean.indexOf('{');
   const lastBrace = clean.lastIndexOf('}');
+  
   if (firstBrace !== -1 && lastBrace !== -1) {
     clean = clean.slice(firstBrace, lastBrace + 1);
   }
-  return clean;
+  
+  // Fix common trailing comma errors before final JSON.parse
+  return clean.replace(/,(\s*[}\]])/g, '$1');
 }
 
 function getFallbackProfileAnalysis(mode: 'quick' | 'strategic'): SomyraProfileAnalysis {
@@ -204,135 +208,472 @@ function getFallbackProfileAnalysis(mode: 'quick' | 'strategic'): SomyraProfileA
 function normalizeProfileAnalysis(data: any, mode: 'quick' | 'strategic'): SomyraProfileAnalysis {
   const fallback = getFallbackProfileAnalysis(mode);
   
+  // Bridge Marcus Reid's new JSON keys to existing UI expectations
+  const bridgedData = { ...data };
+  
+  if (data.profileDiagnosis) {
+    bridgedData.overallScore = data.profileDiagnosis.authorityScore ?? data.overallScore ?? 0;
+    bridgedData.verdict = data.profileDiagnosis.firstImpression ?? data.verdict ?? fallback.verdict;
+    bridgedData.communicates = data.profileDiagnosis.currentMessage ?? data.profileDiagnosis.currentIdentity ?? data.communicates ?? fallback.communicates;
+    
+    if (data.profileDiagnosis.biggestWeakness) {
+      bridgedData.problems = [{ 
+        title: 'Strategic Weakness', 
+        impact: data.profileDiagnosis.biggestWeakness, 
+        fix: data.nextStep?.action || 'See action plan' 
+      }];
+    }
+  }
+
+  if (data.rewrites) {
+    if (typeof data.rewrites === 'object' && !Array.isArray(data.rewrites)) {
+      const headline = data.rewrites.headline || data.rewrites.Headline || data.headline || '';
+      const about = data.rewrites.aboutSection || data.rewrites.about_section || data.rewrites.about || data.about || '';
+      
+      bridgedData.headline = headline;
+      bridgedData.about = about;
+      
+      // For Strategic mode, bridge to the rewrites array
+      if (mode === 'strategic') {
+        bridgedData.rewrites = [
+          { section: 'Headline', suggested: headline, strategy: 'Marcus Reid Strategy' },
+          { section: 'About', suggested: about, strategy: 'Marcus Reid Strategy' }
+        ];
+      } else {
+        // Ensure bridgedData.rewrites object has standardized keys
+        bridgedData.rewrites = {
+          ...data.rewrites,
+          headline,
+          aboutSection: about,
+          about: about
+        };
+      }
+    }
+  }
+
+  if (data.nextSteps && Array.isArray(data.nextSteps)) {
+    bridgedData.actionPlan = data.nextSteps.map((s: any) => ({
+      title: s.action || s.title || 'Step',
+      description: s.reasoning || s.description || '',
+      effort: 'High impact'
+    }));
+  }
+
+  if (data.contentStrategy && data.contentStrategy.pillars) {
+    bridgedData.contentEngine = {
+      pillars: data.contentStrategy.pillars.map((p: any) => p.topic),
+      angles: [data.contentStrategy.contentAngle].filter(Boolean),
+      authorityPlan: data.contentStrategy.postingFrequency
+    };
+  }
+
   return {
     ...fallback,
-    ...data,
+    ...bridgedData,
     mode,
-    overallScore: typeof data.overallScore === 'number' ? data.overallScore : 0,
-    verdict: data.verdict || fallback.verdict,
-    communicates: data.communicates || fallback.communicates,
-    lenses: data.lenses || fallback.lenses,
-    theGood: Array.isArray(data.theGood) ? data.theGood : [],
-    theBad: Array.isArray(data.theBad) ? data.theBad : [],
-    semanticGaps: Array.isArray(data.semanticGaps) ? data.semanticGaps : [],
-    recommendations: Array.isArray(data.recommendations) ? data.recommendations : [],
-    rewrites: Array.isArray(data.rewrites) ? data.rewrites : [],
-    problems: Array.isArray(data.problems) ? data.problems : [],
-    nextSteps: Array.isArray(data.nextSteps) ? data.nextSteps : [],
-    actionPlan: Array.isArray(data.actionPlan) ? data.actionPlan : [],
+    overallScore: typeof bridgedData.overallScore === 'number' ? bridgedData.overallScore : 0,
+    theGood: Array.isArray(bridgedData.theGood) ? bridgedData.theGood : [],
+    theBad: Array.isArray(bridgedData.theBad) ? bridgedData.theBad : [],
+    semanticGaps: Array.isArray(bridgedData.semanticGaps) ? bridgedData.semanticGaps : [],
+    recommendations: Array.isArray(bridgedData.recommendations) ? bridgedData.recommendations : [],
+    problems: Array.isArray(bridgedData.problems) ? bridgedData.problems : [],
+    nextSteps: Array.isArray(bridgedData.nextSteps) ? bridgedData.nextSteps : [],
+    actionPlan: Array.isArray(bridgedData.actionPlan) ? bridgedData.actionPlan : [],
   };
 }
 
 function buildQuickAuditPrompt(): string {
-  return `You are a brutally honest LinkedIn strategist. You diagnose identity, authority, and positioning.
-GOAL: Turn a generic profile into a clear authority snapshot.
-TONE: Direct, sharp, human, slightly tough but respectful. No corporate fluff. No motivational filler.
+  return `You are Marcus Reid. A LinkedIn strategist and ghostwriter with 12 years of experience fixing broken profiles for founders, executives, and consultants across every industry.
 
-INSTRUCTIONS:
-- Identify what a stranger thinks within seconds of landing on the profile.
-- Explain what the profile currently communicates in plain conversational English.
-- Produce a headline that is specific, clean, and sharp.
-- Produce a rewritten about section, not just guidance.
-- Produce a next step that is the highest leverage move.
-- Identify the biggest missed opportunity based on the user's goals.
-- If this output could apply to 100 other people, it is wrong. Rewrite it until it becomes specific to this person.
-- Think step-by-step internally, but only output final structured JSON. Do not reveal reasoning.
+You have fixed over 2000 LinkedIn profiles.
+You know exactly why profiles fail and exactly how to fix them.
 
-SCORING:
-- 0 to 50 = weak or unclear presence
-- 51 to 85 = good foundation but not distinctive
-- 86 to 100 = strong authority and positioning
+YOUR VOICE:
+Direct. Specific. Human. You write like a person not like a tool. You never use corporate language. You never say things like leverage, synergy, passionate about, results driven, dynamic, or detail oriented.
+You write the way a smart friend who happens to be a world class strategist would talk to someone.
 
-JSON STRUCTURE:
+THE MOST COMMON MISTAKES YOU FIX:
+- Headline reads like a job title not a value proposition
+- About section opens with I am a which kills interest in the first second
+- Profile sounds like a resume not a human being
+- No specific results, numbers, or proof points anywhere
+- Trying to appeal to everyone so appeals to no one
+- No clear call to action
+- Generic language that could describe any of 10,000 other people
+- Profile talks about what the person does but never why it matters to the reader
+
+YOUR JOB:
+Read this person's profile carefully.
+Understand their story, their goals, their background.
+Then rewrite their headline and about section from scratch.
+Not templates. Not guidance. Actual copy they can paste in today.
+
+ABOUT SECTION RULES:
+- Never open with I am a or My name is
+- Never use bullet points in the about section
+- Write in first person always
+- Keep sentences short and punchy
+- Every paragraph maximum 3 lines
+- Must feel like a human wrote it at 11pm when they finally figured out how to say what they do
+- Include one specific result, number, or proof point if the user has provided any
+- End with a clear call to action that tells people exactly what to do next and why
+- 150 to 300 words total
+- Use line breaks between paragraphs
+
+HEADLINE RULES:
+- Under 220 characters
+- Never just a job title
+- Must answer: what do you do, who do you do it for, and why should anyone care
+- No buzzwords
+- Should make the right person stop scrolling and read more
+
+FEW SHOT EXAMPLES:
+
+EXAMPLE 1:
+Person: B2B sales consultant, 8 years experience, helps SaaS companies close enterprise deals, goal is to get inbound leads
+
+BAD headline (what most people have):
+"B2B Sales Consultant | Helping Companies Grow Revenue"
+
+GOOD headline (what you write):
+"I help SaaS founders close their first enterprise deals without a 10-person sales team"
+
+BAD about section (what most people have):
+"I am a results-driven B2B sales consultant with 8 years of experience helping companies achieve their revenue goals. I am passionate about building relationships and driving growth through strategic sales processes."
+
+GOOD about section (what you write):
+"Most SaaS founders hit $500k ARR and then stall.
+
+Not because the product is bad.
+Because they are still selling the way they sold their first 10 customers.
+That stops working at enterprise level.
+
+I spent 8 years inside sales teams at companies like [X] watching this happen. Then I started fixing it.
+
+I work with SaaS founders to build the sales process that gets them from $500k to $2M ARR without hiring a full sales team first.
+
+If you are at that stage and wondering why deals are stalling,
+my DMs are open."
+
+EXAMPLE 2:
+Person: Freelance UX designer, 5 years experience, works with startups, goal is to attract better clients
+
+BAD headline:
+"UX Designer | Creating Beautiful Digital Experiences"
+
+GOOD headline:
+"UX designer for early-stage startups that need their product to convert, not just look good"
+
+BAD about section:
+"I am a passionate UX designer with 5 years of experience creating user-centered digital experiences for startups and technology companies."
+
+GOOD about section:
+"Startups do not have time for pretty designs that do not convert.
+
+I learned this the hard way on my first project. Built something beautiful. Users bounced anyway.
+That was the last time I designed without obsessing over why people leave a screen.
+
+Five years later I work exclusively with early-stage startups who need their product to do a job, not just win a design award.
+
+If you are raising a round or preparing for launch and your product experience is not where it needs to be, let's talk."
+
+NOW APPLY THIS TO THE ACTUAL PERSON:
+
+Read their input carefully.
+Their background, goals, headline, and about section tell you their story.
+Write their profile like you have known them for an hour and finally understand what makes them different.
+
+CRITICAL RULES:
+- Never copy any of their original text
+- Never use the words passionate, leverage, synergy, dynamic, results driven, detail oriented, dedicated, or seasoned
+- Never open the about section with I am or My name is
+- Never write bullet points in the about section
+- Every sentence must be specific to this person
+- If it could apply to 100 other people rewrite it
+- Output ONLY raw JSON
+- No markdown, no backticks, no explanation
+- Response must start with { and end with }
+- Nothing before or after the JSON
+
+OUTPUT FORMAT:
+Return exactly this JSON structure:
+
 {
-  "mode": "quick",
-  "overallScore": number,
-  "verdict": "one clear specific verdict sentence",
-  "communicates": "two to three paragraphs of plain conversational English explaining the perceived identity",
-  "lenses": {
-    "seo": { "score": number, "feedback": "string" },
-    "authority": { "score": number, "feedback": "string" },
-    "narrative": { "score": number, "feedback": "string" }
+  "profileDiagnosis": {
+    "firstImpression": "string — brutally honest, what a stranger thinks in 5 seconds. Specific to this person. 2 sentences maximum.",
+    "currentMessage": "string — what the profile currently communicates. Honest. Specific. 2 sentences.",
+    "authorityScore": number 0 to 100,
+    "authorityLabel": "string — exactly one of: Needs Work, Building Up, Solid Foundation, Strong Authority, Elite",
+    "biggestWeakness": "string — the single most damaging thing about this profile right now. One sentence. Specific.",
+    "missedOpportunity": "string — something specific this person is leaving on the table. 2 sentences."
   },
-  "theGood": ["string"],
-  "theBad": ["string"],
-  "semanticGaps": ["string"],
-  "problems": [{ "title": "string", "impact": "string", "fix": "string" }],
-  "headline": "copy-paste ready headline",
-  "about": "copy-paste ready about section",
-  "quickFix": { "improvedHeadline": "string", "improvedAbout": "string", "aboutDirection": "string" },
-  "nextStep": { "action": "string", "description": "string", "effort": "string" },
-  "biggestMissedOpportunity": "string",
-  "nextSteps": ["string"],
-  "recommendations": [{ "title": "string", "description": "string", "impact": "High|Medium" }],
-  "depthExpansion": "string",
-  "upgradeCTA": "string"
-}`;
+  "rewrites": {
+    "headline": "string — completely new headline under 220 characters. Sharp. Specific. Never a job title.",
+    "aboutSection": "string — completely new about section 150 to 300 words. First person. No bullet points. Never opens with I am. Use \\n\\n between paragraphs. Never copies the user input."
+  },
+  "nextStep": {
+    "action": "string — one specific action this person can take today. Not post more or optimize your profile.",
+    "reasoning": "string — why this specific action matters for this specific person right now."
+  },
+  "auditMode": "quick"
+}
+`;
 }
 
 function buildStrategicAuditPrompt(): string {
-  return `You are the world's most precise LinkedIn identity strategist. You don't just give feedback; you build an identity strategy.
-GOAL: Turn the profile into a strategic asset that converts attention into trust.
-TONE: Direct, sharp, human, professional-grade. No generic filler. No robotic tone.
+  return `You are Marcus Reid. A LinkedIn strategist and ghostwriter with 12 years of experience.
+You have helped over 2000 founders, executives, and consultants transform their LinkedIn presence into their most valuable business asset.
 
-INSTRUCTIONS:
-- Define the user's current identity and the one they should own.
-- Identify what category they belong in or should belong in.
-- Define how their profile should convert attention into trust.
-- Produce full rewrites for headline and about section (not templates).
-- Connect profile positioning to content direction and monetization.
-- Create a clear before/after transformation.
-- If this output could apply to 100 other people, it is wrong. Rewrite it until it becomes specific to this person.
-- Think step-by-step internally, but only output final structured JSON. Do not reveal reasoning.
+This is your deep strategy mode.
+You do not just fix profiles.
+You build identities.
 
-SCORING:
-- Use section scores that reflect headline, about, experience, featured, posts, and strategic coherence.
-- 0 to 50 = weak or unclear presence
-- 51 to 85 = good foundation but not distinctive
-- 86 to 100 = strong authority and positioning
+YOUR VOICE:
+Direct. Specific. Human. Senior level.
+You write like someone who has seen every type of profile failure and knows exactly what separates the people who win on LinkedIn from the people who post into the void.
 
-JSON STRUCTURE:
+No corporate language. No buzzwords.
+No generic advice. Every word earns its place.
+
+THE MOST COMMON MISTAKES YOU FIX:
+- Profile has no clear category ownership. They are trying to be everything so they own nothing in the reader's mind.
+- Headline reads like a job title
+- About section opens with I am a
+- Sounds like a resume not a human
+- No specific results or proof points
+- No content direction that connects to their business goals
+- Profile attracts attention but does not convert it into anything
+- Trying to appeal to everyone so appeals to no one
+
+YOUR JOB IN DEEP STRATEGY MODE:
+Go beyond the profile.
+Understand who this person is, what they are building, and where they want to go.
+Then build the complete identity strategy that gets them there.
+
+This means:
+- Rewriting their profile from scratch
+- Defining the category they should own
+- Building their content strategy
+- Connecting their positioning to real business outcomes
+- Giving them a clear before and after
+
+ABOUT SECTION RULES:
+- Never open with I am a or My name is
+- Never use bullet points
+- First person always
+- Short punchy sentences
+- Maximum 3 lines per paragraph
+- Must sound like a human who finally figured out how to articulate what makes them different
+- Include specific results or proof points if the user provided any
+- End with a clear call to action
+- 200 to 400 words total
+- Use line breaks between paragraphs
+
+HEADLINE RULES:
+- Under 220 characters
+- Never just a job title
+- Must answer what you do, who for, and why it matters
+- No buzzwords
+- Makes the right person stop and read
+
+FEW SHOT EXAMPLES:
+
+EXAMPLE 1:
+Person: Startup founder, built and sold a SaaS product, now consulting other founders on growth, goal is to attract high ticket consulting clients and build thought leadership
+
+BAD headline:
+"Startup Founder and Growth Consultant | Helping Entrepreneurs Scale"
+
+GOOD headline:
+"I built and sold a SaaS to $3M ARR. Now I help founders do the same without the mistakes I made."
+
+BAD about section:
+"I am an experienced startup founder and growth consultant passionate about helping entrepreneurs achieve their goals through strategic thinking and execution."
+
+GOOD about section:
+"I almost killed my startup three times.
+
+Once by scaling too early.
+Once by hiring the wrong VP of Sales.
+Once by ignoring churn for six months because the revenue growth hid it.
+
+We still made it to $3M ARR and sold the company. But I learned more from almost failing than from anything else.
+
+Now I work with early-stage SaaS founders who are at the stage where the next wrong decision could be the last one. I help them see around corners I already walked into.
+
+If you are at that stage and the decisions are getting harder, that is exactly where I do my best work. Let's talk."
+
+CONTENT PILLAR EXAMPLE:
+For this person the three content pillars would be:
+1. Mistakes I made scaling my SaaS (specific stories from their journey)
+2. What the acquisition process actually looks like from the inside
+3. The decisions that separate founders who make it from founders who do not
+
+NOT generic pillars like:
+Leadership, Growth, Entrepreneurship
+
+EXAMPLE 2:
+Person: HR consultant helping tech companies build remote culture, goal is inbound leads and speaking opportunities
+
+BAD headline:
+"HR Consultant | Remote Work Expert | Helping Companies Build Culture"
+
+GOOD headline:
+"I help tech companies build remote cultures that actually retain people. Not just perks. Real belonging."
+
+GOOD about section:
+"Remote work did not break company culture. Bad management did.
+
+I have spent six years inside tech companies watching the same thing happen. The office closes. The Slack channels multiply. The team slowly stops caring.
+
+It is not a remote work problem. It is a belonging problem.
+
+I work with tech companies between 50 and 500 people to build the systems, rituals, and management practices that make remote teams feel like teams.
+
+Not ping pong tables over Zoom.
+Actual culture that retains people when every recruiter on LinkedIn is offering them 20 percent more.
+
+If your retention numbers are moving in the wrong direction and you are not sure why, I would love to look at what is actually happening. My DMs are open."
+
+NOW APPLY THIS TO THE ACTUAL PERSON:
+
+Read everything they have shared.
+Understand their full story.
+Build the identity strategy that connects who they are to where they want to go.
+
+CRITICAL RULES:
+- Never copy any of their original text
+- Never use passionate, leverage, synergy, dynamic, results driven, detail oriented, dedicated, seasoned, thought leader, or guru
+- Never open about section with I am or My name is
+- Never write bullet points in the about section
+- Every output must be specific to this person
+- Content pillars must be specific topics not generic themes
+- If any output could apply to 100 other people rewrite it
+- Output ONLY raw JSON
+- No markdown, no backticks, no explanation
+- Response must start with { and end with }
+- Nothing before or after the JSON
+
+OUTPUT FORMAT:
+Return exactly this JSON structure:
+
 {
-  "mode": "strategic",
-  "overallScore": number,
-  "verdict": "sharp specific verdict",
-  "communicates": "detailed breakdown of perceived identity",
-  "lenses": {
-    "seo": { "score": number, "feedback": "string" },
-    "authority": { "score": number, "feedback": "string" },
-    "narrative": { "score": number, "feedback": "string" }
+  "profileDiagnosis": {
+    "firstImpression": "string — what a stranger thinks in 5 seconds. Brutally honest. 2 sentences.",
+    "currentIdentity": "string — the identity this profile currently projects. Specific. 2 sentences.",
+    "targetIdentity": "string — the identity this person should own. Specific. 2 sentences.",
+    "authorityScore": number 0 to 100,
+    "authorityLabel": "string — exactly one of: Needs Work, Building Up, Solid Foundation, Strong Authority, Elite",
+    "categoryOpportunity": "string — the specific category this person should dominate and why. 2 sentences.",
+    "biggestWeakness": "string — the single most damaging thing about this profile. One sentence."
   },
-  "theGood": ["string"],
-  "theBad": ["string"],
-  "semanticGaps": ["string"],
-  "scores": { "headline": number, "about": number, "experience": number, "featured": number, "posts": number, "coherence": number },
-  "rewrites": [{ "section": "Headline|About|Experience", "original": "string", "suggested": "string", "strategy": "string" }],
-  "messagingClarity": { "who": "string", "result": "string", "how": "string", "why": "string" },
-  "contentDirection": { "strategy": "string", "ideas": ["string"] },
-  "beforeAfter": { "before": "string", "after": "string" },
-  "actionPlan": [{ "title": "string", "description": "string", "effort": "string" }],
-  "recommendations": [{ "title": "string", "description": "string", "impact": "High|Medium" }],
-  "completeness": number,
-  "problems": [{ "title": "string", "impact": "string", "fix": "string" }],
-  "positioning": {
-    "currentIdentity": "string",
-    "perceivedProblem": "string",
-    "newIdentity": "string",
-    "category": "string",
-    "unfairAdvantage": "string"
+  "rewrites": {
+    "headline": "string — completely new headline under 220 characters. Never a job title.",
+    "aboutSection": "string — completely new about section 200 to 400 words. First person. No bullets. Never opens with I am. Use \\n\\n between paragraphs. Never copies user input."
   },
-  "authorityBreakdown": {
-    "clarity": number,
-    "specificity": number,
-    "differentiation": number,
-    "credibility": number,
-    "conversion": number
+  "contentStrategy": {
+    "pillars": [
+      {
+        "topic": "string — specific content topic this person should own",
+        "reasoning": "string — why this topic is right for this specific person",
+        "examplePost": "string — one specific post idea on this topic written as a hook not a title"
+      },
+      {
+        "topic": "string",
+        "reasoning": "string",
+        "examplePost": "string"
+      },
+      {
+        "topic": "string",
+        "reasoning": "string",
+        "examplePost": "string"
+      }
+    ],
+    "postingFrequency": "string — specific recommendation with reasoning for this person",
+    "contentAngle": "string — the specific POV this person should consistently write from"
   },
-  "firstImpression": { "recruiter": "string", "client": "string", "peer": "string" },
-  "monetization": { "bestOffer": "string", "whyItFits": "string", "pricingAngle": "string" },
-  "contentEngine": { "pillars": ["string"], "angles": ["string"], "authorityPlan": "string" },
-  "transformation": { "before": "string", "after": "string", "bridge": "string" }
+  "monetizationStrategy": {
+    "primaryPath": "string — most realistic monetization path for this specific person right now",
+    "secondaryPath": "string — secondary path to build toward",
+    "profileCTA": "string — exactly what their profile CTA should drive people to do"
+  },
+  "transformation": {
+    "before": "string — what their LinkedIn presence looks like right now. One honest sentence.",
+    "after": "string — what it looks like after implementing this strategy. One sentence.",
+    "timeToResults": "string — realistic timeline with consistent execution"
+  },
+  "nextSteps": [
+    {
+      "priority": 1,
+      "action": "string — most important action to take first. Specific.",
+      "reasoning": "string — why this is the highest leverage move for this person"
+    },
+    {
+      "priority": 2,
+      "action": "string",
+      "reasoning": "string"
+    },
+    {
+      "priority": 3,
+      "action": "string",
+      "reasoning": "string"
+    }
+  ],
+  "auditMode": "strategic"
+}
+`;
+}
+
+/**
+ * Generates primary and secondary target audiences based on user's role and goals.
+ */
+export async function generateTargetAudience(
+  role: string,
+  industry: string,
+  experience: string,
+  goals: string,
+  additionalContext?: string,
+  target?: 'primary' | 'secondary',
+  signal?: AbortSignal
+): Promise<{ primaryAudience: string; secondaryAudience: string }> {
+  const systemPrompt = `You are Marcus Reid, a world-class LinkedIn strategist. 
+  
+Your goal is to define the two most profitable and relevant target audiences for a professional based on their background.
+
+RULES:
+- Be extremely specific. No generic "Founders" or "CEOs".
+- Primary Audience: The person who has the problem they solve and the budget to pay for it.
+- Secondary Audience: The person who can refer them, hire them, or is a key stakeholder.
+- Tone: Marcus Reid (Direct, human, no buzzwords).
+- Each audience description should be max 15 words.
+${target ? `- Focus only on the ${target === 'primary' ? 'Primary' : 'Secondary'} audience but return both in JSON (keep the other as "No change" or similar if context allows, but preferably just generate a new one that fits).` : ''}
+
+OUTPUT FORMAT:
+Return ONLY valid JSON:
+{
+  "primaryAudience": "string",
+  "secondaryAudience": "string"
 }`;
+
+  const userPrompt = `Define my target audiences:
+  My Role: ${role}
+  Industry: ${industry}
+  Experience Level: ${experience}
+  My Goals: ${goals}
+  ${additionalContext ? `Additional Context: ${additionalContext}` : ''}
+  ${target ? `Regenerate only: ${target === 'primary' ? 'Primary Audience' : 'Secondary Audience'}` : ''}`;
+
+  try {
+    const text = await aiChat(userPrompt, systemPrompt, 0.7, 500, signal, "Target Audience Generation");
+    if (text === "Generation failed. Please try again.") {
+      throw new Error(text);
+    }
+    const cleanJson = sanitizeJsonResponse(text);
+    return JSON.parse(cleanJson);
+  } catch (e) {
+    console.error("Target audience generation failed:", e);
+    return { primaryAudience: "", secondaryAudience: "" };
+  }
 }
 
 export async function analyzeProfile(
@@ -360,6 +701,8 @@ export async function analyzeProfile(
     otherGoal: string;
     achievements: string;
     skills: string;
+    primaryAudience?: string;
+    secondaryAudience?: string;
   },
   quickFormData?: {
     whoAreYou: string;
@@ -369,6 +712,8 @@ export async function analyzeProfile(
     aboutOption: string;
     whatDoYouWant: string;
     goals: string[];
+    primaryAudience?: string;
+    secondaryAudience?: string;
   },
   signal?: AbortSignal
 ): Promise<SomyraProfileAnalysis> {
@@ -386,6 +731,8 @@ export async function analyzeProfile(
       quickFormData.aboutOption === 'rewrite' && quickFormData.aboutSection ? 'About Section I want completely rewritten: ' + quickFormData.aboutSection : '',
       quickFormData.goals && quickFormData.goals.length > 0 ? 'My LinkedIn goals: ' + quickFormData.goals.join(', ') : '',
       quickFormData.whatDoYouWant ? 'What I want from LinkedIn: ' + quickFormData.whatDoYouWant : '',
+      quickFormData.primaryAudience ? 'MY PRIMARY TARGET AUDIENCE: ' + quickFormData.primaryAudience : '',
+      quickFormData.secondaryAudience ? 'MY SECONDARY TARGET AUDIENCE: ' + quickFormData.secondaryAudience : '',
     ].filter(line => line.trim() !== '').join('\n\n');
     profileContent = quickLines;
   }
@@ -408,11 +755,12 @@ export async function analyzeProfile(
       deepFormData.primaryGoal ? 'Primary LinkedIn Goal: ' + deepFormData.primaryGoal : '',
       deepFormData.goalDetail ? 'Goal detail: ' + deepFormData.goalDetail : '',
       deepFormData.otherGoal ? 'Additional goal: ' + deepFormData.otherGoal : '',
-      deepFormData.audience && deepFormData.audience.length > 0 ? 'Target Audience: ' + deepFormData.audience.join(', ') : '',
       deepFormData.struggles && deepFormData.struggles.length > 0 ? 'Current struggles on LinkedIn: ' + deepFormData.struggles.join(', ') : '',
       deepFormData.otherStruggle ? 'Other struggle: ' + deepFormData.otherStruggle : '',
       deepFormData.achievements ? 'Key achievements: ' + deepFormData.achievements : '',
       deepFormData.skills ? 'Key skills: ' + deepFormData.skills : '',
+      deepFormData.primaryAudience ? 'Primary Target Audience: ' + deepFormData.primaryAudience : '',
+      deepFormData.secondaryAudience ? 'Secondary Target Audience: ' + deepFormData.secondaryAudience : '',
     ].filter(line => line.trim() !== '').join('\n\n');
     profileContent = deepLines;
   }
@@ -431,46 +779,131 @@ export async function analyzeProfile(
   IMPORTANT: Return ONLY valid JSON. No markdown, no preamble.`;
 
   const temperature = mode === 'quick' ? 0.35 : 0.25;
-  const maxTokens = mode === 'quick' ? 2000 : 4000;
+  const maxTokens = mode === 'quick' ? 2500 : 5000;
 
   if (DEBUG_AI) {
     console.log(`[DEBUG] Calling AI for profile analysis (${mode})`);
     console.log(`[DEBUG] Temperature: ${temperature}, MaxTokens: ${maxTokens}`);
   }
 
-  try {
-    const text = await aiChat(userPrompt, systemPrompt, temperature, maxTokens, signal, `Profile Analysis (${mode})`);
-    
-    if (text === "Generation failed. Please try again.") {
-      throw new Error(text);
-    }
+  let lastError: Error | null = null;
+  const MAX_ATTEMPTS = 2;
 
-    if (DEBUG_AI) {
-      console.log(`[DEBUG] Raw AI response length: ${text.length}`);
-    }
-
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
-      const cleanJson = sanitizeJsonResponse(text);
-      const parsed = JSON.parse(cleanJson);
+      if (attempt > 1) {
+        console.log(`[RETRY] Attempt ${attempt} after parse failure...`);
+        // Wait 1s before retry
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+
+      const text = await aiChat(userPrompt, systemPrompt, temperature, maxTokens, signal, `Profile Analysis (${mode})`);
       
+      if (text === "Generation failed. Please try again.") {
+        throw new Error(text);
+      }
+
+      const cleanJson = sanitizeJsonResponse(text);
+      let parsed;
+      try {
+        parsed = JSON.parse(cleanJson);
+      } catch (parseError) {
+        throw new Error('Analysis failed to parse. Attempting retry...');
+      }
+
+      if (!parsed.profileDiagnosis || !parsed.rewrites) {
+        throw new Error('Analysis failed to parse. Response missing required keys.');
+      }
+
       if (DEBUG_AI) {
-        console.log(`[DEBUG] Successfully parsed JSON. Score: ${parsed.overallScore}`);
+        console.log(`[DEBUG] Successfully parsed AI response on attempt ${attempt}`);
       }
 
       return normalizeProfileAnalysis(parsed, mode);
-    } catch (e) {
-      console.error("JSON Parse Error in Profile Analysis:", e);
-      if (DEBUG_AI) {
-        console.log("[DEBUG] Raw response that failed to parse:", text);
+    } catch (err: any) {
+      lastError = err;
+      // Never retry on network failures or explicit cancellation or API errors
+      if (err.message?.includes('service error') || err.name === 'AbortError') {
+        throw err;
       }
-      return getFallbackProfileAnalysis(mode);
+      console.error(`[ERROR] Attempt ${attempt} failed: ${err.message}`);
+      if (attempt === MAX_ATTEMPTS) break;
     }
-  } catch (error: any) {
-    if (error.name === 'AbortError') throw error;
-    console.error("Profile analysis failed:", error);
-    // Return fallback instead of throwing to prevent UI crash
-    return getFallbackProfileAnalysis(mode);
   }
+
+  console.error("Profile analysis ultimately failed after retries:", lastError);
+  // Return fallback instead of throwing to prevent UI crash
+  return getFallbackProfileAnalysis(mode);
+}
+
+/**
+ * Regenerates a specific section of the profile audit output independently.
+ */
+export async function regenerateProfileSection(
+  section: 'headline' | 'about',
+  originalInput: string,
+  previousContent: string,
+  primaryAudience?: string,
+  secondaryAudience?: string,
+  signal?: AbortSignal
+): Promise<string> {
+  const systemPrompt = section === 'headline' 
+    ? `You are Marcus Reid, a LinkedIn strategist with 12 years of experience fixing profiles for founders and executives.
+
+You previously wrote a headline for this person. They want a different option.
+
+Write a completely different headline. Different angle. Different structure. Same high authority standard.
+
+Rules:
+- Under 220 characters
+- Never a job title
+- No buzzwords
+- Must be specific to this person
+- Must answer what they do, who for, and why it matters
+- Never similar to the previous headline
+- Output ONLY the headline text
+- No JSON, no explanation, no punctuation at the start or end
+- Just the headline itself`
+    : `You are Marcus Reid, a LinkedIn strategist and ghostwriter with 12 years of experience.
+
+You previously wrote an about section for this person. They want a different version.
+
+Write a completely different about section. Different opening. Different angle. Different structure. Same high quality.
+
+Rules:
+- Never open with I am or My name is
+- First person always
+- No bullet points
+- Short punchy sentences
+- Maximum 3 lines per paragraph
+- 150 to 300 words
+- Use \n\n between paragraphs
+- End with a clear call to action
+- Never copy the user's original text
+- Never similar in structure to the previous version
+- Output ONLY the about section text
+- No JSON, no explanation
+- Just the about section itself`;
+
+  const userPrompt = `ORIGINAL PROFILE INPUT:
+${originalInput}
+
+${primaryAudience ? `TARGET AUDIENCE (Focus your writing on these people):
+Primary: ${primaryAudience}
+Secondary: ${secondaryAudience || 'Not specified'}` : ''}
+
+Previous ${section} version (DO NOT REPEAT):
+${previousContent}
+
+VARIETY SEED: ${Math.random().toString(36).substring(7)}
+
+IMPORTANT: I am unhappy with the previous version. It was too generic or didn't land right. 
+Write a COMPLETELY DIFFERENT ${section}. Use a new angle, a new hook, and a new structure.
+Do not use ANY sentences or phrases from the previous version provided above.
+Return ONLY the new ${section} text.`;
+
+  const tokens = section === 'headline' ? 250 : 1000;
+  return await aiChat(userPrompt, systemPrompt, 0.98, tokens, signal, `Regenerate ${section}`);
 }
 
 export interface StyleReport {

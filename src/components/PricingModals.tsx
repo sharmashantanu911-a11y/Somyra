@@ -17,6 +17,7 @@ import {
   Search
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { DODO_PRODUCT_IDS } from '../constants/pricing';
 
 /* ─────────────────────────────────────────────
    HELPER COMPONENTS
@@ -172,23 +173,26 @@ const PhoneInput = ({ value, onChange, onCountryChange, error }: any) => {
 interface PricingModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpgrade: () => void;
   user: any;
   isPro: boolean;
-  trackEvent: (name: string) => void;
+  isMax: boolean;
+  setShowAuth: (show: boolean) => void;
+  trackEvent: (name: string, params?: any) => void;
 }
 
 export const PricingModal: React.FC<PricingModalProps> = ({ 
   isOpen, 
   onClose, 
-  onUpgrade, 
   user, 
   isPro,
+  isMax,
+  setShowAuth,
   trackEvent 
 }) => {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [maxHeight, setMaxHeight] = useState('90vh');
   const [isAnnual, setIsAnnual] = useState(true);
+  const [isCheckingOut, setIsCheckingOut] = useState<string | null>(null);
 
   useEffect(() => {
     const updateMaxHeight = () => {
@@ -222,22 +226,64 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       a: "Yes completely. No credit card. No trial period. No hidden charges. The free plan gives you 10 generations per day after signing up and that never changes."
     },
     {
-      q: "How does Pro activation work?",
-      a: "After you submit your request Shantanu personally reviews it and activates your account within 24 hours. You will get a WhatsApp confirmation before any payment is collected."
+      q: "How does activation work?",
+      a: "Activation is instant! As soon as your payment is processed via Dodo Payments, your account is automatically upgraded and all features are unlocked immediately."
     },
     {
       q: "Can I cancel anytime?",
-      a: "Absolutely. No contracts. No lock-in. Cancel anytime with zero questions asked. Just send a message on WhatsApp or LinkedIn."
+      a: "Absolutely. No contracts. No lock-in. Cancel anytime with zero questions asked from your account settings."
     },
     {
       q: "Is Somyra better than Taplio or Supergrow?",
       a: "Somyra costs 4x less than Taplio and writes in your exact voice using Voice Profile — something Taplio cannot do."
     },
     {
-      q: "What happens after I request Pro access?",
-      a: "You will receive a WhatsApp message from Shantanu within 24 hours confirming your activation and payment details. No automated billing — everything is confirmed personally."
+      q: "What happens after I subscribe?",
+      a: "Your account is activated instantly! You'll be redirected back to the dashboard with all features unlocked. No manual review needed anymore."
     }
   ];
+
+
+
+  const handleCheckout = async (tier: 'pro' | 'max') => {
+    if (!user) {
+      trackEvent('checkout_attempt_unauthenticated', { tier });
+      onClose();
+      setShowAuth(true);
+      return;
+    }
+
+    setIsCheckingOut(tier);
+    trackEvent('checkout_started', { tier, isAnnual });
+
+    try {
+      const productId = tier === 'pro' 
+        ? (isAnnual ? DODO_PRODUCT_IDS.PRO_ANNUAL : DODO_PRODUCT_IDS.PRO_MONTHLY)
+        : (isAnnual ? DODO_PRODUCT_IDS.MAX_ANNUAL : DODO_PRODUCT_IDS.MAX_MONTHLY);
+
+      const response = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId,
+          userId: user.id,
+          email: user.email
+        })
+      });
+
+      const data = await response.json();
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      alert('Failed to start checkout. Please try again or contact support.');
+    } finally {
+      // We don't reset isCheckingOut(null) here because we are redirecting
+    }
+  };
 
   return (
     <div className="overlay-shell z-[100] p-0 md:p-6">
@@ -397,13 +443,11 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               </div>
 
               <button 
-                onClick={() => {
-                  onUpgrade();
-                  trackEvent('upgrade_button_clicked');
-                }}
-                className="mt-auto w-full py-4 bg-teal-accent text-black rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100"
+                onClick={() => handleCheckout('pro')}
+                disabled={isCheckingOut !== null}
+                className="mt-auto w-full py-4 bg-teal-accent text-black rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
               >
-                Get Pro Access
+                {isCheckingOut === 'pro' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get Pro Access'}
               </button>
             </div>
 
@@ -450,13 +494,11 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               </div>
 
               <button 
-                onClick={() => {
-                  onUpgrade(); // For now same upgrade modal, but we can track the intent
-                  trackEvent('max_upgrade_button_clicked');
-                }}
-                className="mt-auto w-full py-4 bg-gradient-to-r from-amber-400 to-orange-600 text-white rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] transition-all transform hover:scale-[1.02] active:scale-100"
+                onClick={() => handleCheckout('max')}
+                disabled={isCheckingOut !== null}
+                className="mt-auto w-full py-4 bg-gradient-to-r from-amber-400 to-orange-600 text-white rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
               >
-                Get Max Access
+                {isCheckingOut === 'max' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get Max Access'}
               </button>
             </div>
           </div>
@@ -493,9 +535,9 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           {/* Trust Bar */}
           <div className="mt-9 grid grid-cols-1 gap-6 border-t border-white/5 pt-9 md:mt-12 md:grid-cols-3">
             {[
-              { icon: Shield, title: "No Credit Card Required", sub: "Start completely free today" },
-              { icon: Clock, title: "24 Hour Activation", sub: "Pro goes live within one business day" },
-              { icon: Heart, title: "Cancel Anytime", sub: "Zero lock-in zero questions asked" }
+              { icon: Shield, title: "Secure Checkout", sub: "Powered by Dodo Payments" },
+              { icon: Clock, title: "Instant Access", sub: "Start using Pro features immediately" },
+              { icon: Heart, title: "Cancel Anytime", sub: "Self-serve cancellation from settings" }
             ].map((s, i) => (
               <div key={i} className="panel-fluid flex min-w-0 flex-col items-center text-center">
                 <s.icon className="w-5 h-5 text-teal-accent mb-2" />
@@ -517,253 +559,6 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   );
 };
 
-interface UpgradeModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  user: any;
-  trackEvent: (name: string) => void;
-}
-
-export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, user, trackEvent }) => {
-  const [form, setForm] = useState({
-    name: '',
-    email: user?.email || '',
-    whatsapp: '',
-    message: ''
-  });
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    if (user?.email) {
-      setForm(prev => ({ ...prev, email: user.email }));
-    }
-  }, [user]);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (isOpen) {
-      window.addEventListener('keydown', handleEsc);
-    }
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (form.name.length < 2) newErrors.name = 'Full name is required (min 2 characters)';
-    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) newErrors.email = 'Valid email is required';
-    
-    const cleanPhone = form.whatsapp.replace(/\D/g, '');
-    if (selectedCountry.code === '+91') {
-      if (cleanPhone.length !== 10) newErrors.whatsapp = 'WhatsApp number must be exactly 10 digits';
-    } else {
-      if (cleanPhone.length < 7 || cleanPhone.length > 15) newErrors.whatsapp = 'Phone number must be between 7 and 15 digits';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    setStatus('loading');
-    try {
-      const fullNumber = `${selectedCountry.code} ${form.whatsapp.replace(/\D/g, '')}`;
-      const { error: insertError } = await supabase
-        .from('pro_requests')
-        .insert([{
-          name: form.name,
-          email: form.email,
-          whatsapp: fullNumber,
-          message: form.message
-        }]);
-
-      if (insertError) throw insertError;
-
-      setStatus('success');
-      trackEvent('pro_request_submitted');
-    } catch (err) {
-      console.error(err);
-      setStatus('error');
-      trackEvent('pro_request_failed');
-    }
-  };
-
-  if (status === 'success') {
-    return (
-      <div className="overlay-shell z-[110]">
-        <div className="overlay-backdrop bg-black/85 backdrop-blur-md" onClick={onClose} />
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="dialog-panel border-teal-accent/20 text-center"
-        >
-          <motion.div 
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', damping: 12 }}
-            className="dialog-icon bg-teal-accent/10"
-          >
-            <Check className="w-8 h-8 text-teal-accent" />
-          </motion.div>
-          <div className="dialog-header">
-            <h3 className="dialog-title">We received your request</h3>
-            <p className="dialog-copy dialog-section text-safe">
-              Shantanu will personally activate your Somyra Pro account within 24 hours. You will receive a WhatsApp confirmation before any charge.
-            </p>
-          </div>
-          <div className="inline-flex items-center px-4 py-1.5 bg-teal-accent/10 border border-teal-accent/20 rounded-full text-sm font-bold text-teal-accent mb-8">
-            Access Request Confirmed
-          </div>
-          <button 
-            onClick={onClose}
-            className="dialog-button dialog-section mt-8 block border border-[#333333] text-[#888888] hover:text-white hover:border-white"
-          >
-            Close this window
-          </button>
-        </motion.div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="overlay-shell z-[110] p-0 md:p-6">
-      <div className="overlay-backdrop bg-black/85 backdrop-blur-md" onClick={onClose} />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="relative min-w-0 bg-[#0D0D0D] border border-white/10 md:border-teal-accent/20 md:rounded-[20px] w-full h-full md:h-auto md:max-h-[90vh] md:max-w-[480px] p-4 md:p-7 overflow-y-auto custom-scrollbar shadow-2xl"
-        style={{ maxHeight: window.innerWidth < 768 ? '100vh' : '90vh' }}
-      >
-        <button 
-          onClick={onClose}
-          className="absolute top-6 right-6 w-8 h-8 rounded-full bg-[#141414] border border-[#1f1f1f] flex items-center justify-center text-[#888888] hover:text-white hover:border-teal-accent transition-all"
-        >
-          <X className="w-4 h-4" />
-        </button>
-
-        <div className="dialog-header mb-6 pt-2 pr-10">
-          <div className="w-10 h-10 bg-teal-accent/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-            <Crown className="w-5 h-5 text-teal-accent" />
-          </div>
-          <h2 className="dialog-title text-[22px]">Request Somyra Upgrade</h2>
-          <p className="dialog-copy text-safe text-[13px]">
-            We personally activate your account within 24 hours. No automated billing. You confirm before any charge.
-          </p>
-        </div>
-
-        <div className="h-[1px] bg-white/5 w-full mb-6" />
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-[11px] font-bold text-[#888888] uppercase tracking-widest mb-2 ml-1">Full Name</label>
-            <input 
-              type="text"
-              required
-              placeholder="Your full name"
-              value={form.name}
-              onChange={e => setForm(prev => ({ ...prev, name: e.target.value }))}
-              className={`w-full bg-[#141414] border rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent focus:ring-4 focus:ring-teal-accent/10 ${
-                errors.name ? 'border-red-400/50 ring-4 ring-red-400/10' : 'border-[#1f1f1f]'
-              }`}
-            />
-            {errors.name && <p className="text-[11px] text-red-400 mt-1.5 ml-1">{errors.name}</p>}
-          </div>
-
-          <div>
-            <label className="block text-[11px] font-bold text-[#888888] uppercase tracking-widest mb-2 ml-1">Email Address</label>
-            <div className="relative">
-              <input 
-                type="email"
-                required
-                readOnly={!!user}
-                placeholder="your@email.com"
-                value={form.email}
-                onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))}
-                className={`w-full bg-[#141414] border rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent focus:ring-4 focus:ring-teal-accent/10 ${
-                  user ? 'opacity-70 cursor-not-allowed' : ''
-                } ${errors.email ? 'border-red-400/50 ring-4 ring-red-400/10' : 'border-[#1f1f1f]'}`}
-              />
-              {user && <Lock className="absolute right-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#555555]" />}
-            </div>
-            {errors.email && <p className="text-[11px] text-red-400 mt-1.5 ml-1">{errors.email}</p>}
-          </div>
-
-          <div>
-            <label className="block text-[11px] font-bold text-[#888888] uppercase tracking-widest mb-2 ml-1">WhatsApp or Phone Number</label>
-            <PhoneInput 
-              value={form.whatsapp}
-              onChange={(val: string) => setForm(prev => ({ ...prev, whatsapp: val }))}
-              onCountryChange={(country: any) => setSelectedCountry(country)}
-              error={errors.whatsapp}
-            />
-            <p className="text-[11px] text-[#555555] mt-1.5 ml-1">We will contact you on this number to confirm your activation</p>
-            {errors.whatsapp && <p className="text-[11px] text-red-400 mt-1.5 ml-1">{errors.whatsapp}</p>}
-          </div>
-
-          <div>
-            <label className="block text-[11px] font-bold text-[#888888] uppercase tracking-widest mb-2 ml-1">Message (Optional)</label>
-            <textarea 
-              rows={3}
-              placeholder="Any specific requests or feedback for Somyra Pro?"
-              value={form.message}
-              onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
-              className="w-full bg-[#141414] border border-[#1f1f1f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent focus:ring-4 focus:ring-teal-accent/10 resize-none"
-            />
-          </div>
-
-          <button 
-            type="submit"
-            disabled={status === 'loading'}
-            className="w-full py-3.5 bg-teal-accent text-black font-bold rounded-xl text-[15px] hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            {status === 'loading' ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Sending your request...
-              </>
-            ) : (
-              `Send Access Request`
-            )}
-          </button>
-        </form>
-
-        {status === 'error' && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="fixed bottom-8 left-1/2 z-[120] flex w-[min(92vw,26rem)] min-w-0 -translate-x-1/2 items-start gap-4 rounded-xl border border-red-400/30 bg-[#1a1a1a] p-5 shadow-2xl"
-          >
-            <div className="min-w-0 flex-grow">
-              <p className="mb-2 break-words text-sm leading-7 text-white">Something went wrong. Please DM us directly on LinkedIn.</p>
-              <a 
-                href="https://www.linkedin.com/in/sharmashantanu911" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex min-w-0 items-center gap-2 text-xs font-bold text-teal-accent hover:underline"
-              >
-                <Linkedin className="w-3.5 h-3.5" />
-                DM Shantanu on LinkedIn
-              </a>
-            </div>
-            <button onClick={() => setStatus('idle')} className="p-1 text-[#555555] hover:text-white">
-              <X className="w-4 h-4" />
-            </button>
-          </motion.div>
-        )}
-      </motion.div>
-    </div>
-  );
-};
 
 interface LimitReachedModalProps {
   isOpen: boolean;
@@ -897,3 +692,72 @@ export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, on
     </div>
   );
 };
+
+export const SuccessModal: React.FC<{ 
+  isOpen: boolean; 
+  onClose: () => void; 
+  isMax: boolean;
+}> = ({ isOpen, onClose, isMax }) => {
+  const [shouldShow, setShouldShow] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      const hasShown = localStorage.getItem('somyra_upgrade_success_shown');
+      if (!hasShown) {
+        setShouldShow(true);
+        localStorage.setItem('somyra_upgrade_success_shown', 'true');
+      } else {
+        // If it was already shown but the URL param triggered it, just close it silently
+        onClose();
+      }
+    } else {
+      setShouldShow(false);
+    }
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {shouldShow && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-md bg-[#0F0F0F] border border-teal-accent/20 rounded-[32px] p-8 shadow-2xl overflow-hidden text-center"
+          >
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-teal-accent/10 blur-[80px] rounded-full pointer-events-none" />
+            
+            <div className="w-20 h-20 bg-teal-accent/10 rounded-full flex items-center justify-center mx-auto mb-6 relative">
+              <Crown className="w-10 h-10 text-teal-accent" />
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute inset-0 bg-teal-accent/20 rounded-full"
+              />
+            </div>
+
+            <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Welcome to {isMax ? 'Somyra Max' : 'Somyra Pro'}!</h2>
+            <p className="text-[#888888] text-sm leading-relaxed mb-8">
+              Your account has been upgraded successfully. All premium features are now unlocked. We are excited to see what you build!
+            </p>
+            
+            <button 
+              onClick={onClose}
+              className="w-full py-4 bg-teal-accent text-black font-bold rounded-2xl hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all active:scale-95 shadow-lg shadow-teal-accent/20"
+            >
+              Let's Go!
+            </button>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
+

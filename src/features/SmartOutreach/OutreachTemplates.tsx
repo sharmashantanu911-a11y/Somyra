@@ -35,13 +35,13 @@ export function OutreachTemplates({ handleCopy, copied }: { handleCopy: (text: s
 
   return (
     <div className="space-y-6">
-      <div className="bg-teal-accent/5 border border-teal-accent/20 rounded-2xl p-5 mb-6 text-center sm:text-left flex items-start gap-4 flex-col sm:flex-row">
-         <div className="w-10 h-10 bg-teal-accent/10 rounded-full flex items-center justify-center shrink-0">
-            <FileText className="w-5 h-5 text-teal-accent" />
+      <div className="bg-teal-accent/5 border border-teal-accent/20 rounded-2xl p-6 mb-8 text-center sm:text-left flex flex-col sm:flex-row items-center sm:items-start gap-5 transition-all">
+         <div className="w-12 h-12 bg-teal-accent/10 rounded-full flex items-center justify-center shrink-0 border border-teal-accent/20 shadow-[0_0_15px_rgba(45,212,191,0.1)]">
+            <FileText className="w-6 h-6 text-teal-accent" />
          </div>
          <div>
-            <h3 className="text-white font-bold text-sm mb-1">Human-Verified Templates</h3>
-            <p className="text-[13px] text-muted leading-relaxed">
+            <h3 className="text-white font-bold text-base mb-1.5">Human-Verified Templates</h3>
+            <p className="text-[13px] md:text-sm text-muted leading-relaxed max-w-2xl">
               Before doing automated generation, sometimes you just need inspiration. Here are high-converting text blueprints. Customize the brackets and fire away.
             </p>
          </div>

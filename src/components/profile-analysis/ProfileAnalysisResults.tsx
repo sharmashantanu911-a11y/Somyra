@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import {
   AlertCircle,
@@ -8,8 +8,11 @@ import {
   Copy,
   Eye,
   FileText,
+  Loader2,
+  Lock,
   PenTool,
   RefreshCw,
+  RotateCw,
   Search,
   Share2,
   ShieldCheck,
@@ -18,6 +21,7 @@ import {
   TrendingUp,
   Users
 } from 'lucide-react';
+import { regenerateProfileSection } from '../../services/aiService';
 
 const hasText = (value?: string | null) => typeof value === 'string' && value.trim().length > 0;
 const hasObjectContent = (value?: Record<string, any> | null) =>
@@ -63,7 +67,10 @@ function RewriteCard({
   body,
   copied,
   handleCopy,
-  icon: Icon
+  icon: Icon,
+  onRegenerate,
+  isRegenerating,
+  isLocked
 }: {
   id: string;
   title: string;
@@ -72,29 +79,75 @@ function RewriteCard({
   copied: string | null;
   handleCopy: (text: string, id: string) => void;
   icon: React.ComponentType<{ className?: string }>;
+  onRegenerate?: () => void;
+  isRegenerating?: boolean;
+  isLocked?: boolean;
 }) {
+  const canRegenerate = (id === 'headline' || id === 'about') && onRegenerate;
+
   return (
-    <div className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-6">
+    <div className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-6 transition-all duration-300">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-accent/10">
             <Icon className="h-5 w-5 text-teal-accent" />
           </div>
           <div className="min-w-0">
-            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-teal-accent">{title}</p>
+            <div className="flex items-center gap-2">
+              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-teal-accent">{title}</p>
+              {isLocked && canRegenerate && (
+                <div className="group relative">
+                  <Lock className="h-3 w-3 text-[#555555]" />
+                  <div className="absolute left-1/2 bottom-full mb-2 -translate-x-1/2 scale-0 rounded-lg bg-black px-2 py-1 text-[10px] font-bold text-white transition-transform group-hover:scale-100 whitespace-nowrap z-10 border border-white/10 shadow-xl">
+                    Upgrade to Pro to unlock unlimited regenerations.
+                  </div>
+                </div>
+              )}
+            </div>
             {hasText(strategy) && <p className="mt-2 text-sm leading-7 text-[#9a9a9a]">{strategy}</p>}
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => handleCopy(body, id)}
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#d4d4d4]"
-        >
-          {copied === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-        </button>
+        <div className="flex items-center gap-2">
+          {canRegenerate && (
+            <button
+              type="button"
+              disabled={isRegenerating}
+              onClick={onRegenerate}
+              className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#d4d4d4] transition-all hover:bg-white/10 hover:border-teal-accent/30 group relative ${isRegenerating ? 'cursor-not-allowed opacity-50' : ''}`}
+            >
+              {isRegenerating ? (
+                <Loader2 className="h-4 w-4 animate-spin text-teal-accent" />
+              ) : (
+                <RotateCw className="h-4 w-4 transition-transform group-hover:rotate-180 duration-500" />
+              )}
+              {isLocked && !isRegenerating && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full">
+                  <Lock className="h-3 w-3 text-white/50" />
+                </div>
+              )}
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => handleCopy(body, id)}
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#d4d4d4] hover:bg-white/10"
+          >
+            {copied === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
 
-      <div className="mt-5 rounded-[20px] border border-teal-accent/14 bg-teal-accent/[0.05] p-5">
+      <div className="mt-5 rounded-[20px] border border-teal-accent/14 bg-teal-accent/[0.05] p-5 relative overflow-hidden">
+        {isRegenerating && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute inset-0 bg-[#0d1514]/80 backdrop-blur-[2px] flex flex-col items-center justify-center z-20"
+          >
+            <Loader2 className="h-6 w-6 animate-spin text-teal-accent mb-2" />
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-accent">Regenerating {title}...</p>
+          </motion.div>
+        )}
         <p className="whitespace-pre-wrap text-base leading-8 text-white">{body}</p>
       </div>
     </div>
@@ -116,6 +169,7 @@ export function ProfileAnalysisResults(props: {
   setShowPricingModal: (show: boolean) => void;
   setActiveTab: (tab: any) => void;
   triggerAnalyze: () => void;
+  usageLimits: any;
 }) {
   const {
     profile,
@@ -131,8 +185,85 @@ export function ProfileAnalysisResults(props: {
     setDeepStep,
     setShowPricingModal,
     setActiveTab,
-    triggerAnalyze
+    triggerAnalyze,
+    usageLimits
   } = props;
+
+  const [regeneratingHeadline, setRegeneratingHeadline] = useState(false);
+  const [regeneratingAbout, setRegeneratingAbout] = useState(false);
+
+  const usageStatus = usageLimits?.getStatus('profile_audit');
+  const isLimitReached = usageStatus?.isLimitReached;
+
+  const handleRegenerate = async (section: 'headline' | 'about') => {
+    console.log('Regenerating:', section);
+    // 1. Check limit
+    if (isLimitReached) {
+      setShowPricingModal(true);
+      return;
+    }
+
+    // 2. Set loading
+    if (section === 'headline') setRegeneratingHeadline(true);
+    else setRegeneratingAbout(true);
+
+    try {
+      // 3. Prepare data
+      const isQuick = profile.mode === 'quick';
+      const originalInput = isQuick 
+        ? (section === 'headline' ? quickForm.currentHeadline || quickForm.whoAreYou : quickForm.aboutSection || quickForm.whoAreYou)
+        : (section === 'headline' ? deepForm.headline || deepForm.role : deepForm.about || deepForm.role);
+      
+      const previousContent = section === 'headline' ? profile.headline : profile.about;
+      
+      const primaryAudience = isQuick ? quickForm.primaryAudience : deepForm.primaryAudience;
+      const secondaryAudience = isQuick ? quickForm.secondaryAudience : deepForm.secondaryAudience;
+
+      // 4. Call AI
+      const newCopy = await regenerateProfileSection(section, originalInput, previousContent, primaryAudience, secondaryAudience);
+
+      // 5. Update local profile state
+      if (newCopy && newCopy !== "Generation failed. Please try again.") {
+        const updatedProfile = { ...profile };
+        if (section === 'headline') {
+          updatedProfile.headline = newCopy;
+          // Sync with Strategic Rewrites (Array)
+          if (Array.isArray(updatedProfile.rewrites)) {
+             updatedProfile.rewrites = updatedProfile.rewrites.map((r: any) => 
+               r.section === 'Headline' ? { ...r, suggested: newCopy } : r
+             );
+          } 
+          // Sync with Quick Rewrites (Object)
+          else if (updatedProfile.rewrites && typeof updatedProfile.rewrites === 'object') {
+            updatedProfile.rewrites = { ...updatedProfile.rewrites, headline: newCopy };
+          }
+        } else {
+          updatedProfile.about = newCopy;
+          // Sync with Strategic Rewrites (Array)
+          if (Array.isArray(updatedProfile.rewrites)) {
+             updatedProfile.rewrites = updatedProfile.rewrites.map((r: any) => 
+               r.section === 'About' ? { ...r, suggested: newCopy } : r
+             );
+          }
+          // Sync with Quick Rewrites (Object)
+          else if (updatedProfile.rewrites && typeof updatedProfile.rewrites === 'object') {
+            // Update both possible field names for robust mapping
+            updatedProfile.rewrites = { 
+              ...updatedProfile.rewrites, 
+              aboutSection: newCopy,
+              about: newCopy 
+            };
+          }
+        }
+        setProfile(updatedProfile);
+      }
+    } catch (err) {
+      console.error(`Failed to regenerate ${section}:`, err);
+    } finally {
+      if (section === 'headline') setRegeneratingHeadline(false);
+      else setRegeneratingAbout(false);
+    }
+  };
 
   const isStrategic = profile.mode === 'strategic';
   const roleLabel = deepForm.role || quickForm.whoAreYou.split(' ')[0] || 'professional';
@@ -148,7 +279,12 @@ export function ProfileAnalysisResults(props: {
     profile.overallScore >= 85 ? 'Elite' : profile.overallScore >= 70 ? 'Strong' : profile.overallScore >= 50 ? 'Average' : 'Needs Work';
 
   const quickRewrites = !Array.isArray(profile.rewrites) && profile.rewrites
-    ? profile.rewrites
+    ? {
+        headline: profile.rewrites.headline || profile.headline || '',
+        headlineStrategy: profile.rewrites.headlineStrategy || '',
+        about: profile.rewrites.aboutSection || profile.rewrites.about || profile.about || '',
+        aboutStrategy: profile.rewrites.aboutStrategy || profile.rewrites.aboutSectionStrategy || ''
+      }
     : !isStrategic
       ? {
           headline: profile.headline || profile.quickFix?.improvedHeadline || '',
@@ -165,22 +301,22 @@ export function ProfileAnalysisResults(props: {
     ? [
         {
           id: 'headline',
-          title: 'Headline',
+          title: 'HEADLINE',
           body: quickRewrites.headline,
           strategy: quickRewrites.headlineStrategy,
           icon: PenTool
         },
         {
           id: 'about',
-          title: 'About section',
+          title: 'ABOUT SECTION',
           body: quickRewrites.about,
           strategy: quickRewrites.aboutStrategy,
           icon: FileText
         }
       ]
-    : primaryRewrites.map((rewrite: any, index: number) => ({
-        id: `primary-${index}`,
-        title: rewrite.section,
+    : primaryRewrites.map((rewrite: any) => ({
+        id: rewrite.section.toLowerCase() === 'headline' ? 'headline' : 'about',
+        title: rewrite.section.toLowerCase() === 'headline' ? 'HEADLINE' : 'ABOUT SECTION',
         body: rewrite.suggested,
         strategy: rewrite.strategy,
         icon: rewrite.section === 'Headline' ? PenTool : FileText
@@ -364,6 +500,9 @@ export function ProfileAnalysisResults(props: {
                   copied={copied}
                   handleCopy={handleCopy}
                   icon={item.icon}
+                  onRegenerate={() => handleRegenerate(item.id as any)}
+                  isRegenerating={item.id === 'headline' ? regeneratingHeadline : (item.id === 'about' ? regeneratingAbout : false)}
+                  isLocked={isLimitReached}
                 />
               ))}
           </div>

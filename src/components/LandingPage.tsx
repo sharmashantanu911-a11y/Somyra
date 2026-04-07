@@ -696,54 +696,183 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION 7: TESTIMONIALS
          ════════════════════════════════════════ */}
-      <section className="w-full px-6 py-16 md:py-24 relative z-10 border-y border-white/5">
-        <div className="max-w-[896px] mx-auto">
-          <div className="text-center mb-16">
-            <SectionLabel>REAL RESULTS</SectionLabel>
-            <SectionHeading>
-              What happens when your<br />
-              LinkedIn finally works
-            </SectionHeading>
-          </div>
+      <section className="w-full py-16 md:py-24 relative overflow-hidden border-y border-white/5 bg-[#080808]">
+        <style>{`
+          @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+          }
+          .marquee-container {
+            display: flex;
+            width: fit-content;
+            will-change: transform;
+          }
+          .marquee-row-left {
+            animation: scrollLeft 35s linear infinite;
+          }
+          .marquee-row-right {
+            animation: scrollRight 35s linear infinite;
+          }
+          @media (max-width: 768px) {
+            .marquee-row-left, .marquee-row-right {
+              animation-duration: 25s;
+            }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .marquee-row-left, .marquee-row-right {
+              animation-play-state: paused;
+            }
+          }
+          .marquee-row-left:hover, .marquee-row-right:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
 
-          {loadingTestimonials ? (
-            <div className="flex justify-center py-12">
-              <div className="w-8 h-8 border-2 border-[#2DD4BF]/30 border-t-[#2DD4BF] rounded-full animate-spin" />
-            </div>
-          ) : testimonials.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.slice(0, 3).map((t) => (
-                <div key={t.id} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 md:p-8 hover:border-[#2DD4BF]/20 transition-all duration-300 flex flex-col h-full">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(t.star_rating || 5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-[#FFB800] fill-[#FFB800]" />
-                    ))}
-                  </div>
-                  <p className="text-[15px] md:text-[16px] text-[#ccc] leading-[1.8] mb-6 flex-grow">"{t.quote}"</p>
-                  <div>
-                    <p className="text-white font-bold text-sm">{t.name}</p>
-                    <p className="text-[#888] text-xs mt-0.5">{t.title}</p>
-                    {testimonialBadges[t.name] && (
-                      <span className="inline-block mt-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/20">
-                        {testimonialBadges[t.name]}
-                      </span>
-                    )}
-                  </div>
-                </div>
+        <div className="max-w-[896px] mx-auto px-6 text-center mb-12 md:mb-16">
+          <SectionLabel>REAL RESULTS</SectionLabel>
+          <SectionHeading>
+            What happens when your<br />
+            LinkedIn finally works
+          </SectionHeading>
+        </div>
+
+        <div className="relative w-full space-y-6 md:space-y-8">
+          {/* Gradient Fades */}
+          <div className="absolute inset-y-0 left-0 w-[100px] md:w-[200px] bg-gradient-to-r from-[#080808] to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-[100px] md:w-[200px] bg-gradient-to-l from-[#080808] to-transparent z-20 pointer-events-none" />
+
+          {/* Row 1: Scrolls Left */}
+          <div className="flex overflow-hidden">
+            <div className="marquee-container marquee-row-left gap-4 md:gap-5 px-4">
+              {[...Array(2)].map((_, i) => (
+                <React.Fragment key={i}>
+                  {[
+                    {
+                      name: "Sarah Mitchell",
+                      title: "Product Manager at FinTech Startup",
+                      text: "I was skeptical at first but Somyra rewrote my headline and about section in a way I never could have. Three recruiters reached out the following week.",
+                      badge: "3 RECRUITER CALLS IN A WEEK"
+                    },
+                    {
+                      name: "James Okonkwo",
+                      title: "B2B Sales Consultant",
+                      text: "The Smart Outreach feature alone is worth every penny. My reply rate went from basically zero to getting real conversations started.",
+                      badge: "REPLY RATE UP 4X"
+                    },
+                    {
+                      name: "Pradeep Kumar",
+                      title: "Personal Brand Strategist",
+                      text: "I have tried every LinkedIn tool out there. Somyra is the first one that actually sounds like me and not like a robot wrote it.",
+                      badge: "3X INBOUND IN 2 WEEKS"
+                    },
+                    {
+                      name: "Aditya Singh",
+                      title: "AI Workflow Specialist",
+                      text: "The profile audit gave me more clarity in 30 seconds than months of guessing what was wrong with my LinkedIn presence.",
+                      badge: "FIRST REPLY IN 24 HOURS"
+                    },
+                    {
+                      name: "Shehzadi Rabia",
+                      title: "LinkedIn Ghostwriter",
+                      text: "As a ghostwriter I was worried AI would sound generic. Somyra proved me completely wrong. The voice matching is genuinely impressive.",
+                      badge: "PROFILE VIEWS DOUBLED"
+                    }
+                  ].map((review, idx) => (
+                    <div key={idx} className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[12px] p-5 flex flex-col h-full shadow-xl">
+                      <div className="flex gap-1 mb-4">
+                        {[...Array(5)].map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
+                        ))}
+                      </div>
+                      <p className="text-[14px] leading-[1.6] text-[#D1D5DB] mb-6 flex-grow italic font-medium">"{review.text}"</p>
+                      <div>
+                        <p className="text-white font-bold text-[15px]">{review.name}</p>
+                        <p className="text-[#9CA3AF] text-[13px] mt-0.5">{review.title}</p>
+                        <div className="mt-4">
+                          <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[11px] font-semibold tracking-[0.05em] uppercase">
+                            {review.badge}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </React.Fragment>
               ))}
             </div>
-          ) : (
-            <p className="text-center text-[#888] text-sm">No reviews yet.</p>
-          )}
-
-          <div className="text-center mt-12">
-            <button
-              onClick={() => setShowReviewModal(true)}
-              className="px-6 py-3 rounded-xl border border-white/10 text-sm font-bold text-white hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-all"
-            >
-              Leave a Review
-            </button>
           </div>
+
+          {/* Row 2: Scrolls Right */}
+          <div className="flex overflow-hidden">
+            <div className="marquee-container marquee-row-right gap-4 md:gap-5 px-4">
+              {[...Array(2)].map((_, i) => (
+                <React.Fragment key={i}>
+                  {[
+                    {
+                      name: "Marcus Webb",
+                      title: "Operations Consultant",
+                      text: "I landed my first consulting client directly from LinkedIn within 10 days of using Somyra. I had been trying for months before that.",
+                      badge: "FIRST CLIENT IN 10 DAYS"
+                    },
+                    {
+                      name: "Priya Nair",
+                      title: "Founder at EdTech SaaS",
+                      text: "The topic generator alone saves me hours every week. I never stare at a blank screen anymore. Ideas on demand.",
+                      badge: "SAVES 3 HOURS EVERY WEEK"
+                    },
+                    {
+                      name: "Daniel Ferreira",
+                      title: "Growth Advisor",
+                      text: "My connection requests went from getting ignored to a 60 percent acceptance rate. The outreach messages feel genuinely personal.",
+                      badge: "60% CONNECTION ACCEPTANCE"
+                    },
+                    {
+                      name: "Ananya Sharma",
+                      title: "Executive Coach",
+                      text: "Somyra helped me go from invisible on LinkedIn to getting inbound leads every week. This is the tool I wished existed two years ago.",
+                      badge: "WEEKLY INBOUND LEADS"
+                    },
+                    {
+                      name: "Tom Blackwell",
+                      title: "SaaS Founder",
+                      text: "I upgraded to Pro after the free trial and have not looked back. The Deep Strategy audit completely changed how I position myself online.",
+                      badge: "POSITIONING TRANSFORMED"
+                    }
+                  ].map((review, idx) => (
+                    <div key={idx} className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[12px] p-5 flex flex-col h-full shadow-xl">
+                      <div className="flex gap-1 mb-4">
+                        {[...Array(5)].map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
+                        ))}
+                      </div>
+                      <p className="text-[14px] leading-[1.6] text-[#D1D5DB] mb-6 flex-grow italic font-medium">"{review.text}"</p>
+                      <div>
+                        <p className="text-white font-bold text-[15px]">{review.name}</p>
+                        <p className="text-[#9CA3AF] text-[13px] mt-0.5">{review.title}</p>
+                        <div className="mt-4">
+                          <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[11px] font-semibold tracking-[0.05em] uppercase">
+                            {review.badge}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-12 md:mt-16">
+          <button
+            onClick={() => setShowReviewModal(true)}
+            className="px-8 py-4 rounded-xl border border-white/10 text-sm font-bold text-white hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-all bg-white/5 active:scale-95"
+          >
+            Leave a Review
+          </button>
         </div>
       </section>
 

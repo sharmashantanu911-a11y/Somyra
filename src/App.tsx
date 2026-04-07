@@ -47,7 +47,8 @@ import {
   Star,
   Edit,
   ArrowLeft,
-  Download
+  Download,
+  Clock
 } from 'lucide-react';
 import { generateTopics, generatePost, generatePostThreeStep, generateBio, analyzeProfile, analyzeTone, generateStyleReport, type SomyraProfileAnalysis, type SomyraProfileInput, type StyleReport, generateSmartOutreach, scoreOutreachMessage, generateFollowUp, generateICPClarity } from './services/aiService';
 import { ProfileAnalysis } from './components/ProfileAnalysis';
@@ -57,7 +58,7 @@ import Auth from './components/Auth';
 import { PostWriterLoading } from './components/PostWriterLoading';
 import { LinkedInPreview } from './components/LinkedInPreview';
 import { DashboardHome } from './components/DashboardHome';
-import { PricingModal, UpgradeModal, LimitReachedModal } from './components/PricingModals';
+import { PricingModal, LimitReachedModal, SuccessModal } from './components/PricingModals';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ChangelogModal } from './components/ChangelogModal';
 import { useUsageLimits, FeatureKey } from './hooks/useUsageLimits';
@@ -148,6 +149,8 @@ export default function App() {
 
   const [isPro, setIsPro] = useState(false);
   const [isMax, setIsMax] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string | null>(null);
+  const [currentPeriodEnd, setCurrentPeriodEnd] = useState<string | null>(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [authChecked, setAuthChecked] = useState(false);
   const [guestSaves, setGuestSaves] = useState(0);
@@ -157,6 +160,8 @@ export default function App() {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [cancellationRequested, setCancellationRequested] = useState(false);
   const [isSubmittingCancellation, setIsSubmittingCancellation] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
 
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
@@ -180,20 +185,20 @@ export default function App() {
 
   const fetchProStatus = async (userId: string) => {
     try {
-      // H1 FIX: Do NOT read sessionStorage first — that caused stale Pro/Max status after downgrade
-      // Fetch from DB first, then cache
       const { data: { session } } = await supabase.auth.getSession();
       const currentUserId = session?.user?.id || userId;
       if (!currentUserId) return;
 
       const { data: existingProfile, error: fetchError } = await supabase
         .from('profiles')
-        .select('id, is_pro, is_max')
+        .select('id, is_pro, is_max, subscription_id, subscription_status, current_period_end')
         .eq('id', currentUserId)
         .single();
 
       let isProValue = false;
       let isMaxValue = false;
+      let statusValue = null;
+      let periodEndValue = null;
 
       if (fetchError) {
         if (fetchError.code === 'PGRST116') {
@@ -209,10 +214,16 @@ export default function App() {
       } else if (existingProfile) {
         isProValue = existingProfile.is_pro;
         isMaxValue = existingProfile.is_max;
+        statusValue = existingProfile.subscription_status;
+        periodEndValue = (existingProfile as any).current_period_end;
+        setSubscriptionId(existingProfile.subscription_id);
       }
 
       setIsPro(isProValue);
       setIsMax(isMaxValue);
+      setSubscriptionStatus(statusValue);
+      setCurrentPeriodEnd(periodEndValue);
+      
       sessionStorage.setItem("somyra_is_pro", String(isProValue));
       sessionStorage.setItem("somyra_is_max", String(isMaxValue));
       return { isPro: isProValue, isMax: isMaxValue };
@@ -232,25 +243,52 @@ export default function App() {
   const [voicePosts, setVoicePosts] = useState<VoicePost[]>([]);
   const [previousUser, setPreviousUser] = useState<any>(null);
 
-  // Welcome Toast Logic
+  const [isActivating, setIsActivating] = useState(false);
+
   useEffect(() => {
-    if (!previousUser && user && authChecked) {
-      if (activeTab === 'voice') {
-        setToast({
-          message: 'Your Voice Profile is ready to set up.',
-          type: 'success',
-          headline: 'Welcome to Somyra'
-        });
-      } else if (activeTab === 'saved') {
-        setToast({
-          message: 'Your Saved Library is ready.',
-          type: 'success',
-          headline: 'Welcome Back'
-        });
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('upgraded') === 'true' && user) {
+      if (isPro || isMax) {
+        setShowSuccessModal(true);
+        window.history.replaceState({}, '', window.location.pathname);
+        return;
       }
+
+      setIsActivating(true);
+      let attempts = 0;
+      const maxAttempts = 10;
+
+      const poll = setInterval(async () => {
+        attempts++;
+        const status = await fetchProStatus(user.id);
+        
+        if (status?.isPro || status?.isMax) {
+          clearInterval(poll);
+          setIsActivating(false);
+          setShowSuccessModal(true);
+          window.history.replaceState({}, '', window.location.pathname);
+        } else if (attempts >= maxAttempts) {
+          clearInterval(poll);
+          setIsActivating(false);
+          setError({ 
+            message: 'Activation is taking longer than usual.',
+            suggestion: 'Please refresh the page in a few minutes.'
+          });
+          window.history.replaceState({}, '', window.location.pathname);
+        }
+      }, 3000);
+
+      return () => clearInterval(poll);
     }
+  }, [user, isPro, isMax]);
+
+  useEffect(() => {
     setPreviousUser(user);
-  }, [user, authChecked, activeTab]);
+    if (!user) {
+      // Reset success modal flag on logout so it can show for the next upgrade
+      localStorage.removeItem('somyra_upgrade_success_shown');
+    }
+  }, [user]);
   const [deletingId, setDeletingId] = useState<string | null>(null);
       
   const fetchVoiceProfile = async () => {
@@ -282,7 +320,9 @@ export default function App() {
     aboutSection: '',
     aboutOption: 'have' as 'have' | 'none' | 'rewrite',
     whatDoYouWant: '',
-    goals: [] as string[]
+    goals: [] as string[],
+    primaryAudience: '',
+    secondaryAudience: ''
   });
   const [deepStep, setDeepStep] = useState(1);
   const [deepForm, setDeepForm] = useState({
@@ -312,7 +352,9 @@ export default function App() {
     otherStruggle: '',
     otherGoal: '',
     achievements: '',
-    skills: ''
+    skills: '',
+    primaryAudience: '',
+    secondaryAudience: ''
   });
   const [profile, setProfile] = useState<SomyraProfileAnalysis | null>(null);
   const [profileText, setProfileText] = useState(''); // Keep for backward compatibility if needed, but we'll mostly use the new forms
@@ -345,7 +387,6 @@ export default function App() {
     secondaryAction?: { label: string; href: string };
   } | null>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [limitTriggerFeature, setLimitTriggerFeature] = useState<string | null>(null);
   const [showChangelog, setShowChangelog] = useState(false);
@@ -445,11 +486,11 @@ export default function App() {
 
     return (
       <div className="flex flex-col items-end gap-1">
-      <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-3.5 py-1.5 flex items-center gap-1.5 transition-all duration-300 whitespace-nowrap ${remaining === 0 ? 'animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.15)] border-red-500/30' : ''}`}>
-          <Bolt className={`w-3 h-3 shrink-0 ${iconColor}`} />
+      <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-3.5 py-1.5 sm:py-2 flex items-center gap-1.5 transition-all duration-300 whitespace-nowrap min-h-[30px] sm:min-h-[34px] ${remaining === 0 ? 'animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.15)] border-red-500/30' : ''}`}>
+          <Bolt className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${iconColor}`} />
           <motion.span 
             animate={isAnimating ? { scale: 1.3 } : { scale: 1 }}
-            className={`text-xs font-bold ${stateColor}`}
+            className={`text-xs sm:text-[13px] font-bold ${stateColor}`}
           >
             {remaining} of {limit} {getFeatureName()} <span className="hidden sm:inline">left this month</span><span className="sm:hidden">left</span>
           </motion.span>
@@ -524,7 +565,9 @@ export default function App() {
       whoAreYou: truncate(sanitizeProfileField(quickForm.whoAreYou)),
       currentHeadline: sanitizeProfileField(quickForm.currentHeadline),
       aboutSection: truncate(sanitizeProfileField(quickForm.aboutSection)),
-      whatDoYouWant: sanitizeProfileField(quickForm.whatDoYouWant)
+      whatDoYouWant: sanitizeProfileField(quickForm.whatDoYouWant),
+      primaryAudience: sanitizeProfileField(quickForm.primaryAudience),
+      secondaryAudience: sanitizeProfileField(quickForm.secondaryAudience)
     };
     const sanitizedDeepForm = {
       ...deepForm,
@@ -544,7 +587,9 @@ export default function App() {
       featured: truncate(sanitizeProfileField(deepForm.featured)),
       recentPosts: truncate(sanitizeProfileField(deepForm.recentPosts)),
       audience: deepForm.audience.map(sanitizeProfileField),
-      struggles: deepForm.struggles.map(sanitizeProfileField)
+      struggles: deepForm.struggles.map(sanitizeProfileField),
+      primaryAudience: sanitizeProfileField(deepForm.primaryAudience),
+      secondaryAudience: sanitizeProfileField(deepForm.secondaryAudience)
     };
 
     const input: SomyraProfileInput = profileMode === 'quick' 
@@ -557,7 +602,7 @@ export default function App() {
           headline: sanitizedDeepForm.headline,
           about: sanitizedDeepForm.about,
           experience: sanitizedDeepForm.experienceDetails,
-          fullRawText: `Role: ${sanitizedDeepForm.role}\nFocus: ${sanitizedDeepForm.specificFocus}\nIndustry: ${sanitizedDeepForm.industry}\nGoals: ${sanitizedDeepForm.primaryGoal}\nAudience: ${sanitizedDeepForm.audience.join(', ')}\nExperience Level: ${sanitizedDeepForm.experience}`
+          fullRawText: `Role: ${sanitizedDeepForm.role}\nFocus: ${sanitizedDeepForm.specificFocus}\nIndustry: ${sanitizedDeepForm.industry}\nGoals: ${sanitizedDeepForm.primaryGoal || sanitizedDeepForm.goalDetail}\nTargets: ${sanitizedDeepForm.primaryAudience} & ${sanitizedDeepForm.secondaryAudience}\nStruggles: ${sanitizedDeepForm.struggles.join(', ')}\nExperience Level: ${sanitizedDeepForm.experience}`
         };
 
     trackEvent('analyze_profile', { mode: profileMode });
@@ -583,8 +628,8 @@ export default function App() {
         ? sanitizedDeepForm.role
         : sanitizedQuickForm.whoAreYou;
       const inferredAudience = data.mode === 'strategic'
-        ? sanitizedDeepForm.audience.join(', ')
-        : sanitizedQuickForm.whoAreYou;
+        ? [sanitizedDeepForm.primaryAudience, sanitizedDeepForm.secondaryAudience].filter(Boolean).join(' & ') || sanitizedDeepForm.audience.join(', ')
+        : [sanitizedQuickForm.primaryAudience, sanitizedQuickForm.secondaryAudience].filter(Boolean).join(' & ') || sanitizedQuickForm.whoAreYou;
       const inferredGoal = data.mode === 'strategic'
         ? sanitizedDeepForm.primaryGoal
         : sanitizedQuickForm.whatDoYouWant || sanitizedQuickForm.goals.join(', ');
@@ -912,7 +957,6 @@ export default function App() {
       if (e.key !== 'Escape') return;
       if (showAuth) { setShowAuth(false); return; }
       if (showPricingModal) { setShowPricingModal(false); return; }
-      if (showUpgradeModal) { setShowUpgradeModal(false); return; }
       if (showLimitModal) { setShowLimitModal(false); return; }
       if (showChangelog) { setShowChangelog(false); return; }
       if (isMobileMenuOpen) { setIsMobileMenuOpen(false); return; }
@@ -921,7 +965,7 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showAuth, showPricingModal, showUpgradeModal, showLimitModal, showChangelog, isMobileMenuOpen, showDeleteAllSavedConfirm, showCancelModal]);
+  }, [showAuth, showPricingModal, showLimitModal, showChangelog, isMobileMenuOpen, showDeleteAllSavedConfirm, showCancelModal]);
 
   // H6 FIX: Body scroll lock when mobile drawer is open
   useEffect(() => {
@@ -1010,9 +1054,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
+    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30 overflow-x-hidden">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-[999] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 md:px-6 lg:px-8">
           <div className="flex items-center gap-4">
             <div className="relative group">
@@ -1088,10 +1132,10 @@ export default function App() {
           <div className="flex lg:hidden items-center gap-4">
             {!user && (
               <button 
-                onClick={() => setActiveTab('profile')}
-                className="px-4 py-1.5 bg-teal-accent text-black text-xs font-bold rounded-full"
+                onClick={() => setShowAuth(true)}
+                className="rounded-full border border-white/10 bg-transparent px-5 py-2 text-xs font-bold text-white transition-all active:scale-95 hover:border-teal-accent/40 hover:text-teal-accent"
               >
-                Start Free
+                Sign In
               </button>
             )}
             <button 
@@ -1268,11 +1312,58 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <main className="container-max py-8 md:py-12">
+      {/* Subscription Activation Overlay */}
+      <AnimatePresence>
+        {isActivating && (
+          <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/90 backdrop-blur-xl">
+            <div className="text-center">
+              <div className="relative w-24 h-24 mx-auto mb-8">
+                <div className="absolute inset-0 border-4 border-teal-accent/20 rounded-full" />
+                <div className="absolute inset-0 border-4 border-t-teal-accent rounded-full animate-spin" />
+                <Zap className="absolute inset-0 m-auto w-10 h-10 text-teal-accent animate-pulse" />
+              </div>
+              <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Activating your account...</h2>
+              <p className="text-[#888888] text-sm max-w-sm mx-auto leading-relaxed">
+                We've received your payment! We're now syncing your account with Dodo Payments. This usually takes just a few seconds.
+              </p>
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <main className="container-max pt-28 pb-12 md:pb-16">
+        {/* Expiry Reminder Banner */}
+        {subscriptionStatus === 'cancelled' && currentPeriodEnd && (
+          <div className="mb-8 p-6 rounded-[24px] bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <AlertCircle className="w-24 h-24 text-amber-500 -mr-8 -mt-8" />
+            </div>
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+              <div className="flex items-center gap-4 text-center md:text-left">
+                <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center shrink-0">
+                  <Clock className="w-6 h-6 text-amber-500" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-1">Your plan will end soon</h3>
+                  <p className="text-sm text-[#888888]">
+                    Your subscription is currently cancelled and will expire on <span className="text-amber-500 font-bold">{new Date(currentPeriodEnd).toLocaleDateString()}</span>.
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowPricingModal(true)}
+                className="px-8 py-3.5 bg-amber-500 text-black font-black rounded-xl hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all transform hover:scale-[1.02] active:scale-100 text-sm whitespace-nowrap"
+              >
+                Renew Subscription
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12 lg:gap-8 xl:gap-10">
           
-          {/* Sidebar Navigation */}
-          <aside className="sticky top-28 hidden max-h-[calc(100vh-140px)] flex-col overflow-y-auto rounded-[28px] border border-white/5 bg-bg-sidebar p-5 custom-scrollbar col-span-1 lg:col-span-3 lg:flex">
+          {/* SIDE NAVBAR (Sidebar) */}
+          <aside className="sticky top-16 hidden max-h-[calc(100vh-80px)] flex-col overflow-y-auto rounded-[28px] border border-white/5 bg-bg-sidebar p-5 custom-scrollbar col-span-1 lg:col-span-3 lg:flex">
             <div className="space-y-1">
               <nav className="flex flex-col">
                 {/* Home Item */}
@@ -1292,9 +1383,6 @@ export default function App() {
                       <tab.icon className={`w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 ${activeTab === tab.id ? 'text-teal-accent' : 'text-muted'}`} />
                       <span>{tab.label}</span>
                     </div>
-                    {tab.isPro && (
-                      <span className="text-[9px] font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20 uppercase relative z-10">PRO</span>
-                    )}
                   </button>
                 ))}
 
@@ -1330,27 +1418,13 @@ export default function App() {
                         );
                       })}
                     </div>
-                    {groupIdx < sidebarGroups.length - 1 && (
-                      <div className="h-[1px] bg-white/5 my-4 mx-4" />
-                    )}
                   </div>
                 ))}
               </nav>
             </div>
-
-            <div className="pro-tip group relative mt-auto rounded-[22px] border border-white/10 bg-white/5 p-4 pt-5">
-              <div className="relative z-10 mb-2 flex items-center gap-2">
-                <Lightbulb className="w-4 h-4 text-teal-accent" />
-                <h3 className="text-sm font-bold text-white">Pro Tip</h3>
-              </div>
-              <p className="relative z-10 text-[13px] leading-7 text-muted">
-                LinkedIn's algorithm favors conversational posts that start with a strong hook. Avoid using more than 3 hashtags.
-              </p>
-            </div>
           </aside>
 
-          {/* Main Content Area */}
-          <div className="col-span-1 lg:col-span-9 space-y-6">
+          <div className="col-span-1 lg:col-span-9 w-full min-w-0 space-y-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -1421,6 +1495,7 @@ export default function App() {
                     setActiveTab={setActiveTab}
                     user={user}
                     usageLimits={usageLimits}
+                    showToast={showToast}
                   />
                 )}
 
@@ -1594,7 +1669,7 @@ export default function App() {
                             <div className="space-y-4">
                               <p className="text-[#A0A0A0] text-sm leading-relaxed">
                                 You are currently on the <span className="text-white font-bold">{isMax ? 'Max' : 'Pro'}</span> plan. 
-                                Cancellations are processed within 24 hours.
+                                Your subscription and billing are managed via Dodo Payments.
                               </p>
                               
                               {!cancellationRequested ? (
@@ -1698,35 +1773,38 @@ export default function App() {
                           >
                             <div className="absolute -top-24 -left-24 w-48 h-48 bg-red-500/10 blur-[80px] rounded-full pointer-events-none" />
                             <h2 className="text-xl font-black text-white mb-4 tracking-tight">Are you sure?</h2>
-                            <p className="text-[#888888] text-sm leading-relaxed mb-8">
-                              Your {isMax ? 'Max' : 'Pro'} access will remain active until the end of your billing period. 
-                              After that you will move to the free tier. This cannot be undone.
-                            </p>
+                             <p className="text-[#888888] text-sm leading-relaxed mb-8">
+                               Your {isMax ? 'Max' : 'Pro'} access will remain active until the end of your current billing period. 
+                               Your subscription will be cancelled immediately with Dodo Payments.
+                             </p>
                             
                             <div className="flex flex-col gap-3">
                               <button 
                                 onClick={async () => {
                                   try {
                                     setIsSubmittingCancellation(true);
-                                    const { error: insertError } = await supabase
-                                      .from('cancellation_requests')
-                                      .insert({
-                                        user_id: user.id,
-                                        email: user.email,
-                                        status: 'pending'
-                                      });
                                     
-                                    if (insertError) throw insertError;
+                                    const response = await fetch('/api/cancel-subscription', {
+                                      method: 'POST',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({
+                                        subscriptionId: subscriptionId,
+                                        userId: user.id
+                                      })
+                                    });
+
+                                    if (!response.ok) throw new Error('Failed to cancel');
                                     
                                     setCancellationRequested(true);
                                     setShowCancelModal(false);
                                     setToast({
-                                      message: "Cancellation requested. We will process this within 24 hours and confirm via email.",
+                                      message: "Your subscription has been cancelled. You will retain access until the end of this billing period.",
                                       type: 'success'
                                     });
+                                    fetchProStatus(user.id);
                                   } catch (err) {
                                     console.error('Cancellation failed:', err);
-                                    setError({ message: 'Failed to submit cancellation request. Please try again or contact support.' });
+                                    setError({ message: 'Failed to cancel subscription. Please try again or contact support.' });
                                   } finally {
                                     setIsSubmittingCancellation(false);
                                   }
@@ -1921,21 +1999,26 @@ export default function App() {
       <PricingModal 
         isOpen={showPricingModal}
         onClose={() => setShowPricingModal(false)}
-        onUpgrade={() => {
-          setShowPricingModal(false);
-          setShowUpgradeModal(true);
-        }}
         user={user}
         isPro={isPro}
+        isMax={isMax}
+        setShowAuth={setShowAuth}
         trackEvent={trackEvent}
       />
 
-      <UpgradeModal 
-        isOpen={showUpgradeModal}
-        onClose={() => setShowUpgradeModal(false)}
-        user={user}
-        trackEvent={trackEvent}
+      <SuccessModal 
+        isOpen={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          // Cleanup URL params
+          const url = new URL(window.location.href);
+          url.searchParams.delete('upgraded');
+          window.history.replaceState({}, '', url.pathname + url.search);
+        }}
+        isMax={isMax}
       />
+
+
 
       <LimitReachedModal 
         isOpen={showLimitModal}

@@ -56,7 +56,7 @@ import {
   History
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { type SomyraProfileAnalysis, type SomyraProfileInput } from '../services/aiService';
+import { type SomyraProfileAnalysis, type SomyraProfileInput, generateTargetAudience } from '../services/aiService';
 import { supabase } from '../lib/supabase';
 import { commonAudiences, commonFocusAreas, commonIndustries, commonRoles, goalOptions, struggleOptions } from './profile-analysis/constants';
 import { ProfileAnalysisResults } from './profile-analysis/ProfileAnalysisResults';
@@ -80,6 +80,8 @@ interface ProfileAnalysisProps {
     aboutOption: 'have' | 'none' | 'rewrite';
     whatDoYouWant: string;
     goals: string[];
+    primaryAudience: string;
+    secondaryAudience: string;
   };
   setQuickForm: React.Dispatch<React.SetStateAction<{
     whoAreYou: string;
@@ -89,6 +91,8 @@ interface ProfileAnalysisProps {
     aboutOption: 'have' | 'none' | 'rewrite';
     whatDoYouWant: string;
     goals: string[];
+    primaryAudience: string;
+    secondaryAudience: string;
   }>>;
   deepStep: number;
   setDeepStep: React.Dispatch<React.SetStateAction<number>>;
@@ -120,6 +124,8 @@ interface ProfileAnalysisProps {
     otherGoal: string;
     achievements: string;
     skills: string;
+    primaryAudience: string;
+    secondaryAudience: string;
   };
   setDeepForm: React.Dispatch<React.SetStateAction<{
     role: string;
@@ -149,6 +155,8 @@ interface ProfileAnalysisProps {
     otherGoal: string;
     achievements: string;
     skills: string;
+    primaryAudience: string;
+    secondaryAudience: string;
   }>>;
   voicePosts: any[];
   isPro: boolean;
@@ -160,6 +168,7 @@ interface ProfileAnalysisProps {
   setActiveTab: (tab: any) => void;
   user: any;
   usageLimits: any;
+  showToast: (toast: any) => void;
 }
 
 // --- Animation Variants ---
@@ -208,14 +217,82 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
   setDeepForm,
   voicePosts,
   isPro,
+  isMax,
   setShowPricingModal,
   GenerationCounter,
   handleCopy,
   copied,
   setActiveTab,
   user,
-  usageLimits
+  usageLimits,
+  showToast
 }) => {
+  const [isGeneratingAudience, setIsGeneratingAudience] = useState(false);
+
+  const handleGenerateAudience = async (target?: 'primary' | 'secondary') => {
+    // Gate on usage limit
+    if (!usageLimits.checkLimit('profile_audit')) {
+      return; 
+    }
+
+    if (profileMode === 'quick') {
+      if (!quickForm.whoAreYou || !quickForm.goals.length) {
+        setValidationError("Please tell us who you are and select at least one goal first.");
+        return;
+      }
+    } else {
+      // In Deep Mode, we check based on the current step or required fields
+      if (!deepForm.role || !deepForm.primaryGoal) {
+        setValidationError("Please select your role and primary goal first.");
+        return;
+      }
+    }
+
+    setIsGeneratingAudience(true);
+    try {
+      const role = profileMode === 'quick' ? quickForm.whoAreYou : deepForm.role;
+      const goals = profileMode === 'quick' ? quickForm.goals.join(', ') : `${deepForm.primaryGoal}: ${deepForm.goalDetail}`;
+      const industry = profileMode === 'quick' ? '' : deepForm.industry;
+      const experience = profileMode === 'quick' ? '' : deepForm.experienceLevel;
+
+      // Extract more context for Deep Strategy
+      let additionalContext = "";
+      if (profileMode === 'strategic') {
+        const answers = deepForm.aboutAnswers;
+        additionalContext = [
+          answers.whoDoYouHelp ? `Who I help: ${answers.whoDoYouHelp}` : "",
+          answers.result ? `Result: ${answers.result}` : "",
+          deepForm.achievements ? `Achievements: ${deepForm.achievements}` : "",
+          deepForm.skills ? `Skills: ${deepForm.skills}` : ""
+        ].filter(Boolean).join(" | ");
+      }
+
+      const result = await generateTargetAudience(role, industry, experience, goals, additionalContext, target);
+      
+      if (profileMode === 'quick') {
+        setQuickForm(prev => ({
+          ...prev,
+          primaryAudience: target === 'secondary' ? prev.primaryAudience : result.primaryAudience,
+          secondaryAudience: target === 'primary' ? prev.secondaryAudience : result.secondaryAudience
+        }));
+      } else {
+        setDeepForm(prev => ({
+          ...prev,
+          primaryAudience: target === 'secondary' ? prev.primaryAudience : result.primaryAudience,
+          secondaryAudience: target === 'primary' ? prev.secondaryAudience : result.secondaryAudience
+        }));
+      }
+      showToast({ 
+        message: target ? `${target === 'primary' ? 'Primary' : 'Secondary'} audience regenerated!` : "Audiences generated! Somyra has defined your targets based on Marcus Reid's strategy.", 
+        type: 'success' 
+      });
+    } catch (err) {
+      console.error(err);
+      showToast({ message: "Failed to generate audience. Please try again.", type: 'error' });
+    } finally {
+      setIsGeneratingAudience(false);
+    }
+  };
   const TOTAL_DEEP_STEPS = 6;
   const isMountedRef = useRef(true);
   const recentScansRef = useRef<HTMLDivElement>(null);
@@ -423,18 +500,25 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
       aboutSection: '',
       aboutOption: 'have',
       whatDoYouWant: '',
-      goals: []
+      goals: [],
+      primaryAudience: '',
+      secondaryAudience: ''
     });
     setDeepForm({
       role: '',
       specificFocus: '',
-      experienceLevel: '',
+      experienceLevel: 'Mid-Level',
       industry: '',
       headline: '',
       headlineOption: 'have',
       about: '',
       aboutOption: 'have',
-      aboutAnswers: { whatDoYouDo: '', whoDoYouHelp: '', result: '', different: '' },
+      aboutAnswers: { 
+        whatDoYouDo: '', 
+        whoDoYouHelp: '', 
+        result: '', 
+        different: '' 
+      },
       experience: '',
       experienceDetails: '',
       featured: '',
@@ -447,7 +531,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
       otherStruggle: '',
       otherGoal: '',
       achievements: '',
-      skills: ''
+      skills: '',
+      primaryAudience: '',
+      secondaryAudience: ''
     });
     setDeepStep(1);
     setDraftRestored(false);
@@ -725,6 +811,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
         setShowPricingModal={setShowPricingModal}
         setActiveTab={setActiveTab}
         triggerAnalyze={triggerAnalyze}
+        usageLimits={usageLimits}
       />
     );
 
@@ -2275,6 +2362,51 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             </AnimatePresence>
           </motion.div>
 
+          {/* NEW FIELD: TARGET AUDIENCE */}
+          <motion.div variants={itemVariants} className="space-y-4 pt-4 border-t border-white/5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-teal-accent" />
+                <label className="text-xs font-bold uppercase tracking-widest text-white">TARGET AUDIENCE</label>
+                <div className="flex items-center gap-1.5 ml-2">
+                  <span className="text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">AI Recommended</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => handleGenerateAudience()}
+                disabled={isGeneratingAudience}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-teal-accent/10 border border-teal-accent/20 text-[10px] font-bold text-teal-accent hover:bg-teal-accent/20 transition-all disabled:opacity-50"
+              >
+                {isGeneratingAudience ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
+                {quickForm.primaryAudience ? 'Regenerate' : 'Magic Wand'}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Primary Audience</label>
+                <input
+                  type="text"
+                  value={quickForm.primaryAudience}
+                  onChange={(e) => setQuickForm({ ...quickForm, primaryAudience: e.target.value })}
+                  placeholder="e.g. Early-stage SaaS founders at $0 to $1M ARR"
+                  className="w-full bg-[#0D0D0D] border border-white/5 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-2 focus:ring-teal-accent/10 hover:border-white/10"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Secondary Audience</label>
+                <input
+                  type="text"
+                  value={quickForm.secondaryAudience}
+                  onChange={(e) => setQuickForm({ ...quickForm, secondaryAudience: e.target.value })}
+                  placeholder="e.g. VC associates and startup accelerators"
+                  className="w-full bg-[#0D0D0D] border border-white/5 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-2 focus:ring-teal-accent/10 hover:border-white/10"
+                />
+              </div>
+            </div>
+          </motion.div>
+
           {renderInputPreview()}
 
           {/* GENERATE BUTTON */}
@@ -2486,7 +2618,6 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     ))}
                   </div>
                 </div>
-
                 {deepForm.role && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
@@ -2501,6 +2632,53 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                       placeholder="e.g. B2B Strategy, UX Research..."
                     />
                   </motion.div>
+                )}
+
+                {/* NEW FIELD: TARGET AUDIENCE (DEEP) - MOVED TO STEP 5 */}
+                {profileMode === 'quick' && (
+                  <div className="space-y-4 pt-6 border-t border-[#1f1f1f]">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 text-teal-accent" />
+                          <label className="text-xs font-bold uppercase tracking-widest text-white">TARGET AUDIENCE</label>
+                        </div>
+                        <span className="text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide whitespace-nowrap">AI Powered</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleGenerateAudience()}
+                        disabled={isGeneratingAudience}
+                        className="w-full sm:w-auto flex items-center justify-center gap-2 px-3 py-1.5 rounded-xl bg-teal-accent/10 border border-teal-accent/20 text-[10px] font-bold text-teal-accent hover:bg-teal-accent/20 transition-all disabled:opacity-50"
+                      >
+                        {isGeneratingAudience ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
+                        {quickForm.primaryAudience ? 'Regenerate' : 'Magic Wand'}
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Primary Audience</label>
+                        <input
+                          type="text"
+                          value={quickForm.primaryAudience}
+                          onChange={(e) => setQuickForm({ ...quickForm, primaryAudience: e.target.value })}
+                          placeholder="e.g. Early-stage SaaS founders at $0 to $1M ARR"
+                          className="w-full bg-[#080808] border border-[#1f1f1f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-2 focus:ring-teal-accent/10 hover:border-white/10"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Secondary Audience</label>
+                        <input
+                          type="text"
+                          value={quickForm.secondaryAudience}
+                          onChange={(e) => setQuickForm({ ...quickForm, secondaryAudience: e.target.value })}
+                          placeholder="e.g. VC associates and startup accelerators"
+                          className="w-full bg-[#080808] border border-[#1f1f1f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-2 focus:ring-teal-accent/10 hover:border-white/10"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
             )}
@@ -2769,20 +2947,83 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   </div>
                 </div>
 
-                <div className="space-y-6">
-                  <SmartSelector
-                    label="Ideal Audience"
-                    options={commonAudiences}
-                    value={deepForm.audience}
-                    onChange={(val: any) => setDeepForm({...deepForm, audience: val})}
-                    placeholder="Who are you trying to reach?"
-                    allowMultiple
-                  />
+                <div className="space-y-6 pt-6 border-t border-[#1f1f1f]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-teal-accent" />
+                        <label className="text-xs font-bold uppercase tracking-widest text-white">TARGET AUDIENCE</label>
+                      </div>
+                      <span className="text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide whitespace-nowrap">AI Powered</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleGenerateAudience()}
+                      disabled={isGeneratingAudience}
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-teal-accent/10 border border-teal-accent/20 text-xs font-bold text-teal-accent hover:bg-teal-accent/20 transition-all disabled:opacity-50"
+                    >
+                      {isGeneratingAudience ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
+                      {deepForm.primaryAudience ? 'REGENERATE ALL' : 'MAGIC WAND'}
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-[#888888] leading-relaxed -mt-2">
+                    Who do you want to reach on LinkedIn? The more specific you are the sharper your strategy will be.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Primary Audience</label>
+                        {deepForm.primaryAudience && (
+                          <button
+                            type="button"
+                            onClick={() => handleGenerateAudience('primary')}
+                            disabled={isGeneratingAudience}
+                            className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent transition-colors flex items-center gap-1"
+                          >
+                            <RefreshCw className={`w-2.5 h-2.5 ${isGeneratingAudience ? 'animate-spin' : ''}`} />
+                            REGENERATE
+                          </button>
+                        )}
+                      </div>
+                      <textarea
+                        value={deepForm.primaryAudience}
+                        onChange={(e) => setDeepForm({ ...deepForm, primaryAudience: e.target.value })}
+                        placeholder="e.g. Early-stage SaaS founders at $0 to $1M ARR"
+                        rows={2}
+                        className="w-full bg-[#080808] border border-[#1f1f1f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-2 focus:ring-teal-accent/10 hover:border-white/10 resize-none"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Secondary Audience</label>
+                        {deepForm.secondaryAudience && (
+                          <button
+                            type="button"
+                            onClick={() => handleGenerateAudience('secondary')}
+                            disabled={isGeneratingAudience}
+                            className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent transition-colors flex items-center gap-1"
+                          >
+                            <RefreshCw className={`w-2.5 h-2.5 ${isGeneratingAudience ? 'animate-spin' : ''}`} />
+                            REGENERATE
+                          </button>
+                        )}
+                      </div>
+                      <textarea
+                        value={deepForm.secondaryAudience}
+                        onChange={(e) => setDeepForm({ ...deepForm, secondaryAudience: e.target.value })}
+                        placeholder="e.g. VC associates and startup accelerators"
+                        rows={2}
+                        className="w-full bg-[#080808] border border-[#1f1f1f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-2 focus:ring-teal-accent/10 hover:border-white/10 resize-none"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-6">
                   <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Biggest Struggle</label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5 md:gap-3">
                     {struggleOptions.map((struggle) => (
                       <button
                         key={struggle}
@@ -2794,9 +3035,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                             setDeepForm({...deepForm, struggles: [...current, struggle]});
                           }
                         }}
-                        className={`px-4 py-2 rounded-full text-xs font-medium border transition-all duration-300 flex items-center gap-2 ${
+                        className={`px-[12px] py-[8px] sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-xs font-medium border transition-all duration-300 flex items-center gap-2 max-w-full truncate ${
                           deepForm.struggles.includes(struggle)
-                            ? 'bg-teal-accent/10 border-teal-accent text-teal-accent'
+                            ? 'bg-teal-accent/10 border-teal-accent text-teal-accent shadow-[0_0_15px_rgba(45,212,191,0.1)]'
                             : 'bg-[#080808] border-[#1f1f1f] text-[#888888] hover:border-[#333333]'
                         }`}
                       >
@@ -2812,11 +3053,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                           setCustomStruggles(customStruggles.filter(s => s !== struggle));
                           setDeepForm(prev => ({ ...prev, struggles: prev.struggles.filter(s => s !== struggle) }));
                         }}
-                        className="px-4 py-2 rounded-full text-xs font-medium border bg-teal-accent/10 border-teal-accent text-teal-accent flex items-center gap-2"
+                        className="px-[12px] py-[8px] sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-xs font-medium border bg-teal-accent/10 border-teal-accent text-teal-accent flex items-center gap-2 max-w-full truncate"
                       >
                         <Check className="w-3 h-3" />
                         {struggle}
-                        <X className="w-3 h-3 ml-1 opacity-50 hover:opacity-100" />
+                        <X className="w-3.5 h-3.5 ml-1 opacity-50 hover:opacity-100" />
                       </button>
                     ))}
 
@@ -2942,7 +3183,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Profile Audit & Strategy</h2>
             <p className="text-[13px] md:text-sm text-muted">Get a surgical analysis of your LinkedIn presence and an exact roadmap to fix it.</p>
           </div>
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-start gap-2 sm:gap-4">
             <GenerationCounter feature="profile_audit" />
           </div>
         </div>
@@ -2950,22 +3191,24 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
       {/* Section 1 — MODE SELECTOR (QUICK VS STRATEGIC) */}
       {!profile && !loading && (
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-base sm:text-lg font-bold text-white">Analyze Your Profile</h2>
-            <p className="text-[11px] sm:text-xs text-[#666666] mt-0.5">
-              Quick Audit → fast clarity | Deep Strategy → full transformation
-            </p>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
+          <div className="w-full lg:w-auto">
+            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">Analyze Your Profile</h2>
+            <div className="text-sm sm:text-base text-[#666666] mt-1.5 leading-relaxed flex flex-col sm:flex-row sm:items-center sm:gap-0 gap-1">
+              <span>Quick Audit <span className="mx-1 opacity-30">→</span> fast clarity</span>
+              <span className="hidden sm:inline mx-4 opacity-10">|</span>
+              <span>Deep Strategy <span className="mx-1 opacity-30">→</span> full transformation</span>
+            </div>
           </div>
           
-          <div className="bg-[#0D0D0D] border border-[#1f1f1f] rounded-full p-1 flex shrink-0">
+          <div className="grid grid-cols-2 lg:flex p-1 bg-[#0D0D0D] border border-[#1f1f1f] rounded-2xl lg:rounded-full w-full lg:w-auto">
             <button
               onClick={() => {
                 setProfileMode('quick');
                 setDeepStep(1);
               }}
-              className={`px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-bold rounded-full transition-all ${
-                profileMode === 'quick' ? 'bg-teal-accent text-black' : 'text-[#888888] hover:text-white'
+              className={`flex-1 lg:flex-none px-4 sm:px-6 py-3 sm:py-2 text-xs sm:text-sm font-bold rounded-xl lg:rounded-full transition-all flex items-center justify-center ${
+                profileMode === 'quick' ? 'bg-teal-accent text-black shadow-[0_0_20px_rgba(45,212,191,0.2)]' : 'text-[#888888] hover:text-white'
               }`}
             >
               Quick Audit
@@ -2979,13 +3222,13 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   setDeepStep(1);
                 }
               }}
-              className={`px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-bold rounded-full transition-all flex items-center gap-1.5 ${
-                profileMode === 'strategic' ? 'bg-teal-accent text-black' : 'text-[#888888] hover:text-white'
+              className={`flex-1 lg:flex-none px-4 sm:px-6 py-3 sm:py-2 text-xs sm:text-sm font-bold rounded-xl lg:rounded-full transition-all flex items-center justify-center gap-2 ${
+                profileMode === 'strategic' ? 'bg-teal-accent text-black shadow-[0_0_20px_rgba(45,212,191,0.2)]' : 'text-[#888888] hover:text-white'
               }`}
             >
-              {!isPro && <Lock className="w-2.5 h-2.5" />}
+              {!isPro && <Lock className="w-3 h-3" />}
               Deep Strategy
-              {!isPro && <span className="bg-teal-accent text-black text-[8px] px-1.5 py-0.5 rounded font-black">PRO</span>}
+              {!isPro && <span className="bg-teal-accent text-black text-[9px] px-1.5 py-0.5 rounded font-black ml-1">PRO</span>}
             </button>
           </div>
         </div>

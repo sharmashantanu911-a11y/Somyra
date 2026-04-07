@@ -85,11 +85,11 @@ export function BioGenerator({
           <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Bio & Headline</h2>
           <p className="text-[13px] md:text-sm text-muted">Optimize your profile to convert visitors into connections.</p>
         </div>
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-start gap-2 sm:gap-4">
           {voicePosts.length > 0 && (
-            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-teal-accent/10 border border-teal-accent/20">
-              <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-teal-accent rounded-full animate-pulse" />
-              <span className="text-[9px] sm:text-[10px] font-bold text-teal-accent uppercase tracking-wider">Voice Active</span>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-accent/10 border border-teal-accent/20">
+              <div className="w-1.5 h-1.5 bg-teal-accent rounded-full animate-pulse" />
+              <span className="text-xs font-bold text-teal-accent uppercase tracking-wider">Voice Active</span>
             </div>
           )}
           <GenerationCounter feature="bio_headline" />
