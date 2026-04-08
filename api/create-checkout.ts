@@ -44,7 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         email: email,
         name: email.split('@')[0] || 'User',
       },
-      cart: [
+      product_cart: [
         {
           product_id: productId,
           quantity: 1,
@@ -58,7 +58,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     console.log('Sending request to Dodo v1:', JSON.stringify(payload));
 
-    const response = await fetch('https://api.dodopayments.com/v1/checkout-sessions', {
+    const response = await fetch('https://api.dodopayments.com/checkout-sessions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${DODO_API_KEY}`,
@@ -71,7 +71,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (!response.ok) {
       console.error('Dodo API Error:', data);
-      return res.status(response.status).json({ error: 'Dodo Payments API error', details: data });
+      return res.status(response.status).json({ 
+        error: 'Dodo Payments API error', 
+        details: data,
+        status: response.status
+      });
     }
 
     return res.status(200).json({ checkout_url: data.checkout_url });
