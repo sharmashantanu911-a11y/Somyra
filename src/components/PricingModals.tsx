@@ -245,7 +245,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
 
 
 
-  const handleCheckout = async (tier: 'pro' | 'max') => {
+  const handleCheckout = async (tier: 'pro' | 'max', overrideAnnual?: boolean) => {
     if (!user) {
       trackEvent('checkout_attempt_unauthenticated', { tier });
       // Save intent to resume after login
@@ -255,13 +255,14 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       return;
     }
 
+    const currentIsAnnual = overrideAnnual !== undefined ? overrideAnnual : isAnnual;
     setIsCheckingOut(tier);
-    trackEvent('checkout_started', { tier, isAnnual });
+    trackEvent('checkout_started', { tier, isAnnual: currentIsAnnual });
 
     try {
       const productId = tier === 'pro' 
-        ? (isAnnual ? DODO_PRODUCT_IDS.PRO_ANNUAL : DODO_PRODUCT_IDS.PRO_MONTHLY)
-        : (isAnnual ? DODO_PRODUCT_IDS.MAX_ANNUAL : DODO_PRODUCT_IDS.MAX_MONTHLY);
+        ? (currentIsAnnual ? DODO_PRODUCT_IDS.PRO_ANNUAL : DODO_PRODUCT_IDS.PRO_MONTHLY)
+        : (currentIsAnnual ? DODO_PRODUCT_IDS.MAX_ANNUAL : DODO_PRODUCT_IDS.MAX_MONTHLY);
 
       const response = await fetch('/api/create-checkout', {
         method: 'POST',
@@ -306,7 +307,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
             // Small timeout to ensure modal is fully mounted and state is stable
             const timer = setTimeout(() => {
               setIsAnnual(wasAnnual);
-              handleCheckout(tier);
+              handleCheckout(tier, wasAnnual);
             }, 500);
             return () => clearTimeout(timer);
           } else {
