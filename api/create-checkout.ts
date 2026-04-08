@@ -39,31 +39,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   try {
+    const payload = {
+      customer: {
+        email: email,
+        name: email.split('@')[0] || 'User',
+      },
+      product_id: productId,
+      quantity: 1,
+      metadata: {
+        supabase_user_id: userId,
+      },
+      return_url: `${baseUrl}/dashboard?upgraded=true`,
+    };
+
+    console.log('Sending request to Dodo:', JSON.stringify(payload));
+
     const response = await fetch('https://api.dodopayments.com/subscriptions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${DODO_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        billing: {
-          city: '',
-          country: 'IN',
-          state: '',
-          street: '',
-          zip: '',
-        },
-        customer: {
-          email: email,
-          name: email.split('@')[0],
-        },
-        product_id: productId,
-        quantity: 1,
-        metadata: {
-          supabase_user_id: userId,
-        },
-        return_url: `${baseUrl}/dashboard?upgraded=true`,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();

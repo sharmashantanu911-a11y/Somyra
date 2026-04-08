@@ -387,6 +387,17 @@ export default function App() {
     secondaryAction?: { label: string; href: string };
   } | null>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
+
+  // Auto-resume checkout after login/signup
+  useEffect(() => {
+    const pending = localStorage.getItem('somyra_pending_checkout');
+    if (pending && user) {
+      setShowPricingModal(true);
+      // NOTE: The actual handleCheckout(tier) will be triggered inside 
+      // the PricingModal itself because it also checks for this localStorage item.
+    }
+  }, [user]);
+
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [limitTriggerFeature, setLimitTriggerFeature] = useState<string | null>(null);
   const [showChangelog, setShowChangelog] = useState(false);

@@ -248,6 +248,8 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   const handleCheckout = async (tier: 'pro' | 'max') => {
     if (!user) {
       trackEvent('checkout_attempt_unauthenticated', { tier });
+      // Save intent to resume after login
+      localStorage.setItem('somyra_pending_checkout', JSON.stringify({ tier, isAnnual, timestamp: Date.now() }));
       onClose();
       setShowAuth(true);
       return;
@@ -277,13 +279,36 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       } else {
         throw new Error(data.error || 'Failed to create checkout session');
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Checkout error:', err);
-      alert('Failed to start checkout. Please try again or contact support.');
+      const errorMsg = err.message || 'Failed to start checkout';
+      alert(`${errorMsg}. Please try again or contact support.`);
     } finally {
-      // We don't reset isCheckingOut(null) here because we are redirecting
+      setIsCheckingOut(null);
     }
   };
+
+  // Auto-resume checkout after login
+  useEffect(() => {
+    if (user && isOpen) {
+      const pending = localStorage.getItem('somyra_pending_checkout');
+      if (pending) {
+        try {
+          const { tier, isAnnual: wasAnnual, timestamp } = JSON.parse(pending);
+          // Only resume if it was saved in the last 10 minutes
+          if (Date.now() - timestamp < 10 * 60 * 1000) {
+            localStorage.removeItem('somyra_pending_checkout');
+            setIsAnnual(wasAnnual);
+            handleCheckout(tier);
+          } else {
+            localStorage.removeItem('somyra_pending_checkout');
+          }
+        } catch (e) {
+          localStorage.removeItem('somyra_pending_checkout');
+        }
+      }
+    }
+  }, [user, isOpen]);
 
   return (
     <div className="overlay-shell z-[100] p-0 md:p-6">
