@@ -282,7 +282,9 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       }
     } catch (err: any) {
       console.error('Checkout error:', err);
-      const errorMsg = err.message || 'Failed to start checkout';
+      // Try to get specific details if available
+      const errorDetail = err.details || (err.message && err.message.includes('API error') ? err.message : null);
+      const errorMsg = errorDetail || err.message || 'Failed to start checkout';
       alert(`${errorMsg}. Please try again or contact support.`);
     } finally {
       setIsCheckingOut(null);
