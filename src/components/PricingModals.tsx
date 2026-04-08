@@ -178,6 +178,7 @@ interface PricingModalProps {
   isMax: boolean;
   setShowAuth: (show: boolean) => void;
   trackEvent: (name: string, params?: any) => void;
+  initialPendingPlan?: {tier: 'pro' | 'max', isAnnual: boolean} | null;
 }
 
 export const PricingModal: React.FC<PricingModalProps> = ({ 
@@ -187,7 +188,8 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   isPro,
   isMax,
   setShowAuth,
-  trackEvent 
+  trackEvent,
+  initialPendingPlan
 }) => {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [maxHeight, setMaxHeight] = useState('90vh');
@@ -290,25 +292,15 @@ export const PricingModal: React.FC<PricingModalProps> = ({
 
   // Auto-resume checkout after login
   useEffect(() => {
-    if (user && isOpen) {
-      const pending = localStorage.getItem('somyra_pending_checkout');
-      if (pending) {
-        try {
-          const { tier, isAnnual: wasAnnual, timestamp } = JSON.parse(pending);
-          // Only resume if it was saved in the last 10 minutes
-          if (Date.now() - timestamp < 10 * 60 * 1000) {
-            localStorage.removeItem('somyra_pending_checkout');
-            setIsAnnual(wasAnnual);
-            handleCheckout(tier);
-          } else {
-            localStorage.removeItem('somyra_pending_checkout');
-          }
-        } catch (e) {
-          localStorage.removeItem('somyra_pending_checkout');
-        }
-      }
+    if (user && isOpen && initialPendingPlan) {
+      // Small timeout to ensure modal is fully mounted and state is stable
+      const timer = setTimeout(() => {
+        setIsAnnual(initialPendingPlan.isAnnual);
+        handleCheckout(initialPendingPlan.tier);
+      }, 500);
+      return () => clearTimeout(timer);
     }
-  }, [user, isOpen]);
+  }, [user, isOpen, initialPendingPlan]);
 
   return (
     <div className="overlay-shell z-[100] p-0 md:p-6">
