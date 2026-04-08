@@ -39,6 +39,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   try {
+    const isLive = DODO_API_KEY.startsWith('live_');
+    const dodoBaseUrl = isLive ? 'https://live.dodopayments.com' : 'https://test.dodopayments.com';
+
     const payload = {
       customer: {
         email: email,
@@ -56,9 +59,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return_url: `${baseUrl}/dashboard?upgraded=true`,
     };
 
-    console.log('Sending request to Dodo v1:', JSON.stringify(payload));
+    console.log(`Sending request to Dodo ${isLive ? 'LIVE' : 'TEST'}:`, JSON.stringify(payload));
 
-    const response = await fetch('https://api.dodopayments.com/checkout-sessions', {
+    const response = await fetch(`${dodoBaseUrl}/checkout-sessions`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${DODO_API_KEY}`,
