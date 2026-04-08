@@ -81,6 +81,7 @@ export function VoiceProfile({
           .single();
 
         if (saveError) throw saveError;
+        if (!data) throw new Error('Failed to save post: no data returned');
 
         const post: VoicePost = {
           id: data.id,
