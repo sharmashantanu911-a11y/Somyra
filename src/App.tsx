@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Sparkles, 
@@ -387,25 +387,12 @@ export default function App() {
     secondaryAction?: { label: string; href: string };
   } | null>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
-  const [pendingPlan, setPendingPlan] = useState<{tier: 'pro' | 'max', isAnnual: boolean} | null>(null);
 
   // Auto-resume checkout after login/signup
   useEffect(() => {
     const pendingData = localStorage.getItem('somyra_pending_checkout');
     if (pendingData && user) {
-      try {
-        const { tier, isAnnual, timestamp } = JSON.parse(pendingData);
-        // Only resume if it was saved in the last 15 minutes
-        if (Date.now() - timestamp < 15 * 60 * 1000) {
-          setPendingPlan({ tier, isAnnual });
-          setShowPricingModal(true);
-        }
-      } catch (e) {
-        console.error('Failed to parse pending checkout:', e);
-      } finally {
-        // PERMANENT FIX: Clear immediately so we don't loop or re-trigger
-        localStorage.removeItem('somyra_pending_checkout');
-      }
+      setShowPricingModal(true);
     }
   }, [user]);
 
@@ -2018,19 +2005,19 @@ export default function App() {
         )}
       </AnimatePresence>
       {/* Modals */}
-      <PricingModal 
-        isOpen={showPricingModal}
-        onClose={() => {
-          setShowPricingModal(false);
-          setPendingPlan(null);
-        }}
-        user={user}
-        isPro={isPro}
-        isMax={isMax}
-        setShowAuth={setShowAuth}
-        trackEvent={trackEvent}
-        initialPendingPlan={pendingPlan}
-      />
+      <AnimatePresence>
+        {showPricingModal && (
+          <PricingModal 
+            isOpen={showPricingModal}
+            onClose={() => setShowPricingModal(false)}
+            user={user}
+            isPro={isPro}
+            isMax={isMax}
+            setShowAuth={setShowAuth}
+            trackEvent={trackEvent}
+          />
+        )}
+      </AnimatePresence>
 
       <SuccessModal 
         isOpen={showSuccessModal}

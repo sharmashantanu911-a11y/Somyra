@@ -178,7 +178,6 @@ interface PricingModalProps {
   isMax: boolean;
   setShowAuth: (show: boolean) => void;
   trackEvent: (name: string, params?: any) => void;
-  initialPendingPlan?: {tier: 'pro' | 'max', isAnnual: boolean} | null;
 }
 
 export const PricingModal: React.FC<PricingModalProps> = ({ 
@@ -188,8 +187,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   isPro,
   isMax,
   setShowAuth,
-  trackEvent,
-  initialPendingPlan
+  trackEvent
 }) => {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [maxHeight, setMaxHeight] = useState('90vh');
@@ -290,17 +288,36 @@ export const PricingModal: React.FC<PricingModalProps> = ({
     }
   };
 
+  const autoResumeTriggered = useRef(false);
+
   // Auto-resume checkout after login
   useEffect(() => {
-    if (user && isOpen && initialPendingPlan) {
-      // Small timeout to ensure modal is fully mounted and state is stable
-      const timer = setTimeout(() => {
-        setIsAnnual(initialPendingPlan.isAnnual);
-        handleCheckout(initialPendingPlan.tier);
-      }, 500);
-      return () => clearTimeout(timer);
+    if (user && isOpen && !autoResumeTriggered.current) {
+      const pendingData = localStorage.getItem('somyra_pending_checkout');
+      if (pendingData) {
+        autoResumeTriggered.current = true;
+        try {
+          const { tier, isAnnual: wasAnnual, timestamp } = JSON.parse(pendingData);
+          // Only resume if it was saved in the last 15 minutes
+          if (Date.now() - timestamp < 15 * 60 * 1000) {
+            // Clear immediately to prevent any re-triggering
+            localStorage.removeItem('somyra_pending_checkout');
+            
+            // Small timeout to ensure modal is fully mounted and state is stable
+            const timer = setTimeout(() => {
+              setIsAnnual(wasAnnual);
+              handleCheckout(tier);
+            }, 500);
+            return () => clearTimeout(timer);
+          } else {
+            localStorage.removeItem('somyra_pending_checkout');
+          }
+        } catch (e) {
+          localStorage.removeItem('somyra_pending_checkout');
+        }
+      }
     }
-  }, [user, isOpen, initialPendingPlan]);
+  }, [user, isOpen]);
 
   return (
     <div className="overlay-shell z-[100] p-0 md:p-6">
