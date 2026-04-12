@@ -48,63 +48,6 @@ export function SavedLibrary({
           <Loader2 className="w-10 h-10 text-teal-accent animate-spin" />
           <p className="text-muted font-medium">Loading...</p>
         </div>
-      ) : !user && savedItems.length === 0 ? (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center justify-center min-h-[60vh] px-6 sm:px-10 py-10 sm:py-20 text-center"
-        >
-          <div className="relative mb-6 sm:mb-8">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-teal-accent/8 border border-teal-accent/15 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(45,212,191,0.15)]">
-              <Bookmark className="w-11 h-11 sm:w-14 sm:h-14 text-teal-accent" />
-            </div>
-          </div>
-
-          <h2 className="text-white text-xl sm:text-2xl font-extrabold max-w-[360px] leading-tight mb-3 sm:mb-4">
-            Your Content Needs a Home
-          </h2>
-          
-          <p className="text-muted text-sm sm:text-[15px] leading-relaxed max-w-[400px] mb-8 sm:mb-10">
-            Saved Library stores your best generated posts, profile rewrites and DMs so you never lose great content. We need a free account to save your data — it is completely free forever.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
-            {[
-              'Never lose great content',
-              'Access from anywhere',
-              'Completely free forever'
-            ].map((benefit, i) => (
-              <div key={i} className="flex items-center gap-2 px-3.5 py-1.5 bg-teal-accent/8 border border-teal-accent/20 rounded-full">
-                <Check className="w-3.5 h-3.5 text-teal-accent" />
-                <span className="text-[11px] sm:text-xs font-medium text-teal-accent">{benefit}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="w-full max-w-[320px] space-y-4 sm:space-y-6">
-            <button 
-              onClick={() => setShowAuth(true)}
-              className="w-full py-3.5 sm:py-4 bg-teal-accent text-black font-bold rounded-xl text-[15px] hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100"
-            >
-              Sign Up Free
-            </button>
-            
-            <div className="space-y-2">
-              <p className="text-[13px] text-muted">
-                Already have an account?{' '}
-                <button 
-                  onClick={() => setShowAuth(true)}
-                  className="text-teal-accent font-semibold underline underline-offset-4 hover:text-teal-accent/80 transition-colors"
-                >
-                  Sign In
-                </button>
-              </p>
-              <p className="text-[11px] text-[#555555]">
-                Free forever — no credit card required
-              </p>
-            </div>
-          </div>
-        </motion.div>
       ) : (
         <>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative mb-8">
@@ -123,16 +66,14 @@ export function SavedLibrary({
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Saved Library</h2>
-                  {!user ? (
-                    <span className="text-[10px] font-bold bg-white/5 text-muted px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-widest">GUEST MODE</span>
-                  ) : isMax ? (
+                  {isMax ? (
                     <span className="text-[10px] font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20 uppercase tracking-widest">MAX</span>
                   ) : isPro ? (
                     <span className="text-[10px] font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20 uppercase tracking-widest">PRO</span>
                   ) : null}
                 </div>
                 <p className="text-[13px] md:text-sm text-muted">
-                  {!user ? 'Your temporary local collection. Sign in to save permanently.' : 'Your collection of generated personal branding assets.'}
+                  Your collection of generated personal branding assets.
                 </p>
               </div>
             </div>
@@ -157,23 +98,6 @@ export function SavedLibrary({
               )}
             </div>
           </div>
-
-          {!user && savedItems.length > 0 && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <AlertCircle className="w-5 h-5 text-muted" />
-                <p className="text-sm text-muted font-medium">
-                  You are in Guest Mode. These items are stored only in your browser and will be lost if you clear your cache.
-                </p>
-              </div>
-              <button 
-                onClick={() => setShowAuth(true)}
-                className="px-6 py-2 bg-white text-black font-bold rounded-xl text-xs whitespace-nowrap hover:bg-teal-accent transition-colors"
-              >
-                Create Free Account
-              </button>
-            </div>
-          )}
 
           {user && !isMax && (() => {
             const saveLimit = usageLimits.getSavedLibraryLimit();

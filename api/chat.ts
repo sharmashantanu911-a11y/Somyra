@@ -2,8 +2,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 20;
-const RATE_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT = 50;
+const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -26,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const entry = rateLimitMap.get(ip);
   if (entry && now < entry.resetAt) {
     if (entry.count >= RATE_LIMIT) {
-      return res.status(429).json({ error: 'Rate limit exceeded. Please wait.' });
+      return res.status(429).json({ error: 'Too many requests. Please try again in an hour.' });
     }
     entry.count++;
   } else {

@@ -75,8 +75,8 @@ export function TopicGenerator({
         setResults((prev: any) => ({ ...prev, topics: data }));
         setStats((prev: any) => ({ ...prev, topics: prev.topics + 1 }));
         setToast(null);
-        // C5: Increment by actual number of topics generated (8), not 1
-        await incrementUsage('topic_generator', data.length);
+        // C5: Increment by 1 generation (not the number of topics returned)
+        await incrementUsage('topic_generator', 1);
       } else {
         showToast({
           message: 'No topics were generated. Please try again.',

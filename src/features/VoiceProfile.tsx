@@ -57,10 +57,10 @@ export function VoiceProfile({
 
     if (status.limit !== 'unlimited' && currentVoice >= (status.limit as number)) {
       let message = '';
-      if (usageLimits.tier === 'guest') message = 'Sign up free to add up to 5 sample posts.';
-      else if (usageLimits.tier === 'free') message = 'Upgrade to Pro to add up to 10 sample posts and unlock Deep Mode.';
-      else if (usageLimits.tier === 'pro') message = 'Upgrade to Max to add up to 20 voice samples.';
-      else message = 'Maximum posts reached. Delete a post to add a new one.';
+      if (usageLimits.tier === 'guest') message = 'Create a free account to start using Somyra.';
+      else if (usageLimits.tier === 'free') message = "You've reached your limit. Upgrade to Pro to add more.";
+      else if (usageLimits.tier === 'pro') message = "You've reached your Pro limit. Upgrade to Max for more.";
+      else message = "You've reached your sample post limit. Contact us for a custom plan.";
 
       showToast({
         message,
@@ -73,31 +73,23 @@ export function VoiceProfile({
 
     setLoadingVoice(true);
     try {
-      if (user) {
-        const { data, error: saveError } = await supabase
-          .from('voice_profile')
-          .insert([{ user_id: user.id, post_text: newVoicePost }])
-          .select()
-          .single();
+      if (!user) return;
+      
+      const { data, error: saveError } = await supabase
+        .from('voice_profile')
+        .insert([{ user_id: user.id, post_text: newVoicePost }])
+        .select()
+        .single();
 
-        if (saveError) throw saveError;
-        if (!data) throw new Error('Failed to save post: no data returned');
+      if (saveError) throw saveError;
+      if (!data) throw new Error('Failed to save post: no data returned');
 
-        const post: VoicePost = {
-          id: data.id,
-          content: data.post_text,
-          created_at: data.created_at
-        };
-        setVoicePosts([post, ...voicePosts]);
-      } else {
-        const newPost: VoicePost = { 
-          id: Date.now().toString(), 
-          content: newVoicePost, 
-          created_at: new Date().toISOString() 
-        };
-        setVoicePosts([newPost, ...voicePosts]);
-        usageLimits.incrementUsage('voice_profile');
-      }
+      const post: VoicePost = {
+        id: data.id,
+        content: data.post_text,
+        created_at: data.created_at
+      };
+      setVoicePosts([post, ...voicePosts]);
       
       setNewVoicePost('');
       setVoiceError(null);

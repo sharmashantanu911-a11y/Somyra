@@ -400,8 +400,6 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                 <p className="text-[10px] font-bold text-[#555555] tracking-[2px] uppercase">INCLUDES</p>
                 <ul className="space-y-3">
                   {[
-                    "5 generations to try instantly",
-                    "20 generations per month after signup",
                     "Profile Audit: 5 per month",
                     "Topic Generator: 30 topics per month",
                     "Post Writer: 10 per month",
@@ -489,18 +487,18 @@ export const PricingModal: React.FC<PricingModalProps> = ({
             </div>
 
             {/* Max Card */}
-            <div className="relative flex min-w-0 flex-1 flex-col rounded-3xl border border-amber-500/30 bg-amber-500/[0.03] p-5 md:p-7 hover:border-amber-500/50 transition-colors">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-amber-400 to-orange-600 px-4 py-1 text-[10px] font-black uppercase tracking-wider text-black shadow-lg shadow-amber-500/20 text-white">
+            <div className="relative flex min-w-0 flex-1 flex-col rounded-3xl border border-red-500/30 bg-red-500/[0.01] p-5 md:p-7 hover:border-red-500/50 transition-colors">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-400 to-red-600 px-4 py-1 text-[10px] font-black uppercase tracking-wider text-black shadow-lg shadow-red-500/20 text-white">
                 For Power Users
               </div>
 
               <div className="mb-6">
-                <span className="text-[10px] font-bold text-amber-500 tracking-[2px] uppercase">MAX</span>
+                <span className="text-[10px] font-bold text-red-400 tracking-[2px] uppercase">MAX</span>
                 <div className="mt-2 flex items-baseline gap-1">
                   <span className="text-[32px] md:text-[44px] font-black text-white">${isAnnual ? '29' : '39'}</span>
                   <span className="text-[13px] text-[#888888]">/mo</span>
                 </div>
-                {isAnnual && <p className="text-[11px] text-amber-500 font-bold">Billed $348/year (Save $120)</p>}
+                {isAnnual && <p className="text-[11px] text-red-400 font-bold">Billed $348/year (Save $120)</p>}
                 <p className="text-[13px] text-[#A0A0A0] mt-2">Everything in Pro plus:</p>
               </div>
 
@@ -521,8 +519,8 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     "Direct founder access for feedback"
                   ].map((f, i) => (
                     <li key={i} className="flex items-start gap-3 text-[12px] text-white leading-snug">
-                      <div className="w-4 h-4 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-3 h-3 text-amber-500" />
+                      <div className="w-4 h-4 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-3 h-3 text-red-400" />
                       </div>
                       {f}
                     </li>
@@ -533,7 +531,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               <button 
                 onClick={() => handleCheckout('max')}
                 disabled={isCheckingOut !== null}
-                className="mt-auto w-full py-4 bg-gradient-to-r from-amber-400 to-orange-600 text-white rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
+                className="mt-auto w-full py-4 bg-gradient-to-r from-red-400 to-red-600 text-white rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(239,68,68,0.3)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
               >
                 {isCheckingOut === 'max' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get Max Access'}
               </button>
@@ -596,7 +594,6 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   );
 };
 
-
 interface LimitReachedModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -604,30 +601,86 @@ interface LimitReachedModalProps {
   onAuth: () => void;
   user: any;
   isPro?: boolean;
+  isMax?: boolean;
   triggerFeature?: string | null;
 }
 
-export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, onClose, onPricing, onAuth, user, isPro, triggerFeature }) => {
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0 });
-
-  useEffect(() => {
-    if (isOpen && user) {
-      const updateTimer = () => {
-        const now = new Date();
-        const midnight = new Date(now);
-        midnight.setUTCHours(24, 0, 0, 0);
-        const diff = midnight.getTime() - now.getTime();
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        setTimeLeft({ hours, minutes });
-      };
-      updateTimer();
-      const interval = setInterval(updateTimer, 60000);
-      return () => clearInterval(interval);
-    }
-  }, [isOpen, user]);
-
+export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, onClose, onPricing, onAuth, user, isPro, isMax, triggerFeature }) => {
   if (!isOpen) return null;
+
+  // ─── Monthly reset date ───
+  const now = new Date();
+  const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  const resetDateStr = `${monthNames[nextMonth.getMonth()]} 1st`;
+
+  // ─── Determine if this is a cumulative cap (voice/saved) vs monthly ───
+  const isCumulativeCap = triggerFeature === 'voice_profile' || triggerFeature === 'saved_library';
+
+  // ─── Compute title ───
+  const getTitle = (): string => {
+    if (!user) return 'Create a free account to start using Somyra.';
+
+    if (isMax) {
+      if (triggerFeature === 'profile_audit') return "You've reached your monthly audit limit.";
+      if (triggerFeature === 'smart_outreach') return "You've reached your monthly outreach limit.";
+      if (triggerFeature === 'voice_profile') return "You've reached your sample post limit.";
+      return "You've reached your monthly limit.";
+    }
+
+    if (isPro) {
+      if (isCumulativeCap) return "You've reached your Pro limit.";
+      return "You've reached your Pro limit.";
+    }
+
+    // Free tier
+    if (isCumulativeCap) return "You've reached your limit.";
+    return "You've hit your monthly limit.";
+  };
+
+  // ─── Compute message body ───
+  const getMessage = (): string => {
+    if (!user) return 'Join thousands of professionals building their LinkedIn presence with Somyra. Free forever — no credit card needed.';
+
+    if (isMax) {
+      if (triggerFeature === 'profile_audit') return `It resets on ${resetDateStr}.`;
+      if (triggerFeature === 'smart_outreach') return `It resets on ${resetDateStr} — or contact us for a custom plan.`;
+      if (triggerFeature === 'voice_profile') return 'Contact us for a custom plan.';
+      return `It resets on ${resetDateStr}.`;
+    }
+
+    if (isPro) {
+      if (triggerFeature === 'voice_profile') return 'Upgrade to Max for more.';
+      if (isCumulativeCap) return 'Upgrade to Max for more.';
+      return 'Upgrade to Max for unlimited access.';
+    }
+
+    // Free tier
+    if (triggerFeature === 'voice_profile') return 'Upgrade to Pro to add more.';
+    if (isCumulativeCap) return 'Upgrade to Pro to add more.';
+    return 'Upgrade to Pro for more.';
+  };
+
+  // ─── Compute CTA ───
+  const getCtaLabel = (): string => {
+    if (!user) return 'Sign Up';
+    if (isMax) return 'Contact Us';
+    if (isPro) return 'Upgrade to Max';
+    return 'Upgrade to Pro';
+  };
+
+  const handleCta = () => {
+    if (!user) {
+      onAuth();
+    } else if (isMax) {
+      // Contact us — open mailto or pricing page
+      window.open('mailto:support@somyra.com?subject=Custom%20Plan%20Request', '_blank');
+      onClose();
+    } else {
+      onPricing();
+    }
+  };
 
   return (
     <div className="overlay-shell z-[120]">
@@ -645,90 +698,47 @@ export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, on
           <div className="absolute inset-0 bg-teal-accent/20 rounded-full animate-ping opacity-20" />
         </div>
 
-        {!user ? (
-          <>
-            <div className="dialog-header">
-              <div className="inline-flex items-center px-3 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full text-[10px] font-bold text-teal-accent uppercase tracking-wider mb-4">
-                Free forever
-              </div>
-              <h3 className="dialog-title">You have used your 5 free generations</h3>
-              <p className="dialog-copy dialog-section text-safe">
-                Sign up free to get 20 generations per month, unlock your Voice Profile, and start building your content library.
-              </p>
+        <div className="dialog-header">
+          {!user && (
+            <div className="inline-flex items-center px-3 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full text-[10px] font-bold text-teal-accent uppercase tracking-wider mb-4">
+              Free forever
             </div>
-
-            <div className="dialog-section mt-8 flex flex-col gap-3">
-              <button 
-                onClick={onAuth}
-                className="w-full py-3.5 bg-teal-accent text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100"
-              >
-                Sign Up Free
-              </button>
-              <button 
-                onClick={onClose}
-                className="w-full py-3 text-[#555555] font-bold rounded-xl hover:text-white transition-all"
-              >
-                Maybe Later
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="dialog-header">
-              <h3 className="dialog-title">
-                {triggerFeature === 'profile_audit' ? `You have used all ${isPro ? 30 : 5} Profile Audits` :
-                 triggerFeature === 'post_writer' ? `You have used all ${isPro ? 60 : 10} Post Writers` :
-                 triggerFeature === 'smart_outreach' ? `You have used all ${isPro ? 500 : 10} Smart Outreach messages` :
-                 triggerFeature === 'topic_generator' ? `You have used all 30 Topic Generators` :
-                 'You have reached your limit'}
-              </h3>
-              <p className="dialog-copy dialog-section text-safe">
-                {isPro && triggerFeature === 'profile_audit' ? 'Upgrade to Max for unlimited Profile Audits.' :
-                 isPro && triggerFeature === 'post_writer' ? 'Upgrade to Max for unlimited Post Writers.' :
-                 isPro && triggerFeature === 'smart_outreach' ? 'Upgrade to Max for 1000 Smart Outreach messages per month.' :
-                 triggerFeature === 'profile_audit' ? 'Upgrade to Pro for 30 per month and Deep Mode access.' :
-                 triggerFeature === 'post_writer' ? 'Upgrade to Pro for 60 per month and Deep Mode access.' :
-                 triggerFeature === 'smart_outreach' ? 'Upgrade to Pro for 500 per month and Deep Mode access.' :
-                 triggerFeature === 'topic_generator' ? 'Upgrade to Pro for unlimited Topic Generators.' :
-                 isPro ? 'Upgrade to Max for unlimited usage and elite features.' : 'Upgrade to Pro for higher limits and Deep Mode access.'}
-              </p>
-            </div>
-
-            <div className="dialog-section mt-6 bg-[#141414] border border-[#1f1f1f] rounded-xl p-4">
-              <div className="text-[10px] text-[#555555] uppercase tracking-widest mb-1">Resets in</div>
-              <div className="text-2xl font-bold text-white flex items-center justify-center gap-2">
-                <span>{timeLeft.hours}h</span>
-                <span className="text-[#333333]">:</span>
-                <span>{timeLeft.minutes}m</span>
-              </div>
-            </div>
-            
-            <div className="dialog-section mt-8 flex flex-col gap-3">
-              <button 
-                onClick={onPricing}
-                className="w-full py-3.5 bg-teal-accent text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100"
-              >
-                Upgrade to Pro
-              </button>
-              <button 
-                onClick={onClose}
-                className="w-full py-3 text-[#555555] font-bold rounded-xl hover:text-white transition-all"
-              >
-                Check back tomorrow
-              </button>
-            </div>
-          </>
-        )}
-
-        <div className="dialog-section mt-8 border-t border-white/5 pt-6">
-          <p className="text-[11px] text-[#555555] italic">
-            Profile Analysis is always free and unlimited
+          )}
+          <h3 className="dialog-title">{getTitle()}</h3>
+          <p className="dialog-copy dialog-section text-safe">
+            {getMessage()}
           </p>
+        </div>
+
+        {/* Reset date indicator — only show for monthly features of logged-in users */}
+        {user && !isCumulativeCap && (
+          <div className="dialog-section mt-6 bg-[#141414] border border-[#1f1f1f] rounded-xl p-4">
+            <div className="text-[10px] text-[#555555] uppercase tracking-widest mb-1">Monthly Reset</div>
+            <div className="text-lg font-bold text-white">
+              {resetDateStr}
+            </div>
+          </div>
+        )}
+        
+        <div className="dialog-section mt-8 flex flex-col gap-3">
+          <button 
+            onClick={handleCta}
+            className="w-full py-3.5 bg-teal-accent text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100"
+          >
+            {getCtaLabel()}
+          </button>
+          <button 
+            onClick={onClose}
+            className="w-full py-3 text-[#555555] font-bold rounded-xl hover:text-white transition-all"
+          >
+            {!user ? 'Maybe Later' : 'Got it'}
+          </button>
         </div>
       </motion.div>
     </div>
   );
 };
+
 
 export const SuccessModal: React.FC<{ 
   isOpen: boolean; 

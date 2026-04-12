@@ -61,6 +61,7 @@ import { DashboardHome } from './components/DashboardHome';
 import { PricingModal, LimitReachedModal, SuccessModal } from './components/PricingModals';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ChangelogModal } from './components/ChangelogModal';
+import { ReviewModal } from './components/ReviewModal';
 import { useUsageLimits, FeatureKey } from './hooks/useUsageLimits';
 
 import { VoiceProfile } from './features/VoiceProfile';
@@ -133,6 +134,45 @@ const getTimeUntilMidnightUTC = () => {
   return { hours, minutes };
 };
 
+const GuestSignupWallModal = ({ show, setShowAuth }: { show: boolean, setShowAuth: (val: boolean) => void }) => {
+  if (!show) return null;
+  return (
+    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+      <div className="relative w-full max-w-sm rounded-[16px] bg-[#141414] p-6 shadow-2xl border-t-[4px] border-t-teal-accent border-l border-r border-b border-white/10 ring-1 ring-white/5">
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-teal-accent/10">
+            <svg className="h-8 w-8 text-teal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h2 className="mb-2 text-xl font-bold text-white">Create a free account to start using Somyra.</h2>
+          <p className="mb-6 text-sm text-[#888888]">
+            Join thousands of founders and professionals building their LinkedIn presence with Somyra. Free forever. No credit card needed.
+          </p>
+          <div className="mb-6 flex flex-wrap justify-center gap-2">
+            <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Profile Audits</span>
+            <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Post Writer</span>
+            <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Smart Outreach</span>
+          </div>
+          <button
+            onClick={() => setShowAuth(true)}
+            className="mb-4 w-full rounded-xl bg-teal-accent px-4 py-3 text-sm font-bold text-black transition-all hover:bg-teal-accent/90 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
+          >
+            Sign Up Free
+          </button>
+          <button
+            onClick={() => setShowAuth(true)}
+            className="text-sm font-medium text-[#888888] transition-colors hover:text-white"
+          >
+            Already have an account? Sign In
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -142,6 +182,8 @@ export default function App() {
   const [error, setError] = useState<AppError | null>(null);
   const [user, setUser] = useState<any>(null);
   const [showAuth, setShowAuth] = useState(false);
+  const [showGuestWall, setShowGuestWall] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [isDeepMode, setIsDeepMode] = useState(false);
   const [abortController, setAbortController] = useState<AbortController | null>(null);
   const [showDeleteAllSavedConfirm, setShowDeleteAllSavedConfirm] = useState(false);
@@ -189,6 +231,8 @@ export default function App() {
       const currentUserId = session?.user?.id || userId;
       if (!currentUserId) return;
 
+      if (!currentUserId) return;
+
       const { data: existingProfile, error: fetchError } = await supabase
         .from('profiles')
         .select('id, is_pro, is_max, subscription_id, subscription_status, current_period_end')
@@ -230,6 +274,30 @@ export default function App() {
     } catch (err: any) {
       console.log(`Pro/Max status fetch error silently ignored: ${err.message}`);
       return { isPro: false, isMax: false };
+    }
+  };
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [loadingTestimonials, setLoadingTestimonials] = useState(true);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
+
+  const fetchTestimonials = async () => {
+    try {
+      setLoadingTestimonials(true);
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      if (data) setTestimonials(data);
+    } catch (err) {
+      console.error('Error fetching testimonials:', err);
+    } finally {
+      setLoadingTestimonials(false);
     }
   };
 
@@ -473,7 +541,7 @@ export default function App() {
         case 'profile_audit': return 'Profile Audits';
         case 'post_writer': return 'Posts';
         case 'smart_outreach': return 'Outreach messages';
-        case 'topic_generator': return 'Topics';
+        case 'topic_generator': return 'Topic Generations';
         case 'bio_headline': return 'Bio & Headlines';
         case 'voice_profile': return 'Voice posts';
         default: return 'generations';
@@ -554,8 +622,14 @@ export default function App() {
   const handleAnalyzeProfile = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isGenerating) return;
+    setIsGenerating(true);
+
     // Gate on usage limit before running the expensive API call
-    if (!checkGenerationLimit('profile_audit')) return;
+    if (!checkGenerationLimit('profile_audit')) {
+      setIsGenerating(false);
+      return;
+    }
     
     // Cancel any existing request
     if (abortController) {
@@ -701,6 +775,8 @@ export default function App() {
       if (industry) {
         localStorage.setItem('somyra_industry', industry);
       }
+
+      await usageLimits.incrementUsage('profile_audit');
     } catch (err: any) {
       clearTimeout(timeoutId);
       if (err.name === 'AbortError') {
@@ -714,6 +790,7 @@ export default function App() {
     } finally {
       setLoading(false);
       setAbortController(null);
+      setIsGenerating(false);
     }
   };
 
@@ -753,49 +830,6 @@ export default function App() {
     const saveLimit = usageLimits.getSavedLibraryLimit();
 
     if (!user) {
-      const guestSaveCap = 5; // Guest save cap (from TIER_LIMITS)
-      if (guestSaves >= guestSaveCap) {
-        showToast({
-          message: 'Save limit reached. Sign up free to save up to 10 items.',
-          type: 'error',
-          headline: 'Limit Reached'
-        });
-        trackEvent('saved_library_limit_hit', { tier: 'guest' });
-        return;
-      }
-      
-      // Save to local storage for guests
-      try {
-        const localItem: SavedItem = {
-          id: Date.now(),
-          type,
-          content,
-          created_at: new Date().toISOString()
-        };
-        
-        const currentLocalItems = JSON.parse(localStorage.getItem('somyra_local_library') || '[]');
-        const updatedLocalItems = [localItem, ...currentLocalItems];
-        localStorage.setItem('somyra_local_library', JSON.stringify(updatedLocalItems));
-        setSavedItems(updatedLocalItems);
-        
-        const newCount = guestSaves + 1;
-        setGuestSaves(newCount);
-        localStorage.setItem('somyra_guest_saves', newCount.toString());
-        
-        setCopied(id);
-        setTimeout(() => setCopied(null), 2000);
-        
-        showToast({
-          message: 'Saved locally! Sign up free to access 10 saves per month.',
-          type: 'success',
-          headline: 'Saved Locally'
-        });
-      } catch (err) {
-        showToast({
-          message: 'Failed to save locally.',
-          type: 'error'
-        });
-      }
       return;
     }
 
@@ -804,8 +838,8 @@ export default function App() {
       const isProUser = isPro && !isMax;
       showToast({
         message: isProUser
-          ? 'Save limit reached (200 saves). Upgrade to Max for unlimited saves.'
-          : 'Save limit reached (10 saves). Upgrade to Pro for 200 saves per month.',
+          ? "You've reached your Pro limit. Upgrade to Max for more."
+          : "You've reached your limit. Upgrade to Pro to add more.",
         type: 'error',
         headline: 'Limit Reached',
         action: { label: isProUser ? 'Upgrade to Max' : 'Upgrade to Pro', onClick: () => setShowPricingModal(true) }
@@ -853,19 +887,6 @@ export default function App() {
     setError(null);
     
     if (!user) {
-      // Delete from local storage for guests
-      try {
-        const updatedLocalItems = savedItems.filter(item => item.id !== id);
-        localStorage.setItem('somyra_local_library', JSON.stringify(updatedLocalItems));
-        setSavedItems(updatedLocalItems);
-        
-        // Also decrement guest saves count if we want to be generous
-        const newCount = Math.max(0, guestSaves - 1);
-        setGuestSaves(newCount);
-        localStorage.setItem('somyra_guest_saves', newCount.toString());
-      } catch (err) {
-        console.error('Failed to delete local item');
-      }
       return;
     }
     
@@ -890,16 +911,6 @@ export default function App() {
     setError(null);
 
     if (!user) {
-      try {
-        localStorage.removeItem('somyra_local_library');
-        localStorage.removeItem('somyra_guest_saves');
-        setSavedItems([]);
-        setGuestSaves(0);
-      } catch (err) {
-        console.error('Failed to clear local saved library');
-      } finally {
-        
-      }
       return;
     }
 
@@ -932,14 +943,21 @@ export default function App() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       const currentUser = session?.user ?? null;
       setUser(currentUser);
-      setIsAuthLoading(false);
-      setAuthChecked(true);
-      
+
       if (currentUser) {
+        setIsAuthLoading(false);
+        setAuthChecked(true);
         fetchProStatus(currentUser.id);
         
         // H2 FIX: Clear ALL guest localStorage keys on sign-in
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+          // POST-SIGNUP REDIRECT LOGIC
+          const redirectFeature = localStorage.getItem('somyra_redirect_feature');
+          if (redirectFeature) {
+            setActiveTab(redirectFeature as Tab);
+            localStorage.removeItem('somyra_redirect_feature');
+          }
+          
           localStorage.removeItem('somyra_guest_generations');
           localStorage.removeItem('somyra_guest_voice_count');
           localStorage.removeItem('somyra_guest_saves');
@@ -954,6 +972,8 @@ export default function App() {
       } else {
         setIsPro(false);
         setIsMax(false);
+        setIsAuthLoading(false);
+        setAuthChecked(true);
       }
     });
 
@@ -1062,10 +1082,21 @@ export default function App() {
     }
   };
 
+  const handleTabClick = (tabId: Tab) => {
+    const restrictedTabs = ['voice', 'profile', 'topics', 'writer', 'bio', 'outreach', 'saved'];
+    if (!user && restrictedTabs.includes(tabId)) {
+      localStorage.setItem('somyra_redirect_feature', tabId);
+      setShowGuestWall(true);
+    } else {
+      setActiveTab(tabId);
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30 overflow-x-hidden">
+    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-[999] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-[40] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 md:px-6 lg:px-8">
           <div className="flex items-center gap-4">
             <div className="relative group">
@@ -1128,7 +1159,7 @@ export default function App() {
                   Sign In
                 </button>
                 <button 
-                  onClick={() => setActiveTab('profile')}
+                  onClick={() => handleTabClick('profile')}
                   className="rounded-full bg-teal-accent px-5 py-2.5 text-xs font-bold text-black shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all active:scale-95 hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] hover:bg-teal-accent/90"
                 >
                   Start Free
@@ -1205,8 +1236,7 @@ export default function App() {
                   <button
                     key={tab.id}
                     onClick={() => {
-                      setActiveTab(tab.id as Tab);
-                      setIsMobileMenuOpen(false);
+                      handleTabClick(tab.id as Tab);
                     }}
                     className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 mb-2 ${
                       activeTab === tab.id 
@@ -1234,8 +1264,7 @@ export default function App() {
                           <button
                             key={tab.id}
                             onClick={() => {
-                              setActiveTab(tab.id as Tab);
-                              setIsMobileMenuOpen(false);
+                              handleTabClick(tab.id as Tab);
                             }}
                             className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                               activeTab === tab.id 
@@ -1369,10 +1398,9 @@ export default function App() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12 lg:gap-8 xl:gap-10">
+        <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12 lg:gap-8 xl:gap-10 items-start">
           
-          {/* SIDE NAVBAR (Sidebar) */}
-          <aside className="sticky top-16 hidden max-h-[calc(100vh-80px)] flex-col overflow-y-auto rounded-[28px] border border-white/5 bg-bg-sidebar p-5 custom-scrollbar col-span-1 lg:col-span-3 lg:flex">
+          <aside className="sticky top-28 hidden lg:flex flex-col col-span-1 lg:col-span-3 max-h-[calc(100vh-140px)] overflow-y-auto rounded-[28px] border border-white/5 bg-bg-sidebar p-5 custom-scrollbar">
             <div className="space-y-1">
               <nav className="flex flex-col">
                 {/* Home Item */}
@@ -1380,7 +1408,7 @@ export default function App() {
                   <button
                     key={tab.id}
                     onClick={() => {
-                      setActiveTab(tab.id as Tab);
+                      handleTabClick(tab.id as Tab);
                     }}
                     className={`group relative mb-2 flex items-center justify-between overflow-hidden rounded-xl px-4 py-3.5 text-sm font-medium transition-all duration-300 ${
                       activeTab === tab.id 
@@ -1408,7 +1436,7 @@ export default function App() {
                           <button
                             key={tab.id}
                             onClick={() => {
-                              setActiveTab(tab.id as Tab);
+                              handleTabClick(tab.id as Tab);
                             }}
                             className={`group relative flex items-center justify-between overflow-hidden rounded-xl px-4 py-3.5 text-sm font-medium transition-all duration-300 ${
                               activeTab === tab.id 
@@ -1452,7 +1480,7 @@ export default function App() {
                     stats={stats}
                     voicePostsCount={voicePosts.length}
                     usageLimits={usageLimits}
-                    setActiveTab={setActiveTab}
+                    setActiveTab={handleTabClick}
                     setShowAuth={setShowAuth}
                     onUpgrade={() => setShowPricingModal(true)}
                     setToast={setToast}
@@ -1908,26 +1936,51 @@ export default function App() {
 
       
       {/* Footer */}
-      <footer className="relative max-w-6xl mx-auto px-6 py-20 md:py-32 mt-20">
-          <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-teal-accent/40 to-transparent"></div>
-        <div className="flex flex-col items-center justify-center space-y-8">
-          <div className="flex items-center gap-6 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
-            <button onClick={() => navigateTo('/terms')} className="hover:text-teal-accent transition-all">Terms of Service</button>
-            <span className="w-1 h-1 bg-white/10 rounded-full" />
-            <button onClick={() => navigateTo('/privacy')} className="hover:text-teal-accent transition-all">Privacy Policy</button>
-            <span className="w-1 h-1 bg-white/10 rounded-full" />
-            <button onClick={() => navigateTo('/contact')} className="hover:text-teal-accent transition-all">Contact</button>
-          </div>
+      <footer className="relative w-full border-t border-white/5 mt-20 pt-16 pb-20 md:pt-20 md:pb-24">
+        {/* Top Glow Divider */}
+        <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-teal-accent/30 to-transparent" />
+        
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-10 md:gap-0">
+            {/* Logo and Credits */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
+                </svg>
+                <span className="text-xl font-bold tracking-tight text-white">Somyra</span>
+              </div>
+              <p className="text-[11px] text-muted font-black uppercase tracking-[0.3em] text-center md:text-left">
+                Made with ❤️ in India by <a href="https://www.linkedin.com/in/sharmashantanu911" target="_blank" rel="noopener noreferrer" className="text-teal-accent hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] transition-all">Shantanu Sharma</a>
+              </p>
+            </div>
 
-          <div className="flex items-center gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            <svg className="w-4 h-4 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
-            </svg>
-            <span className="text-sm font-bold tracking-tight text-white">Somyra</span>
+            {/* Links */}
+            <div className="flex items-center gap-8 md:gap-12">
+              <button 
+                onClick={() => navigateTo('/terms')} 
+                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
+              >
+                Terms
+              </button>
+              <button 
+                onClick={() => navigateTo('/privacy')} 
+                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
+              >
+                Privacy
+              </button>
+              <button 
+                onClick={() => navigateTo('/contact')} 
+                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
+              >
+                Contact
+              </button>
+            </div>
           </div>
-          <p className="text-center text-[10px] text-muted font-medium uppercase tracking-[0.2em]">
-            Made with ❤️ in India by <a href="https://www.linkedin.com/in/sharmashantanu911" target="_blank" rel="noopener noreferrer" className="text-teal-accent hover:opacity-80 transition-opacity">Shantanu Sharma</a>
-          </p>
+          
+          <div className="mt-16 text-center">
+            <p className="text-[10px] text-muted/40 font-bold uppercase tracking-[0.1em]">© 2026 Somyra AI. All rights reserved.</p>
+          </div>
         </div>
       </footer>
 
@@ -2005,6 +2058,10 @@ export default function App() {
         )}
       </AnimatePresence>
       {/* Modals */}
+      <GuestSignupWallModal 
+        show={showGuestWall} 
+        setShowAuth={(val) => { setShowGuestWall(false); setShowAuth(val); }} 
+      />
       <AnimatePresence>
         {showPricingModal && (
           <PricingModal 
@@ -2021,14 +2078,14 @@ export default function App() {
 
       <SuccessModal 
         isOpen={showSuccessModal}
-        onClose={() => {
-          setShowSuccessModal(false);
-          // Cleanup URL params
-          const url = new URL(window.location.href);
-          url.searchParams.delete('upgraded');
-          window.history.replaceState({}, '', url.pathname + url.search);
-        }}
-        isMax={isMax}
+        onClose={() => setShowSuccessModal(false)}
+      />
+
+      <ReviewModal
+        isOpen={showReviewModal}
+        onClose={() => setShowReviewModal(false)}
+        user={user}
+        onSuccess={fetchTestimonials}
       />
 
 
@@ -2051,6 +2108,7 @@ export default function App() {
         }}
         user={user}
         isPro={isPro}
+        isMax={isMax}
         triggerFeature={limitTriggerFeature}
       />
 

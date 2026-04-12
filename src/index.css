@@ -10,8 +10,10 @@
   --color-border-card: #1f1f1f;
   --color-muted: #888888;
   
-  --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-  --shadow-teal: 0 0 20px -5px rgba(45, 212, 191, 0.3);
+  --shadow-premium: 0 20px 50px -12px rgba(0, 0, 0, 0.7);
+  --shadow-teal: 0 0 25px -5px rgba(45, 212, 191, 0.3);
+  --shadow-glow: 0 0 20px rgba(45, 212, 191, 0.2);
+  --shadow-red-glow: 0 0 25px rgba(239, 68, 68, 0.3);
 
   /* Layout Tokens */
   --container-max-desktop: 1100px;
@@ -52,6 +54,31 @@
   @keyframes shimmer {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-20px) translateX(10px); }
+    66% { transform: translateY(10px) translateX(-15px); }
+    100% { transform: translateY(0px) translateX(0px); }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.98); }
+  }
+
+  @keyframes progress-loading {
+    0% { width: 0%; opacity: 0.5; }
+    30% { width: 40%; opacity: 1; }
+    60% { width: 70%; opacity: 0.8; }
+    100% { width: 100%; opacity: 1; }
+  }
+
+  @keyframes ring-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(45, 212, 191, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
   }
 }
 
@@ -94,21 +121,32 @@
 
 @layer base {
   html {
-    overflow-y: auto;
-    overflow-x: hidden;
     scroll-behavior: smooth;
   }
   body {
     @apply bg-bg-main text-white antialiased selection:bg-teal-accent/30 selection:text-teal-accent;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: clip;
     background-image: 
-      radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 100% 50%, rgba(45, 212, 191, 0.05) 0%, transparent 40%),
       radial-gradient(circle at 0% 100%, rgba(45, 212, 191, 0.03) 0%, transparent 40%),
       url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
     background-attachment: fixed;
     line-height: 1.6;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(45, 212, 191, 0.04), transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
   }
 
   h1 { @apply text-[32px] md:text-[40px] lg:text-5xl font-bold tracking-tight leading-[1.1]; }
@@ -164,17 +202,17 @@
   }
 
   .card-premium {
-    @apply bg-bg-card border border-border-card rounded-[18px] md:rounded-[24px] p-[18px] md:p-[24px] shadow-premium transition-all duration-500;
+    @apply bg-bg-card/80 backdrop-blur-xl border border-white/5 rounded-[24px] p-6 md:p-8 shadow-premium transition-all duration-500;
   }
 
   @media (hover: hover) {
     .card-premium:hover {
-      @apply border-teal-accent/20 shadow-[0_10px_40px_rgba(0,0,0,0.6)] -translate-y-1;
+      @apply border-teal-accent/20 shadow-[0_20px_60px_rgba(0,0,0,0.8)] -translate-y-1.5;
     }
   }
 
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl;
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl;
   }
 
   .section-gap {
@@ -311,5 +349,29 @@
   .panel-fluid {
     width: 100%;
     min-width: 0;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.15;
+  }
+
+  .animate-float {
+    animation: float 15s ease-in-out infinite;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1 }
+    50% { opacity: 0 }
+  }
+  
+  .cursor {
+    animation: blink 0.7s infinite;
+    color: #2DD4BF;
+    margin-left: 2px;
   }
 }

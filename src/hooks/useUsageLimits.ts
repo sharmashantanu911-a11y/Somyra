@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 
-export type FeatureKey = 'profile_audit' | 'topic_generator' | 'post_writer' | 'smart_outreach' | 'bio_headline' | 'voice_profile';
+export type FeatureKey = 'profile_audit' | 'topic_generator' | 'post_writer' | 'smart_outreach' | 'bio_headline' | 'voice_profile' | 'saved_items';
 
 export interface UsageStatus {
   used: number;
@@ -18,28 +18,31 @@ type TierLimits = {
   bio_headline: number | 'unlimited';
   voice_cap: number | 'unlimited';
   save_cap: number | 'unlimited';
-  total?: number;
 };
 
+// ─────────────────────────────────────────────────────
+//  SOURCE OF TRUTH — Tier Definitions
+//  Voice Profile & Saved Library are CUMULATIVE caps
+//  (never reset monthly). All others are monthly.
+// ─────────────────────────────────────────────────────
 const TIER_LIMITS: Record<string, TierLimits> = {
   guest: {
-    total: 5,
-    profile_audit: 5,
-    topic_generator: 5,
-    post_writer: 5,
-    smart_outreach: 5,
-    bio_headline: 5,
-    voice_cap: 3,
-    save_cap: 5,
+    profile_audit: 0,
+    topic_generator: 0,
+    post_writer: 0,
+    smart_outreach: 0,
+    bio_headline: 0,
+    voice_cap: 0,
+    save_cap: 0,
   },
   free: {
     profile_audit: 5,
-    topic_generator: 30, // 30 topics
+    topic_generator: 3,      // 3 generations of 10 topics = 30 topics
     post_writer: 10,
     smart_outreach: 10,
-    bio_headline: 10, // Not explicitly requested but matching the previous pattern
-    voice_cap: 5,
-    save_cap: 10,
+    bio_headline: 10,
+    voice_cap: 5,    // cumulative slot cap, never resets
+    save_cap: 10,    // cumulative cap, never resets
   },
   pro: {
     profile_audit: 30,
@@ -47,62 +50,88 @@ const TIER_LIMITS: Record<string, TierLimits> = {
     post_writer: 60,
     smart_outreach: 500,
     bio_headline: 'unlimited',
-    voice_cap: 10,
-    save_cap: 200,
+    voice_cap: 10,   // cumulative slot cap, never resets
+    save_cap: 200,   // cumulative cap, never resets
   },
   max: {
-    profile_audit: 'unlimited',
+    profile_audit: 'unlimited', 
     topic_generator: 'unlimited',
     post_writer: 'unlimited',
     smart_outreach: 1000,
     bio_headline: 'unlimited',
-    voice_cap: 20,
+    voice_cap: 20,   // cumulative slot cap, never resets
     save_cap: 'unlimited',
   }
 };
 
+// Timezone-safe period start: always returns YYYY-MM-01 in local time
+function getPeriodStart(): string {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  return `${year}-${month}-01`;
+}
+
 export function useUsageLimits(user: any, isPro: boolean, isMax: boolean) {
   const [usage, setUsage] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
-  const [guestCount, setGuestCount] = useState(0);
+  const userRef = useRef(user);
+  userRef.current = user;
 
-  const getTier = useCallback(() => {
+  const getTier = useCallback((): string => {
     if (!user) return 'guest';
     if (isMax) return 'max';
     if (isPro) return 'pro';
     return 'free';
   }, [user, isPro, isMax]);
 
-  const getPeriodStart = () => {
-    const now = new Date();
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
-  };
-
   const fetchUsage = useCallback(async () => {
     if (!user) {
-      const stored = localStorage.getItem('somyra_guest_generations_used');
-      setGuestCount(stored ? parseInt(stored) : 0);
+      setUsage({});
       setLoading(false);
       return;
     }
 
     try {
       const periodStart = getPeriodStart();
-      const { data, error } = await supabase
-        .from('generation_counts')
-        .select('feature, count')
-        .eq('user_id', user.id)
-        .eq('period_start', periodStart);
+      
+      // Batch all usage queries in parallel
+      const [genResponse, voiceResponse, savedResponse] = await Promise.all([
+        supabase
+          .from('generation_counts')
+          .select('feature, count')
+          .eq('user_id', user.id)
+          .eq('period_start', periodStart),
+        supabase
+          .from('voice_profile')
+          .select('id', { count: 'exact', head: true })
+          .eq('user_id', user.id),
+        supabase
+          .from('saved_items')
+          .select('id', { count: 'exact', head: true })
+          .eq('user_id', user.id)
+      ]);
 
-      if (error) throw error;
+      if (genResponse.error) console.error('[UsageLimits] gen error:', genResponse.error);
+      if (voiceResponse.error) console.error('[UsageLimits] voice error:', voiceResponse.error);
+      if (savedResponse.error) console.error('[UsageLimits] saved error:', savedResponse.error);
 
       const usageMap: Record<string, number> = {};
-      data?.forEach(row => {
-        usageMap[row.feature] = row.count;
-      });
+      
+      // Map monthly generation counts
+      if (genResponse.data) {
+        genResponse.data.forEach(row => {
+          usageMap[row.feature] = row.count;
+        });
+      }
+
+      // Add cumulative counts
+      usageMap['voice_profile'] = voiceResponse.count || 0;
+      usageMap['saved_items'] = savedResponse.count || 0;
+
       setUsage(usageMap);
     } catch (err) {
-      console.error('Error fetching usage limits:', err);
+      console.error('[UsageLimits] fetchUsage exception:', err);
     } finally {
       setLoading(false);
     }
@@ -112,78 +141,108 @@ export function useUsageLimits(user: any, isPro: boolean, isMax: boolean) {
     fetchUsage();
   }, [fetchUsage]);
 
-  const getLimitForFeature = (feature: FeatureKey): number | 'unlimited' => {
+  const getLimitForFeature = useCallback((feature: FeatureKey): number | 'unlimited' => {
     const tier = getTier();
     const tierLimits = TIER_LIMITS[tier];
-    if (!tierLimits) return 5;
+    if (!tierLimits) return 0;
     if (feature === 'voice_profile') return tierLimits.voice_cap;
-    if (tier === 'guest') return tierLimits.total ?? 5;
-    return tierLimits[feature] ?? 5;
-  };
+    if (feature === 'saved_items') return tierLimits.save_cap;
+    return (tierLimits as any)[feature] ?? 0;
+  }, [getTier]);
 
-  const checkLimit = (feature: FeatureKey): boolean => {
+  const checkLimit = useCallback((feature: FeatureKey): boolean => {
     const tier = getTier();
     const limit = getLimitForFeature(feature);
     if (limit === 'unlimited') return true;
-    const used = tier === 'guest' ? guestCount : (usage[feature] || 0);
+    if (tier === 'guest') return false;
+    const used = usage[feature] || 0;
     return used < (limit as number);
-  };
+  }, [getTier, getLimitForFeature, usage]);
 
-  const incrementUsage = async (feature: FeatureKey, count: number = 1) => {
+  // =====================================================
+  // Optimistic increment — updates UI FIRST, then DB.
+  // =====================================================
+  const incrementUsage = useCallback(async (feature: FeatureKey, count: number = 1) => {
     const tier = getTier();
-
-    if (tier === 'guest') {
-      const newCount = guestCount + count;
-      setGuestCount(newCount);
-      localStorage.setItem('somyra_guest_generations_used', newCount.toString());
-      return;
-    }
-
-    // voice_profile is tracked via voicePosts array length, not generation_counts
+    if (tier === 'guest') return;
     if (feature === 'voice_profile') return;
+
+    // STEP 1: Optimistic state update
+    setUsage(prev => {
+      const currentUsed = prev[feature] || 0;
+      const newUsed = currentUsed + count;
+      console.log(`[UsageLimits] OPTIMISTIC UPDATE: ${feature} ${currentUsed} -> ${newUsed}`);
+      return { ...prev, [feature]: newUsed };
+    });
+
+    // STEP 2: Persist to DB in background
+    const currentUser = userRef.current;
+    if (!currentUser) return;
 
     try {
       const periodStart = getPeriodStart();
-      const currentUsed = usage[feature] || 0;
-      const newUsed = currentUsed + count;
 
-      const { error } = await supabase
+      const { data: existing, error: fetchErr } = await supabase
         .from('generation_counts')
-        .upsert({
-          user_id: user.id,
-          feature,
-          count: newUsed,
-          period_start: periodStart,
-          reset_date: periodStart,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'user_id,feature,period_start' });
+        .select('id, count')
+        .eq('user_id', currentUser.id)
+        .eq('feature', feature)
+        .eq('period_start', periodStart)
+        .maybeSingle();
 
-      if (error) throw error;
-      setUsage(prev => ({ ...prev, [feature]: newUsed }));
+      if (fetchErr) {
+        console.error(`[UsageLimits] DB SELECT failed for ${feature}:`, JSON.stringify(fetchErr));
+        return;
+      }
+
+      if (existing) {
+        const updatedCount = (existing.count || 0) + count;
+        const { error: updateErr } = await supabase
+          .from('generation_counts')
+          .update({ count: updatedCount })
+          .eq('id', existing.id);
+        if (updateErr) {
+          console.error(`[UsageLimits] DB UPDATE failed for ${feature}:`, JSON.stringify(updateErr));
+        }
+      } else {
+        const { error: insertErr } = await supabase
+          .from('generation_counts')
+          .insert({
+            user_id: currentUser.id,
+            feature,
+            count: count,
+            period_start: periodStart
+          });
+        if (insertErr) {
+          console.error(`[UsageLimits] DB INSERT failed for ${feature}:`, JSON.stringify(insertErr));
+        }
+      }
     } catch (err) {
-      console.error('Error incrementing usage:', err);
+      console.error(`[UsageLimits] DB sync exception for ${feature}:`, err);
     }
-  };
+  }, [getTier]);
 
-  const getRemainingCount = (feature: FeatureKey): number => {
+  const getStatus = useCallback((feature: FeatureKey): UsageStatus => {
     const limit = getLimitForFeature(feature);
-    if (limit === 'unlimited') return Infinity;
-    const used = getTier() === 'guest' ? guestCount : (usage[feature] || 0);
-    return Math.max(0, (limit as number) - used);
-  };
-
-  const getStatus = (feature: FeatureKey): UsageStatus => {
-    const limit = getLimitForFeature(feature);
-    const tier = getTier();
-    const used = tier === 'guest' ? guestCount : (usage[feature] || 0);
-    const remaining = limit === 'unlimited' ? Infinity : Math.max(0, (limit as number) - used);
+    const used = usage[feature] || 0;
+    if (limit === 'unlimited') {
+      return { used, limit, remaining: Infinity, isLimitReached: false };
+    }
+    const remaining = Math.max(0, (limit as number) - used);
     return {
       used,
       limit,
       remaining,
-      isLimitReached: limit === 'unlimited' ? false : used >= (limit as number)
+      isLimitReached: used >= (limit as number)
     };
-  };
+  }, [getLimitForFeature, usage]);
+
+  const getRemainingCount = useCallback((feature: FeatureKey): number => {
+    const limit = getLimitForFeature(feature);
+    if (limit === 'unlimited') return Infinity;
+    const used = usage[feature] || 0;
+    return Math.max(0, (limit as number) - used);
+  }, [getLimitForFeature, usage]);
 
   const getResetDate = () => {
     const now = new Date();
@@ -204,6 +263,29 @@ export function useUsageLimits(user: any, isPro: boolean, isMax: boolean) {
     return TIER_LIMITS[tier]?.save_cap ?? 10;
   };
 
+  const getLifetimeStats = useCallback(async (): Promise<Record<string, number>> => {
+    if (!user) return {};
+    try {
+      const { data, error } = await supabase
+        .from('generation_counts')
+        .select('feature, count')
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+      
+      const lifetimeMap: Record<string, number> = {};
+      if (data) {
+        data.forEach(row => {
+          lifetimeMap[row.feature] = (lifetimeMap[row.feature] || 0) + row.count;
+        });
+      }
+      return lifetimeMap;
+    } catch (err) {
+      console.error('[UsageLimits] getLifetimeStats error:', err);
+      return {};
+    }
+  }, [user]);
+
   return {
     checkLimit,
     incrementUsage,
@@ -213,7 +295,9 @@ export function useUsageLimits(user: any, isPro: boolean, isMax: boolean) {
     getStatus,
     getVoiceProfileLimit,
     getSavedLibraryLimit,
+    getLifetimeStats,
     isLoading: loading,
-    tier: getTier()
+    tier: getTier(),
+    refetch: fetchUsage
   };
 }

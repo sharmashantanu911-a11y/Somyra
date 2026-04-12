@@ -35,6 +35,7 @@ export function MessageBuilder({
   const [generationPhase, setGenerationPhase] = useState<'idle' | 'analyzing' | 'crafting' | 'scoring' | 'completed'>('idle');
   const [draft, setDraft] = useState<string | null>(null);
   const [score, setScore] = useState<any>(null);
+  const isGeneratingRef = React.useRef(false);
 
   const relationships = [
     { id: 'Cold', label: 'Cold Outreach', desc: 'First time reaching out without interaction' },
@@ -45,10 +46,12 @@ export function MessageBuilder({
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isGeneratingRef.current) return;
     if (!checkGenerationLimit('smart_outreach')) return;
 
     trackEvent('generate_smart_outreach', { relationship: form.relationship });
     setLoading(true);
+    isGeneratingRef.current = true;
     setGenerationPhase('analyzing');
     setToast(null);
     setDraft(null);
@@ -83,6 +86,7 @@ export function MessageBuilder({
       showToast({ message: 'Generation failed. Please try again.', type: 'error' });
     } finally {
       setLoading(false);
+      isGeneratingRef.current = false;
       setGenerationPhase('idle');
     }
   };

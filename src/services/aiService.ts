@@ -782,8 +782,7 @@ export async function analyzeProfile(
   const maxTokens = mode === 'quick' ? 2500 : 5000;
 
   if (DEBUG_AI) {
-    console.log(`[DEBUG] Calling AI for profile analysis (${mode})`);
-    console.log(`[DEBUG] Temperature: ${temperature}, MaxTokens: ${maxTokens}`);
+
   }
 
   let lastError: Error | null = null;
@@ -816,7 +815,7 @@ export async function analyzeProfile(
       }
 
       if (DEBUG_AI) {
-        console.log(`[DEBUG] Successfully parsed AI response on attempt ${attempt}`);
+
       }
 
       return normalizeProfileAnalysis(parsed, mode);
