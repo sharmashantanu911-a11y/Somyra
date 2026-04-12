@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 // Product ID constants (hardcoded fallbacks)
 const PRO_ID_1 = 'pdt_0NcAa6Nsq6rb7WhPjW213';
 const PRO_ID_2 = 'pdt_0NcAaljffcuBCTOBy4CJz';
-const MAX_ID_1 = 'pdt_0NcAc5FxE6ZAoRh64IaD9';
+const MAX_ID_1 = 'pdt_0NcAc5FxE6ZAoRh64laD9';
 const MAX_ID_2 = 'pdt_0NcAcV68XuqmUWa250TxD';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -114,18 +114,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let userIdToUpdate = finalUserId;
 
     if (!userIdToUpdate && email) {
-      console.log('[LOOKUP] Searching profiles by email:', email);
-      const { data: profile, error: lookupError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', email)
-        .single();
-
-      if (profile) {
-        userIdToUpdate = profile.id;
-        console.log('[LOOKUP] Found user via email:', userIdToUpdate);
+      console.log('[LOOKUP] No metadata ID — searching auth users by email:', email);
+      // profiles table has no email column; look up via Supabase auth admin API
+      const { data: authData, error: lookupError } = await supabase.auth.admin.listUsers();
+      
+      if (authData?.users) {
+        const matchedUser = authData.users.find((u: any) => u.email === email);
+        if (matchedUser) {
+          userIdToUpdate = matchedUser.id;
+          console.log('[LOOKUP] Found user via auth email:', userIdToUpdate);
+        } else {
+          console.error('[LOOKUP] No auth user found for email:', email);
+        }
       } else {
-        console.error('[LOOKUP] Email lookup failed:', lookupError?.message);
+        console.error('[LOOKUP] Auth lookup failed:', lookupError?.message);
       }
     }
 

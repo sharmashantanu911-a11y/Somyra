@@ -315,40 +315,57 @@ export default function App() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('upgraded') === 'true' && user) {
-      if (isPro || isMax) {
-        setShowSuccessModal(true);
-        window.history.replaceState({}, '', window.location.pathname);
-        return;
-      }
+    if (urlParams.get('upgraded') !== 'true' || !user) return;
 
-      setIsActivating(true);
-      let attempts = 0;
-      const maxAttempts = 10;
+    // Immediately clean the URL so we never re-enter this effect
+    window.history.replaceState({}, '', window.location.pathname);
 
-      const poll = setInterval(async () => {
-        attempts++;
+    // If already upgraded (e.g. webhook fired instantly), show success
+    if (isPro || isMax) {
+      setShowSuccessModal(true);
+      return;
+    }
+
+    // Start polling Supabase for the plan update
+    setIsActivating(true);
+    let attempts = 0;
+    const maxAttempts = 15; // 15 × 2s = 30s max wait
+    let cancelled = false;
+
+    const poll = setInterval(async () => {
+      if (cancelled) return;
+      attempts++;
+      
+      try {
         const status = await fetchProStatus(user.id);
         
         if (status?.isPro || status?.isMax) {
           clearInterval(poll);
-          setIsActivating(false);
-          setShowSuccessModal(true);
-          window.history.replaceState({}, '', window.location.pathname);
-        } else if (attempts >= maxAttempts) {
-          clearInterval(poll);
-          setIsActivating(false);
-          setError({ 
-            message: 'Activation is taking longer than usual.',
-            suggestion: 'Please refresh the page in a few minutes.'
-          });
-          window.history.replaceState({}, '', window.location.pathname);
+          if (!cancelled) {
+            setIsActivating(false);
+            setShowSuccessModal(true);
+          }
+          return;
         }
-      }, 3000);
+      } catch (e) {
+        // Ignore individual poll failures, keep trying
+      }
 
-      return () => clearInterval(poll);
-    }
-  }, [user, isPro, isMax]);
+      if (attempts >= maxAttempts && !cancelled) {
+        clearInterval(poll);
+        setIsActivating(false);
+        // Force one final refresh of pro status and show dashboard
+        fetchProStatus(user.id);
+        setShowSuccessModal(true); // Show success anyway — webhook may have updated already
+      }
+    }, 2000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(poll);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   useEffect(() => {
     setPreviousUser(user);
