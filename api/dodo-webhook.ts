@@ -141,7 +141,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       case 'subscription.active':
       case 'payment.succeeded':
       case 'subscription.updated': {
-        const updatePayload = {
+        const updatePayload: Record<string, any> = {
           id: userIdToUpdate,
           is_pro: isPro || isMax,
           is_max: isMax,
