@@ -2,10 +2,5 @@
   "rewrites": [
     { "source": "/api/chat", "destination": "/api/chat" },
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "functions": {
-    "api/dodo-webhook.ts": {
-      "bodyParser": false
-    }
-  }
+  ]
 }

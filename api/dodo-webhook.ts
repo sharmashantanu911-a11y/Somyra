@@ -8,6 +8,12 @@ const PRO_ID_2 = 'pdt_0NcAaljffcuBCTOBy4CJz';
 const MAX_ID_1 = 'pdt_0NcAc5FxE6ZAoRh64IaD9';
 const MAX_ID_2 = 'pdt_0NcAcV68XuqmUWa250TxD';
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
