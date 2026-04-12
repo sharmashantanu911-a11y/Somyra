@@ -20,25 +20,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const headers = req.headers;
   const payload = JSON.stringify(req.body);
-  const signature = headers['dodo-signature'] as string;
-  console.log('All headers:', JSON.stringify(req.headers));
+  const webhookId = req.headers['webhook-id'] as string;
+  const webhookTimestamp = req.headers['webhook-timestamp'] as string;
+  const webhookSignature = req.headers['webhook-signature'] as string;
 
-  if (!signature) {
-    return res.status(400).json({ error: 'Missing dodo-signature header' });
+  if (!webhookId || !webhookTimestamp || !webhookSignature) {
+    console.error('Missing webhook headers');
+    return res.status(400).json({ error: 'Missing webhook headers' });
   }
 
   const wh = new Webhook(WEBHOOK_SECRET);
   let evt: any;
 
   try {
-    // Verify the webhook signature
     evt = wh.verify(payload, {
-      'svix-id': headers['svix-id'] as string,
-      'svix-timestamp': headers['svix-timestamp'] as string,
-      'svix-signature': signature,
+      'webhook-id': webhookId,
+      'webhook-timestamp': webhookTimestamp,
+      'webhook-signature': webhookSignature,
     });
   } catch (err) {
-    console.error('Webhook signature verification failed:', err);
+    console.error('Webhook verification failed:', err);
     return res.status(400).json({ error: 'Invalid signature' });
   }
 
