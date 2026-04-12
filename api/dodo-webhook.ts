@@ -21,6 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const headers = req.headers;
   const payload = JSON.stringify(req.body);
   const signature = headers['dodo-signature'] as string;
+  console.log('All headers:', JSON.stringify(req.headers));
 
   if (!signature) {
     return res.status(400).json({ error: 'Missing dodo-signature header' });
@@ -51,7 +52,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const subscriptionId = data.subscription_id || data.id;
 
     // Product ID Mapping from Verification Checklist
-    const PRO_ID_1 = 'pdt_0NcAa6Nsq6rb7WhPJW213';
+    const PRO_ID_1 = 'pdt_0NcAa6Nsq6rb7WhPjW213';
     const PRO_ID_2 = 'pdt_0NcAaljffcuBCTOBy4CJz';
     const MAX_ID_1 = 'pdt_0NcAc5FxE6ZAoRh64IaD9';
     const MAX_ID_2 = 'pdt_0NcAcV68XuqmUWa250TxD';
@@ -65,7 +66,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const isMax = productId === MAX_MONTHLY || productId === MAX_ANNUAL;
 
     // Extract User ID - support both 'userId' and 'supabase_user_id'
-    const finalUserId = data.metadata?.userId || data.metadata?.supabase_user_id;
+    const finalUserId = data.metadata?.supabase_user_id || data.metadata?.userId;
 
     if (!finalUserId && email) {
       // If metadata is missing, identify user by email
