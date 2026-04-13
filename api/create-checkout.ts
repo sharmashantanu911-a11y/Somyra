@@ -24,12 +24,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const DODO_API_KEY = process.env.DODO_API_KEY;
+  
+  // Debug logging for API key
+  console.log('Dodo API Key exists:', !!DODO_API_KEY);
+  if (DODO_API_KEY) {
+    console.log('Dodo API Key prefix:', DODO_API_KEY.substring(0, 8));
+  }
+
   if (!DODO_API_KEY) {
     console.error('CRITICAL: DODO_API_KEY is missing from environment variables');
     return res.status(500).json({ error: 'Server configuration error: DODO_API_KEY missing' });
   }
 
-  // Verify other product IDs exist as a sanity check
+  // Verify other plan IDs exist as a sanity check
   const requiredEnv = [
     'DODO_PRO_MONTHLY_ID', 'DODO_PRO_ANNUAL_ID', 
     'DODO_MAX_MONTHLY_ID', 'DODO_MAX_ANNUAL_ID'
@@ -39,8 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   try {
-    const isLive = DODO_API_KEY.startsWith('live_');
-    const dodoBaseUrl = isLive ? 'https://live.dodopayments.com' : 'https://test.dodopayments.com';
+    const dodoApiUrl = 'https://api.dodopayments.com/checkouts';
 
     const payload = {
       customer: {
@@ -59,9 +65,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return_url: `${baseUrl}/dashboard?upgraded=true`,
     };
 
-    console.log(`Sending request to Dodo ${isLive ? 'LIVE' : 'TEST'}:`, JSON.stringify(payload));
+    console.log(`Sending request to Dodo:`, JSON.stringify(payload));
 
-    const response = await fetch(`${dodoBaseUrl}/checkouts`, {
+    const response = await fetch(dodoApiUrl, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${DODO_API_KEY}`,
@@ -96,3 +102,4 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 }
+
