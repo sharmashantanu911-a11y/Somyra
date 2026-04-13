@@ -73,6 +73,7 @@ import { SavedLibrary } from './features/SavedLibrary';
 import { Terms } from './components/Terms';
 import { Privacy } from './components/Privacy';
 import { Contact } from './components/Contact';
+import { Analytics } from '@vercel/analytics/react';
 
 const dailyTips = [
   "LinkedIn's algorithm favors conversational posts that start with a strong hook. Avoid using more than 3 hashtags.",
@@ -1112,6 +1113,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
+      <Analytics />
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-[40] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 md:px-6 lg:px-8">
