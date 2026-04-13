@@ -3,10 +3,10 @@ import { Webhook } from 'svix';
 import { createClient } from '@supabase/supabase-js';
 
 // Product ID constants (hardcoded fallbacks)
-const PRO_ID_1 = 'pdt_0NcAa6Nsq6rb7WhPjW213';
-const PRO_ID_2 = 'pdt_0NcAaljffcuBCTOBy4CJz';
-const MAX_ID_1 = 'pdt_0NcAc5FxE6ZAoRh64laD9';
-const MAX_ID_2 = 'pdt_0NcAcV68XuqmUWa250TxD';
+const PRO_ID_1 = 'pdt_0NcaXTwkHnyrnL6a2bxtb'; // Pro Monthly
+const PRO_ID_2 = 'pdt_0NcaXTKIo7ajSG2bWzf3A'; // Pro Annual
+const MAX_ID_1 = 'pdt_0NcaXanhL6johMofuLydC'; // Max Monthly
+const MAX_ID_2 = 'pdt_0NcaXRtoXaZkSQGuTkzcI'; // Max Annual
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
