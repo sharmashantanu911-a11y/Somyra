@@ -1239,8 +1239,7 @@ export function LandingPage({
                   
                   {/* Somyra Column Header */}
                   <div className="relative bg-[#2DD4BF]/[0.05] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-6 text-center shadow-[0_-10px_20px_rgba(45,212,191,0.05)]">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-6 h-6 bg-[#2DD4BF] rounded-full flex items-center justify-center text-[11px] font-black text-black mb-1">S</div>
+                    <div className="flex flex-col items-center gap-1">
                       <span className="text-[15px] font-bold text-white">Somyra</span>
                       <span className="text-[13px] font-bold text-[#2DD4BF]">Starting at $19/mo</span>
                     </div>
