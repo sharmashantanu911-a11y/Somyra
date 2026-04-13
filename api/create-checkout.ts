@@ -1,4 +1,55 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import https from 'https';
+import { URL } from 'url';
+
+const makeRequest = (url: string, options: any, body: string): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const reqOptions = {
+      hostname: urlObj.hostname,
+      port: 443,
+      path: urlObj.pathname,
+      method: options.method || 'POST',
+      headers: {
+        ...options.headers,
+        'Content-Length': Buffer.byteLength(body)
+      }
+    };
+    
+    const req = https.request(reqOptions, (res) => {
+      let data = '';
+      res.on('data', chunk => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        try {
+          const isJson = res.headers['content-type']?.includes('application/json');
+          resolve({
+            ok: res.statusCode && res.statusCode >= 200 && res.statusCode < 300,
+            status: res.statusCode,
+            json: () => isJson ? JSON.parse(data) : { message: data },
+            text: () => data
+          });
+        } catch (e) {
+          resolve({
+            ok: false,
+            status: res.statusCode,
+            text: () => data,
+            json: () => ({ message: data })
+          });
+        }
+      });
+    });
+    
+    req.on('error', (err) => {
+      console.error('HTTPS Request Error Detail:', err);
+      reject(err);
+    });
+    
+    req.write(body);
+    req.end();
+  });
+};
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS Headers
@@ -36,15 +87,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'Server configuration error: DODO_API_KEY missing' });
   }
 
-  // Verify other plan IDs exist as a sanity check
-  const requiredEnv = [
-    'DODO_PRO_MONTHLY_ID', 'DODO_PRO_ANNUAL_ID', 
-    'DODO_MAX_MONTHLY_ID', 'DODO_MAX_ANNUAL_ID'
-  ];
-  requiredEnv.forEach(env => {
-    if (!process.env[env]) console.warn(`Warning: Environment variable ${env} is not defined`);
-  });
-
   try {
     const dodoApiUrl = 'https://api.dodopayments.com/checkouts';
 
@@ -67,22 +109,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     console.log(`Sending request to Dodo:`, JSON.stringify(payload));
 
-    const response = await fetch(dodoApiUrl, {
+    const response = await makeRequest(dodoApiUrl, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${DODO_API_KEY}`,
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+      }
+    }, JSON.stringify(payload));
 
-    const responseText = await response.text();
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch (e) {
-      data = { message: responseText };
-    }
+    const responseText = response.text();
+    const data = await response.json();
 
     if (!response.ok) {
       console.error('Dodo API Error:', data);
@@ -91,6 +127,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         details: data.message || data.error || responseText,
         status: response.status
       });
+    }
+
+    if (!data.checkout_url) {
+      console.error('Unexpected Dodo API response (no checkout_url):', data);
+      return res.status(500).json({ error: 'Dodo API did not return a checkout URL', details: data });
     }
 
     return res.status(200).json({ checkout_url: data.checkout_url });
