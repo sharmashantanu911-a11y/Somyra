@@ -24,7 +24,8 @@ import {
   Crown,
   ChevronDown,
   Loader2,
-  Lock
+  Lock,
+  AlertTriangle
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -1187,77 +1188,243 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION 8: COMPARISON
          ════════════════════════════════════════ */}
+      {/* ════════════════════════════════════════
+         SECTION 8: COMPETITIVE COMPARISON
+         ════════════════════════════════════════ */}
       <motion.section 
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-16 md:py-24 relative z-10"
+        className="w-full px-4 py-20 md:py-24 bg-[#0D0D0D] relative z-10"
       >
-        <div className="max-w-[896px] mx-auto">
-          <div className="text-center mb-10">
-            <SectionLabel>THE HONEST TRUTH</SectionLabel>
-            <SectionHeading className="mb-4">Why not just use ChatGPT?</SectionHeading>
-            <p className="text-[#A0A0A0] text-[15px] md:text-base leading-[1.7] max-w-[672px] mx-auto">
-              We asked the same thing. Then we saw what it actually produces.
-            </p>
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center mb-16">
+            <motion.p 
+              variants={fadeInUp}
+              className="text-[11px] md:text-[13px] font-black uppercase tracking-[0.3em] text-[#2DD4BF] mb-5 md:mb-7"
+            >
+              THE HONEST COMPARISON
+            </motion.p>
+            <SectionHeading className="mb-6 text-center">
+              You have options.<br />
+              Here is why Somyra wins.
+            </SectionHeading>
+            <motion.p 
+              variants={fadeInUp}
+              className="text-[#888] text-[15px] md:text-lg leading-[1.7] max-w-[672px] mx-auto text-center"
+            >
+              We compared ourselves against every major LinkedIn tool so you do not have to.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 md:mt-24">
-            {/* ChatGPT card */}
-            <div className="rounded-2xl border border-red-500/20 bg-[#141414] p-6 md:p-10 flex flex-col h-full hover:border-red-500/40 transition-all shadow-premium">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <X className="w-4 h-4 text-red-500" />
-                </div>
-                <h3 className="text-sm font-black uppercase tracking-[0.15em] text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">ChatGPT and Generic AI</h3>
-              </div>
-              <div className="space-y-3.5">
-                {[
-                  'Sounds like AI wrote it',
-                  'No LinkedIn context whatsoever',
-                  'Does not learn your voice',
-                  'No outreach tools built in',
-                  'No profile strategy',
-                  'You need ten different tools',
-                  'Starts from zero every single time'
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                    <span className="text-[14px] text-[#ccc] leading-relaxed">{item}</span>
-                  </div>
-                ))}
-              </div>
+          {/* Table Container */}
+          <div className="relative">
+            {/* Mobile Scroll Hint */}
+            <div className="md:hidden text-center mb-4">
+              <span className="text-[11px] text-[#555] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                <ChevronRight className="w-3 h-3 rotate-180" />
+                Scroll to compare
+                <ChevronRight className="w-3 h-3" />
+              </span>
             </div>
 
-            {/* Somyra card */}
-            <div className="rounded-2xl border border-[#2DD4BF]/30 bg-[#141414] p-6 md:p-10 flex flex-col h-full hover:border-[#2DD4BF]/50 shadow-[0_0_30px_rgba(45,212,191,0.05)] transition-all">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-full bg-[#2DD4BF]/10 flex items-center justify-center">
-                  <Check className="w-4 h-4 text-[#2DD4BF]" />
-                </div>
-                <h3 className="text-sm font-black uppercase tracking-[0.15em] text-[#2DD4BF]">Somyra</h3>
-              </div>
-              <div className="space-y-3.5">
-                {[
-                  'Sounds exactly like you',
-                  'Built only for LinkedIn',
-                  'Learns and remembers your voice',
-                  'Smart Outreach built in',
-                  'Full profile strategy included',
-                  'Everything in one place',
-                  'Gets better the more you use it'
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-[#2DD4BF] shrink-0 mt-0.5" />
-                    <span className="text-[14px] text-[#ccc] leading-relaxed">{item}</span>
+            <div className="overflow-x-auto pb-6 no-scrollbar">
+              <div className="min-w-[800px] md:min-w-full">
+                {/* Table Header */}
+                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-end">
+                  <div className="pb-6 pl-4">
+                    <span className="text-[11px] font-black text-[#555] uppercase tracking-[0.2em]">Feature</span>
                   </div>
-                ))}
+                  
+                  {/* Somyra Column Header */}
+                  <div className="relative bg-[#2DD4BF]/[0.05] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-6 text-center shadow-[0_-10px_20px_rgba(45,212,191,0.05)]">
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-6 h-6 bg-[#2DD4BF] rounded-full flex items-center justify-center text-[11px] font-black text-black mb-1">S</div>
+                      <span className="text-[15px] font-bold text-white">Somyra</span>
+                      <span className="text-[13px] font-bold text-[#2DD4BF]">Starting at $19/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Competitor Headers */}
+                  {[
+                    { name: 'Taplio', price: 'From $39/mo*' },
+                    { name: 'Supergrow', price: 'From $19/mo' },
+                    { name: 'MagicPost', price: 'From $27/mo' }
+                  ].map((comp, idx) => (
+                    <div key={idx} className="bg-[#141414] p-6 text-center border-t border-x border-white/5 rounded-t-xl mx-[1px]">
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-[15px] font-bold text-white">{comp.name}</span>
+                        <span className="text-[13px] text-[#666] font-medium">{comp.price}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Table Body */}
+                <div className="border border-white/5 rounded-b-2xl overflow-hidden">
+                  {[
+                    {
+                      label: 'AI Post Writer',
+                      somyra: { type: 'yes', text: 'Writes in your exact voice' },
+                      taplio: { type: 'partial', text: 'Generic AI, $69/mo plan only' },
+                      supergrow: { type: 'partial', text: 'Voice learning, limited' },
+                      magicpost: { type: 'partial', text: 'Basic AI, needs editing' }
+                    },
+                    {
+                      label: 'Profile Audit & Strategy',
+                      somyra: { type: 'yes', text: 'Full Deep Strategy included' },
+                      taplio: { type: 'no', text: 'Not available' },
+                      supergrow: { type: 'no', text: 'Not available' },
+                      magicpost: { type: 'no', text: 'Not available' }
+                    },
+                    {
+                      label: 'Smart Outreach & DMs',
+                      somyra: { type: 'yes', text: '500 DMs/mo with ICP and CRM' },
+                      taplio: { type: 'partial', text: 'Pro plan only, $199/mo' },
+                      supergrow: { type: 'no', text: 'Not available' },
+                      magicpost: { type: 'no', text: 'Not available' }
+                    },
+                    {
+                      label: 'Voice Profile Learning',
+                      somyra: { type: 'yes', text: 'Learns your exact style' },
+                      taplio: { type: 'partial', text: 'Basic style matching' },
+                      supergrow: { type: 'partial', text: 'Voice learning, carousels' },
+                      magicpost: { type: 'partial', text: 'Basic voice learning' }
+                    },
+                    {
+                      label: 'Topic Generator',
+                      somyra: { type: 'yes', text: 'Unlimited on Pro' },
+                      taplio: { type: 'partial', text: 'Limited credits' },
+                      supergrow: { type: 'yes', text: 'Available' },
+                      magicpost: { type: 'yes', text: 'Available' }
+                    },
+                    {
+                      label: 'LinkedIn Account Safety',
+                      somyra: { type: 'yes', text: 'No automation, fully safe' },
+                      taplio: { type: 'partial', text: 'Cookie-based, account risk' },
+                      supergrow: { type: 'yes', text: 'OAuth, safe' },
+                      magicpost: { type: 'yes', text: 'Safe' }
+                    },
+                    {
+                      label: 'Follow-Up Intelligence',
+                      somyra: { type: 'yes', text: 'Smart follow-up sequences' },
+                      taplio: { type: 'partial', text: 'Basic automation only' },
+                      supergrow: { type: 'no', text: 'Not available' },
+                      magicpost: { type: 'no', text: 'Not available' }
+                    },
+                    {
+                      label: 'ICP Clarity Tool',
+                      somyra: { type: 'yes', text: 'Built-in ICP builder' },
+                      taplio: { type: 'no', text: 'Not available' },
+                      supergrow: { type: 'no', text: 'Not available' },
+                      magicpost: { type: 'no', text: 'Not available' }
+                    },
+                    {
+                      label: 'Saved Content Library',
+                      somyra: { type: 'yes', text: 'Up to 200 saves on Pro' },
+                      taplio: { type: 'partial', text: 'Basic saves' },
+                      supergrow: { type: 'partial', text: 'Limited' },
+                      magicpost: { type: 'no', text: 'Not available' }
+                    },
+                    {
+                      label: 'Starting Price with AI',
+                      somyra: { type: 'yes', text: '$19/mo full AI included' },
+                      taplio: { type: 'no', text: '$69/mo for AI features' },
+                      supergrow: { type: 'partial', text: '$19/mo limited AI' },
+                      magicpost: { type: 'partial', text: '$27/mo basic AI' }
+                    }
+                  ].map((row, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.04, duration: 0.3 }}
+                      className={`grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center ${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'}`}
+                    >
+                      {/* Row Label */}
+                      <div className="p-4 md:p-6 text-[14px] font-bold text-white pl-6">
+                        {row.label}
+                      </div>
+
+                      {/* Somyra Data */}
+                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center bg-[#2DD4BF]/[0.04] h-full border-x border-white/5">
+                        <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" />
+                        <span className="text-[13px] md:text-[14px] font-bold text-white leading-snug">{row.somyra.text}</span>
+                      </div>
+
+                      {/* Taplio Data */}
+                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center h-full border-r border-white/5">
+                        {row.taplio.type === 'yes' ? <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" /> : 
+                         row.taplio.type === 'no' ? <X className="w-4 h-4 text-red-500/60 mb-1.5" /> :
+                         <AlertTriangle className="w-4 h-4 text-amber-500/60 mb-1.5" />}
+                        <span className="text-[13px] md:text-[14px] font-medium text-[#888] leading-snug">{row.taplio.text}</span>
+                      </div>
+
+                      {/* Supergrow Data */}
+                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center h-full border-r border-white/5">
+                        {row.supergrow.type === 'yes' ? <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" /> : 
+                         row.supergrow.type === 'no' ? <X className="w-4 h-4 text-red-500/60 mb-1.5" /> :
+                         <AlertTriangle className="w-4 h-4 text-amber-500/60 mb-1.5" />}
+                        <span className="text-[13px] md:text-[14px] font-medium text-[#888] leading-snug">{row.supergrow.text}</span>
+                      </div>
+
+                      {/* MagicPost Data */}
+                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center h-full">
+                        {row.magicpost.type === 'yes' ? <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" /> : 
+                         row.magicpost.type === 'no' ? <X className="w-4 h-4 text-red-500/60 mb-1.5" /> :
+                         <AlertTriangle className="w-4 h-4 text-amber-500/60 mb-1.5" />}
+                        <span className="text-[13px] md:text-[14px] font-medium text-[#888] leading-snug">{row.magicpost.text}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
+            
+            {/* Table Footnote */}
+            <div className="mt-4 px-4">
+              <p className="text-[12px] text-[#555] font-medium italic">
+                *AI features require $69/mo plan on Taplio.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Callout */}
+          <div className="mt-20 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 mb-6">
+              <span className="text-[10px] font-black text-[#2DD4BF] uppercase tracking-[0.2em]">THE VERDICT</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6">
+              More features. Lower price.<br />Zero account risk.
+            </h3>
+            <p className="text-[#888] text-[15px] md:text-lg mb-10 max-w-[600px] mx-auto leading-relaxed">
+              Somyra is the only LinkedIn tool that combines post writing, profile strategy, and smart outreach in one place. Starting at $19/month.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <button 
+                onClick={() => setActiveTab('profile')}
+                className="px-8 py-4 bg-[#2DD4BF] text-black font-bold rounded-xl text-sm hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
+              >
+                Start for Free →
+              </button>
+              <button 
+                onClick={() => document.getElementById('landing-pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 bg-transparent border border-white/10 text-white font-bold rounded-xl text-sm hover:bg-white/5 transition-all"
+              >
+                See Pricing
+              </button>
+            </div>
+            
+            <p className="text-[11px] text-[#444] font-bold uppercase tracking-widest">
+              Competitor pricing based on publicly available information. Verified April 2026.
+            </p>
           </div>
         </div>
       </motion.section>
+
 
       {/* ════════════════════════════════════════
          SECTION 9: PRICING PREVIEW
