@@ -23,6 +23,37 @@ interface ChangelogVersion {
 // To add new updates in future just add a new object at the top of this array.
 const CHANGELOG_DATA: ChangelogVersion[] = [
   {
+    version: 'v1.3',
+    date: 'April 2026',
+    items: [
+      {
+        badge: 'NEW',
+        title: 'Competitive Comparison',
+        description: 'New high-conversion section on the landing page. We compared ourselves against every major LinkedIn tool so you do not have to.'
+      },
+      {
+        badge: 'NEW',
+        title: 'Branding Update',
+        description: 'Implemented the official Somyra logo as the browser favicon and OG social preview image.'
+      },
+      {
+        badge: 'IMPROVED',
+        title: 'Dodo Payments Live',
+        description: 'Transitioned to live billing mode with secure payment processing and instant subscription synchronization.'
+      },
+      {
+        badge: 'FIXED',
+        title: 'Subscription Cancellation',
+        description: 'Resolved a bug preventing users from canceling their subscriptions directly from the settings menu.'
+      },
+      {
+        badge: 'FIXED',
+        title: 'Review Button',
+        description: 'Fixed the \"Leave a Review\" button on the landing page that was failing to trigger the feedback modal.'
+      }
+    ]
+  },
+  {
     version: 'v1.2',
     date: 'March 2026',
     items: [
@@ -165,8 +196,8 @@ const COMING_SOON_DATA: ChangelogItem[] = [
   },
   {
     badge: 'COMING SOON',
-    title: 'Razorpay Integration',
-    description: 'Automated payment processing and instant Pro activation.'
+    title: 'Post Analysis',
+    description: 'Get deep insights into why your posts are performing and how to improve them.'
   },
   {
     badge: 'COMING SOON',

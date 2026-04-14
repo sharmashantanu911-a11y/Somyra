@@ -57,6 +57,7 @@ interface DashboardHomeProps {
   setShowAuth: (show: boolean) => void;
   onUpgrade: () => void;
   setToast: (toast: any) => void;
+  setShowReviewModal: (show: boolean) => void;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -493,7 +494,8 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
   setActiveTab,
   setShowAuth,
   onUpgrade,
-  setToast
+  setToast,
+  setShowReviewModal
 }) => {
   const [localProfile, setLocalProfile] = useState<any>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
@@ -586,7 +588,7 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
           testimonials={testimonials}
           loadingTestimonials={false}
           showReviewModal={false}
-          setShowReviewModal={() => {}}
+          setShowReviewModal={setShowReviewModal}
           user={user}
         />
       </div>

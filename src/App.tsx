@@ -1501,6 +1501,7 @@ export default function App() {
                     setShowAuth={setShowAuth}
                     onUpgrade={() => setShowPricingModal(true)}
                     setToast={setToast}
+                    setShowReviewModal={setShowReviewModal}
                   />
                 )}
 
