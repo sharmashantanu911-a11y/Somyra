@@ -85,7 +85,7 @@ const CHANGELOG_DATA: ChangelogVersion[] = [
       {
         badge: 'IMPROVED',
         title: 'Post Writer',
-        description: 'Switched to Kimi K2 model for significantly better output quality. Less generic more human.'
+        description: 'Switched to openai/gpt-oss-120b model for significantly better output quality. Less generic more human.'
       },
       {
         badge: 'IMPROVED',

@@ -29,7 +29,7 @@ async function startServer() {
   // Groq API Proxy
   app.post("/api/chat", async (req, res) => {
     const GROQ_API_KEY = process.env.GROQ_API_KEY;
-    const DEFAULT_MODEL = "moonshotai/kimi-k2-instruct-0905";
+    const DEFAULT_MODEL = "openai/gpt-oss-120b";
 
     if (!GROQ_API_KEY) {
       console.error("GROQ_API_KEY is missing from environment variables");
@@ -67,6 +67,7 @@ async function startServer() {
           messages: req.body.messages,
           temperature: req.body.temperature || 0.7,
           max_tokens: req.body.max_tokens || 16384,
+          include_reasoning: req.body.include_reasoning,
         }),
       });
 

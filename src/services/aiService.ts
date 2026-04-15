@@ -1,5 +1,5 @@
 
-const AI_MODEL = "moonshotai/kimi-k2-instruct-0905";
+const AI_MODEL = "openai/gpt-oss-120b";
 
 export interface GenerationControls {
   tone: string;
@@ -117,6 +117,20 @@ async function aiChat(
 ): Promise<string> {
   try {
     console.log(`AI call starting for ${featureName} via proxy using model ${model}`);
+    const isGptOssModel = model.startsWith("openai/gpt-oss-");
+    const messages = isGptOssModel
+      ? [
+          {
+            role: "user",
+            content: systemPrompt
+              ? `${systemPrompt}\n\n${prompt}`
+              : prompt,
+          },
+        ]
+      : [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: prompt },
+        ];
     
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -125,12 +139,10 @@ async function aiChat(
       },
       body: JSON.stringify({
         model: model,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: prompt }
-        ],
+        messages,
         temperature: temperature,
-        max_tokens: maxTokens
+        max_tokens: maxTokens,
+        include_reasoning: isGptOssModel ? false : undefined
       }),
       signal
     });

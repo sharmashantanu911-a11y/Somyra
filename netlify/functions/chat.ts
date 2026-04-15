@@ -16,7 +16,7 @@ export const handler: Handler = async (event) => {
   }
 
   const GROQ_API_KEY = process.env.GROQ_API_KEY;
-  const DEFAULT_MODEL = "moonshotai/kimi-k2-instruct-0905";
+  const DEFAULT_MODEL = "openai/gpt-oss-120b";
 
   if (!GROQ_API_KEY) {
     console.error("GROQ_API_KEY is missing from environment variables");
@@ -77,6 +77,7 @@ export const handler: Handler = async (event) => {
         messages: body.messages,
         temperature: body.temperature || 0.7,
         max_tokens: body.max_tokens || 2048,
+        include_reasoning: body.include_reasoning,
       }),
     });
 
