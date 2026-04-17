@@ -26,5 +26,6 @@
   },
   "exclude": [
     "src/types/supabase.ts"
-  ]
+  ],
+  "include": ["src", "api"]
 }
