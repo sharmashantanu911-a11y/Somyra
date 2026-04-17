@@ -1,5 +1,4 @@
 
-const AI_MODEL = "openai/gpt-oss-120b";
 
 export interface GenerationControls {
   tone: string;
@@ -112,25 +111,32 @@ async function aiChat(
   temperature: number = 0.8, 
   maxTokens: number = 2048, 
   signal?: AbortSignal,
-  featureName: string = "AI",
-  model: string = AI_MODEL
+  featureName: string = "AI"
 ): Promise<string> {
+  // Tier detection for backend routing
+  let tier = 'Free';
   try {
-    console.log(`AI call starting for ${featureName} via proxy using model ${model}`);
-    const isGptOssModel = model.startsWith("openai/gpt-oss-");
-    const messages = isGptOssModel
-      ? [
-          {
-            role: "user",
-            content: systemPrompt
-              ? `${systemPrompt}\n\n${prompt}`
-              : prompt,
-          },
-        ]
-      : [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: prompt },
-        ];
+    const userStr = localStorage.getItem('somyra_user');
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      const planId = user?.subscription?.planId?.toLowerCase() || '';
+      if (planId.includes('pro')) tier = 'Pro';
+      else if (planId.includes('max')) tier = 'Max';
+    }
+  } catch (e) {
+    console.warn("[TIER] Failed to parse user data, defaulting to Free");
+  }
+  
+  try {
+    console.log(`[REQUEST] Feature: ${featureName} | Tier: ${tier}`);
+    const messages = [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: prompt },
+    ];
+    
+    // Create timeout controller
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 90000); // 90s timeout for deep audits / complex persona gen
     
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -138,19 +144,20 @@ async function aiChat(
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: model,
         messages,
-        temperature: temperature,
+        temperature,
         max_tokens: maxTokens,
-        include_reasoning: isGptOssModel ? false : undefined
+        tier
       }),
-      signal
+      signal: signal || controller.signal
     });
-
-    console.log(`AI proxy response received status ${response.status}`);
+    
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
-      throw new Error(`AI service error: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage = errorData.error?.message || errorData.error || `Status ${response.status}`;
+      throw new Error(`AI service error: ${errorMessage}`);
     }
 
     const data = await response.json();
@@ -161,15 +168,14 @@ async function aiChat(
 
     const result = data.choices[0].message?.content;
     
-    if (typeof result !== 'string' || result.trim().length <= 10) {
-      throw new Error("AI service returned empty or too short content");
+    if (typeof result !== 'string' || result.trim().length <= 1) {
+      throw new Error("AI service returned empty content");
     }
     
-    console.log(`Generation success content length ${result.length}`);
     return result;
   } catch (error: any) {
     if (error.name === 'AbortError') throw error;
-    console.error(`AI service error (${featureName}):`, error);
+    console.error(`[ERROR] ${featureName} failed for Tier ${tier}:`, error.message);
     return "Generation failed. Please try again.";
   }
 }
@@ -790,8 +796,8 @@ export async function analyzeProfile(
   
   IMPORTANT: Return ONLY valid JSON. No markdown, no preamble.`;
 
-  const temperature = mode === 'quick' ? 0.35 : 0.25;
-  const maxTokens = mode === 'quick' ? 2500 : 5000;
+  const temperature = 0.4;
+  const maxTokens = mode === 'quick' ? 3000 : 6000;
 
   if (DEBUG_AI) {
 
@@ -942,11 +948,96 @@ export interface StyleReport {
   self_disclosure_level: string;
   reader_relationship: string;
   post_length_range: string;
+  formatting_preferences: {
+    use_bullets: boolean;
+    use_bold: boolean;
+    use_emojis: boolean;
+    emoji_density: 'none' | 'low' | 'high';
+  };
+  vocabulary_complexity: 'simple' | 'medium' | 'advanced';
+}
+
+function formatStyleReportForPrompt(styleReport: StyleReport | null): string {
+  if (!styleReport) return '';
+  
+  const lines: string[] = [
+    'VOICE STYLE RULES — FOLLOW EXACTLY:'
+  ];
+
+  if ((styleReport as any).sentence_structure) {
+    lines.push(`- Sentence length: ${(styleReport as any).sentence_structure}`);
+  }
+  if ((styleReport as any).vocabulary_level) {
+    lines.push(`- Vocabulary: ${(styleReport as any).vocabulary_level} — match this exactly`);
+  }
+  if ((styleReport as any).tone) {
+    lines.push(`- Tone: ${(styleReport as any).tone}`);
+  }
+  if (styleReport.opening_patterns) {
+    lines.push(`- How they open posts: ${styleReport.opening_patterns}`);
+  }
+  if (styleReport.closing_patterns) {
+    lines.push(`- How they close posts: ${styleReport.closing_patterns}`);
+  }
+  if ((styleReport as any).recurring_themes?.length) {
+    lines.push(`- Themes they write about: ${(styleReport as any).recurring_themes.join(', ')}`);
+  }
+  if (styleReport.formatting_preferences) {
+    const f = styleReport.formatting_preferences;
+    lines.push(`- Uses bullet points: ${f.use_bullets ? 'yes' : 'no'}`);
+    lines.push(`- Uses bold text: ${f.use_bold ? 'yes' : 'no'}`);
+    lines.push(`- Uses emojis: ${f.use_emojis ? 'yes' : 'no'}`);
+  }
+  if ((styleReport as any).unique_patterns) {
+    lines.push(`- Unique writing patterns: ${(styleReport as any).unique_patterns}`);
+  }
+
+  // Adding the standard styleReport fields to ensure everything is covered
+  if (styleReport.thought_patterns) {
+    lines.push(`- Worldview: ${styleReport.thought_patterns.worldview}`);
+    lines.push(`- What they notice: ${styleReport.thought_patterns.noticing}`);
+  }
+  if (styleReport.avg_sentence_length) lines.push(`- Sentence length notes: ${styleReport.avg_sentence_length}`);
+  if (styleReport.paragraph_structure) lines.push(`- Paragraph structure: ${styleReport.paragraph_structure}`);
+  if (styleReport.vocabulary_fingerprint) lines.push(`- Core vocabulary: ${styleReport.vocabulary_fingerprint}`);
+
+  return lines.join('\n');
+}
+
+function getFreeUserFallbackPrompt(): string {
+  return `WRITING STYLE FOR THIS GENERATION:
+Since no voice profile has been set up yet,
+write in this default style:
+
+- Conversational and direct
+- Short sentences, one idea per line
+- Written like a smart founder talking to
+  a peer, not a marketer talking to leads
+- Specific details over general claims
+- Real observations over motivational fluff
+- Open with a specific situation or moment,
+  not a question or a generic statement
+- End with a genuine question or a single
+  clear takeaway, never both
+- No corporate vocabulary
+- No performed emotion
+- No list of lessons format
+- Sound like a real person who has done
+  the thing they are writing about
+
+The goal: write something a founder would
+actually send to their network and feel
+proud of. Not something that looks like
+it came from an AI content tool.`;
 }
 
 const FORBIDDEN_WORDS = "utilize, leverage, navigate, delve, foster, empower, unlock, seamlessly, robust, innovative, cutting-edge, thought leader, game changer, move the needle, circle back, deep dive, synergy, paradigm shift, holistic, transformative, impactful, actionable, best practices, pain points, value proposition, low hanging fruit, bandwidth, ecosystem, scalable, disruption, pivot, journey, space as in the marketing space, folks, supercharge, harness, spearhead, dynamic, multifaceted, elevate, pave the way, relentless, hustle, grind, crushing it, killing it, showing up, lean in, unpack, touch base, at the end of the day, it is what it is, when all is said and done, the fact of the matter, in today's world, fast paced, ever changing, landscape, narrative, authentic, genuine, passionate, excited to announce, thrilled to share, humbled, blessed, grateful for the opportunity";
 
-function getCorePhilosophyPrompt() {
+function getCorePhilosophyPrompt(styleReport: StyleReport | null = null) {
+  const allowBullets = styleReport?.formatting_preferences?.use_bullets ?? false;
+  const allowBold = styleReport?.formatting_preferences?.use_bold ?? false;
+  const allowEmojis = styleReport?.formatting_preferences?.use_emojis ?? false;
+
   return `THE CORE PHILOSOPHY:
 We are not writing LinkedIn content. We are writing things worth reading. There is a difference. LinkedIn content is optimized for engagement. Things worth reading are optimized for truth. The goal of every single output is one thing — make the reader read it twice. Not because it is clever. Because it is true in a way they have not heard before. Every word must earn its place. If a word is not doing work cut it. If a sentence is not moving the story forward cut it. If a paragraph is not adding something new cut it.
 
@@ -955,64 +1046,42 @@ Before outputting any content ask: if a complete stranger read this while scroll
 
 WRITING VOICE — NON NEGOTIABLE:
 - Daily life words only. If a word would feel weird to say out loud in a normal conversation do not use it.
+- NO COMPLEX OR ACADEMIC VOCABULARY. We speak as a trusted friend, not a textbook.
+- NO EM-DASHES (—). Use commas, periods, or colons instead.
+- NO MID-SENTENCE HYPHENS (-). Hyphens are strictly for bullet points at the start of a line.
 - No three part lists as the entire structure of a post.
 - No inspirational quote as the opener.
-- No numbered lessons format.
+- No numbered lessons format (except for explicit lists if allowed).
 - No fake vulnerability — I almost quit but then I realized.
 - No performed emotion — the tears, the sleepless nights, the journey.
 - Real emotion only — the specific feeling of a specific moment.
 - No generic hooks — unpopular opinion, hot take, most people do not know this.
 - Hooks must earn attention through specificity and truth not through pattern.
-- Format follows content — not the other way around.
-- Rhythm matters. Read every post out loud in your head. If it stumbles anywhere fix it.
+- Rhythm matters. Read every post out loud in your head.
 - Flow matters. Each sentence must pull you into the next one naturally.
-- White space matters. A post that breathes is easier to read than a wall of text.
 - Every post must have one clear point. Not two. Not three. One.
-
-THE ONE POINT RULE:
-Every post must be about exactly one thing. Before writing identify the one thing. Write it in one sentence. Every other sentence in the post must serve that one sentence. If any sentence does not serve the one point cut it.
 
 FORBIDDEN WORDS — ABSOLUTE BAN:
 ${FORBIDDEN_WORDS}
-Also ban: em dashes used for dramatic effect unless in sample posts, ellipsis used more than once per post, any word that sounds like it belongs in a TED talk or a corporate email.
-
-SENTENCE CONSTRUCTION RULES:
-- Short sentences land harder than long ones for emotional moments.
-- Long sentences work for building context and setting scenes.
-- Never use two long sentences in a row.
-- Never use more than four short sentences in a row.
-- The sentence before the ending must be the second strongest sentence in the post.
-- The ending must be the strongest or most honest sentence in the post.
-- Active voice always. Passive voice never.
-- Concrete nouns over abstract nouns always.
-- Specific verbs over generic verbs always — not walked but trudged, not said but admitted.
-
-EMOTION RULES:
-- Never name the emotion. Show the situation that creates it.
-- The reader should feel the emotion before they can name it.
-- Every post should have one emotional through line — one feeling that runs underneath everything.
-- Earned emotions only. If the story does not earn the emotion do not put it there.
+Also ban: em dashes (—), mid-sentence hyphens (-), ellipsis used more than once per post, any word that sounds like it belongs in a TED talk or a corporate email.
 
 FORMATTING RULES:
 - Format follows content always.
+${allowBullets ? "- USE BULLET POINTS (-, •) if it helps clarity, as the user prefers this style." : "- NEVER use bullet points."}
+${allowBold ? "- USE BOLD TEXT for emphasis if it helps clarity, as the user prefers this style." : "- NEVER use bold text."}
+${allowEmojis ? `- USE EMOJIS naturally (${styleReport?.formatting_preferences?.emoji_density || 'low'} density).` : "- NEVER use emojis."}
 - Short punchy posts — one sentence per line.
 - Longer narrative posts — paragraphs of 2 to 4 sentences.
-- Never mix formats randomly within a post.
-- Never use bullet points.
-- Never use bold text.
-- Never use numbered lists.
 - Hashtags maximum 3 at the very end only.
-- Emojis only if the person uses them in sample posts.
 - Line breaks between paragraphs always — no wall of text ever.
 
 SILENT QUALITY CHECK — RUN BEFORE EVERY SINGLE OUTPUT:
-- Does the hook stop scrolling or allow it?
-- Is there one clear point or multiple competing ones?
-- Is every sentence doing real work?
-- Is there a single forbidden word anywhere?
+- DOES THIS HAVE A LABEL LIKE "Hook:" or "Body:"? (If yes, REMOVE IT. Output raw text ONLY).
+- Are there any complex/academic words that could be simplified?
+- Is there a single em-dash (—) or mid-sentence hyphen (-) anywhere? (Remove it).
+- Does the "Visual Rhythm" (number of words per line and line breaks) match the samples?
 - Is there a single AI pattern anywhere — list, transition word, performed emotion?
-- Does the rhythm work when read aloud in your head?
-- Does the ending land or trail off?`;
+- Does the rhythm work?`;
 }
 
 export async function generateStyleReport(voiceProfile?: string[], profileContext?: ProfileData): Promise<StyleReport | null> {
@@ -1020,8 +1089,11 @@ export async function generateStyleReport(voiceProfile?: string[], profileContex
   if (!hasVoice) return null;
 
   const systemPrompt = `TIER 3 — PRO USER WITH VOICE PROFILE — THE POSSESSION:
+
 CALL 1 — THOUGHT AND STYLE EXTRACTION:
+
 Read every sample post with complete attention. This is not skimming. This is study.
+
 First understand how this person thinks:
 - What do they notice that others usually miss?
 - What is their relationship with failure — do they lean into it or reframe it quickly?
@@ -1060,8 +1132,18 @@ Return ONLY a valid JSON object with these exact fields:
   "pacing": "do they rush to the point or build context first",
   "self_disclosure_level": "how much personal detail do they share",
   "reader_relationship": "how directly do they address the reader",
-  "post_length_range": "shortest and longest post and what the average is"
-}`;
+  "post_length_range": "shortest and longest post and what the average is",
+  "formatting_preferences": {
+    "use_bullets": "true if they use - or • or numbers",
+    "use_bold": "true if they use **bold** text",
+    "use_emojis": "true if emojis are present",
+    "emoji_density": "none, low, or high"
+  },
+  "vocabulary_complexity": "simple (everyday words), medium, or advanced (industry jargon)"
+}
+    
+IMPORTANT: Specifically note if they use em-dashes (—). If they do not use them, we must avoid them in generation.
+IMPORTANT: Note their preference for simple vs complex words. We prioritize simplicity."`;
   
   const voiceData = voiceProfile.map((post, i) => `[SAMPLE POST ${i + 1}]: ${post}`).join('\n');
     
@@ -1069,7 +1151,7 @@ Return ONLY a valid JSON object with these exact fields:
 ${voiceData}`;
 
   try {
-    const response = await aiChat(userPrompt, systemPrompt, 0.2, 1500, undefined, "Voice Profile Analysis");
+    const response = await aiChat(userPrompt, systemPrompt, 0.3, 2000, undefined, "Voice Profile Analysis");
     if (response === "Generation failed. Please try again.") {
       return null;
     }
@@ -1082,14 +1164,16 @@ ${voiceData}`;
 }
 
 function getGenerationSystemPrompt(styleReport: StyleReport | null) {
-  return getCorePhilosophyPrompt();
+  return getCorePhilosophyPrompt(styleReport);
 }
 
 export async function generateTopics(profession: string, goals: string, audience: string, styleReport: StyleReport | null) {
   const systemPrompt = `TOPIC GENERATOR:
+
 Generate 10 topics. Each is a specific angle not a general theme.
 Each topic comes from a real human experience or tension — not a content calendar idea.
 Each has a one line description of the specific angle and the emotional truth behind it.
+
 Bad: lessons from failure
 Good: the client I lost that made me realize my pricing was actually a self worth problem
 
@@ -1107,7 +1191,7 @@ ${getCorePhilosophyPrompt()}`;
       "topics": ["string"]
     }`;
 
-  const text = await aiChat(userPrompt, systemPrompt, 0.78, 800, undefined, "Topic Generator");
+  const text = await aiChat(userPrompt, systemPrompt, 0.95, 2000, undefined, "Topic Generator");
   if (text === "Generation failed. Please try again.") {
     return [];
   }
@@ -1122,8 +1206,9 @@ ${getCorePhilosophyPrompt()}`;
 export async function generatePost(topic: string, style: string, profileContext: ProfileData | null) {
   const isTier2 = !!profileContext;
   
-  const systemPrompt = isTier2 
+  let systemPrompt = isTier2 
     ? `TIER 2 — SIGNED IN FREE USER — THE INFORMED VOICE:
+
 You know their profile context — industry, role, what they work on.
 Use this to make everything specific to their world.
 The hook comes from a real tension in their specific industry.
@@ -1133,22 +1218,28 @@ Do not write generically about entrepreneurship or leadership.
 Write specifically about what it feels like to do what they do.
 Ask: what does someone in this role worry about at 2am that they would never say in a meeting?
 That is your angle.
+
 Length: 150 to 250 words.
 
 ${getCorePhilosophyPrompt()}`
     : `TIER 1 — FREE USER — THE HONEST STRANGER:
+
 You know only the topic. Nothing else.
 Do not pretend to know their industry. Do not make up their backstory.
 Write as a real thoughtful person having a genuine thought about this topic.
 Find the most honest and specific angle — not the most popular one.
 Ask: what is the thing about this topic that most people feel but nobody says directly?
 Then say that thing.
+
 Hook: one specific concrete sentence that captures the truth of this topic.
 Body: one real observation or moment that supports the hook. Specific details even if illustrative must feel completely real and grounded.
 Ending: where the thought naturally lands. Not a call to action. Not a generic question.
+
 Length: 100 to 180 words. Short focused and complete.
 
 ${getCorePhilosophyPrompt()}`;
+
+  systemPrompt += `\n\n${getFreeUserFallbackPrompt()}`;
 
   const userPrompt = `Write a post about: ${topic}
     ${isTier2 ? `Profile Context: ${JSON.stringify(profileContext)}` : ''}
@@ -1164,7 +1255,7 @@ ${getCorePhilosophyPrompt()}`;
     OBSERVATION POST STRUCTURE (if applicable):
     Opening observation -> Evidence -> Implication -> Landing.`;
 
-  return await aiChat(userPrompt, systemPrompt, 0.73, 1000, undefined, "Post Writer");
+  return await aiChat(userPrompt, systemPrompt, 0.9, 1000, undefined, "Post Writer");
 }
 
 export async function generatePostThreeStep(
@@ -1196,28 +1287,58 @@ export async function generatePostThreeStep(
   // STEP 2 — VOICE GENERATION
   try {
     onPhaseChange('crafting');
-    const systemPrompt2 = `TIER 3 — PRO USER WITH VOICE PROFILE — THE POSSESSION:
-CALL 2 — VOICE GENERATION:
-You are now this person. Completely. Not impersonating. Not mimicking. Being.
-You have their worldview. Their observations. Their specific way of seeing.
-Before writing ask: what would this specific person find most honest or interesting about this topic?
-That is your angle. Not the popular angle. Their angle.
-Write using their thought patterns.
-Every sentence must pass this test: would this person say this exact sentence in this exact way?
+    const systemPrompt2 = `VOICE MATCHING — CALL 2:
 
-USE THIS VOICE ANALYSIS AS YOUR STRICT BLUEPRINT:
-${JSON.stringify(styleReport)}
+Your only job is to rewrite the post draft
+in the exact voice of the person below.
+You are not adding ideas. You are not
+improving the content. You are only
+changing HOW it sounds to match their
+exact writing style.
 
-${getCorePhilosophyPrompt()}`;
+${formatStyleReportForPrompt(styleReport)}
 
-    const userPrompt2 = `Write a post as this person about: ${topic}
+THEIR ACTUAL WRITING SAMPLES:
+Study these carefully. Match the rhythm,
+sentence length, word choice, and structure
+exactly. These are not examples — they are
+the standard you must match.
+
+${voiceProfile.map((post, i) => `[SAMPLE ${i + 1}]:\n${post}`).join('\n\n')}
+
+REWRITING RULES:
+- Keep every idea from the draft
+- Change the words to match their vocabulary
+- Match their sentence length pattern exactly
+- Match their line break rhythm exactly
+- Match their opening style exactly
+- If their samples never use bullet points,
+  never use bullet points
+- If their samples use short punchy lines,
+  use short punchy lines
+- If their samples use longer paragraphs,
+  use longer paragraphs
+- Remove any word that does not sound like
+  them based on the samples above
+
+OUTPUT RULE:
+Raw post text only.
+No labels. No commentary. No preamble.
+Just the post exactly as they would write it.
+
+${getCorePhilosophyPrompt(styleReport)}`;
+
+    const userPrompt2 = `Write the one-and-only final LinkedIn post as this person about: ${topic}
     ${profileContext ? `Profile Context: ${JSON.stringify(profileContext)}` : ''}
     
-    HOOK WRITING — SPECIAL INSTRUCTIONS:
-    Write the body first. Then write the hook.
-    Find the most true or most surprising sentence in the body. That is the seed of your hook.`;
+    IMPORTANT RESTRAINT:
+    - Output the RAW post text only.
+    - NEVER add labels like "Hook:", "Body:", or "Summary".
+    - NEVER add preamble like "Here is your post:".
+    - The first line MUST be the hook.
+    - Match the visual pacing and rhythm of the user samples provided in the system prompt.`;
 
-    initialPost = await aiChat(userPrompt2, systemPrompt2, 0.70, 1500, signal, "Voice Profile Call 2 generation");
+    initialPost = await aiChat(userPrompt2, systemPrompt2, 0.85, 1200, signal, "Voice Profile Call 2 generation");
     if (initialPost === "Generation failed. Please try again.") {
       throw new Error(initialPost);
     }
@@ -1248,14 +1369,14 @@ Never more creative. Never more dramatic. Always more honest.`;
       
       Return ONLY the refined post.`;
       
-      const refinedPost = await aiChat(userPrompt3, systemPrompt3, 0.63, 1500, signal, "Deep Mode Call 3 refinement");
+      const refinedPost = await aiChat(userPrompt3, systemPrompt3, 0.8, 1500, signal, "Deep Mode Call 3 refinement");
       if (refinedPost === "Generation failed. Please try again.") {
-        return initialPost;
+        return cleanupPersonaOutput(initialPost);
       }
-      return refinedPost;
+      return cleanupPersonaOutput(refinedPost);
     }
     
-    return initialPost;
+    return cleanupPersonaOutput(initialPost);
   } catch (err: any) {
     if (err.name === 'AbortError') throw err;
     return initialPost || "Generation failed.";
@@ -1266,9 +1387,9 @@ export async function generateBio(role: string, skills: string, achievements: st
   const systemPrompt = `BIO AND HEADLINE:
 Headline: what you do, for whom, with one specific result if possible. Under 12 words.
 Bio: sounds like the person talking to someone they respect but just met. Not a resume. Not a mission statement. A person.
-${styleReport ? "For Pro users match their vocabulary and directness exactly." : ""}
+${styleReport ? "For Pro users, match their precise vocabulary, directness, and formatting (bold/bullets) exactly." : ""}
 
-${getCorePhilosophyPrompt()}`;
+${getCorePhilosophyPrompt(styleReport)}`;
 
   const userPrompt = `Generate a LinkedIn headline and bio.
     Role: ${role}
@@ -1283,13 +1404,17 @@ ${getCorePhilosophyPrompt()}`;
       "about": "string"
     }`;
 
-  const text = await aiChat(userPrompt, systemPrompt, 0.75, 600, undefined, "Bio and Headline");
+  const text = await aiChat(userPrompt, systemPrompt, 0.45, 600, undefined, "Bio and Headline");
   if (text === "Generation failed. Please try again.") {
     return { headlines: [], about: "" };
   }
   try {
     const jsonStr = text.replace(/```json\n?|```/g, '').trim();
-    return JSON.parse(jsonStr);
+    const parsed = JSON.parse(jsonStr);
+    if (parsed.about) {
+      parsed.about = cleanupPersonaOutput(parsed.about);
+    }
+    return parsed;
   } catch (e) {
     return { headlines: [], about: "" };
   }
@@ -1303,13 +1428,20 @@ export async function generateSmartOutreach(
   styleReport: StyleReport | null
 ) {
   const systemPrompt = `SMART OUTREACH SYSTEM:
+
 You are an elite B2B thinking partner. 
 You follow the "Writing Things Worth Reading" philosophy exactly.
 Your goal is to write a personalized first message based on the relationship context and research provided.
-Crucial rules for the message:
+
+Crucial rules:
 1. Specificity — reference something real from the research Context.
 2. Brevity — UNDER 60 words always.
 3. No pitch — start a conversation, do not pitch.
+${styleReport ? "4. VOICE MATCH — Replicate the user's sentence length and tone from their style report." : ""}
+
+OUTPUT RESTRAINT:
+- Output the raw message ONLY.
+- No labels, no preamble, no commentary.
 
 Relationship context rules:
 - Cold: Shortest and most specific observation.
@@ -1317,7 +1449,7 @@ Relationship context rules:
 - Reconnect: Acknowledge the gap naturally.
 - Referral: Lead with the mutual connection.
 
-${getCorePhilosophyPrompt()}`;
+${getCorePhilosophyPrompt(styleReport)}`;
 
   const userPrompt = `Write a personalized LinkedIn outreach message.
     Target: ${target}
@@ -1326,14 +1458,18 @@ ${getCorePhilosophyPrompt()}`;
     End Goal: ${goal}
     ${styleReport ? `Voice Blueprint: ${JSON.stringify(styleReport)}` : ''}`;
 
-  return await aiChat(userPrompt, systemPrompt, 0.73, 400, undefined, "Smart Outreach");
+  const text = await aiChat(userPrompt, systemPrompt, 0.75, 300, undefined, "Smart Outreach");
+  return cleanupPersonaOutput(text);
 }
 
 export async function scoreOutreachMessage(message: string) {
   const systemPrompt = `OUTREACH SCORING EXPERT:
+
 You score LinkedIn outreach messages based on 4 metrics: Specificity, Length, PitchLevel, and HumanFeel.
+
 Length should be strictly under 60 words.
 PitchLevel should be non-existent.
+
 Return ONLY valid JSON.`;
 
   const prompt = `Evaluate this outreach message:
@@ -1357,12 +1493,12 @@ IMPORTANT: Return ONLY a valid JSON object:
   }
 }
 
-export async function generateFollowUp(scenario: string, firstMessage: string, styleReport?: any) {
+export async function generateFollowUp(scenario: string, firstMessage: string, styleReport?: StyleReport | null) {
   const systemPrompt = `FOLLOW-UP INTELLIGENCE:
 You write highly situational follow-up messages. Do not use generic "bumping this" templates.
 Keep the relationship preserving and natural.
 Under 40 words.
-${getCorePhilosophyPrompt()}`;
+${getCorePhilosophyPrompt(styleReport || null)}`;
 
   const prompt = `Write a follow-up message to this initial outreach:
 "${firstMessage}"
@@ -1376,7 +1512,8 @@ Strategy logic:
 - Said not interested: Graceful exit that leaves the door open.
 ${styleReport ? `Voice Blueprint: ${JSON.stringify(styleReport)}` : ''}`;
 
-  return await aiChat(prompt, systemPrompt, 0.7, 300, undefined, "Follow Up Intelligence");
+  const text = await aiChat(prompt, systemPrompt, 0.7, 300, undefined, "Follow Up Intelligence");
+  return cleanupPersonaOutput(text);
 }
 
 export async function generateICPClarity(bestClient: string, worstClient: string, uniqueProblem: string) {
@@ -1393,6 +1530,59 @@ Format as Markdown with bullet points or clear headings.`;
 Output a clear profile defining the Target, the Pain, and the exact hook that will resonate with them.`;
 
   return await aiChat(prompt, systemPrompt, 0.7, 800, undefined, "ICP Clarity");
+}
+
+/**
+ * Mechanically cleans the AI output to ensure 1:1 persona compliance.
+ * Strips AI signatures (Hook:), removes mid-sentence dashes, and fixes vocabulary.
+ */
+function cleanupPersonaOutput(text: string): string {
+  if (!text) return text;
+  
+  let cleaned = text;
+
+  // 1. Strip AI labels/metadata
+  cleaned = cleaned.replace(/^(Hook|Body|Summary|Note|Post|Post text|Here is your post|Analysis):/im, '');
+  cleaned = cleaned.replace(/^(Hook|Body|Summary|Note|Post|Post text|Here is your post|Analysis)\s*-\s*/im, '');
+  
+  // 2. Eradicate Em-Dashes (—) and replace with commas or periods
+  // If at the end of a sentence before a quote or end of line, use period. Else comma.
+  cleaned = cleaned.replace(/—/g, ', ');
+  
+  // 3. Fix mid-sentence hyphens (but keep bullet points)
+  // Bullet points usually look like "\n- " or "^- "
+  // Mid-sentence hyphens look like "word - word" or "word-word" (if used as separator)
+  
+  // Replace space-hyphen-space with comma (very common AI slop)
+  cleaned = cleaned.replace(/\s+-\s+/g, ', ');
+  
+  // Replace mid-word hyphens that look like separators
+  // e.g., "help people-that is" -> "help people, that is"
+  cleaned = cleaned.replace(/([a-z])\s*-\s*([a-z])/gi, '$1, $2');
+
+  // 4. Double check for "Hook:" at the very bottom
+  cleaned = cleaned.replace(/\n\s*Hook:\s*/gi, '\n\n');
+
+  // 5. Final polish: Remove any double commas or weird punctuation gaps
+  cleaned = cleaned.replace(/,\s*,/g, ',');
+  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+  
+  // Restore paragraph breaks (since \s+ strips them)
+  // Let's redo step 5 more carefully to preserve breaks
+  cleaned = text
+    .replace(/^(Hook|Body|Summary|Note|Post|Post text|Here is your post|Analysis):\s*/im, '')
+    .replace(/^(Hook|Body|Summary|Note|Post|Post text|Here is your post|Analysis)\s*-\s*/im, '')
+    .replace(/—/g, ', ')
+    .replace(/\s+-\s+/g, ', ')
+    .replace(/([a-z])\s*-\s*([a-z])/gi, '$1, $2')
+    .replace(/\n\s*Hook:\s*/gi, '\n\n')
+    .split('\n')
+    .map(line => line.trim())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  return cleaned;
 }
 
 export async function analyzeTone(text: string, voiceProfile?: string[]) {
