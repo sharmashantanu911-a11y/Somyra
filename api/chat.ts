@@ -4,9 +4,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 const MODEL_CHAINS: Record<string, string[]> = {
-  Free: ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-2.0-flash-lite', 'llama-3.3-70b-versatile'],
-  Pro:  ['gemini-1.5-pro', 'gemini-2.0-flash', 'gemini-1.5-flash', 'llama-3.3-70b-versatile'],
-  Max:  ['gemini-1.5-pro', 'gemini-2.0-flash', 'gemini-1.5-flash', 'llama-3.3-70b-versatile'],
+  Free: ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'llama-3.3-70b-versatile'],
+  Pro:  ['gemini-2.5-flash', 'gemini-2.0-flash', 'llama-3.3-70b-versatile'],
+  Max:  ['gemini-2.5-pro',   'gemini-2.5-flash',  'llama-3.3-70b-versatile'],
 };
 
 async function executeAiGeneration(
