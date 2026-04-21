@@ -22,8 +22,8 @@ console.log('-------------------------------------------');
 // ─────────────────────────────────────────────────────────────────────────────
 const MODEL_CHAINS: Record<string, string[]> = {
   'Free': ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'],
-  'Pro':  ['qwen/qwen3-32b', 'llama-3.3-70b-versatile', 'llama-3.1-8b-instant'],
-  'Max':  ['qwen/qwen3-32b', 'llama-3.3-70b-versatile', 'llama-3.1-8b-instant'],
+  'Pro':  ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama-3.1-8b-instant'],
+  'Max':  ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama-3.1-8b-instant'],
 };
 
 // Small delay helper — gives Groq rate limiter time to reset between models
