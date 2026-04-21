@@ -1470,81 +1470,44 @@ export async function generatePostThreeStep(
   // STEP 2 — VOICE GENERATION
   try {
     onPhaseChange('crafting');
-    const systemPrompt2 = `VOICE POSSESSION — CALL 2:
+    // Truncate voice samples to avoid exceeding TPM limits — keep most recent/shortest samples
+    const MAX_SAMPLES_CHARS = 3000;
+    let samplesText = '';
+    let charCount = 0;
+    for (let i = 0; i < voiceProfile.length && charCount < MAX_SAMPLES_CHARS; i++) {
+      const sample = voiceProfile[i].substring(0, Math.min(voiceProfile[i].length, MAX_SAMPLES_CHARS - charCount));
+      samplesText += `[SAMPLE ${i + 1}]:\n${sample}\n\n`;
+      charCount += sample.length;
+    }
 
-BEFORE YOU WRITE A SINGLE WORD, you must deeply study every writing sample below.
-Do not skim. Do not rush. Read each post at least twice.
-You are performing a forensic analysis of their writing DNA.
-
-YOU ARE ANALYZING — EVERY SINGLE DETAIL:
-1. TONE — Are they serious, playful, dry, warm, provocative, calm? What is the emotional temperature?
-2. STYLE — Do they write in fragments or full sentences? Short bursts or flowing paragraphs? Casual or polished?
-3. PHRASES — What words and phrases do they naturally reach for? What transitions do they use? What filler words appear?
-4. STRUCTURE — How do they open? How long are their paragraphs? Where do they place the turn? How do they close?
-5. EMOTIONS — Do they share vulnerability? Are they understated or expressive? Do they use humor, irony, directness?
-6. RHYTHM — Read the posts out loud in your head. Feel the pacing. Some writers punch. Some writers flow. Match theirs exactly.
-7. VOCABULARY LEVEL — Simple everyday words or industry-specific language? Match the exact complexity level.
-8. WHAT THEY NEVER DO — This is equally important. If they never use emojis, you never use emojis. If they never ask questions at the end, you don't either.
-9. SENTENCE LENGTH — Count the words per sentence in their samples. Your sentences must match their average length.
-10. LINE BREAKS — Count blank lines between paragraphs. Replicate the exact same white space density.
-11. CAPITALIZATION — Do they use ALL CAPS for emphasis? If yes, use it the same way. If no, NEVER use ALL CAPS.
-12. BOLD AND ITALIC — Do they use **bold** or *italic*? If yes, use it for the same purpose. If no, NEVER use formatting.
-13. PUNCTUATION — Do they use question marks frequently? Exclamation marks? Colons? Ellipsis? Dashes? Match their exact punctuation patterns.
-14. WORDS PER LINE — Count how many words they typically put on each line before a line break. Match this number.
-15. SIGNATURE PHRASES — Use their actual phrases and verbal patterns. If they always say "Here's the thing" — you say "Here's the thing."
-16. TRANSITION WORDS — If they connect ideas with "But" not "However", you use "But." Match their connectors exactly.
-
-Only after you have fully internalized their voice, write the post AS THEM.
-You are not writing "in a similar style." You are writing as if you ARE this person.
-A reader who knows them should not be able to tell the difference.
+    const systemPrompt2 = `VOICE POSSESSION — Write as this person. Not similar to them. AS them.
 
 ${formatStyleReportForPrompt(styleReport)}
 
-THEIR ACTUAL WRITING SAMPLES — STUDY THESE LINE BY LINE:
-${voiceProfile.map((post, i) => ` [SAMPLE ${i + 1}]:\\n${post}`).join('\\n\\n')}
+WRITING SAMPLES — Match these exactly:
+${samplesText.trim()}
 
-VOICE MATCHING RULES — NON-NEGOTIABLE:
-- Match their exact sentence length patterns. If they average 8 words per sentence, you average 8.
-- Match their exact words-per-line count. If they write 5-7 words per line, you write 5-7 words per line.
-- Match their paragraph length. If they write 1-line paragraphs, write 1-line paragraphs.
-- Match their blank line pattern. If they put a blank line after every sentence, do the same.
-- Match their opening style. If they open with observations, open with an observation. If they open mid-story, open mid-story.
-- Match their closing style. If they end with a question, end with a question. If they end with a statement, end with a statement.
-- Use their vocabulary. If they say "wild" instead of "surprising", say "wild."
-- Use their transition words. If they say "But" not "However", say "But."
-- Use their signature phrases naturally.
-- Match their capitalization. If they use ALL CAPS for emphasis, use ALL CAPS for emphasis. If they never do, never do.
-- Match their bold/italic usage. If they bold key phrases, bold key phrases. If they never format, never format.
-- Match their punctuation density. If they rarely use exclamation marks, you rarely use them. If they use ellipsis, use ellipsis.
-- Match their emoji usage exactly. Same emojis, same placement, same frequency. If zero, then zero.
-- Match their line break rhythm exactly.
-- Remove any word that does not sound like them based on the samples above.
+RULES — NON-NEGOTIABLE:
+- Match their sentence length, words per line, and paragraph spacing exactly.
+- Match their opening and closing patterns from the style report.
+- Use their vocabulary, transition words, and signature phrases.
+- Match their capitalization, bold/italic, punctuation, and emoji patterns exactly. If they never use something, you never use it.
+- Match their line break rhythm and white space density.
+- Every word must sound like them. Remove anything that doesn't.
+- Output raw post text only. No labels, no preamble, no commentary.`;
 
-FINAL CHECK BEFORE OUTPUT:
-- Read your draft and compare it line-by-line against their samples.
-- Does the visual shape of your post look like their posts? Same density? Same spacing?
-- Does the word count per line match?
-- Does the punctuation pattern match?
-- Would their mother mistake your post for theirs?
+    // Only pass essential profile context, not the entire analysis object
+    const trimmedContext = profileContext ? {
+      verdict: profileContext.verdict,
+      communicates: profileContext.communicates,
+      mode: profileContext.mode,
+    } : null;
 
-OUTPUT RULE:
-Raw post text only.
-No labels. No commentary. No preamble.
-Just the post exactly as they would write it.
+    const userPrompt2 = `Write a LinkedIn post as this person about: ${topic}
+${trimmedContext ? `Context: ${JSON.stringify(trimmedContext)}` : ''}
+Output the RAW post text only. No labels, no preamble. First line is the hook.`;
 
-${getCorePhilosophyPrompt(styleReport)}`;
-
-    const userPrompt2 = `Write the one-and-only final LinkedIn post as this person about: ${topic}
-${profileContext ? `Profile Context: ${JSON.stringify(profileContext)}` : ''}
-
-IMPORTANT RESTRAINT:
-- Output the RAW post text only.
-- NEVER add labels like "Hook:", "Body:", or "Summary".
-- NEVER add preamble like "Here is your post:".
-- The first line MUST be the hook.
-- Match the visual pacing and rhythm of the user samples provided in the system prompt.`;
-
-    initialPost = await aiChat(userPrompt2, systemPrompt2, 0.85, 1200, signal, "Voice Profile Call 2 generation");
+    initialPost = await aiChat(userPrompt2, systemPrompt2, 0.85, 800, signal, "Voice Profile Call 2 generation");
     if (initialPost === "Generation failed. Please try again.") {
       throw new Error(initialPost);
     }
