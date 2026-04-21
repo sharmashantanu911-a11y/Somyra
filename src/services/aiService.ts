@@ -185,51 +185,78 @@ async function aiChat(
   // FIX: Detect tier from Supabase, not from a non-existent localStorage field
   const tier = await detectUserTier();
 
-  try {
-    console.log(`[REQUEST] Feature: ${featureName} | Tier: ${tier}`);
+  const MAX_CLIENT_RETRIES = 2;
 
-    const messages = [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: prompt },
-    ];
+  for (let attempt = 1; attempt <= MAX_CLIENT_RETRIES; attempt++) {
+    try {
+      console.log(`[REQUEST] Feature: ${featureName} | Tier: ${tier} | Attempt: ${attempt}`);
 
-    // Create timeout controller (55s — to match Vercel limit)
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 55000);
+      const messages = [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: prompt },
+      ];
 
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages, temperature, max_tokens: maxTokens, tier }),
-      signal: signal || controller.signal
-    });
+      // Create timeout controller (55s — to match Vercel limit)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 55000);
 
-    clearTimeout(timeoutId);
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages, temperature, max_tokens: maxTokens, tier }),
+        signal: signal || controller.signal
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      const errorMessage = errorData.error?.message || errorData.error || `Status ${response.status}`;
-      throw new Error(`AI service error: ${errorMessage}`);
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.error?.message || errorData.error || `Status ${response.status}`;
+        const errorType = errorData.error?.type || '';
+
+        // If the server exhausted all models and we have retries left, wait and retry
+        if (errorType === 'resilience_failure' && attempt < MAX_CLIENT_RETRIES) {
+          console.warn(`[RETRY] Server exhausted model chain. Retrying in 3s... (attempt ${attempt}/${MAX_CLIENT_RETRIES})`);
+          await new Promise(r => setTimeout(r, 3000));
+          continue;
+        }
+
+        throw new Error(`AI service error: ${errorMessage}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.choices || !data.choices.length) {
+        throw new Error("AI service returned no choices");
+      }
+
+      const result = data.choices[0].message?.content;
+
+      if (typeof result !== 'string' || result.trim().length <= 1) {
+        throw new Error("AI service returned empty content");
+      }
+
+      return result;
+    } catch (error: any) {
+      if (error.name === 'AbortError') throw error;
+
+      // If we still have retries and it's a network-level failure, retry
+      if (attempt < MAX_CLIENT_RETRIES && (
+        error.message?.includes('Failed to fetch') ||
+        error.message?.includes('NetworkError') ||
+        error.message?.includes('network')
+      )) {
+        console.warn(`[RETRY] Network error. Retrying in 2s... (attempt ${attempt}/${MAX_CLIENT_RETRIES})`);
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+
+      console.error(`[ERROR] ${featureName} failed for Tier ${tier}:`, error.message);
+      return "Generation failed. Please try again.";
     }
-
-    const data = await response.json();
-
-    if (!data.choices || !data.choices.length) {
-      throw new Error("AI service returned no choices");
-    }
-
-    const result = data.choices[0].message?.content;
-
-    if (typeof result !== 'string' || result.trim().length <= 1) {
-      throw new Error("AI service returned empty content");
-    }
-
-    return result;
-  } catch (error: any) {
-    if (error.name === 'AbortError') throw error;
-    console.error(`[ERROR] ${featureName} failed for Tier ${tier}:`, error.message);
-    return "Generation failed. Please try again.";
   }
+
+  return "Generation failed. Please try again.";
 }
 
 const DEBUG_AI = import.meta.env.DEV === true;
