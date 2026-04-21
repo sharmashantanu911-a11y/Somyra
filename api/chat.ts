@@ -1,12 +1,13 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-
+// ─────────────────────────────────────────────────────────────────────────────
+// MODEL CHAINS — Groq only. Qwen3-32B primary, Llama 70B fallback.
+// Gemini removed entirely due to free tier rate limits.
+// ─────────────────────────────────────────────────────────────────────────────
 const MODEL_CHAINS: Record<string, string[]> = {
-  Free: ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'llama-3.3-70b-versatile'],
-  Pro:  ['gemini-2.5-flash', 'gemini-2.0-flash', 'llama-3.3-70b-versatile'],
-  Max:  ['gemini-2.5-pro',   'gemini-2.5-flash',  'llama-3.3-70b-versatile'],
+  Free: ['llama-3.3-70b-versatile'],
+  Pro:  ['qwen/qwen3-32b', 'llama-3.3-70b-versatile'],
+  Max:  ['qwen/qwen3-32b', 'llama-3.3-70b-versatile'],
 };
 
 async function executeAiGeneration(
@@ -15,68 +16,37 @@ async function executeAiGeneration(
   temperature: number,
   maxTokens: number
 ) {
-  // ── Groq / Llama path ──────────────────────────────────────────────────────
-  if (modelId.includes('llama') || modelId.includes('versatile')) {
-    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ model: modelId, messages, temperature, max_tokens: maxTokens }),
-    });
-    if (!groqRes.ok) {
-      const err = await groqRes.json();
-      throw new Error(err.error?.message || 'Groq API error');
-    }
-    return groqRes.json();
+  const body: Record<string, any> = {
+    model: modelId,
+    messages,
+    temperature,
+    max_tokens: maxTokens,
+  };
+
+  // Disable Qwen3's thinking mode — keeps responses fast and JSON-safe
+  if (modelId.includes('qwen3')) {
+    body.reasoning_effort = 'none';
   }
 
-  // ── Gemini path ────────────────────────────────────────────────────────────
-  const cleanModelId = modelId.replace(/^models\//, '');
-  const systemMessage = messages.find((m: any) => m.role === 'system')?.content || '';
-
-  const contents = messages
-    .filter((m: any) => m.role !== 'system')
-    .map((m: any) => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: typeof m.content === 'string' ? m.content : JSON.stringify(m.content) }],
-    }));
-
-  if (contents.length === 0) throw new Error('No user messages to send to Gemini');
-  if (contents[0].role !== 'user') throw new Error('Gemini conversation must start with a user message');
-
-  const model = genAI.getGenerativeModel({
-    model: cleanModelId,
-    ...(systemMessage
-      ? { systemInstruction: { role: 'system', parts: [{ text: systemMessage }] } }
-      : {}),
-    generationConfig: { temperature, maxOutputTokens: maxTokens },
-    safetySettings: [
-      { category: 'HARM_CATEGORY_HATE_SPEECH'      as any, threshold: 'BLOCK_NONE' as any },
-      { category: 'HARM_CATEGORY_HARASSMENT'        as any, threshold: 'BLOCK_NONE' as any },
-      { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT' as any, threshold: 'BLOCK_NONE' as any },
-      { category: 'HARM_CATEGORY_DANGEROUS_CONTENT' as any, threshold: 'BLOCK_NONE' as any },
-    ],
+  const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
 
-  const result = await model.generateContent({ contents });
-
-  let outputText = '';
-  try {
-    outputText =
-      result?.response?.candidates?.[0]?.content?.parts?.[0]?.text ??
-      (typeof result?.response?.text === 'function' ? result.response.text() : '') ??
-      '';
-  } catch {
-    outputText = '';
+  if (!groqRes.ok) {
+    const err = await groqRes.json();
+    throw new Error(err.error?.message || `Groq API error ${groqRes.status}`);
   }
 
-  return { choices: [{ message: { content: outputText } }] };
+  return groqRes.json();
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // CORS headers (needed for browser → serverless function calls)
+  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -87,7 +57,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { messages, temperature, max_tokens, tier = 'Free' } = req.body;
 
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
-    return res.status(400).json({ error: { message: 'messages array is required', type: 'invalid_request' } });
+    return res.status(400).json({
+      error: { message: 'messages array is required', type: 'invalid_request' }
+    });
   }
 
   const chain = MODEL_CHAINS[tier] || MODEL_CHAINS['Free'];
@@ -96,7 +68,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   for (const modelId of chain) {
     try {
       console.log(`[ROUTING] Tier: ${tier} → Model: ${modelId}`);
-      const result = await executeAiGeneration(modelId, messages, temperature ?? 0.7, max_tokens ?? 8192);
+      const result = await executeAiGeneration(
+        modelId,
+        messages,
+        temperature ?? 0.7,
+        max_tokens ?? 8192
+      );
 
       const content = result?.choices?.[0]?.message?.content;
       if (!content || typeof content !== 'string' || content.trim().length === 0) {
@@ -108,14 +85,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     } catch (error: any) {
       lastError = error;
+
       const isRetryable =
         error.message?.includes('429') ||
         error.message?.includes('quota') ||
+        error.message?.includes('rate_limit') ||
+        error.message?.includes('Resource has been exhausted') ||
         error.message?.includes('RESOURCE_EXHAUSTED') ||
         error.message?.includes('503') ||
+        error.message?.includes('500') ||
         error.message?.includes('overloaded') ||
-        error.message?.includes('empty content') ||
-        error.message?.includes('500');
+        error.message?.includes('high demand') ||
+        error.message?.includes('empty content');
 
       console.warn(`[${isRetryable ? 'FAILOVER' : 'ERROR'}] ${modelId}: ${error.message}`);
       continue; // always try next in chain
@@ -124,6 +105,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   console.error('[CHAIN EXHAUSTED] Last error:', lastError?.message);
   return res.status(500).json({
-    error: { message: lastError?.message || 'All models failed.', type: 'resilience_failure' }
+    error: {
+      message: lastError?.message || 'All models failed.',
+      type: 'resilience_failure'
+    }
   });
 }
