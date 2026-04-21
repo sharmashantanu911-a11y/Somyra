@@ -507,44 +507,74 @@ THE STANDARD: Every post you write should make someone think "I wish I wrote tha
 function formatStyleReportForPrompt(styleReport: StyleReport | null): string {
   if (!styleReport) return '';
 
-  const lines: string[] = ['VOICE STYLE RULES — FOLLOW EXACTLY:'];
+  const lines: string[] = ['EXTRACTED VOICE DNA — FOLLOW EVERY DETAIL EXACTLY:'];
+  const sr = styleReport as any;
 
-  if ((styleReport as any).sentence_structure) {
-    lines.push(`- Sentence length: ${(styleReport as any).sentence_structure}`);
-  }
-  if ((styleReport as any).vocabulary_level) {
-    lines.push(`- Vocabulary: ${(styleReport as any).vocabulary_level} — match this exactly`);
-  }
-  if ((styleReport as any).tone) {
-    lines.push(`- Tone: ${(styleReport as any).tone}`);
-  }
-  if (styleReport.opening_patterns) {
-    lines.push(`- How they open posts: ${styleReport.opening_patterns}`);
-  }
-  if (styleReport.closing_patterns) {
-    lines.push(`- How they close posts: ${styleReport.closing_patterns}`);
-  }
-  if ((styleReport as any).recurring_themes?.length) {
-    lines.push(`- Themes they write about: ${(styleReport as any).recurring_themes.join(', ')}`);
-  }
-  if (styleReport.formatting_preferences) {
-    const f = styleReport.formatting_preferences;
-    lines.push(`- Uses bullet points: ${f.use_bullets ? 'yes' : 'no'}`);
-    lines.push(`- Uses bold text: ${f.use_bold ? 'yes' : 'no'}`);
-    lines.push(`- Uses emojis: ${f.use_emojis ? 'yes' : 'no'}`);
-  }
-  if ((styleReport as any).unique_patterns) {
-    lines.push(`- Unique writing patterns: ${(styleReport as any).unique_patterns}`);
-  }
+  // Thought patterns
   if (styleReport.thought_patterns) {
+    lines.push('\nTHOUGHT PATTERNS:');
     lines.push(`- Worldview: ${styleReport.thought_patterns.worldview}`);
     lines.push(`- What they notice: ${styleReport.thought_patterns.noticing}`);
+    lines.push(`- Frustrations: ${styleReport.thought_patterns.frustrations}`);
+    lines.push(`- Humor style: ${styleReport.thought_patterns.humor}`);
+    lines.push(`- Reader relationship: ${styleReport.thought_patterns.reader_view}`);
+    lines.push(`- What they NEVER say: ${styleReport.thought_patterns.absences}`);
   }
-  if (styleReport.avg_sentence_length) lines.push(`- Sentence length notes: ${styleReport.avg_sentence_length}`);
-  if (styleReport.paragraph_structure) lines.push(`- Paragraph structure: ${styleReport.paragraph_structure}`);
-  if (styleReport.vocabulary_fingerprint) lines.push(`- Core vocabulary: ${styleReport.vocabulary_fingerprint}`);
 
-  return lines.join('\\n');
+  // Core measurements
+  lines.push('\nEXACT MEASUREMENTS — MATCH THESE NUMBERS:');
+  if (styleReport.avg_sentence_length) lines.push(`- Average sentence length: ${styleReport.avg_sentence_length}`);
+  if (sr.avg_words_per_line) lines.push(`- Average words per line: ${sr.avg_words_per_line}`);
+  if (styleReport.paragraph_structure) lines.push(`- Paragraph structure: ${styleReport.paragraph_structure}`);
+  if (styleReport.post_length_range) lines.push(`- Post length range: ${styleReport.post_length_range}`);
+  if (sr.sentence_length_variation) lines.push(`- Sentence length variation: ${sr.sentence_length_variation}`);
+
+  // Opening and closing
+  lines.push('\nOPENING AND CLOSING PATTERNS:');
+  if (styleReport.opening_patterns) lines.push(`- How they open: ${styleReport.opening_patterns}`);
+  if (styleReport.closing_patterns) lines.push(`- How they close: ${styleReport.closing_patterns}`);
+
+  // Formatting and visual patterns
+  lines.push('\nVISUAL FORMATTING — REPLICATE EXACTLY:');
+  if (styleReport.line_break_habits) lines.push(`- Line break pattern: ${styleReport.line_break_habits}`);
+  if (sr.blank_line_frequency) lines.push(`- Blank line frequency: ${sr.blank_line_frequency}`);
+  if (sr.capitalization_habits) lines.push(`- ALL CAPS usage: ${sr.capitalization_habits}`);
+  if (sr.bold_italic_usage) lines.push(`- Bold/italic usage: ${sr.bold_italic_usage}`);
+  if (styleReport.punctuation_inventory) lines.push(`- Punctuation fingerprint: ${styleReport.punctuation_inventory}`);
+  if (styleReport.formatting_preferences) {
+    const f = styleReport.formatting_preferences;
+    lines.push(`- Uses bullet points: ${f.use_bullets ? 'YES — use them' : 'NO — never use them'}`);
+    lines.push(`- Uses bold text: ${f.use_bold ? 'YES — use it' : 'NO — never use it'}`);
+    lines.push(`- Uses italic text: ${(f as any).use_italic ? 'YES — use it' : 'NO — never use it'}`);
+    lines.push(`- Uses emojis: ${f.use_emojis ? `YES (${f.emoji_density} density)` : 'NO — never use them'}`);
+    if ((f as any).emoji_placement) lines.push(`- Emoji placement: ${(f as any).emoji_placement}`);
+    if ((f as any).specific_emojis) lines.push(`- Specific emojis they use: ${(f as any).specific_emojis}`);
+  }
+
+  // Vocabulary
+  lines.push('\nVOCABULARY DNA:');
+  if (styleReport.vocabulary_fingerprint) lines.push(`- Their core vocabulary (USE THESE WORDS): ${styleReport.vocabulary_fingerprint}`);
+  if (sr.transition_words) lines.push(`- Transition words they use: ${sr.transition_words}`);
+  if (sr.filler_phrases) lines.push(`- Filler/connector phrases: ${sr.filler_phrases}`);
+  if (sr.signature_phrases) lines.push(`- Signature phrases (USE THESE): ${sr.signature_phrases}`);
+  if (styleReport.words_never_use) lines.push(`- Words they NEVER use (AVOID THESE): ${styleReport.words_never_use}`);
+  if (sr.vocabulary_level) lines.push(`- Vocabulary complexity: ${sr.vocabulary_level}`);
+
+  // Emotional and rhetorical
+  lines.push('\nEMOTIONAL AND RHETORICAL PATTERNS:');
+  if (styleReport.emotional_register) lines.push(`- Emotional register: ${styleReport.emotional_register}`);
+  if (styleReport.rhetorical_devices) lines.push(`- Rhetorical devices used: ${styleReport.rhetorical_devices}`);
+  if (styleReport.pacing) lines.push(`- Pacing style: ${styleReport.pacing}`);
+  if (styleReport.self_disclosure_level) lines.push(`- Self-disclosure level: ${styleReport.self_disclosure_level}`);
+  if (styleReport.reader_relationship) lines.push(`- Reader relationship: ${styleReport.reader_relationship}`);
+
+  // Other patterns
+  if (sr.sentence_structure) lines.push(`- Sentence structure: ${sr.sentence_structure}`);
+  if (sr.tone) lines.push(`- Overall tone: ${sr.tone}`);
+  if (sr.recurring_themes?.length) lines.push(`- Recurring themes: ${sr.recurring_themes.join(', ')}`);
+  if (sr.unique_patterns) lines.push(`- Unique patterns: ${sr.unique_patterns}`);
+
+  return lines.join('\n');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1179,11 +1209,13 @@ export async function generateStyleReport(voiceProfile?: string[], profileContex
 
   const systemPrompt = `TIER 3 — PRO USER WITH VOICE PROFILE — THE POSSESSION:
 
-CALL 1 — THOUGHT AND STYLE EXTRACTION:
+CALL 1 — FORENSIC STYLE EXTRACTION:
 
-Read every sample post with complete attention. This is not skimming. This is study.
+You are a forensic linguist. Read every sample post with obsessive attention to every detail.
+This is not skimming. This is not summarizing. This is forensic deconstruction.
+You are building a complete DNA profile of how this person writes.
 
-First understand how this person thinks:
+PHASE 1 — THOUGHT PATTERNS (How they think):
 - What do they notice that others usually miss?
 - What is their relationship with failure — do they lean into it or reframe it quickly?
 - What is their relationship with success — do they celebrate openly or deflect?
@@ -1194,7 +1226,31 @@ First understand how this person thinks:
 - How do they see their reader — as a peer, a student, a friend, someone to challenge?
 - What do they never say — what is conspicuously absent from their writing?
 
-Then extract style with exact measurements.
+PHASE 2 — MICRO-LEVEL STYLE FORENSICS (How they write — measure EXACTLY):
+
+For EACH sample post, count and record:
+a) Total words in the post
+b) Number of lines (including blank lines)
+c) Average words per line (total words ÷ non-blank lines)
+d) Number of sentences
+e) Average words per sentence
+f) Number of blank lines (gaps between paragraphs)
+g) Longest sentence (word count)
+h) Shortest sentence (word count)
+
+Then across ALL posts, identify:
+- LINE BREAK RHYTHM: Do they put a blank line after every sentence? Every 2-3 sentences? Do they write dense paragraphs? Count the exact pattern.
+- CAPITALIZATION: Do they use ALL CAPS words for emphasis? How often? Which words?
+- BOLD/ITALIC: Do they use **bold** or *italic* text? For what purpose? How frequently?
+- PUNCTUATION FINGERPRINT: Count exact usage of periods, commas, question marks, exclamation marks, colons, semicolons, dashes (—), hyphens (-), ellipsis (...). Note what they NEVER use.
+- EMOJI USAGE: Which specific emojis? Where placed (start of line, end of line, inline)? How many per post?
+- TRANSITION WORDS: What words do they use to connect ideas? ("But", "And", "The thing is", "Here's the truth", etc.)
+- FILLER PHRASES: What filler or connector phrases appear repeatedly? ("honestly", "look", "the reality is", "here's what I mean")
+- SIGNATURE PHRASES: Words or phrases they use that are distinctively theirs — their verbal fingerprint.
+- HOOK TYPES: How does each post open? (Statement, question, story, number, quote, observation, contradiction?)
+- CLOSING TYPES: How does each post end? (Question, statement, CTA, one-liner, trailing thought?)
+- SENTENCE VARIATION: Do they alternate between short and long sentences? Or stay consistent?
+- WHITE SPACE DENSITY: How much visual white space? Lots of single lines with gaps? Or dense paragraphs?
 
 Return ONLY a valid JSON object with these exact fields:
 {
@@ -1208,39 +1264,52 @@ Return ONLY a valid JSON object with these exact fields:
     "reader_view": "string",
     "absences": "string"
   },
-  "avg_sentence_length": "count words in each sentence across all posts and average",
-  "paragraph_structure": "what percentage are single lines versus multi line blocks",
-  "opening_patterns": "categorize each post opening and identify the dominant type",
-  "closing_patterns": "categorize each post ending and identify the dominant type",
-  "punctuation_inventory": "list every punctuation mark used and how frequently",
-  "line_break_habits": "do they break after every sentence or write in paragraphs",
-  "vocabulary_fingerprint": "list their 10 most distinctive words and phrases",
-  "words_never_use": "note vocabulary that is conspicuously absent",
-  "emotional_register": "what feeling dominates across posts",
-  "rhetorical_devices": "do they use contrast, repetition, rhetorical questions and how often",
-  "pacing": "do they rush to the point or build context first",
-  "self_disclosure_level": "how much personal detail do they share",
-  "reader_relationship": "how directly do they address the reader",
-  "post_length_range": "shortest and longest post and what the average is",
+  "avg_sentence_length": "exact number of words per sentence averaged across all posts",
+  "avg_words_per_line": "exact number of words per non-blank line averaged across all posts",
+  "paragraph_structure": "exact percentage of single-line paragraphs vs multi-line blocks",
+  "opening_patterns": "categorize each post opening and identify the dominant type with examples",
+  "closing_patterns": "categorize each post ending and identify the dominant type with examples",
+  "punctuation_inventory": "exact count of each punctuation mark used across all posts — periods, commas, questions, exclamations, colons, dashes, ellipsis",
+  "line_break_habits": "exact pattern — e.g. blank line after every sentence, or after every 2-3 sentences, or dense paragraphs",
+  "blank_line_frequency": "average number of blank lines per post and where they appear",
+  "capitalization_habits": "do they use ALL CAPS? For which words? How often per post?",
+  "bold_italic_usage": "do they use bold or italic text? How often? For what purpose?",
+  "vocabulary_fingerprint": "list their 15 most distinctive words and phrases — the ones only they use",
+  "transition_words": "list every transition word or connector phrase they use between ideas",
+  "filler_phrases": "list recurring filler or connector phrases",
+  "signature_phrases": "phrases that are uniquely theirs — their verbal DNA",
+  "words_never_use": "note vocabulary and punctuation that is conspicuously absent",
+  "emotional_register": "what feeling dominates across posts and how it shifts within a single post",
+  "rhetorical_devices": "contrast, repetition, rhetorical questions, parallel structure — which ones and how often",
+  "pacing": "do they rush to the point or build context first? Do they use sentence length variation for rhythm?",
+  "self_disclosure_level": "how much personal detail do they share — scale of 1-10 with examples",
+  "reader_relationship": "how directly do they address the reader — you/your usage frequency",
+  "post_length_range": "shortest post word count, longest post word count, average word count",
+  "sentence_length_variation": "do they alternate short and long sentences? What is the pattern?",
   "formatting_preferences": {
     "use_bullets": "true if they use - or bullet or numbers",
-    "use_bold": "true if they use bold text",
+    "use_bold": "true if they use **bold** text",
+    "use_italic": "true if they use *italic* text",
     "use_emojis": "true if emojis are present",
-    "emoji_density": "none, low, or high"
+    "emoji_density": "none, low, or high",
+    "emoji_placement": "where emojis appear — start of line, end of line, inline, or mixed",
+    "specific_emojis": "list the exact emojis used"
   },
   "vocabulary_complexity": "simple (everyday words), medium, or advanced (industry jargon)"
 }
 
-IMPORTANT: Specifically note if they use em-dashes (—). If they do not use them, we must avoid them in generation.
-IMPORTANT: Note their preference for simple vs complex words. We prioritize simplicity.`;
+IMPORTANT: Count actual numbers. Do not estimate. Do not say approximately. Count exactly.
+IMPORTANT: If they use em-dashes (—), note it. If they do not, we must NEVER use them.
+IMPORTANT: If they use ALL CAPS for emphasis, note which words. If they never do, we must NEVER do it.
+IMPORTANT: Note their preference for simple vs complex words. We prioritize matching THEIR level exactly.`;
 
-  const voiceData = voiceProfile!.map((post, i) => `[SAMPLE POST ${i + 1}]: ${post}`).join('\\n');
+  const voiceData = voiceProfile!.map((post, i) => `[SAMPLE POST ${i + 1}]:\n${post}`).join('\n\n---\n\n');
 
-  const userPrompt = `Extract thought and style patterns from these sample posts:
+  const userPrompt = `Perform a FORENSIC style extraction from these sample posts. Count exact numbers. Do not estimate.
 ${voiceData}`;
 
   try {
-    const response = await aiChat(userPrompt, systemPrompt, 0.3, 2000, undefined, "Voice Profile Analysis");
+    const response = await aiChat(userPrompt, systemPrompt, 0.3, 3500, undefined, "Voice Profile Analysis");
     if (response === "Generation failed. Please try again.") {
       return null;
     }
@@ -1405,8 +1474,9 @@ export async function generatePostThreeStep(
 
 BEFORE YOU WRITE A SINGLE WORD, you must deeply study every writing sample below.
 Do not skim. Do not rush. Read each post at least twice.
+You are performing a forensic analysis of their writing DNA.
 
-YOU ARE ANALYZING:
+YOU ARE ANALYZING — EVERY SINGLE DETAIL:
 1. TONE — Are they serious, playful, dry, warm, provocative, calm? What is the emotional temperature?
 2. STYLE — Do they write in fragments or full sentences? Short bursts or flowing paragraphs? Casual or polished?
 3. PHRASES — What words and phrases do they naturally reach for? What transitions do they use? What filler words appear?
@@ -1415,6 +1485,14 @@ YOU ARE ANALYZING:
 6. RHYTHM — Read the posts out loud in your head. Feel the pacing. Some writers punch. Some writers flow. Match theirs exactly.
 7. VOCABULARY LEVEL — Simple everyday words or industry-specific language? Match the exact complexity level.
 8. WHAT THEY NEVER DO — This is equally important. If they never use emojis, you never use emojis. If they never ask questions at the end, you don't either.
+9. SENTENCE LENGTH — Count the words per sentence in their samples. Your sentences must match their average length.
+10. LINE BREAKS — Count blank lines between paragraphs. Replicate the exact same white space density.
+11. CAPITALIZATION — Do they use ALL CAPS for emphasis? If yes, use it the same way. If no, NEVER use ALL CAPS.
+12. BOLD AND ITALIC — Do they use **bold** or *italic*? If yes, use it for the same purpose. If no, NEVER use formatting.
+13. PUNCTUATION — Do they use question marks frequently? Exclamation marks? Colons? Ellipsis? Dashes? Match their exact punctuation patterns.
+14. WORDS PER LINE — Count how many words they typically put on each line before a line break. Match this number.
+15. SIGNATURE PHRASES — Use their actual phrases and verbal patterns. If they always say "Here's the thing" — you say "Here's the thing."
+16. TRANSITION WORDS — If they connect ideas with "But" not "However", you use "But." Match their connectors exactly.
 
 Only after you have fully internalized their voice, write the post AS THEM.
 You are not writing "in a similar style." You are writing as if you ARE this person.
@@ -1422,20 +1500,32 @@ A reader who knows them should not be able to tell the difference.
 
 ${formatStyleReportForPrompt(styleReport)}
 
-THEIR ACTUAL WRITING SAMPLES — STUDY THESE DEEPLY:
-${voiceProfile.map((post, i) => `[SAMPLE ${i + 1}]:\\n${post}`).join('\\n\\n')}
+THEIR ACTUAL WRITING SAMPLES — STUDY THESE LINE BY LINE:
+${voiceProfile.map((post, i) => ` [SAMPLE ${i + 1}]:\\n${post}`).join('\\n\\n')}
 
 VOICE MATCHING RULES — NON-NEGOTIABLE:
 - Match their exact sentence length patterns. If they average 8 words per sentence, you average 8.
+- Match their exact words-per-line count. If they write 5-7 words per line, you write 5-7 words per line.
 - Match their paragraph length. If they write 1-line paragraphs, write 1-line paragraphs.
+- Match their blank line pattern. If they put a blank line after every sentence, do the same.
 - Match their opening style. If they open with observations, open with an observation. If they open mid-story, open mid-story.
 - Match their closing style. If they end with a question, end with a question. If they end with a statement, end with a statement.
 - Use their vocabulary. If they say "wild" instead of "surprising", say "wild."
+- Use their transition words. If they say "But" not "However", say "But."
+- Use their signature phrases naturally.
+- Match their capitalization. If they use ALL CAPS for emphasis, use ALL CAPS for emphasis. If they never do, never do.
+- Match their bold/italic usage. If they bold key phrases, bold key phrases. If they never format, never format.
+- Match their punctuation density. If they rarely use exclamation marks, you rarely use them. If they use ellipsis, use ellipsis.
+- Match their emoji usage exactly. Same emojis, same placement, same frequency. If zero, then zero.
 - Match their line break rhythm exactly.
-- If their samples never use bullet points, never use bullet points.
-- If their samples use short punchy lines, use short punchy lines.
-- If their samples use longer paragraphs, use longer paragraphs.
 - Remove any word that does not sound like them based on the samples above.
+
+FINAL CHECK BEFORE OUTPUT:
+- Read your draft and compare it line-by-line against their samples.
+- Does the visual shape of your post look like their posts? Same density? Same spacing?
+- Does the word count per line match?
+- Does the punctuation pattern match?
+- Would their mother mistake your post for theirs?
 
 OUTPUT RULE:
 Raw post text only.
