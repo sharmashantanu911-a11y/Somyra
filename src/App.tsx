@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Sparkles, 
@@ -14,6 +15,7 @@ import {
   Copy, 
   Check,
   ChevronRight,
+  ChevronDown,
   Linkedin,
   Target,
   Rocket,
@@ -198,24 +200,16 @@ export default function App() {
   const [guestSaves, setGuestSaves] = useState(0);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [bottomBarDismissed, setBottomBarDismissed] = useState(false);
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [showToolsDropdown, setShowToolsDropdown] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [cancellationRequested, setCancellationRequested] = useState(false);
   const [isSubmittingCancellation, setIsSubmittingCancellation] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
 
-  useEffect(() => {
-    const handlePopState = () => setCurrentPath(window.location.pathname);
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  const navigateTo = (path: string) => {
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
-    window.scrollTo(0, 0);
-  };
+  const navigateTo = (path: string) => navigate(path);
 
   useEffect(() => {
     return () => {
@@ -1134,6 +1128,47 @@ export default function App() {
           <div className="hidden lg:flex items-center gap-6">
             <nav className="flex items-center gap-6 text-[15px] font-semibold text-slate-400">
               <span onClick={() => scrollToSection('how-it-works')} className="cursor-pointer transition-colors hover:text-white">How it Works</span>
+              
+              {/* Tools Dropdown */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setShowToolsDropdown(true)}
+                onMouseLeave={() => setShowToolsDropdown(false)}
+              >
+                <button className="flex items-center gap-1 transition-colors hover:text-slate-200 py-2 focus:outline-none font-semibold">
+                  Tools
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${showToolsDropdown ? 'rotate-180' : ''}`} />
+                </button>
+                
+                <AnimatePresence>
+                  {showToolsDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute left-1/2 -translate-x-1/2 mt-1 w-56 rounded-xl border border-white/10 bg-[#0D0D0D] p-2 shadow-2xl backdrop-blur-xl z-50 flex flex-col gap-0.5"
+                    >
+                      <Link to="/linkedin-post-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                        LinkedIn Post Generator
+                      </Link>
+                      <Link to="/linkedin-profile-audit" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                        LinkedIn Profile Audit
+                      </Link>
+                      <Link to="/linkedin-dm-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                        LinkedIn DM Generator
+                      </Link>
+                      <Link to="/linkedin-hook-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                        LinkedIn Hook Generator
+                      </Link>
+                      <Link to="/linkedin-topic-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                        Topic Generator
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <span onClick={() => scrollToSection('pricing')} className="cursor-pointer transition-colors hover:text-white">Pricing</span>
               <span onClick={openChangelog} className="cursor-pointer transition-colors hover:text-white relative">
                 What's New
@@ -1959,7 +1994,7 @@ export default function App() {
         <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-teal-accent/30 to-transparent" />
         
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-10 md:gap-0">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-0">
             {/* Logo and Credits */}
             <div className="flex flex-col items-center md:items-start gap-4">
               <div className="flex items-center gap-3">
@@ -1973,8 +2008,20 @@ export default function App() {
               </p>
             </div>
 
-            {/* Links */}
-            <div className="flex items-center gap-8 md:gap-12">
+            {/* Tools Links Section */}
+            <div className="flex flex-col gap-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#2DD4BF] text-center md:text-left">Tools</p>
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-[12px] font-bold uppercase tracking-widest text-[#888888]">
+                <Link to="/linkedin-post-generator" className="hover:text-teal-accent transition-colors">Post Generator</Link>
+                <Link to="/linkedin-profile-audit" className="hover:text-teal-accent transition-colors">Profile Audit</Link>
+                <Link to="/linkedin-dm-generator" className="hover:text-teal-accent transition-colors">DM Generator</Link>
+                <Link to="/linkedin-hook-generator" className="hover:text-teal-accent transition-colors">Hook Generator</Link>
+                <Link to="/linkedin-topic-generator" className="hover:text-teal-accent transition-colors">Topic Generator</Link>
+              </div>
+            </div>
+
+            {/* Legal Links */}
+            <div className="flex items-center gap-8 md:gap-12 self-center md:self-auto mt-4 md:mt-0">
               <button 
                 onClick={() => navigateTo('/terms')} 
                 className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
@@ -2002,10 +2049,6 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Static Pages Overlay */}
-      {currentPath === '/terms' && <Terms onBack={() => navigateTo('/')} />}
-      {currentPath === '/privacy' && <Privacy onBack={() => navigateTo('/')} />}
-      {currentPath === '/contact' && <Contact onBack={() => navigateTo('/')} />}
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (

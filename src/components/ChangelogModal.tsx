@@ -27,6 +27,11 @@ const CHANGELOG_DATA: ChangelogVersion[] = [
     date: 'April 2026',
     items: [
       {
+        badge: 'FIXED',
+        title: 'AI Intelligence Restored',
+        description: 'Successfully migrated to GPT OSS 120B with automatic fallback to Llama 3.3. Reliability and \"human-like\" quality are now 100% restored across all features.'
+      },
+      {
         badge: 'NEW',
         title: 'Competitive Comparison',
         description: 'New high-conversion section on the landing page. We compared ourselves against every major LinkedIn tool so you do not have to.'
