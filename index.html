@@ -43,17 +43,26 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Somyra",
-      "url": "https://somyra.online",
-      "description": "AI-powered LinkedIn copilot for founders and professionals. Write posts, audit your profile, and run smart outreach — all in your own voice.",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Somyra",
+          "url": "https://somyra.online/"
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Somyra",
+          "url": "https://somyra.online/",
+          "description": "AI-powered LinkedIn copilot for founders and professionals. Write posts, audit your profile, and run smart outreach — all in your own voice.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+      ]
     }
     </script>
   </head>
