@@ -28,12 +28,17 @@ export const SEOPageLayout: React.FC<SEOPageLayoutProps> = ({ children }) => {
             <span className="text-xl font-bold tracking-tight text-white">Somyra</span>
           </Link>
 
-          <Link 
-            to="/?utm_source=seo&utm_medium=organic&utm_campaign=seo-nav" 
-            className="px-5 py-2.5 bg-[#2DD4BF] text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] hover:bg-[#2DD4BF]/90 transition-all text-sm"
-          >
-            Try Somyra Free
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link to="/blog" className="text-sm font-bold text-[#888888] hover:text-[#2DD4BF] transition-colors">
+              Blog
+            </Link>
+            <Link 
+              to="/?utm_source=seo&utm_medium=organic&utm_campaign=seo-nav" 
+              className="px-5 py-2.5 bg-[#2DD4BF] text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] hover:bg-[#2DD4BF]/90 transition-all text-sm"
+            >
+              Try Somyra Free
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -61,6 +66,12 @@ export const SEOPageLayout: React.FC<SEOPageLayoutProps> = ({ children }) => {
 
             {/* Links */}
             <div className="flex items-center gap-6 md:gap-8">
+              <Link 
+                to="/blog" 
+                className="text-[12px] font-bold uppercase tracking-widest text-[#888888] hover:text-[#2DD4BF] transition-all duration-300"
+              >
+                Blog
+              </Link>
               <Link 
                 to="/terms" 
                 className="text-[12px] font-bold uppercase tracking-widest text-[#888888] hover:text-[#2DD4BF] transition-all duration-300"

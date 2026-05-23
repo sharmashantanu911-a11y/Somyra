@@ -1169,6 +1169,7 @@ export default function App() {
                 </AnimatePresence>
               </div>
 
+              <Link to="/blog" className="cursor-pointer transition-colors hover:text-white">Blog</Link>
               <span onClick={() => scrollToSection('pricing')} className="cursor-pointer transition-colors hover:text-white">Pricing</span>
               <span onClick={openChangelog} className="cursor-pointer transition-colors hover:text-white relative">
                 What's New
@@ -2022,6 +2023,12 @@ export default function App() {
 
             {/* Legal Links */}
             <div className="flex items-center gap-8 md:gap-12 self-center md:self-auto mt-4 md:mt-0">
+              <Link 
+                to="/blog" 
+                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
+              >
+                Blog
+              </Link>
               <button 
                 onClick={() => navigateTo('/terms')} 
                 className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
