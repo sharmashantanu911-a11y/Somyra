@@ -16,7 +16,7 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
             className="group flex items-center gap-2 text-muted hover:text-teal-accent transition-colors mb-12 text-sm font-bold uppercase tracking-widest"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Dashboard
+            Back to Home
           </button>
 
           <header className="mb-16">

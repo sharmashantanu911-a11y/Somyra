@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Mail, Lock as LockIcon, Loader2, Rocket, ArrowRight, X, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
+import { Mail, Lock as LockIcon, Loader2, ArrowRight, X, Eye, EyeOff, CheckCircle2, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 type AuthMode = 'login' | 'signup' | 'forgot' | 'check_email';
@@ -8,10 +8,11 @@ type AuthMode = 'login' | 'signup' | 'forgot' | 'check_email';
 interface AuthProps {
   onAuthSuccess: (user: any) => void;
   onClose?: () => void;
+  feature?: string;
 }
 
-export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
-  const [mode, setMode] = useState<AuthMode>('login');
+export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
+  const [mode, setMode] = useState<AuthMode>('signup'); // Default to signup for actions
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +32,6 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
           password,
         });
         if (authError) {
-          // Provide friendlier messages for common errors
           if (authError.message.includes('Invalid login credentials')) {
             throw new Error('Incorrect email or password. Please try again.');
           }
@@ -56,12 +56,10 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
           }
           throw authError;
         }
-        // If session is immediately available, email confirmation is disabled — log in directly
         if (data.session && data.user) {
           onAuthSuccess(data.user);
           if (onClose) onClose();
         } else {
-          // Email confirmation required
           setMode('check_email');
         }
 
@@ -87,57 +85,69 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
     setResetSent(false);
   };
 
-  const title = mode === 'login' ? 'Welcome back' : mode === 'signup' ? 'Create account' : mode === 'forgot' ? 'Reset password' : 'Check your inbox';
-  const subtitle = mode === 'login'
-    ? 'Sign in to continue building your personal brand with AI.'
-    : mode === 'signup'
-    ? 'Join thousands of professionals growing their presence on LinkedIn.'
-    : mode === 'forgot'
+  const title = mode === 'check_email' ? 'Check your inbox'
+    : mode === 'forgot' ? 'Reset password'
+    : feature ? `Your ${feature} is one step away` 
+    : 'Welcome to Somyra';
+
+  const subtitle = mode === 'forgot'
     ? 'Enter your email and we\'ll send you a reset link.'
-    : `We sent a confirmation link to ${email}. Click it to activate your account.`;
+    : mode === 'check_email'
+    ? `We sent a confirmation link to ${email}. Click it to activate your account.`
+    : 'Create your free account and get instant access. No credit card. No pressure. Just results.';
 
   return (
-    <div className="overlay-shell font-sans overflow-y-auto">
-      <div className="overlay-backdrop" onClick={onClose} />
+    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+      {/* Background overlay with blur */}
+      <div 
+        className="absolute inset-0 bg-black/80 backdrop-blur-md" 
+        onClick={onClose} 
+      />
+      
+      {/* Modal Card */}
       <motion.div
         key={mode}
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="relative h-full w-full min-w-0 border-none bg-[#121216] shadow-2xl md:my-auto md:h-auto md:max-w-[440px] md:rounded-[2rem] md:border md:border-white/5 lg:rounded-[2.5rem]"
+        className="relative w-full max-w-[440px] rounded-[24px] bg-[#141414] shadow-2xl border-t-[4px] border-t-teal-accent border-l border-r border-b border-white/10 ring-1 ring-white/5 overflow-hidden"
       >
         {onClose && (
           <button
             onClick={onClose}
-            className="absolute right-5 top-5 md:right-6 md:top-6 p-2 text-slate-500 hover:text-white transition-colors z-10"
+            className="absolute right-5 top-5 p-2 text-slate-500 hover:text-white transition-colors z-10 bg-white/5 rounded-full"
             aria-label="Close modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         )}
 
-        <div className="max-h-full md:max-h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar">
-          <div className="p-5 md:p-[28px] lg:p-[32px]">
-            {/* Logo */}
-            <div className="mb-10 flex items-center gap-4">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-teal-accent/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500" />
-                <div className="relative flex items-center justify-center w-10 h-10 bg-[#080808] rounded-xl border border-white/10">
-                  <svg className="w-6 h-6 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
-                  </svg>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-white tracking-tight leading-none">Somyra</span>
-                <span className="text-[8px] text-muted font-bold tracking-widest mt-1 uppercase">ELEVATED</span>
-              </div>
+        <div className="max-h-[85vh] overflow-y-auto custom-scrollbar p-6 sm:p-8">
+          <div className="flex flex-col items-center text-center mb-8">
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-teal-accent/10 border border-teal-accent/20">
+              <Sparkles className="h-8 w-8 text-teal-accent" />
             </div>
+            
+            <h1 className="mb-3 text-2xl font-bold tracking-tight text-white leading-tight">
+              {title}
+            </h1>
+            
+            <p className="text-sm leading-relaxed text-[#888888]">
+              {subtitle}
+            </p>
 
-            <h1 className="mb-3 text-3xl font-bold tracking-tight text-white">{title}</h1>
-            <p className="mb-10 max-w-[320px] text-sm leading-7 text-muted">{subtitle}</p>
+            {/* Feature Chips */}
+            {(mode === 'signup' || mode === 'login') && (
+              <div className="mt-6 flex flex-wrap justify-center gap-2">
+                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Profile Audits</span>
+                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Post Writer</span>
+                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Smart Outreach</span>
+              </div>
+            )}
+          </div>
 
+          <div className="w-full">
             {/* Check email confirmation state */}
             <AnimatePresence mode="wait">
               {mode === 'check_email' ? (
@@ -147,11 +157,11 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                   animate={{ opacity: 1, y: 0 }}
                   className="space-y-6"
                 >
-                  <div className="flex flex-col items-center gap-4 py-6 text-center">
-                    <div className="w-16 h-16 bg-teal-accent/10 rounded-full flex items-center justify-center">
-                      <CheckCircle2 className="w-8 h-8 text-teal-accent" />
+                  <div className="flex flex-col items-center gap-4 py-2 text-center">
+                    <div className="w-14 h-14 bg-teal-accent/10 rounded-full flex items-center justify-center">
+                      <CheckCircle2 className="w-7 h-7 text-teal-accent" />
                     </div>
-                    <p className="text-sm text-muted max-w-[280px]">
+                    <p className="text-sm text-[#888888] max-w-[280px]">
                       Once confirmed, come back and sign in with your credentials.
                     </p>
                   </div>
@@ -170,12 +180,12 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                   animate={{ opacity: 1, y: 0 }}
                   className="space-y-6"
                 >
-                  <div className="flex flex-col items-center gap-4 py-6 text-center">
-                    <div className="w-16 h-16 bg-teal-accent/10 rounded-full flex items-center justify-center">
-                      <CheckCircle2 className="w-8 h-8 text-teal-accent" />
+                  <div className="flex flex-col items-center gap-4 py-2 text-center">
+                    <div className="w-14 h-14 bg-teal-accent/10 rounded-full flex items-center justify-center">
+                      <CheckCircle2 className="w-7 h-7 text-teal-accent" />
                     </div>
-                    <p className="text-sm text-muted max-w-[280px]">
-                      Password reset link sent to <span className="text-white font-semibold">{email}</span>. Check your inbox.
+                    <p className="text-sm text-[#888888] max-w-[280px]">
+                      Password reset link sent to <span className="text-white font-semibold">{email}</span>.
                     </p>
                   </div>
                   <button
@@ -187,42 +197,42 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                 </motion.div>
 
               ) : (
-                <motion.div key={mode} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                <motion.div key={mode} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
+                  <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Email */}
-                    <div className="space-y-2">
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-muted ml-1">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] ml-1">
                         Email Address
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888] pointer-events-none" />
                         <input
                           type="email"
                           required
                           autoFocus
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="input-field pl-12"
+                          className="input-field pl-11 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus:border-teal-accent/50 focus:bg-white/[0.07]"
                           placeholder="name@company.com"
                           autoComplete="email"
                         />
                       </div>
                     </div>
 
-                    {/* Password (hidden in forgot mode) */}
+                    {/* Password */}
                     {mode !== 'forgot' && (
-                      <div className="space-y-2">
-                        <label className="block text-[10px] font-bold uppercase tracking-widest text-muted ml-1">
+                      <div className="space-y-1.5">
+                        <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] ml-1">
                           Password
                         </label>
                         <div className="relative">
-                          <LockIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
+                          <LockIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888] pointer-events-none" />
                           <input
                             type={showPassword ? 'text' : 'password'}
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="input-field pl-12 pr-12"
+                            className="input-field pl-11 pr-11 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus:border-teal-accent/50 focus:bg-white/[0.07]"
                             placeholder="••••••••"
                             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                             minLength={mode === 'signup' ? 6 : undefined}
@@ -230,25 +240,22 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-white transition-colors"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#888888] hover:text-white transition-colors"
                             aria-label={showPassword ? 'Hide password' : 'Show password'}
                           >
                             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                           </button>
                         </div>
-                        {mode === 'signup' && (
-                          <p className="text-[10px] text-muted ml-1">Minimum 6 characters</p>
-                        )}
                       </div>
                     )}
 
-                    {/* Forgot password link (login only) */}
+                    {/* Forgot password link */}
                     {mode === 'login' && (
-                      <div className="text-right -mt-2">
+                      <div className="text-right -mt-1">
                         <button
                           type="button"
                           onClick={() => switchMode('forgot')}
-                          className="text-[11px] text-muted hover:text-teal-accent transition-colors font-semibold"
+                          className="text-[11px] text-[#888888] hover:text-teal-accent transition-colors font-semibold"
                         >
                           Forgot password?
                         </button>
@@ -258,15 +265,15 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                     {/* Error */}
                     <AnimatePresence>
                       {error && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -8 }}
-                          className="flex min-w-0 items-center gap-3 rounded-2xl border border-red-500/10 bg-red-500/5 p-4 text-xs text-red-400"
-                        >
-                          <div className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" />
-                          <span className="min-w-0 break-words">{error}</span>
-                        </motion.div>
+                         <motion.div
+                         initial={{ opacity: 0, y: -4 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: -4 }}
+                         className="flex min-w-0 items-center gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-xs text-red-400"
+                       >
+                         <div className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" />
+                         <span className="min-w-0 break-words">{error}</span>
+                       </motion.div>
                       )}
                     </AnimatePresence>
 
@@ -274,13 +281,13 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full btn-gradient mt-4"
+                      className="w-full rounded-xl bg-teal-accent px-4 py-3.5 text-[13px] font-bold text-black transition-all hover:bg-teal-accent/90 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] mt-2 flex items-center justify-center gap-2"
                     >
                       {loading ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
                         <>
-                          {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link'}
+                          {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Sign Up Free' : 'Send Reset Link'}
                           <ArrowRight className="w-4 h-4" />
                         </>
                       )}
@@ -288,27 +295,27 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
                   </form>
 
                   {/* Switch mode */}
-                  <div className="text-center space-y-2">
+                  <div className="text-center pt-2">
                     {mode === 'login' && (
                       <button
                         onClick={() => switchMode('signup')}
-                        className="text-muted hover:text-teal-accent text-xs font-bold uppercase tracking-widest transition-colors"
+                        className="text-sm font-medium text-[#888888] transition-colors hover:text-white"
                       >
-                        New to Somyra? Create account
+                        New to Somyra? Sign Up Free
                       </button>
                     )}
                     {mode === 'signup' && (
                       <button
                         onClick={() => switchMode('login')}
-                        className="text-muted hover:text-teal-accent text-xs font-bold uppercase tracking-widest transition-colors"
+                        className="text-sm font-medium text-[#888888] transition-colors hover:text-white"
                       >
-                        Already have an account? Sign in
+                        Already have an account? Sign In
                       </button>
                     )}
                     {mode === 'forgot' && (
                       <button
                         onClick={() => switchMode('login')}
-                        className="text-muted hover:text-teal-accent text-xs font-bold uppercase tracking-widest transition-colors"
+                        className="text-[12px] font-bold text-[#888888] transition-colors hover:text-white uppercase tracking-wider"
                       >
                         ← Back to Sign In
                       </button>
@@ -318,16 +325,12 @@ export default function Auth({ onAuthSuccess, onClose }: AuthProps) {
               )}
             </AnimatePresence>
           </div>
-
-          {/* Footer strip */}
-          <div className="flex items-center gap-5 border-t border-white/5 bg-white/5 p-6 md:p-8">
-            <div className="w-12 h-12 bg-teal-accent/10 rounded-2xl flex items-center justify-center shrink-0">
-              <Rocket className="w-6 h-6 text-teal-accent" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-white uppercase tracking-wider">Premium Access</p>
-              <p className="text-[10px] text-muted font-medium mt-0.5">Unlock all AI features and save your content.</p>
-            </div>
+          
+          {/* Footer note */}
+          <div className="mt-8 text-center border-t border-white/5 pt-6">
+            <p className="text-[11px] text-[#666666] font-medium">
+              Free forever plan available. Upgrade only if you want more.
+            </p>
           </div>
         </div>
       </motion.div>

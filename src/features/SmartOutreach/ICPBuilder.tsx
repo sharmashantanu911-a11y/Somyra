@@ -13,6 +13,8 @@ interface ICPBuilderProps {
   handleCopy: (text: string, id: string) => void;
   saving: string | null;
   copied: string | null;
+  user?: any;
+  onRequireAuth?: (feature: string, callback: () => void) => void;
 }
 
 export function ICPBuilder({
@@ -24,14 +26,20 @@ export function ICPBuilder({
   handleSave,
   handleCopy,
   saving,
-  copied
+  copied,
+  user,
+  onRequireAuth
 }: ICPBuilderProps) {
   const [form, setForm] = useState({ best: '', worst: '', unique: '' });
   const [loading, setLoading] = useState(false);
   const [draft, setDraft] = useState<string | null>(null);
 
-  const handleGenerate = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGenerate = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!user && onRequireAuth) {
+      onRequireAuth('ICP Clarity', () => handleGenerate());
+      return;
+    }
     if (!checkGenerationLimit('smart_outreach')) return;
 
     trackEvent('generate_icp');

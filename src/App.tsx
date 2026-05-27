@@ -88,7 +88,7 @@ const dailyTips = [
 ];
 
 const tabs = [
-  { id: 'home', label: 'Dashboard', icon: Home, isPro: false },
+  { id: 'home', label: 'Home', icon: Home, isPro: false },
   { id: 'voice', label: 'Voice Profile', icon: Mic, isPro: false },
   { id: 'profile', label: 'Profile Audit', icon: UserCircle, isPro: false },
   { id: 'topics', label: 'Topics', icon: Lightbulb, isPro: false },
@@ -137,45 +137,6 @@ const getTimeUntilMidnightUTC = () => {
   return { hours, minutes };
 };
 
-const GuestSignupWallModal = ({ show, setShowAuth }: { show: boolean, setShowAuth: (val: boolean) => void }) => {
-  if (!show) return null;
-  return (
-    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-      <div className="relative w-full max-w-sm rounded-[16px] bg-[#141414] p-6 shadow-2xl border-t-[4px] border-t-teal-accent border-l border-r border-b border-white/10 ring-1 ring-white/5">
-        <div className="flex flex-col items-center text-center">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-teal-accent/10">
-            <svg className="h-8 w-8 text-teal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <h2 className="mb-2 text-xl font-bold text-white">Create a free account to start using Somyra.</h2>
-          <p className="mb-6 text-sm text-[#888888]">
-            Join thousands of founders and professionals building their LinkedIn presence with Somyra. Free forever. No credit card needed.
-          </p>
-          <div className="mb-6 flex flex-wrap justify-center gap-2">
-            <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Profile Audits</span>
-            <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Post Writer</span>
-            <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Smart Outreach</span>
-          </div>
-          <button
-            onClick={() => setShowAuth(true)}
-            className="mb-4 w-full rounded-xl bg-teal-accent px-4 py-3 text-sm font-bold text-black transition-all hover:bg-teal-accent/90 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
-          >
-            Sign Up Free
-          </button>
-          <button
-            onClick={() => setShowAuth(true)}
-            className="text-sm font-medium text-[#888888] transition-colors hover:text-white"
-          >
-            Already have an account? Sign In
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -185,7 +146,14 @@ export default function App() {
   const [error, setError] = useState<AppError | null>(null);
   const [user, setUser] = useState<any>(null);
   const [showAuth, setShowAuth] = useState(false);
-  const [showGuestWall, setShowGuestWall] = useState(false);
+  const [authFeature, setAuthFeature] = useState<string | undefined>();
+  const [authCallback, setAuthCallback] = useState<(() => void) | null>(null);
+
+  const handleRequireAuth = (feature: string, callback: () => void) => {
+    setAuthFeature(feature);
+    setAuthCallback(() => callback);
+    setShowAuth(true);
+  };
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDeepMode, setIsDeepMode] = useState(false);
   const [abortController, setAbortController] = useState<AbortController | null>(null);
@@ -312,19 +280,16 @@ export default function App() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('upgraded') !== 'true' || !user) return;
 
-    // Immediately clean the URL so we never re-enter this effect
     window.history.replaceState({}, '', window.location.pathname);
 
-    // If already upgraded (e.g. webhook fired instantly), show success
     if (isPro || isMax) {
       setShowSuccessModal(true);
       return;
     }
 
-    // Start polling Supabase for the plan update
     setIsActivating(true);
     let attempts = 0;
-    const maxAttempts = 15; // 15 × 2s = 30s max wait
+    const maxAttempts = 15;
     let cancelled = false;
 
     const poll = setInterval(async () => {
@@ -343,15 +308,13 @@ export default function App() {
           return;
         }
       } catch (e) {
-        // Ignore individual poll failures, keep trying
       }
 
       if (attempts >= maxAttempts && !cancelled) {
         clearInterval(poll);
         setIsActivating(false);
-        // Force one final refresh of pro status and show dashboard
         fetchProStatus(user.id);
-        setShowSuccessModal(true); // Show success anyway — webhook may have updated already
+        setShowSuccessModal(true);
       }
     }, 2000);
 
@@ -359,13 +322,11 @@ export default function App() {
       cancelled = true;
       clearInterval(poll);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
 
   useEffect(() => {
     setPreviousUser(user);
     if (!user) {
-      // Reset success modal flag on logout so it can show for the next upgrade
       localStorage.removeItem('somyra_upgrade_success_shown');
     }
   }, [user]);
@@ -383,7 +344,6 @@ export default function App() {
       if (fetchError) throw fetchError;
       setVoicePosts(data.map(p => ({ id: p.id, content: p.post_text, created_at: p.created_at })));
     } catch (err: any) {
-      // M9 FIX: Use toast not global error banner for voice profile load failure
       showToast({
         message: 'Could not load your voice profile. Please refresh.',
         type: 'error'
@@ -391,7 +351,6 @@ export default function App() {
     }
   };
 
-  // Profile State
   const [profileMode, setProfileMode] = useState<'quick' | 'strategic'>('quick');
   const [quickForm, setQuickForm] = useState({
     whoAreYou: '',
@@ -437,18 +396,15 @@ export default function App() {
     secondaryAudience: ''
   });
   const [profile, setProfile] = useState<SomyraProfileAnalysis | null>(null);
-  const [profileText, setProfileText] = useState(''); // Keep for backward compatibility if needed, but we'll mostly use the new forms
+  const [profileText, setProfileText] = useState('');
 
-  // Saved Items State
   const [savedItems, setSavedItems] = useState<SavedItem[]>([]);
   const [saving, setSaving] = useState<string | null>(null);
 
-  // Form States
   const [topicForm, setTopicForm] = useState({ profession: '', goals: '', audience: '' });
   const [writerForm, setWriterForm] = useState({ topic: '', style: 'storytelling' });
   const [bioForm, setBioForm] = useState({ role: '', skills: '', achievements: '', goal: '' });
   
-  // Result States
   const [results, setResults] = useState<{
     topics?: string[];
     post?: string;
@@ -457,7 +413,7 @@ export default function App() {
     toneAnalysis?: { tone: string; suggestions: string[] };
   }>({});
 
-      const [generationsUsed, setGenerationsUsed] = useState(0);
+  const [generationsUsed, setGenerationsUsed] = useState(0);
   const [toast, setToast] = useState<{
     message: string;
     type?: 'success' | 'error' | 'info';
@@ -468,7 +424,6 @@ export default function App() {
   } | null>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
 
-  // Auto-resume checkout after login/signup
   useEffect(() => {
     const pendingData = localStorage.getItem('somyra_pending_checkout');
     if (pendingData && user) {
@@ -521,7 +476,6 @@ export default function App() {
     return false;
   };
 
-  // Sync on focus
   useEffect(() => {
     const handleFocus = () => {
       if (user) {
@@ -597,11 +551,9 @@ export default function App() {
     if (copyTimeoutRef.current) {
       clearTimeout(copyTimeoutRef.current);
     }
-    // L2 FIX: Wrapped clipboard write in try/catch for http or permission-denied failure
     try {
       navigator.clipboard.writeText(text);
     } catch {
-      // Fallback for environments where clipboard API is not available
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
@@ -631,24 +583,25 @@ export default function App() {
       .replace(/\n{3,}/g, '\n\n')
       .replace(/[ \t]{2,}/g, ' ');
 
-  const handleAnalyzeProfile = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAnalyzeProfile = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!user) {
+      handleRequireAuth('Profile Audit', () => handleAnalyzeProfile());
+      return;
+    }
 
     if (isGenerating) return;
     setIsGenerating(true);
 
-    // Gate on usage limit before running the expensive API call
     if (!checkGenerationLimit('profile_audit')) {
       setIsGenerating(false);
       return;
     }
     
-    // Cancel any existing request
     if (abortController) {
       abortController.abort();
     }
 
-    // H4 FIX: Guard against extremely long inputs that would cause token overflow
     const MAX_FIELD_LENGTH = profileMode === 'quick' ? 3000 : 5000;
     const truncate = (val: string) => val.slice(0, MAX_FIELD_LENGTH);
 
@@ -705,7 +658,6 @@ export default function App() {
     setError(null);
     setToast(null);
 
-    // Timeout protection
     const timeoutId = setTimeout(() => {
       controller.abort();
       setLoading(false);
@@ -744,7 +696,6 @@ export default function App() {
       setStats(prev => ({ ...prev, profiles: prev.profiles + 1 }));
       localStorage.setItem('somyra_last_analysis_score', String(data.overallScore));
       
-      // Save to Supabase if user is logged in
       if (user) {
         try {
           await supabase.from('profile_analyses').insert({
@@ -758,12 +709,10 @@ export default function App() {
         }
       }
 
-      // Clear quick audit draft on success
       if (profileMode === 'quick') {
         localStorage.removeItem('somyra_quick_audit_draft');
       }
 
-      // Pre-fill other sections so the rest of the platform can build on this analysis.
       setTopicForm(prev => ({
         ...prev,
         profession: inferredRole,
@@ -808,7 +757,6 @@ export default function App() {
 
   const fetchSavedItems = async () => {
     if (!user) {
-      // Load from local storage for guests
       try {
         const localItems = localStorage.getItem('somyra_local_library');
         if (localItems) {
@@ -838,14 +786,12 @@ export default function App() {
   };
 
   const handleSave = async (type: string, content: string, id: string) => {
-    // SAVED LIBRARY LIMITS
     const saveLimit = usageLimits.getSavedLibraryLimit();
 
     if (!user) {
       return;
     }
 
-    // Check against tier-based save cap for logged-in users
     if (saveLimit !== 'unlimited' && savedItems.length >= (saveLimit as number)) {
       const isProUser = isPro && !isMax;
       showToast({
@@ -879,7 +825,6 @@ export default function App() {
       
       setCopied(id);
       setTimeout(() => setCopied(null), 2000);
-      // L3 FIX: Show success toast on save
       showToast({
         message: 'Saved to your library.',
         type: 'success',
@@ -961,9 +906,7 @@ export default function App() {
         setAuthChecked(true);
         fetchProStatus(currentUser.id);
         
-        // H2 FIX: Clear ALL guest localStorage keys on sign-in
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
-          // POST-SIGNUP REDIRECT LOGIC
           const redirectFeature = localStorage.getItem('somyra_redirect_feature');
           if (redirectFeature) {
             setActiveTab(redirectFeature as Tab);
@@ -974,11 +917,11 @@ export default function App() {
           localStorage.removeItem('somyra_guest_voice_count');
           localStorage.removeItem('somyra_guest_saves');
           localStorage.removeItem('somyra_guest_generations_used');
-          localStorage.removeItem('somyra_local_library');       // guest saves
-          localStorage.removeItem('somyra_last_analysis_score'); // guest profile score
-          localStorage.removeItem('somyra_industry');             // guest industry
-          localStorage.removeItem('somyra_quick_audit_draft');   // guest draft
-          localStorage.removeItem('somyra_crm_prospects');       // guest CRM data
+          localStorage.removeItem('somyra_local_library');
+          localStorage.removeItem('somyra_last_analysis_score');
+          localStorage.removeItem('somyra_industry');
+          localStorage.removeItem('somyra_quick_audit_draft');
+          localStorage.removeItem('somyra_crm_prospects');
           setGuestSaves(0);
         }
       } else {
@@ -992,7 +935,6 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // H3 FIX: Global ESC key handler to close all modals
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
@@ -1008,7 +950,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showAuth, showPricingModal, showLimitModal, showChangelog, isMobileMenuOpen, showDeleteAllSavedConfirm, showCancelModal]);
 
-  // H6 FIX: Body scroll lock when mobile drawer is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -1027,14 +968,13 @@ export default function App() {
     }
   }, [user]);
 
-  // M3 FIX: Scroll to top when navigating between tabs
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [activeTab]);
 
   useEffect(() => {
     if (error) {
-      const timer = setTimeout(() => setError(null), 6000); // extended from 3s
+      const timer = setTimeout(() => setError(null), 6000);
       return () => clearTimeout(timer);
     }
   }, [error]);
@@ -1085,7 +1025,6 @@ export default function App() {
       setUser(null);
       setVoicePosts([]);
       setSavedItems([]);
-      // M1 FIX: Reset generated results on logout so old user's content doesn't flash
       setResults({});
       setProfile(null);
       setActiveTab('home');
@@ -1095,19 +1034,12 @@ export default function App() {
   };
 
   const handleTabClick = (tabId: Tab) => {
-    const restrictedTabs = ['voice', 'profile', 'topics', 'writer', 'bio', 'outreach', 'saved'];
-    if (!user && restrictedTabs.includes(tabId)) {
-      localStorage.setItem('somyra_redirect_feature', tabId);
-      setShowGuestWall(true);
-    } else {
-      setActiveTab(tabId);
-    }
+    setActiveTab(tabId);
     setIsMobileMenuOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
-      {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-[40] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 md:px-6 lg:px-8">
           <div className="flex items-center gap-4">
@@ -1125,12 +1057,10 @@ export default function App() {
             </div>
           </div>
           
-          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-6">
             <nav className="flex items-center gap-6 text-[15px] font-semibold text-slate-400">
               <span onClick={() => scrollToSection('how-it-works')} className="cursor-pointer transition-colors hover:text-white">How it Works</span>
               
-              {/* Tools Dropdown */}
               <div 
                 className="relative"
                 onMouseEnter={() => setShowToolsDropdown(true)}
@@ -1189,7 +1119,6 @@ export default function App() {
                     <UserCircle className="w-4 h-4 text-teal-accent" />
                   </div>
                   <span className="truncate text-xs font-bold text-slate-200">{user.email}</span>
-                  {/* M2 FIX: Show Crown for both Pro and Max users */}
                   {(isPro || isMax) && (
                     <div className="flex items-center gap-1 ml-1" title={isMax ? 'Somyra Max' : 'Somyra Pro'}>
                       <Crown className="w-3.5 h-3.5 text-teal-accent" />
@@ -1222,7 +1151,6 @@ export default function App() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-4">
             {!user && (
               <button 
@@ -1242,11 +1170,9 @@ export default function App() {
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -1254,7 +1180,6 @@ export default function App() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] lg:hidden"
             />
-            {/* Drawer */}
             <motion.div
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
@@ -1285,7 +1210,6 @@ export default function App() {
                     </div>
 
               <nav className="flex flex-col">
-                {/* Home Item */}
                 {tabs.filter(t => t.id === 'home').map(tab => (
                   <button
                     key={tab.id}
@@ -1343,7 +1267,6 @@ export default function App() {
                   </div>
                 ))}
 
-                {/* Navbar items in mobile menu */}
                 <div className="h-[1px] bg-white/5 my-4 mx-4" />
                 <div className="flex flex-col gap-1">
                   <button 
@@ -1404,7 +1327,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Subscription Activation Overlay */}
       <AnimatePresence>
         {isActivating && (
           <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/90 backdrop-blur-xl">
@@ -1424,7 +1346,6 @@ export default function App() {
       </AnimatePresence>
 
       <main className="container-max pt-28 pb-12 md:pb-16">
-        {/* Expiry Reminder Banner */}
         {subscriptionStatus === 'cancelled' && currentPeriodEnd && (
           <div className="mb-8 p-6 rounded-[24px] bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -1457,7 +1378,6 @@ export default function App() {
           <aside className="sticky top-28 hidden lg:flex flex-col col-span-1 lg:col-span-3 max-h-[calc(100vh-140px)] overflow-y-auto rounded-[28px] border border-white/5 bg-bg-sidebar p-5 custom-scrollbar">
             <div className="space-y-1">
               <nav className="flex flex-col">
-                {/* Home Item */}
                 {tabs.filter(t => t.id === 'home').map(tab => (
                   <button
                     key={tab.id}
@@ -1525,7 +1445,6 @@ export default function App() {
                 transition={{ duration: 0.2 }}
                 className={`w-full min-w-0 ${activeTab === 'home' ? 'space-y-10' : activeTab === 'profile' ? 'space-y-8' : 'card-premium'}`}
               >
-                {/* Tab Content: Dashboard */}
                 {activeTab === 'home' && (
                   <DashboardHome 
                     user={user}
@@ -1552,6 +1471,7 @@ export default function App() {
                     setVoicePosts={setVoicePosts}
                     authChecked={authChecked}
                     setShowAuth={setShowAuth}
+                    onRequireAuth={handleRequireAuth}
                     setShowPricingModal={setShowPricingModal}
                     setError={setError}
                     showToast={showToast}
@@ -1586,6 +1506,7 @@ export default function App() {
                     copied={copied}
                     setActiveTab={setActiveTab}
                     user={user}
+                    onRequireAuth={handleRequireAuth}
                     usageLimits={usageLimits}
                     showToast={showToast}
                   />
@@ -1612,6 +1533,8 @@ export default function App() {
                     copied={copied}
                     setStats={setStats}
                     usageLimits={usageLimits}
+                    user={user}
+                    onRequireAuth={handleRequireAuth}
                   />
                 )}
 
@@ -1637,6 +1560,7 @@ export default function App() {
                     isDeepMode={isDeepMode}
                     setIsDeepMode={setIsDeepMode}
                     user={user}
+                    onRequireAuth={handleRequireAuth}
                     isPro={isPro}
                     isMax={isMax}
                     setError={setError}
@@ -1665,6 +1589,8 @@ export default function App() {
                     saving={saving}
                     copied={copied}
                     usageLimits={usageLimits}
+                    user={user}
+                    onRequireAuth={handleRequireAuth}
                   />
                 )}
 
@@ -1684,6 +1610,8 @@ export default function App() {
                     saving={saving}
                     copied={copied}
                     usageLimits={usageLimits}
+                    user={user}
+                    onRequireAuth={handleRequireAuth}
                   />
                 )}
 
@@ -1980,11 +1908,21 @@ export default function App() {
       <AnimatePresence>
         {showAuth && (
           <Auth 
+            feature={authFeature}
             onAuthSuccess={(userData) => {
               setUser(userData);
+              if (authCallback) {
+                authCallback();
+                setAuthCallback(null);
+              }
+              setAuthFeature(undefined);
               setShowAuth(false);
             }} 
-            onClose={() => setShowAuth(false)} 
+            onClose={() => {
+              setShowAuth(false);
+              setAuthCallback(null);
+              setAuthFeature(undefined);
+            }} 
           />
         )}
       </AnimatePresence>
@@ -2063,10 +2001,6 @@ export default function App() {
         )}
       </AnimatePresence>
       {/* Modals */}
-      <GuestSignupWallModal 
-        show={showGuestWall} 
-        setShowAuth={(val) => { setShowGuestWall(false); setShowAuth(val); }} 
-      />
       <AnimatePresence>
         {showPricingModal && (
           <PricingModal 

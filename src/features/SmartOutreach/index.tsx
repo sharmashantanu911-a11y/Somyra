@@ -19,6 +19,8 @@ interface SmartOutreachProps {
   saving: string | null;
   copied: string | null;
   usageLimits: any;
+  user?: any;
+  onRequireAuth?: (feature: string, callback: () => void) => void;
 }
 
 export function SmartOutreach(props: SmartOutreachProps) {

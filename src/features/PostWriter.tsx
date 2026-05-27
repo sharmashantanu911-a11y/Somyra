@@ -30,6 +30,7 @@ interface PostWriterProps {
   setError: React.Dispatch<React.SetStateAction<any>>;
   setStats: React.Dispatch<React.SetStateAction<any>>;
   usageLimits: any;
+  onRequireAuth: (feature: string, callback: () => void) => void;
 }
 
 export function PostWriter({
@@ -56,7 +57,8 @@ export function PostWriter({
   isMax,
   setError,
   setStats,
-  usageLimits
+  usageLimits,
+  onRequireAuth
 }: PostWriterProps) {
   const [loading, setLoading] = useState(false);
   const [generationPhase, setGenerationPhase] = useState<'idle' | 'analyzing' | 'crafting' | 'refining' | 'completed'>('idle');
@@ -65,8 +67,12 @@ export function PostWriter({
   const [abortController, setAbortController] = useState<AbortController | null>(null);
   const isGeneratingRef = React.useRef(false);
 
-  const handleGeneratePost = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGeneratePost = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!user) {
+      onRequireAuth('Post Writer', () => handleGeneratePost());
+      return;
+    }
     // C4: Race condition guard
     if (isGeneratingRef.current) return;
     if (!checkGenerationLimit('post_writer')) return;

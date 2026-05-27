@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   FileText,
@@ -712,7 +713,7 @@ export function LandingPage({
           className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 relative z-10"
         >
           <p className="text-[#555] text-[12px] md:text-sm font-medium tracking-wide">
-            No credit card required. Cancel anytime.
+            Free to use. No card. No catch.
           </p>
           <div className="flex items-center gap-4 text-[#555] text-[12px] md:text-sm font-medium border-l border-white/10 pl-6">
             <div className="flex -space-x-1.5 transition-all cursor-default">
@@ -785,28 +786,35 @@ export function LandingPage({
               )}
             </div>
 
-            {/* Blurred preview */}
-            <div className="relative rounded-xl border border-white/5 bg-[#141414]/50 p-5 overflow-hidden min-h-[140px]">
+            {/* Full preview */}
+            <div className="relative rounded-xl border border-white/5 bg-[#141414] p-5 md:p-6 overflow-hidden min-h-[140px] shadow-2xl">
               <AnimatePresence mode="wait">
                 {showResult ? (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="relative"
+                    className="relative space-y-6"
                   >
                     <div className="space-y-3">
-                      <p className="text-[13px] md:text-[14px] text-white/90 leading-relaxed font-medium [mask-image:linear-gradient(to_bottom,black_40%,transparent_90%)]">
+                      <p className="text-[13px] md:text-[14px] text-white/90 leading-relaxed font-medium">
                         I spent 100 hours analyzing why some LinkedIn posts go viral while others die in silence. <br /><br />
                         The secret isn't the algorithm. It's the hook. Most people fail because they start with "I'm so excited to announce..." instead of talking about the reader's pain. <br /><br />
-                        Here are 3 frameworks that work every single time...
+                        Here are 3 frameworks that work every single time:<br /><br />
+                        1. The Contrarian Hook: State a commonly held belief in your industry, then instantly destroy it.<br /><br />
+                        2. The Vulnerability Hook: Share a massive failure before you share the lesson. People connect with scars, not trophies.<br /><br />
+                        3. The X to Y Framework: "How I went from [Painful State] to [Dream State] in [Timeframe]." Be specific.<br /><br />
+                        Stop writing for your peers. Start writing for your past self.<br /><br />
+                        What's the best hook you've seen this week?
                       </p>
                     </div>
-                    {/* Floating Premium Badge */}
-                    <div className="absolute inset-0 flex items-end justify-center pb-4">
-                      <div className="px-5 py-2.5 bg-black/80 backdrop-blur-md rounded-full border border-teal-accent/40 shadow-[0_0_30px_rgba(45,212,191,0.2)] flex items-center gap-2.5 transform hover:scale-[1.02] transition-transform cursor-pointer">
-                        <Lock className="w-4 h-4 text-teal-accent" />
-                        <span className="text-[11px] font-black text-white uppercase tracking-wider">Upgrade to see full post</span>
-                      </div>
+                    
+                    <div className="pt-4 border-t border-white/5 flex justify-center">
+                      <Link 
+                        to="/linkedin-post-generator"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-teal-accent text-teal-accent text-xs font-bold uppercase tracking-wider hover:bg-teal-accent hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(45,212,191,0.15)] hover:shadow-[0_0_25px_rgba(45,212,191,0.3)]"
+                      >
+                        Write your own post →
+                      </Link>
                     </div>
                   </motion.div>
                 ) : (
@@ -817,9 +825,6 @@ export function LandingPage({
                   </div>
                 )}
               </AnimatePresence>
-              
-              {/* Teal gradient fade */}
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0D0D0D] to-transparent pointer-events-none" />
             </div>
           </div>
         </div>

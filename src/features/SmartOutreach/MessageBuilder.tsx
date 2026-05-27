@@ -15,6 +15,8 @@ interface MessageBuilderProps {
   handleCopy: (text: string, id: string) => void;
   saving: string | null;
   copied: string | null;
+  user?: any;
+  onRequireAuth?: (feature: string, callback: () => void) => void;
 }
 
 export function MessageBuilder({
@@ -28,7 +30,9 @@ export function MessageBuilder({
   handleSave,
   handleCopy,
   saving,
-  copied
+  copied,
+  user,
+  onRequireAuth
 }: MessageBuilderProps) {
   const [form, setForm] = useState({ target: '', researchContext: '', relationship: 'Cold', goal: '' });
   const [loading, setLoading] = useState(false);
@@ -44,8 +48,12 @@ export function MessageBuilder({
     { id: 'Referral', label: 'Referral', desc: 'Mutual connection exists' }
   ];
 
-  const handleGenerate = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGenerate = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!user && onRequireAuth) {
+      onRequireAuth('Message Builder', () => handleGenerate());
+      return;
+    }
     if (isGeneratingRef.current) return;
     if (!checkGenerationLimit('smart_outreach')) return;
 

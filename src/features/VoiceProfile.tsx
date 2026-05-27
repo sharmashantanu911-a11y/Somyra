@@ -23,6 +23,7 @@ interface VoiceProfileProps {
   showToast: (toastData: any) => void;
   trackEvent: (eventName: string, params?: any) => void;
   usageLimits: any;
+  onRequireAuth: (feature: string, callback: () => void) => void;
 }
 
 export function VoiceProfile({
@@ -37,7 +38,8 @@ export function VoiceProfile({
   setError,
   showToast,
   trackEvent,
-  usageLimits
+  usageLimits,
+  onRequireAuth
 }: VoiceProfileProps) {
   const [newVoicePost, setNewVoicePost] = useState('');
   const [voiceError, setVoiceError] = useState<string | null>(null);
@@ -46,6 +48,11 @@ export function VoiceProfile({
   const [showDeleteAllConfirm, setShowDeleteAllConfirm] = useState(false);
 
   const handleAddVoicePost = async () => {
+    if (!user) {
+      onRequireAuth('Voice Profile', () => handleAddVoicePost());
+      return;
+    }
+    
     if (!newVoicePost.trim()) {
       setVoiceError('Please paste a LinkedIn post first.');
       setTimeout(() => setVoiceError(null), 3000);
@@ -73,7 +80,6 @@ export function VoiceProfile({
 
     setLoadingVoice(true);
     try {
-      if (!user) return;
       
       const { data, error: saveError } = await supabase
         .from('voice_profile')
@@ -152,63 +158,6 @@ export function VoiceProfile({
           <Loader2 className="w-10 h-10 text-teal-accent animate-spin" />
           <p className="text-muted font-medium">Loading...</p>
         </div>
-      ) : !user ? (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center justify-center min-h-[60vh] px-6 sm:px-10 py-10 sm:py-20 text-center"
-        >
-          <div className="relative mb-6 sm:mb-8">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-teal-accent/8 border border-teal-accent/15 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(45,212,191,0.15)]">
-              <Mic className="w-11 h-11 sm:w-14 sm:h-14 text-teal-accent" />
-            </div>
-          </div>
-
-          <h2 className="text-white text-xl md:text-2xl font-extrabold max-w-[360px] leading-tight mb-3 md:mb-4">
-            Somyra Needs Your Account to Remember You
-          </h2>
-          
-          <p className="text-muted text-[13px] md:text-[15px] leading-relaxed max-w-[400px] mb-8 md:mb-10">
-            Voice Profile saves your writing style so every post sounds exactly like you. We need a free account to store your data — takes 30 seconds to create.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-12">
-            {[
-              'Saves your writing style',
-              'Gets better over time',
-              'Works across all devices'
-            ].map((benefit, i) => (
-              <div key={i} className="flex items-center gap-2 px-3.5 py-1.5 bg-teal-accent/8 border border-teal-accent/20 rounded-full">
-                <Check className="w-3.5 h-3.5 text-teal-accent" />
-                <span className="text-[10px] md:text-xs font-medium text-teal-accent">{benefit}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="w-full max-w-[320px] space-y-4 md:space-y-6">
-            <button 
-              onClick={() => setShowAuth(true)}
-              className="w-full py-3.5 md:py-4 bg-teal-accent text-black font-bold rounded-xl text-[14px] md:text-[15px] hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100"
-            >
-              Sign Up Free
-            </button>
-            
-            <div className="space-y-2">
-              <p className="text-[13px] text-muted">
-                Already have an account?{' '}
-                <button 
-                  onClick={() => setShowAuth(true)}
-                  className="text-teal-accent font-semibold underline underline-offset-4 hover:text-teal-accent/80 transition-colors"
-                >
-                  Sign In
-                </button>
-              </p>
-              <p className="text-[11px] text-[#555555]">
-                Free forever — no credit card required
-              </p>
-            </div>
-          </div>
-        </motion.div>
       ) : (
         <div className="space-y-8 md:space-y-12">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">

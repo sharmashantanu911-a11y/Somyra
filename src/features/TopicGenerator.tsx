@@ -22,6 +22,8 @@ interface TopicGeneratorProps {
   copied: string | null;
   setStats: React.Dispatch<React.SetStateAction<any>>;
   usageLimits: any;
+  user: any;
+  onRequireAuth: (feature: string, callback: () => void) => void;
 }
 
 export function TopicGenerator({
@@ -42,14 +44,20 @@ export function TopicGenerator({
   saving,
   copied,
   setStats,
-  usageLimits
+  usageLimits,
+  user,
+  onRequireAuth
 }: TopicGeneratorProps) {
   const [loading, setLoading] = useState(false);
   const [generationPhase, setGenerationPhase] = useState<'idle' | 'analyzing' | 'crafting' | 'completed'>('idle');
   const isGeneratingRef = React.useRef(false);
 
-  const handleGenerateTopics = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGenerateTopics = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!user) {
+      onRequireAuth('Topic Generator', () => handleGenerateTopics());
+      return;
+    }
     // C4: Race condition guard — prevent double-submit
     if (isGeneratingRef.current) return;
     if (!checkGenerationLimit('topic_generator')) return;
