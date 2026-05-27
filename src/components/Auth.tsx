@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Mail, Lock as LockIcon, Loader2, ArrowRight, X, Eye, EyeOff, CheckCircle2, Sparkles } from 'lucide-react';
+import { Mail, Lock as LockIcon, Loader2, ArrowRight, X, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 type AuthMode = 'login' | 'signup' | 'forgot' | 'check_email';
@@ -12,7 +12,7 @@ interface AuthProps {
 }
 
 export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
-  const [mode, setMode] = useState<AuthMode>('signup'); // Default to signup for actions
+  const [mode, setMode] = useState<AuthMode>('signup');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -100,23 +100,23 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
       {/* Background overlay with blur */}
       <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-md" 
+        className="absolute inset-0 bg-black/70 backdrop-blur-xl" 
         onClick={onClose} 
       />
       
-      {/* Modal Card */}
+      {/* Modal Card — Glassmorphism */}
       <motion.div
         key={mode}
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="relative w-full max-w-[440px] rounded-[24px] bg-[#141414] shadow-2xl border-t-[4px] border-t-teal-accent border-l border-r border-b border-white/10 ring-1 ring-white/5 overflow-hidden"
+        className="relative w-full max-w-[440px] rounded-[24px] bg-white/[0.04] backdrop-blur-2xl shadow-[0_0_80px_rgba(45,212,191,0.08)] border-t-2 border-t-teal-accent border-l border-r border-b border-white/[0.08] ring-1 ring-white/[0.04] overflow-hidden"
       >
         {onClose && (
           <button
             onClick={onClose}
-            className="absolute right-5 top-5 p-2 text-slate-500 hover:text-white transition-colors z-10 bg-white/5 rounded-full"
+            className="absolute right-5 top-5 p-2 text-slate-500 hover:text-white transition-colors z-10 bg-white/[0.06] hover:bg-white/[0.1] rounded-full"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />
@@ -125,8 +125,11 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
 
         <div className="max-h-[85vh] overflow-y-auto custom-scrollbar p-6 sm:p-8">
           <div className="flex flex-col items-center text-center mb-8">
-            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-teal-accent/10 border border-teal-accent/20">
-              <Sparkles className="h-8 w-8 text-teal-accent" />
+            {/* Somyra Logo */}
+            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/[0.06] border border-white/[0.1] shadow-[0_0_20px_rgba(45,212,191,0.15)]">
+              <svg className="w-7 h-7 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
+              </svg>
             </div>
             
             <h1 className="mb-3 text-2xl font-bold tracking-tight text-white leading-tight">
@@ -140,9 +143,9 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
             {/* Feature Chips */}
             {(mode === 'signup' || mode === 'login') && (
               <div className="mt-6 flex flex-wrap justify-center gap-2">
-                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Profile Audits</span>
-                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Post Writer</span>
-                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent">Smart Outreach</span>
+                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent border border-teal-accent/20">Profile Audits</span>
+                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent border border-teal-accent/20">Post Writer</span>
+                <span className="rounded-full bg-teal-accent/10 px-3 py-1 text-xs font-semibold text-teal-accent border border-teal-accent/20">Smart Outreach</span>
               </div>
             )}
           </div>
@@ -158,7 +161,7 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
                   className="space-y-6"
                 >
                   <div className="flex flex-col items-center gap-4 py-2 text-center">
-                    <div className="w-14 h-14 bg-teal-accent/10 rounded-full flex items-center justify-center">
+                    <div className="w-14 h-14 bg-teal-accent/10 rounded-full flex items-center justify-center border border-teal-accent/20">
                       <CheckCircle2 className="w-7 h-7 text-teal-accent" />
                     </div>
                     <p className="text-sm text-[#888888] max-w-[280px]">
@@ -181,7 +184,7 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
                   className="space-y-6"
                 >
                   <div className="flex flex-col items-center gap-4 py-2 text-center">
-                    <div className="w-14 h-14 bg-teal-accent/10 rounded-full flex items-center justify-center">
+                    <div className="w-14 h-14 bg-teal-accent/10 rounded-full flex items-center justify-center border border-teal-accent/20">
                       <CheckCircle2 className="w-7 h-7 text-teal-accent" />
                     </div>
                     <p className="text-sm text-[#888888] max-w-[280px]">
@@ -212,7 +215,7 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
                           autoFocus
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="input-field pl-11 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus:border-teal-accent/50 focus:bg-white/[0.07]"
+                          className="input-field pl-11 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 focus:border-teal-accent/40 focus:bg-white/[0.06]"
                           placeholder="name@company.com"
                           autoComplete="email"
                         />
@@ -232,7 +235,7 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="input-field pl-11 pr-11 bg-white/5 border-white/10 text-white placeholder:text-white/20 focus:border-teal-accent/50 focus:bg-white/[0.07]"
+                            className="input-field pl-11 pr-11 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 focus:border-teal-accent/40 focus:bg-white/[0.06]"
                             placeholder="••••••••"
                             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                             minLength={mode === 'signup' ? 6 : undefined}
@@ -327,7 +330,7 @@ export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
           </div>
           
           {/* Footer note */}
-          <div className="mt-8 text-center border-t border-white/5 pt-6">
+          <div className="mt-8 text-center border-t border-white/[0.06] pt-6">
             <p className="text-[11px] text-[#666666] font-medium">
               Free forever plan available. Upgrade only if you want more.
             </p>

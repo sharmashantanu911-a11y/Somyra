@@ -183,6 +183,7 @@ export function VoiceProfile({
                 <p className="text-[13px] md:text-sm text-muted">Train Somyra to write exactly like you.</p>
               </div>
             </div>
+            {user && (
             <div className="flex items-center gap-3 px-4 py-2 bg-white/5 rounded-2xl border border-white/10 self-start md:self-auto">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-teal-accent">{voicePosts.length}</span>
@@ -201,6 +202,7 @@ export function VoiceProfile({
                 />
               </div>
             </div>
+            )}
             {voicePosts.length > 0 && (
               <button
                 onClick={() => setShowDeleteAllConfirm(true)}

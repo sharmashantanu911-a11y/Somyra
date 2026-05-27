@@ -502,6 +502,9 @@ export default function App() {
       return () => window.removeEventListener('generationUsed', handleGen);
     }, []);
 
+    // Hide counter for unauthenticated users
+    if (!user) return null;
+
     const getFeatureName = () => {
       switch (feature) {
         case 'profile_audit': return 'Profile Audits';
