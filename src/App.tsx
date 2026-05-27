@@ -75,6 +75,7 @@ import { SavedLibrary } from './features/SavedLibrary';
 import { Terms } from './components/Terms';
 import { Privacy } from './components/Privacy';
 import { Contact } from './components/Contact';
+import SomyraFooter from './components/SomyraFooter';
 
 const dailyTips = [
   "LinkedIn's algorithm favors conversational posts that start with a strong hook. Avoid using more than 3 hashtags.",
@@ -1990,71 +1991,7 @@ export default function App() {
 
       
       {/* Footer */}
-      <footer className="relative w-full border-t border-white/5 mt-20 pt-16 pb-20 md:pt-20 md:pb-24">
-        {/* Top Glow Divider */}
-        <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-teal-accent/30 to-transparent" />
-        
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-0">
-            {/* Logo and Credits */}
-            <div className="flex flex-col items-center md:items-start gap-4">
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
-                </svg>
-                <span className="text-xl font-bold tracking-tight text-white">Somyra</span>
-              </div>
-              <p className="text-[11px] text-muted font-black uppercase tracking-[0.3em] text-center md:text-left">
-                Made with ❤️ in India by <a href="https://www.linkedin.com/in/sharmashantanu911" target="_blank" rel="noopener noreferrer" className="text-teal-accent hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] transition-all">Shantanu Sharma</a>
-              </p>
-            </div>
-
-            {/* Tools Links Section */}
-            <div className="flex flex-col gap-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#2DD4BF] text-center md:text-left">Tools</p>
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-[12px] font-bold uppercase tracking-widest text-[#888888]">
-                <Link to="/linkedin-post-generator" className="hover:text-teal-accent transition-colors">Post Generator</Link>
-                <Link to="/linkedin-profile-audit" className="hover:text-teal-accent transition-colors">Profile Audit</Link>
-                <Link to="/linkedin-dm-generator" className="hover:text-teal-accent transition-colors">DM Generator</Link>
-                <Link to="/linkedin-hook-generator" className="hover:text-teal-accent transition-colors">Hook Generator</Link>
-                <Link to="/linkedin-topic-generator" className="hover:text-teal-accent transition-colors">Topic Generator</Link>
-              </div>
-            </div>
-
-            {/* Legal Links */}
-            <div className="flex items-center gap-8 md:gap-12 self-center md:self-auto mt-4 md:mt-0">
-              <Link 
-                to="/blog" 
-                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
-              >
-                Blog
-              </Link>
-              <button 
-                onClick={() => navigateTo('/terms')} 
-                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
-              >
-                Terms
-              </button>
-              <button 
-                onClick={() => navigateTo('/privacy')} 
-                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
-              >
-                Privacy
-              </button>
-              <button 
-                onClick={() => navigateTo('/contact')} 
-                className="text-[12px] font-bold uppercase tracking-widest text-muted hover:text-teal-accent transition-all duration-300"
-              >
-                Contact
-              </button>
-            </div>
-          </div>
-          
-          <div className="mt-16 text-center">
-            <p className="text-[10px] text-muted/40 font-bold uppercase tracking-[0.1em]">© 2026 Somyra AI. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <SomyraFooter />
 
       {/* Toast Notification */}
       <AnimatePresence>
