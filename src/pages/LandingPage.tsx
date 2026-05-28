@@ -83,8 +83,8 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           ))}
         </div>
         <div style={{ flex: 1 }} />
-        <a href="/signin" onClick={onClose} style={{ ...styles.navLink, display: 'block', textAlign: 'center', marginBottom: 10 }}>Sign In</a>
-        <a href="/signup" onClick={onClose} style={{ ...styles.btnTeal, justifyContent: 'center', padding: '12px 20px' }}>Start Free</a>
+        <Link to="/signin" onClick={onClose} style={{ ...styles.navLink, display: 'block', textAlign: 'center', marginBottom: 10 }}>Sign In</Link>
+        <Link to="/signup" onClick={onClose} style={{ ...styles.btnTeal, justifyContent: 'center', padding: '12px 20px' }}>Start Free</Link>
       </div>
     </>
   );
@@ -105,8 +105,8 @@ function Sidebar() {
   ];
   return (
     <aside style={{
-      width: 220, flexShrink: 0, position: 'sticky', top: 78, alignSelf: 'flex-start',
-      maxHeight: 'calc(100vh - 100px)', overflowY: 'auto', borderRadius: 28,
+      width: 220, flexShrink: 0, position: 'sticky', top: 96, alignSelf: 'flex-start',
+      maxHeight: 'calc(100vh - 130px)', overflowY: 'auto', borderRadius: 28,
       border: '1px solid rgba(255,255,255,0.05)', background: '#0C0C0C', padding: 20,
     }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -185,7 +185,7 @@ function Hero() {
 
         <Reveal delay={180}>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
-            <a href="/signup" style={styles.btnTeal}>Audit My Profile Free</a>
+            <Link to="/signup" style={styles.btnTeal}>Audit My Profile Free</Link>
             <a href="#how" style={styles.btnGhost}>Watch 2 Minute Walkthrough</a>
           </div>
           <p style={{ fontSize: 12.5, color: '#6B7280', fontFamily: 'monospace', marginBottom: 52 }}>No credit card. Free forever plan. Takes 60 seconds to set up.</p>
@@ -526,7 +526,7 @@ function Features() {
                     </div>
                   ))}
                 </div>
-                <a href="/signup" style={styles.btnTeal}>Try {f.icon} Free</a>
+                <Link to="/signup" style={styles.btnTeal}>Try {f.icon} Free</Link>
               </div>
               <div style={{ order: i % 2 === 1 ? 1 : 2 }}>{f.visual}</div>
             </div>
@@ -769,14 +769,14 @@ function Pricing() {
                     </div>
                   ))}
                 </div>
-                <a href={p.href} style={{
+                <Link to={p.href} style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   padding: '13px 20px', borderRadius: 10, fontWeight: 700, fontSize: 14,
                   background: p.style === 'featured' ? T : 'transparent',
                   color: p.style === 'featured' ? '#030B09' : '#F5F5F5',
                   border: p.style === 'featured' ? 'none' : '1px solid rgba(255,255,255,0.18)',
                   textDecoration: 'none', transition: 'all 0.2s',
-                }}>{p.cta}</a>
+                }}>{p.cta}</Link>
               </div>
             </Reveal>
           ))}
@@ -853,7 +853,7 @@ function FinalCTA() {
             Audit your profile, build your voice, and start publishing and outreaching with a system that works. Do it in the next ten minutes.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 14 }}>
-            <a href="/signup" style={{ ...styles.btnTeal, fontSize: 15, padding: '15px 26px', borderRadius: 11 }}>Audit My Profile Free</a>
+            <Link to="/signup" style={{ ...styles.btnTeal, fontSize: 15, padding: '15px 26px', borderRadius: 11 }}>Audit My Profile Free</Link>
             <a href="#pricing" style={{ ...styles.btnGhost, fontSize: 15, padding: '15px 26px', borderRadius: 11 }}>See Pricing</a>
           </div>
           <p style={{ fontSize: 12.5, color: '#6B7280', fontFamily: 'monospace' }}>No credit card. Free forever plan. Cancel paid plans anytime.</p>
@@ -879,12 +879,12 @@ function Footer() {
     <footer style={{ background: '#080808', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(40px,6vw,56px) 28px 44px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 48 }}>
         <div style={{ maxWidth: 220 }}>
-          <a href="/" style={styles.logoWrap}>
+          <Link to="/" style={styles.logoWrap}>
             <div style={{ width: 30, height: 30, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.28)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: T }}>
               <SomyraLogo size={16} />
             </div>
             <span style={{ fontSize: 17, fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em' }}>Somyra</span>
-          </a>
+          </Link>
           <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 16 }}>Your AI copilot for LinkedIn. Build presence, write better, and close more.</p>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 11.5, color: '#6B7280', background: '#141414', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: '5px 12px', fontFamily: 'monospace' }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#22C55E', boxShadow: pulse ? '0 0 0 3px rgba(34,197,94,0.2)' : 'none', transition: 'box-shadow 0.6s', flexShrink: 0, display: 'inline-block' }}/>
@@ -894,7 +894,7 @@ function Footer() {
         {footerLinks.map(col => (
           <div key={col.t}>
             <p style={{ fontSize: 10.5, fontWeight: 700, color: '#374151', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: 14 }}>{col.t}</p>
-            {col.l.map(link => <a key={link.l} href={link.h} style={linkStyle}>{link.l}</a>)}
+            {col.l.map(link => link.h.startsWith('#') ? <a key={link.l} href={link.h} style={linkStyle}>{link.l}</a> : <Link key={link.l} to={link.h} style={linkStyle}>{link.l}</Link>)}
           </div>
         ))}
       </div>
@@ -938,20 +938,20 @@ const LandingPage: React.FC = () => {
 
       <nav style={styles.nav}>
         <div style={styles.navInner}>
-          <a href="/" style={styles.logoWrap}>
+          <Link to="/" style={styles.logoWrap}>
             <div style={{ width: 30, height: 30, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.28)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: T }}>
               <SomyraLogo size={16} />
             </div>
-            <span style={styles.logoName}>Somyra</span>
-          </a>
+            <span style={{ fontSize: 17, fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em' }}>Somyra</span>
+          </Link>
 
           <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             {['How It Works','Features','Pricing'].map(l => (
               <a key={l} href={`#${l.toLowerCase().replace(/ /g,'')}`} style={styles.navLink}>{l}</a>
             ))}
             <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.08)', margin: '0 6px' }}/>
-            <a href="/signin" style={styles.navLink}>Sign In</a>
-            <a href="/signup" style={styles.btnTeal}>Start Free</a>
+            <Link to="/signin" style={styles.navLink}>Sign In</Link>
+            <Link to="/signup" style={styles.btnTeal}>Start Free</Link>
           </div>
 
           <button
