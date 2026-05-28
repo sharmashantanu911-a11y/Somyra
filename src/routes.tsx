@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import App from './App';
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 import { Terms } from './components/Terms';
 import { Privacy } from './components/Privacy';
 import { Contact } from './components/Contact';
@@ -64,10 +65,23 @@ const BlogRouter: React.FC = () => {
 export const AppRoutes: React.FC = () => {
   const navigate = useNavigate();
 
+  const SignUpPage: React.FC = () => {
+    useEffect(() => { navigate('/dashboard', { replace: true }); }, [navigate]);
+    return <div style={{background:'#080808', minHeight:'100vh'}}/>;
+  };
+
+  const SignInPage: React.FC = () => {
+    useEffect(() => { navigate('/dashboard', { replace: true }); }, [navigate]);
+    return <div style={{background:'#080808', minHeight:'100vh'}}/>;
+  };
+
   return (
     <Suspense fallback={<div style={{background:'#080808', minHeight:'100vh'}}/>}>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<App />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
         <Route path="/terms" element={<Terms onBack={() => navigate('/')} />} />
         <Route path="/privacy" element={<Privacy onBack={() => navigate('/')} />} />
         <Route path="/contact" element={<Contact onBack={() => navigate('/')} />} />
