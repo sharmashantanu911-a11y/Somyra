@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function useInView(threshold = 0.1): [React.RefObject<HTMLDivElement | null>, boolean] {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -32,21 +33,26 @@ const styles: Record<string, React.CSSProperties> = {
   page: { background: '#080808', color: '#F5F5F5', fontFamily: "'DM Sans', sans-serif", minHeight: '100vh', overflowX: 'hidden' },
   nav: { position: 'sticky', top: 0, zIndex: 99, background: 'rgba(8,8,8,0.92)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '14px 0' },
   navInner: { maxWidth: 1100, margin: '0 auto', padding: '0 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
-  logoWrap: { display: 'flex', alignItems: 'center', gap: 9 },
-  logoS: { width: 30, height: 30, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.28)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: T },
-  logoName: { fontSize: 17, fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em' },
+  logoWrap: { display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none' },
   navLinks: { display: 'flex', alignItems: 'center', gap: 4 },
   navLink: { fontSize: 13.5, color: '#6B7280', padding: '6px 12px', borderRadius: 8, cursor: 'pointer', transition: 'color 0.2s', textDecoration: 'none' },
-  btnTeal: { display: 'inline-flex', alignItems: 'center', gap: 7, background: T, color: '#030B09', fontWeight: 700, fontSize: 14, padding: '9px 18px', borderRadius: 9, border: 'none', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif", textDecoration: 'none' },
-  btnGhost: { display: 'inline-flex', alignItems: 'center', gap: 7, background: 'transparent', color: '#9CA3AF', fontWeight: 500, fontSize: 14, padding: '9px 18px', borderRadius: 9, border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', textDecoration: 'none' },
-  section: { padding: '88px 0' },
+  btnTeal: { display: 'inline-flex', alignItems: 'center', gap: 6, background: T, color: '#030B09', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 10, border: 'none', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif", textDecoration: 'none', transition: 'all 0.2s' },
+  btnGhost: { display: 'inline-flex', alignItems: 'center', gap: 6, background: 'transparent', color: '#F5F5F5', fontWeight: 500, fontSize: 14, padding: '12px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.18)', cursor: 'pointer', textDecoration: 'none', transition: 'all 0.2s' },
+  section: { padding: '80px 0' },
   container: { maxWidth: 1100, margin: '0 auto', padding: '0 28px' },
   containerNarrow: { maxWidth: 820, margin: '0 auto', padding: '0 28px' },
   eyebrow: { display: 'inline-block', fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: T, fontFamily: 'monospace', marginBottom: 14, padding: '4px 12px', background: 'rgba(45,212,191,0.06)', border: '1px solid rgba(45,212,191,0.15)', borderRadius: 20 },
   h2: { fontSize: 'clamp(26px,4vw,44px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.12, marginBottom: 14, color: '#F5F5F5' },
-  sub: { fontSize: 16, color: '#9CA3AF', lineHeight: 1.7, maxWidth: 520, marginBottom: 52 },
+  sub: { fontSize: 16, color: '#9CA3AF', lineHeight: 1.7, maxWidth: 520, marginBottom: 48 },
   card: { background: '#141414', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16 },
 };
+
+// Somyra SVG logo (matches app sidebar)
+const SomyraLogo: React.FC<{ size?: number }> = ({ size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
+  </svg>
+);
 
 // ── MOBILE NAV ──
 function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -64,8 +70,10 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-            <div style={styles.logoS}>S</div>
-            <span style={styles.logoName}>Somyra</span>
+            <div style={{ width: 30, height: 30, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.28)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: T }}>
+              <SomyraLogo size={16} />
+            </div>
+            <span style={{ fontSize: 17, fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em' }}>Somyra</span>
           </div>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: 24, cursor: 'pointer', padding: 4 }}>✕</button>
         </div>
@@ -79,6 +87,56 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         <a href="/signup" onClick={onClose} style={{ ...styles.btnTeal, justifyContent: 'center', padding: '12px 20px' }}>Start Free</a>
       </div>
     </>
+  );
+}
+
+// ── SIDEBAR ──
+function Sidebar() {
+  const navigate = useNavigate();
+  const items = [
+    { id: 'home', label: 'Home', icon: '◈' },
+    { id: 'profile', label: 'Profile Audit', icon: '◎' },
+    { id: 'postwriter', label: 'Post Writer', icon: '✎' },
+    { id: 'topicgen', label: 'Topic Generator', icon: '⊞' },
+    { id: 'biogen', label: 'Bio Generator', icon: '▣' },
+    { id: 'outreach', label: 'Smart Outreach', icon: '◉' },
+    { id: 'voice', label: 'Voice Profile', icon: '♪' },
+    { id: 'saved', label: 'Saved Library', icon: '✦' },
+  ];
+  return (
+    <aside style={{
+      width: 220, flexShrink: 0, position: 'sticky', top: 78, alignSelf: 'flex-start',
+      maxHeight: 'calc(100vh - 100px)', overflowY: 'auto', borderRadius: 28,
+      border: '1px solid rgba(255,255,255,0.05)', background: '#0C0C0C', padding: 20,
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        {items.map((item, i) => (
+          <React.Fragment key={item.id}>
+            {i === 1 && <div style={{ height: 1, background: 'rgba(255,255,255,0.05)', margin: '8px 0' }} />}
+            <button
+              onClick={() => navigate('/dashboard')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px',
+                borderRadius: 10, fontSize: 13, fontWeight: 500, color: '#6B7280',
+                border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left',
+                transition: 'all 0.2s', width: '100%',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.color = '#F5F5F5'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#6B7280'; }}
+            >
+              <span style={{ fontSize: 14, color: T, width: 18, textAlign: 'center' }}>{item.icon}</span>
+              <span>{item.label}</span>
+            </button>
+          </React.Fragment>
+        ))}
+      </div>
+      <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ background: 'rgba(45,212,191,0.06)', border: '1px solid rgba(45,212,191,0.12)', borderRadius: 10, padding: 12 }}>
+          <p style={{ fontSize: 10, color: T, fontWeight: 700, marginBottom: 4, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Pro Tip</p>
+          <p style={{ fontSize: 10.5, color: '#6B7280', lineHeight: 1.5 }}>Analyze your profile first to get personalized content suggestions.</p>
+        </div>
+      </div>
+    </aside>
   );
 }
 
@@ -98,22 +156,24 @@ function Hero() {
 
       <div style={{ ...styles.container, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative', zIndex: 1 }}>
         <Reveal>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: '#141414', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 40, padding: '8px 16px 8px 10px', marginBottom: 28, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <div style={{ display: 'flex', position: 'relative', width: 68, height: 28 }}>
-              {['R','P','A','T'].map((l,i) => (
-                <div key={i} style={{ position: 'absolute', left: i * 18, width: 28, height: 28, borderRadius: '50%', background: 'rgba(45,212,191,0.12)', border: '2px solid #080808', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: T }}>{l}</div>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: '#141414', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 40, padding: '6px 16px 6px 6px', marginBottom: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: 2 }}>
+              {['#FF6B6B','#FFB347','#4ECB71','#4DABF7','#9775FA'].map((bg, i) => (
+                <div key={i} style={{ width: 26, height: 26, borderRadius: '50%', background: bg, border: '2px solid #141414', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#fff', marginLeft: i > 0 ? -8 : 0, position: 'relative', zIndex: 5 - i }}>
+                  {['R','P','A','T','S'][i]}
+                </div>
               ))}
             </div>
-            <div>
-              <div style={{ display: 'flex', gap: 2, marginBottom: 2, justifyContent: 'center' }}>{[...Array(5)].map((_,i) => <span key={i} style={{color:T,fontSize:11}}>★</span>)}</div>
-              <span style={{ fontSize: 12, color: '#9CA3AF', fontFamily: 'monospace' }}>Trusted by <strong style={{color:'#F5F5F5'}}>{n.toLocaleString()}+</strong> LinkedIn professionals</span>
+            <div style={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+              {[...Array(5)].map((_, i) => <span key={i} style={{color:T,fontSize:11}}>★</span>)}
             </div>
+            <span style={{ fontSize: 12, color: '#9CA3AF', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>Trusted by <strong style={{color:'#F5F5F5'}}>{n.toLocaleString()}+</strong> LinkedIn professionals</span>
           </div>
         </Reveal>
 
         <Reveal delay={60}>
-          <h1 style={{ fontSize: 'clamp(32px,7vw,76px)', fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 1.04, marginBottom: 22, color: '#F5F5F5' }}>
-            Build a LinkedIn Presence<br/>That Closes Deals —<br/><span style={{color:T}}>Without Hiring a Ghostwriter</span>
+          <h1 style={{ fontSize: 'clamp(28px,5vw,52px)', fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 1.1, marginBottom: 22, color: '#F5F5F5', maxWidth: 800 }}>
+            Build a LinkedIn Presence That Closes Deals Without Hiring a Ghostwriter
           </h1>
         </Reveal>
 
@@ -125,8 +185,8 @@ function Hero() {
 
         <Reveal delay={180}>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
-            <a href="/signup" style={styles.btnTeal}>Audit My Profile Free →</a>
-            <a href="#how" style={styles.btnGhost}>Watch 2-min walkthrough</a>
+            <a href="/signup" style={styles.btnTeal}>Audit My Profile Free</a>
+            <a href="#how" style={styles.btnGhost}>Watch 2 Minute Walkthrough</a>
           </div>
           <p style={{ fontSize: 12.5, color: '#6B7280', fontFamily: 'monospace', marginBottom: 52 }}>No credit card. Free forever plan. Takes 60 seconds to set up.</p>
         </Reveal>
@@ -183,7 +243,7 @@ function Hero() {
                   ))}
                   <div style={{ background: 'rgba(45,212,191,0.06)', border: '1px solid rgba(45,212,191,0.12)', borderRadius: 8, padding: '10px 12px', marginTop: 6 }}>
                     <span style={{ fontSize: 10, fontWeight: 700, color: T, display: 'block', marginBottom: 5, fontFamily: 'monospace', letterSpacing: '0.08em', textTransform: 'uppercase' }}>AI Insight</span>
-                    <p style={{ fontSize: 12, color: '#9CA3AF', lineHeight: 1.5, fontStyle: 'italic' }}>Your About starts with "I am" — reframe around the reader's outcome to triple profile views.</p>
+                    <p style={{ fontSize: 12, color: '#9CA3AF', lineHeight: 1.5, fontStyle: 'italic' }}>Your About starts with "I am" reframe around the reader outcome to triple profile views.</p>
                   </div>
                 </div>
               </div>
@@ -203,7 +263,7 @@ function LogoStrip() {
       <p style={{ textAlign: 'center', fontSize: 11, color: '#374151', fontFamily: 'monospace', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 14 }}>Used by professionals across</p>
       <div style={{ overflow: 'hidden', position: 'relative' }}>
         <div className="logo-scroll" style={{ display: 'flex', width: 'max-content' }}>
-          {[...Array(2)].map((_,r) => ['Bootstrapped Founders','VC-Backed Startups','Sales Teams','Executive Coaches','B2B Agencies','Consultants','SaaS Companies','LinkedIn Creators'].map((l,i) => (
+          {[...Array(2)].map((_,r) => ['Bootstrapped Founders','VC Backed Startups','Sales Teams','Executive Coaches','B2B Agencies','Consultants','SaaS Companies','LinkedIn Creators'].map((l,i) => (
             <span key={`${r}-${i}`} style={{ padding: '0 28px', fontSize: 13, color: '#374151', fontWeight: 600, borderRight: '1px solid rgba(255,255,255,0.06)', whiteSpace: 'nowrap' }}>{l}</span>
           )))}
         </div>
@@ -224,9 +284,9 @@ function Pain() {
         </Reveal>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 16 }}>
           {[
-            { e:'😤', t:"You're posting but nothing is happening", b:"You write a post, get twelve likes from colleagues, and wonder why you bothered. Meanwhile someone else posts a three-liner and gets fifty DMs." },
+            { e:'😤', t:"You're posting but nothing is happening", b:"You write a post, get twelve likes from colleagues, and wonder why you bothered. Meanwhile someone else posts a three liner and gets fifty DMs." },
             { e:'😰', t:"Your profile looks like everyone else's", b:"'Founder | Entrepreneur | Passionate about innovation.' Sound familiar? Your profile is the first thing a prospect sees and it is giving them no reason to connect with you." },
-            { e:'😩', t:"Outreach feels like shouting into a void", b:"Copy-paste DMs get ignored. You have tried personalizing manually but it takes forever and the reply rate is still embarrassing. There has to be a better way and there is." },
+            { e:'😩', t:"Outreach feels like shouting into a void", b:"Copy paste DMs get ignored. You have tried personalizing manually but it takes forever and the reply rate is still embarrassing. There has to be a better way and there is." },
           ].map((p,i) => (
             <Reveal key={i} delay={i * 80}>
               <div style={{ ...styles.card, padding: 28, transition: 'transform 0.2s' }}>
@@ -293,9 +353,9 @@ function HowItWorks() {
         </Reveal>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 2, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, overflow: 'hidden', marginBottom: 40 }}>
           {[
-            { n:'01', t:'Connect your LinkedIn', b:'Paste your LinkedIn URL. Somyra reads your profile and builds a complete picture of your headline, about section, keywords, and positioning in seconds.' },
-            { n:'02', t:'Get your audit and voice profile', b:'Marcus Reid AI gives you a real strategic audit with scores and specific rewrites. Then you train your Voice Profile so everything sounds like you.' },
-            { n:'03', t:'Write, post, and reach out', b:'Generate posts in Deep Mode, build a full week of topics, and send personalized outreach that your ideal客户 actually replies to.' },
+            { n:'01', t:'Connect Your LinkedIn', b:'Paste your LinkedIn URL. Somyra reads your profile and builds a complete picture of your headline, about section, keywords, and positioning in seconds.' },
+            { n:'02', t:'Get Your Audit and Voice Profile', b:'Marcus Reid AI gives you a real strategic audit with scores and specific rewrites. Then you train your Voice Profile so everything sounds like you.' },
+            { n:'03', t:'Write, Post, and Reach Out', b:'Generate posts in Deep Mode, build a full week of topics, and send personalized outreach that your ideal customer actually replies to.' },
           ].map((s,i) => (
             <Reveal key={i} delay={i * 90}>
               <div style={{ background: '#141414', padding: '32px 28px', height: '100%', transition: 'background 0.2s' }}>
@@ -311,8 +371,8 @@ function HowItWorks() {
             <div style={{ width: 56, height: 56, borderRadius: '50%', background: T, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', cursor: 'pointer' }}>
               <svg width="20" height="24" viewBox="0 0 20 24" fill="#030B09"><path d="M0 0l20 12L0 24V0z"/></svg>
             </div>
-            <p style={{ fontSize: 16, fontWeight: 700, color: '#F5F5F5', marginBottom: 8 }}>2-min product walkthrough</p>
-            <p style={{ fontSize: 13, color: '#374151', fontFamily: 'monospace' }}>Video coming soon — see the full audit and post writer in action</p>
+            <p style={{ fontSize: 16, fontWeight: 700, color: '#F5F5F5', marginBottom: 8 }}>2 minute product walkthrough</p>
+            <p style={{ fontSize: 13, color: '#374151', fontFamily: 'monospace' }}>Video coming soon. See the full audit and post writer in action.</p>
           </div>
         </Reveal>
       </div>
@@ -325,18 +385,18 @@ function Features() {
   const feats = [
     {
       tag:'Feature 01', icon:'🎯',
-      title:'Profile Audit that actually tells you what to fix',
+      title:'Profile Audit That Actually Tells You What to Fix',
       benefit:'Stop guessing why your profile is not converting. Get a score, a rewrite, and a strategy.',
       body:'Marcus Reid AI analyzes every section of your profile and gives you a score breakdown, specific rewrites you can apply in one click, and a full target audience analysis.',
-      points:['Score breakdown by section','One-click AI rewrites','Target Audience AI analysis','Deep Strategy + Quick Audit modes'],
+      points:['Score breakdown by section','One click AI rewrites','Target Audience AI analysis','Deep Strategy and Quick Audit modes'],
       visual: (
-        <div style={{ ...styles.card, padding: 22 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <div style={{ ...styles.card, padding: 20 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <span style={{ fontSize: 13, fontWeight: 600, color: '#F5F5F5' }}>Your Profile Score</span>
             <span style={{ fontSize: 28, fontWeight: 900, color: T, letterSpacing: '-0.04em' }}>82<span style={{fontSize:13,color:'#9CA3AF'}}>/100</span></span>
           </div>
-          {([['Headline',90,'#2DD4BF','Strong — leads with outcome'],['About',74,'#FBBF24','Starts with "I am" — reframe around reader'],['Keywords',68,'#F87171','Missing 6 high-intent keywords']] as const).map(([l,v,c,insight]) => (
-            <div key={l} style={{ marginBottom: 14 }}>
+          {([['Headline',90,'#2DD4BF','Strong leads with outcome'],['About',74,'#FBBF24','Starts with "I am" reframe around reader'],['Keywords',68,'#F87171','Missing 6 high intent keywords']] as const).map(([l,v,c,insight]) => (
+            <div key={l} style={{ marginBottom: 12 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#9CA3AF' }}>{l}</span>
                 <span style={{ fontSize: 11, fontWeight: 700, color: c, fontFamily: 'monospace', background: `${c}15`, border: `1px solid ${c}25`, borderRadius: 5, padding: '1px 7px' }}>{v}</span>
@@ -352,24 +412,24 @@ function Features() {
     },
     {
       tag:'Feature 02', icon:'✍️',
-      title:'Posts that sound like you, not like ChatGPT',
+      title:'Posts That Sound Like You, Not Like ChatGPT',
       benefit:'Train Somyra on your voice once. Every post will sound like you on your best day.',
-      body:'Your Voice Profile captures your tone, vocabulary, and writing patterns. Deep Mode generates structured, algorithm-friendly posts in three variants. Done in under 5 minutes.',
-      points:['Voice Profile trained on your style','Deep Mode for high-performance formats','Three variants per generation','Hook-first structure built for reach'],
+      body:'Your Voice Profile captures your tone, vocabulary, and writing patterns. Deep Mode generates structured, algorithm friendly posts in three variants. Done in under 5 minutes.',
+      points:['Voice Profile trained on your style','Deep Mode for high performance formats','Three variants per generation','Hook first structure built for reach'],
       visual: (
         <div style={{ ...styles.card, overflow: 'hidden' }}>
           <div style={{ background: '#0D0D0D', borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '12px 16px' }}>
             <span style={{ fontSize: 10, fontWeight: 700, color: '#374151', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'monospace', display: 'block', marginBottom: 6 }}>Topic</span>
             <p style={{ fontSize: 13, color: '#9CA3AF' }}>"Why most founders fail on LinkedIn even when they have great content"</p>
           </div>
-          <div style={{ padding: 16 }}>
+          <div style={{ padding: 14 }}>
             <div style={{ background: '#181818', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: '12px 14px', marginBottom: 12 }}>
               <span style={{ fontSize: 10, fontWeight: 700, color: T, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'monospace', display: 'block', marginBottom: 7 }}>Variant 1 · Hook: Controversial</span>
               <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65 }}>Most LinkedIn advice is backwards.<br/><br/>Everyone tells you to "be consistent." But I have seen founders post daily for six months with zero inbound.<br/><br/>The real problem is positioning, not frequency.</p>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12, color: T, fontFamily: 'monospace', background: 'rgba(45,212,191,0.06)', borderRadius: 8, padding: '7px 12px' }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: T, boxShadow: `0 0 6px ${T}`, flexShrink: 0, display: 'inline-block' }}/>
-              Voice Profile Active — sounds like you
+              Voice Profile Active sounds like you
             </div>
           </div>
         </div>
@@ -377,13 +437,13 @@ function Features() {
     },
     {
       tag:'Feature 03', icon:'📡',
-      title:'Outreach that gets replies instead of getting ignored',
+      title:'Outreach That Gets Replies Instead of Getting Ignored',
       benefit:"Stop sending the same DM to fifty people. Generate messages based on each prospect's actual profile.",
-      body:'Build your ICP, pull prospect profiles, and generate first-touch messages that reference specific things about them. Track every conversation in the built-in CRM.',
-      points:['ICP Builder with filters','Profile-based message personalization','Follow-up sequence generator','Built-in CRM tracker'],
+      body:'Build your ICP, pull prospect profiles, and generate first touch messages that reference specific things about them. Track every conversation in the built in CRM.',
+      points:['ICP Builder with filters','Profile based message personalization','Follow up sequence generator','Built in CRM tracker'],
       visual: (
         <div style={{ ...styles.card, padding: 18 }}>
-          <div style={{ background: '#181818', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: 16, marginBottom: 14 }}>
+          <div style={{ background: '#181818', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: 14, marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 12 }}>
               <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: T, flexShrink: 0 }}>R</div>
               <div>
@@ -391,13 +451,45 @@ function Features() {
                 <p style={{ fontSize: 11, color: '#374151', fontFamily: 'monospace' }}>Generated from profile · First touch</p>
               </div>
             </div>
-            <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65 }}>Hey Rahul — saw your post about the Q4 pipeline squeeze and it hit close to home.<br/><br/>I work with sales leaders building inbound on LinkedIn without it eating their week. Most see two to three times the reply rates within 30 days.<br/><br/>Worth a quick chat?</p>
+            <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65 }}>Hey Rahul, saw your post about the Q4 pipeline squeeze and it hit close to home.<br/><br/>I work with sales leaders building inbound on LinkedIn without it eating their week. Most see two to three times the reply rates within 30 days.<br/><br/>Worth a quick chat?</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
             {[['68%','Open Rate',T],['31%','Reply Rate',T],['3.1x','vs Generic','#FBBF24']].map(([n,l,c]) => (
               <div key={l} style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '10px 8px', textAlign: 'center' }}>
                 <span style={{ display: 'block', fontSize: 'clamp(16px,2vw,20px)', fontWeight: 900, color: c, letterSpacing: '-0.04em', marginBottom: 3 }}>{n}</span>
                 <span style={{ fontSize: 11, color: '#6B7280', fontFamily: 'monospace' }}>{l}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      tag:'Feature 04', icon:'💡',
+      title:'Topic Generator That Eliminates Writer Block',
+      benefit:'Never stare at a blank screen again. Get dozens of topic ideas tailored to your industry and audience.',
+      body:'Generate a full month of content ideas in seconds. Each topic comes with a suggested hook type, angle, and target audience. Pick the winners and turn them into posts with one click.',
+      points:['30 topics per generation','Hook type suggestions for each idea','Industry specific topic clusters','One click send to Post Writer'],
+      visual: (
+        <div style={{ ...styles.card, overflow: 'hidden' }}>
+          <div style={{ background: '#0D0D0D', borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: '#374151', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Generated for</span>
+            <span style={{ fontSize: 11, color: '#9CA3AF', fontFamily: 'monospace' }}>B2B SaaS · Founder</span>
+          </div>
+          <div style={{ padding: 14 }}>
+            {[
+              { t:'Why your ICP is not engaging and how to fix it', h:'Contrarian', c:T },
+              { t:'The one metric that matters more than followers', h:'Data Driven', c:'#FBBF24' },
+              { t:'How we closed 3 deals from a single LinkedIn post', h:'Story', c:'#4ECB71' },
+              { t:'Stop optimizing for likes and start optimizing for DMs', h:'Hot Take', c:'#F87171' },
+              { t:'The 3 3 3 framework for consistent LinkedIn growth', h:'How To', c:'#4DABF7' },
+            ].map((row, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
+                <span style={{ width: 20, height: 20, borderRadius: '50%', background: `${row.c}15`, border: `1px solid ${row.c}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 800, color: row.c, flexShrink: 0 }}>{i + 1}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 12.5, color: '#9CA3AF', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.t}</p>
+                </div>
+                <span style={{ fontSize: 9, fontWeight: 700, color: row.c, fontFamily: 'monospace', background: `${row.c}12`, border: `1px solid ${row.c}20`, borderRadius: 4, padding: '2px 7px', whiteSpace: 'nowrap', flexShrink: 0 }}>{row.h}</span>
               </div>
             ))}
           </div>
@@ -411,29 +503,120 @@ function Features() {
       <div style={styles.container}>
         <Reveal>
           <span style={styles.eyebrow}>Features</span>
-          <h2 style={styles.h2}>Three tools.<br/><span style={{color:T}}>One system that works.</span></h2>
+          <h2 style={styles.h2}>Four tools.<br/><span style={{color:T}}>One system that works.</span></h2>
         </Reveal>
         {feats.map((f,i) => (
           <Reveal key={f.tag} delay={60}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(340px,1fr))', gap: 56, alignItems: 'center', marginBottom: 88 }}>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 48,
+              alignItems: 'center',
+              marginBottom: 64,
+            }}>
               <div style={{ order: i % 2 === 1 ? 2 : 1 }}>
                 <span style={{ fontSize: 10.5, fontWeight: 700, color: '#374151', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'monospace', display: 'block', marginBottom: 12 }}>{f.tag}</span>
-                <h3 style={{ fontSize: 'clamp(20px,2.5vw,28px)', fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: 12 }}>{f.title}</h3>
-                <p style={{ fontSize: 15, fontWeight: 600, color: T, marginBottom: 14, lineHeight: 1.5 }}>{f.benefit}</p>
-                <p style={{ fontSize: 14.5, color: '#9CA3AF', lineHeight: 1.72, marginBottom: 24 }}>{f.body}</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+                <h3 style={{ fontSize: 'clamp(18px,2.2vw,26px)', fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: 10 }}>{f.title}</h3>
+                <p style={{ fontSize: 14, fontWeight: 600, color: T, marginBottom: 12, lineHeight: 1.5 }}>{f.benefit}</p>
+                <p style={{ fontSize: 14, color: '#9CA3AF', lineHeight: 1.7, marginBottom: 20 }}>{f.body}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
                   {f.points.map(p => (
                     <div key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13.5, color: '#9CA3AF' }}>
                       <span style={{ color: T, fontSize: 14, flexShrink: 0 }}>✓</span>{p}
                     </div>
                   ))}
                 </div>
-                <a href="/signup" style={styles.btnTeal}>Try {f.icon} Free →</a>
+                <a href="/signup" style={styles.btnTeal}>Try {f.icon} Free</a>
               </div>
               <div style={{ order: i % 2 === 1 ? 1 : 2 }}>{f.visual}</div>
             </div>
           </Reveal>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ── COMPARISON TABLE ──
+function ComparisonTable() {
+  const cols = ['Somyra', 'Taplio', 'Supergrow', 'MagicPost'];
+  const rows = [
+    { label: 'AI Post Writer', values: ['full', 'full', 'full', 'full'] },
+    { label: 'Profile Audit and Strategy', values: ['full', 'limited', 'none', 'none'] },
+    { label: 'Smart Outreach and DMs', values: ['full', 'none', 'none', 'none'] },
+    { label: 'Voice Profile Learning', values: ['full', 'none', 'none', 'none'] },
+    { label: 'Topic Generator', values: ['full', 'full', 'limited', 'limited'] },
+    { label: 'LinkedIn Account Safety', values: ['full', 'limited', 'full', 'full'] },
+    { label: 'Follow Up Sequences', values: ['full', 'none', 'none', 'none'] },
+    { label: 'ICP Builder', values: ['full', 'none', 'none', 'none'] },
+    { label: 'Starting Price', values: ['free', 'paid', 'paid', 'paid'] },
+  ];
+
+  const iconMap: Record<string, React.ReactNode> = {
+    full: <span style={{color:'#22C55E',fontSize:16}}>✓</span>,
+    limited: <span style={{color:'#FBBF24',fontSize:16}}>△</span>,
+    none: <span style={{color:'#F87171',fontSize:16}}>✗</span>,
+    free: <span style={{color:T,fontSize:13,fontWeight:700}}>$0</span>,
+    paid: <span style={{color:'#F87171',fontSize:13,fontWeight:700}}>$$</span>,
+  };
+
+  return (
+    <div style={{ ...styles.section, background: '#080808' }}>
+      <div style={styles.container}>
+        <Reveal>
+          <span style={styles.eyebrow}>Comparison</span>
+          <h2 style={styles.h2}>How we stack up against<br/><span style={{color:T}}>the alternatives</span></h2>
+          <p style={styles.sub}>Somyra packs more features into a single tool than most competitors combined.</p>
+        </Reveal>
+        <Reveal delay={60}>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <table style={{ width: '100%', minWidth: 600, borderCollapse: 'separate', borderSpacing: 0 }}>
+              <thead>
+                <tr>
+                  <th style={{ textAlign: 'left', padding: '14px 16px', fontSize: 11, fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'monospace', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>Feature</th>
+                  {cols.map((c, i) => (
+                    <th key={c} style={{
+                      textAlign: 'center', padding: '14px 16px', fontSize: 13, fontWeight: 700,
+                      color: i === 0 ? T : '#6B7280',
+                      borderTop: i === 0 ? `2px solid ${T}` : '1px solid rgba(255,255,255,0.07)',
+                      borderLeft: i === 0 ? `1px solid ${T}30` : 'none',
+                      borderRight: i === cols.length - 1 ? '1px solid rgba(255,255,255,0.07)' : i === 0 ? `1px solid ${T}30` : 'none',
+                      borderBottom: '1px solid rgba(255,255,255,0.07)',
+                      background: i === 0 ? 'rgba(45,212,191,0.04)' : 'transparent',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {c}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, ri) => (
+                  <tr key={row.label}>
+                    <td style={{
+                      padding: '12px 16px', fontSize: 13.5, color: '#9CA3AF', fontWeight: 500,
+                      borderBottom: ri < rows.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                    }}>{row.label}</td>
+                    {row.values.map((v, ci) => (
+                      <td key={`${ri}-${ci}`} style={{
+                        textAlign: 'center', padding: '12px 8px',
+                        borderBottom: ri < rows.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                        borderRight: ci === cols.length - 1 ? '1px solid rgba(255,255,255,0.04)' : ci === 0 ? '1px solid rgba(45,212,191,0.1)' : 'none',
+                        borderLeft: ci === 0 ? '1px solid rgba(45,212,191,0.1)' : 'none',
+                        background: ci === 0 ? 'rgba(45,212,191,0.02)' : 'transparent',
+                      }}>
+                        {iconMap[v]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ fontSize: 11, color: '#374151', fontFamily: 'monospace', marginTop: 12, textAlign: 'center' }}>
+            Full feature set as of May 2026. Competitor feature availability may change.
+          </p>
+        </Reveal>
       </div>
     </div>
   );
@@ -459,7 +642,6 @@ function Testimonials() {
           <p style={styles.sub}>Every testimonial below is from a real user with a specific result.</p>
         </Reveal>
       </div>
-      {/* Marquee row 1 */}
       <div className="marquee-container" style={{ marginBottom: 16 }}>
         <div className="marquee-track marquee-right" style={{ display: 'flex', gap: 16, width: 'max-content' }}>
           {[...Array(2)].map((_, dupIdx) => tests.map((t,i) => (
@@ -480,7 +662,6 @@ function Testimonials() {
           )))}
         </div>
       </div>
-      {/* Marquee row 2 - reverse */}
       <div className="marquee-container" style={{ marginBottom: 16 }}>
         <div className="marquee-track marquee-left" style={{ display: 'flex', gap: 16, width: 'max-content' }}>
           {[...Array(2)].map((_, dupIdx) => [...tests].reverse().map((t,i) => (
@@ -520,7 +701,7 @@ function Founder() {
             </div>
             <div>
               <span style={styles.eyebrow}>Why I Built This</span>
-              <p style={{ fontSize: 15, color: '#9CA3AF', lineHeight: 1.75, marginBottom: 14 }}>"I dropped out of college and left my job in 2024 to go all-in on LinkedIn strategy for founders. I spent months doing profile revamps and ghostwriting manually and I kept seeing the same problems.</p>
+              <p style={{ fontSize: 15, color: '#9CA3AF', lineHeight: 1.75, marginBottom: 14 }}>"I dropped out of college and left my job in 2024 to go all in on LinkedIn strategy for founders. I spent months doing profile revamps and ghostwriting manually and I kept seeing the same problems.</p>
               <p style={{ fontSize: 15, color: '#9CA3AF', lineHeight: 1.75, marginBottom: 14 }}>Great founders with terrible profiles. Smart people writing posts that got ignored. Outreach that felt like spam because it was too generic.</p>
               <p style={{ fontSize: 15, color: '#9CA3AF', lineHeight: 1.75, marginBottom: 20 }}>I built Somyra because I was tired of LinkedIn being a black box. The strategy that works is not a secret. It just needed to be made accessible. That is what this is."</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -542,9 +723,9 @@ function Pricing() {
   const plans = [
     { name:'Free', price:{m:'$0',a:'$0'}, note:'forever', desc:'Try every feature before you commit.', cta:'Start Free', href:'/signup', style:'plain' as const,
       feats:['5 Profile Audits','10 Posts Written','30 Topics Generated','10 Outreach Messages','5 Voice Profile posts','10 Saved items'] },
-    { name:'Pro', price:{m:'$19',a:'$13'}, note:'/mo', desc:'For founders and professionals who want consistent LinkedIn growth.', cta:'Start Pro — Most Popular', href:'/signup?plan=pro', style:'featured' as const, badge:'Most Popular',
+    { name:'Pro', price:{m:'$19',a:'$13'}, note:'/mo', desc:'For founders and professionals who want consistent LinkedIn growth.', cta:'Start Pro', href:'/signup?plan=pro', style:'featured' as const, badge:'Most Popular',
       feats:['30 Profile Audits','60 Posts Written','Unlimited Topics','500 Outreach Messages','10 Voice Profile posts','200 Saved items','LinkedIn Growth Tracker','Priority AI model tier'] },
-    { name:'Max', price:{m:'$39',a:'$29'}, note:'/mo', desc:'For high-volume creators and teams who need no limits.', cta:'Start Max', href:'/signup?plan=max', style:'dark' as const,
+    { name:'Max', price:{m:'$39',a:'$29'}, note:'/mo', desc:'For high volume creators and teams who need no limits.', cta:'Start Max', href:'/signup?plan=max', style:'dark' as const,
       feats:['30 Profile Audits','Unlimited Posts','Unlimited Topics','1000 Outreach Messages','20 Voice Profile posts','Unlimited Saved items','LinkedIn Growth Tracker','Top AI intelligence layer','Early access to new tools'] },
   ];
   return (
@@ -588,16 +769,30 @@ function Pricing() {
                     </div>
                   ))}
                 </div>
-                <a href={p.href} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '13px 20px', borderRadius: 10, fontWeight: 700, fontSize: 14, background: p.style === 'featured' ? T : 'transparent', color: p.style === 'featured' ? '#030B09' : '#9CA3AF', border: p.style === 'featured' ? 'none' : '1px solid rgba(255,255,255,0.1)', textDecoration: 'none', transition: 'all 0.2s' }}>{p.cta}</a>
+                <a href={p.href} style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: '13px 20px', borderRadius: 10, fontWeight: 700, fontSize: 14,
+                  background: p.style === 'featured' ? T : 'transparent',
+                  color: p.style === 'featured' ? '#030B09' : '#F5F5F5',
+                  border: p.style === 'featured' ? 'none' : '1px solid rgba(255,255,255,0.18)',
+                  textDecoration: 'none', transition: 'all 0.2s',
+                }}>{p.cta}</a>
               </div>
             </Reveal>
           ))}
         </div>
         <Reveal delay={100}>
-          <div style={{ ...styles.card, padding: '24px 28px', display: 'flex', alignItems: 'flex-start', gap: 18 }}>
-            <span style={{ fontSize: 28, flexShrink: 0 }}>🔒</span>
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(45,212,191,0.08), rgba(45,212,191,0.02))',
+            border: '1px solid rgba(45,212,191,0.25)',
+            borderRadius: 16, padding: '24px 28px',
+            display: 'flex', alignItems: 'flex-start', gap: 18,
+          }}>
+            <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(45,212,191,0.1)', border: '1px solid rgba(45,212,191,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <span style={{ fontSize: 22 }}>🔒</span>
+            </div>
             <div>
-              <p style={{ fontSize: 15, fontWeight: 700, color: '#F5F5F5', marginBottom: 6 }}>30-Day Money-Back Guarantee</p>
+              <p style={{ fontSize: 16, fontWeight: 800, color: '#F5F5F5', marginBottom: 6 }}>30 Day Money Back Guarantee</p>
               <p style={{ fontSize: 13.5, color: '#9CA3AF', lineHeight: 1.65 }}>If you are on a paid plan and do not see improvement in your profile views or outreach replies within 30 days, email us and we will refund every rupee. No questions, no process, no waiting.</p>
             </div>
           </div>
@@ -611,7 +806,7 @@ function Pricing() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   const faqs = [
-    { q:'Will it actually sound like me, or like a bot?', a:'This is the question we hear most. Somyra Voice Profile trains on your actual writing patterns, tone, and vocabulary. Pro and Max users get the highest intelligence AI tier specifically to maintain voice consistency. The output reads like you wrote it on your best day, not like a robot trying to impersonate you.' },
+    { q:'Will it actually sound like me or like a bot?', a:'This is the question we hear most. Somyra Voice Profile trains on your actual writing patterns, tone, and vocabulary. Pro and Max users get the highest intelligence AI tier specifically to maintain voice consistency. The output reads like you wrote it on your best day, not like a robot trying to impersonate you.' },
     { q:'How long before I see real results?', a:'Most users see a measurable increase in profile views within the first week after implementing their audit recommendations. Outreach reply rates improve immediately. Content reach takes two to four weeks to build momentum because consistent posting is still part of the equation.' },
     { q:"I'm not a writer. Will this still work for me?", a:'Especially for you. You do not write anything from scratch. You give Somyra a topic, it generates three variants, you pick one and tweak a word or two. The whole process takes under five minutes per post. Non-writers are consistently our happiest users.' },
     { q:'What if I already have a strong profile?', a:'Run the audit and see. Most profiles that founders think are "fine" score between 60 and 75 out of 100 and have three to five specific, fixable issues. The audit will tell you exactly what is holding you back or confirm you are in great shape.' },
@@ -652,13 +847,13 @@ function FinalCTA() {
         <Reveal>
           <span style={styles.eyebrow}>Get Started Free</span>
           <h2 style={{ fontSize: 'clamp(28px,5vw,52px)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1, marginBottom: 18, color: '#F5F5F5' }}>
-            Your LinkedIn is either building<br/>your business or wasting your time.
+            Your LinkedIn is either building your business or wasting your time.
           </h2>
           <p style={{ fontSize: 16, color: '#9CA3AF', lineHeight: 1.7, marginBottom: 36 }}>
             Audit your profile, build your voice, and start publishing and outreaching with a system that works. Do it in the next ten minutes.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 14 }}>
-            <a href="/signup" style={{ ...styles.btnTeal, fontSize: 15, padding: '15px 26px', borderRadius: 11 }}>Audit My Profile Free →</a>
+            <a href="/signup" style={{ ...styles.btnTeal, fontSize: 15, padding: '15px 26px', borderRadius: 11 }}>Audit My Profile Free</a>
             <a href="#pricing" style={{ ...styles.btnGhost, fontSize: 15, padding: '15px 26px', borderRadius: 11 }}>See Pricing</a>
           </div>
           <p style={{ fontSize: 12.5, color: '#6B7280', fontFamily: 'monospace' }}>No credit card. Free forever plan. Cancel paid plans anytime.</p>
@@ -684,10 +879,12 @@ function Footer() {
     <footer style={{ background: '#080808', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(40px,6vw,56px) 28px 44px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 48 }}>
         <div style={{ maxWidth: 220 }}>
-          <div style={{ ...styles.logoWrap, marginBottom: 12 }}>
-            <div style={styles.logoS}>S</div>
-            <span style={styles.logoName}>Somyra</span>
-          </div>
+          <a href="/" style={styles.logoWrap}>
+            <div style={{ width: 30, height: 30, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.28)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: T }}>
+              <SomyraLogo size={16} />
+            </div>
+            <span style={{ fontSize: 17, fontWeight: 800, color: '#F5F5F5', letterSpacing: '-0.03em' }}>Somyra</span>
+          </a>
           <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 16 }}>Your AI copilot for LinkedIn. Build presence, write better, and close more.</p>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 11.5, color: '#6B7280', background: '#141414', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: '5px 12px', fontFamily: 'monospace' }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#22C55E', boxShadow: pulse ? '0 0 0 3px rgba(34,197,94,0.2)' : 'none', transition: 'box-shadow 0.6s', flexShrink: 0, display: 'inline-block' }}/>
@@ -739,15 +936,15 @@ const LandingPage: React.FC = () => {
 
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-      {/* Sticky nav */}
       <nav style={styles.nav}>
         <div style={styles.navInner}>
-          <div style={styles.logoWrap}>
-            <div style={styles.logoS}>S</div>
+          <a href="/" style={styles.logoWrap}>
+            <div style={{ width: 30, height: 30, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.28)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', color: T }}>
+              <SomyraLogo size={16} />
+            </div>
             <span style={styles.logoName}>Somyra</span>
-          </div>
+          </a>
 
-          {/* Desktop nav */}
           <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             {['How It Works','Features','Pricing'].map(l => (
               <a key={l} href={`#${l.toLowerCase().replace(/ /g,'')}`} style={styles.navLink}>{l}</a>
@@ -757,7 +954,6 @@ const LandingPage: React.FC = () => {
             <a href="/signup" style={styles.btnTeal}>Start Free</a>
           </div>
 
-          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(true)}
             className="mobile-hamburger"
@@ -769,20 +965,33 @@ const LandingPage: React.FC = () => {
         </div>
       </nav>
 
-      <Hero />
-      <LogoStrip />
-      <Pain />
-      <Transform />
-      <HowItWorks />
-      <Features />
-      <Testimonials />
-      <Founder />
-      <Pricing />
-      <FAQ />
-      <FinalCTA />
+      {/* Main content with sidebar layout */}
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '0 28px', display: 'flex', gap: 28 }}>
+        <div className="landing-sidebar" style={{ display: 'block' }}>
+          <Sidebar />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <Hero />
+          <LogoStrip />
+          <Pain />
+          <Transform />
+          <HowItWorks />
+          <Features />
+          <ComparisonTable />
+          <Testimonials />
+          <Founder />
+          <Pricing />
+          <FAQ />
+          <FinalCTA />
+        </div>
+      </div>
+
       <Footer />
 
       <style>{`
+        @media (max-width: 1024px) {
+          .landing-sidebar { display: none !important; }
+        }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-hamburger { display: block !important; }
