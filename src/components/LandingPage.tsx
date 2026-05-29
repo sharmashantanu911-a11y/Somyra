@@ -1059,9 +1059,15 @@ export function LandingPage({
                   </div>
 
                   {/* Somyra */}
-                  <div className="bg-[#2DD4BF]/[0.06] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-5 text-center">
-                    <div className="flex flex-col items-center gap-0.5">
-                      <span className="text-[14px] font-bold text-white">Somyra</span>
+                  <div className="bg-gradient-to-b from-[#2DD4BF]/[0.08] to-[#2DD4BF]/[0.02] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-4 md:p-5 text-center relative">
+                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#2DD4BF] text-black text-[9px] font-black uppercase tracking-[0.15em] shadow-[0_0_12px_rgba(45,212,191,0.4)]">
+                      Best Value
+                    </span>
+                    <div className="flex flex-col items-center gap-0.5 mt-2">
+                      <span className="text-[14px] font-bold text-white flex items-center gap-1.5">
+                        <Crown className="w-3.5 h-3.5 text-[#2DD4BF]" />
+                        Somyra
+                      </span>
                       <span className="text-[12px] font-bold text-[#2DD4BF]">From $19/mo</span>
                     </div>
                   </div>
@@ -1131,8 +1137,11 @@ export function LandingPage({
                     }
                   ].map((row, i) => {
                     const renderCell = (val: any, isSomyra: boolean) => {
-                      if (val === true) return <Check className={`w-4 h-4 ${isSomyra ? 'text-[#2DD4BF]' : 'text-[#2DD4BF]'} mb-1`} />;
-                      if (val === false) return <X className="w-4 h-4 text-red-500/50 mb-1" />;
+                      if (val === true) return <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[#2DD4BF]/10"><Check className="w-3.5 h-3.5 text-[#2DD4BF]" /></div>;
+                      if (val === false) return <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-500/10"><X className="w-3.5 h-3.5 text-red-500/60" /></div>;
+                      if (val === 'At risk') return <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-500/10"><AlertTriangle className="w-3.5 h-3.5 text-red-400" /></div>;
+                      if (val.toString().startsWith('$')) return <span className="text-[12px] md:text-[13px] font-bold text-[#EF4444]/70 leading-snug">{val}</span>;
+                      if (val === 'Limited' || val === 'Basic' || val === 'Basic AI') return <span className="text-[12px] md:text-[13px] font-medium text-[#777] leading-snug">{val}</span>;
                       return <span className="text-[12px] md:text-[13px] font-medium text-[#777] leading-snug">{val}</span>;
                     };
 
@@ -1505,19 +1514,43 @@ export function LandingPage({
         className="w-full px-6 py-16 md:py-24 text-center relative z-10 border-t border-white/5"
       >
         <div className="max-w-[672px] mx-auto">
+          {/* Micro quote */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 mb-8">
+            <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
+            <span className="text-[13px] text-[#999]">
+              "The first tool that actually sounds like me." <span className="text-white font-semibold">— James O.</span>
+            </span>
+          </div>
+
           <SectionHeading className="mb-6">
             Every week you stay quiet,<br />
             someone in your space gets louder.
           </SectionHeading>
-          <p className="text-[#A0A0A0] text-base mb-10">
+          <p className="text-[#A0A0A0] text-base mb-8">
             Start free forever. No credit card. Takes 30 seconds.
           </p>
           <button
             onClick={() => setActiveTab('profile')}
-            className="px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100"
+            className="px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 mb-8"
           >
             Start for Free
           </button>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
+              <Lock className="w-3 h-3 text-[#2DD4BF]" />
+              <span className="text-[11px] text-[#888] font-medium">No credit card required</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
+              <Shield className="w-3 h-3 text-[#2DD4BF]" />
+              <span className="text-[11px] text-[#888] font-medium">Free forever</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
+              <Zap className="w-3 h-3 text-[#2DD4BF]" />
+              <span className="text-[11px] text-[#888] font-medium">30 second signup</span>
+            </div>
+          </div>
         </div>
       </motion.section>
 
