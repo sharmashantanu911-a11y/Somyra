@@ -643,145 +643,152 @@ export function LandingPage({
       </nav>
 
       {/* ── HERO ── */}
-      <section id="landing-hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-[120px] pb-20 text-center overflow-hidden">
-        <div className="hero-glow" />
-        <div className="hero-grid-lines" />
+      <section id="landing-hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-[120px] pb-20 md:pb-28 text-center overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
-        <div className="relative z-10 max-w-[740px] w-full">
-          <div className="inline-flex items-center gap-[7px] bg-teal-accent/10 border border-teal-accent/25 rounded-full px-3.5 py-1.5 mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
-            <span className="w-1.5 h-1.5 bg-teal-accent rounded-full animate-[pulse-dot_2s_infinite]" />
-            <span className="text-[11px] font-semibold text-teal-accent tracking-widest uppercase">AI Powered LinkedIn Copilot</span>
+        <div className="relative z-10 max-w-[720px] w-full">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-4 py-1.5 mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
+            <div className="flex items-center">
+              <div className="w-5 h-5 rounded-full border-2 border-[#080808] -mr-1.5 bg-gradient-to-br from-teal-accent/30 to-teal-accent/50 flex items-center justify-center text-[8px] font-bold text-[#080808] z-[4]">PK</div>
+              <div className="w-5 h-5 rounded-full border-2 border-[#080808] -mr-1.5 bg-gradient-to-br from-indigo-500/30 to-indigo-500/50 flex items-center justify-center text-[8px] font-bold text-[#080808] z-[3]">AS</div>
+              <div className="w-5 h-5 rounded-full border-2 border-[#080808] bg-gradient-to-br from-amber-500/30 to-amber-500/50 flex items-center justify-center text-[8px] font-bold text-[#080808] z-[2]">TB</div>
+            </div>
+            <span className="text-[12px] font-medium text-white/60">Trusted by <strong className="text-white/90 font-semibold">2,400+ founders</strong></span>
           </div>
 
-          <h1 className="font-[family-name:var(--font-display)] text-[clamp(38px,7vw,68px)] font-extrabold leading-[1.07] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
-            <span className="whitespace-nowrap">Write posts. Close clients.</span><br />
-            Sound like <span className="text-teal-accent relative">you<span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-teal-accent/45 rounded-full origin-left scale-x-0 animate-[scale-in-x_0.5s_1s_ease_forwards]" /></span> every time.
+          {/* Headline */}
+          <h1 className="font-[family-name:var(--font-display)] text-[clamp(34px,6vw,62px)] font-extrabold leading-[1.08] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
+            Your LinkedIn sounds like<br className="hidden sm:block" />
+            <span className="text-teal-accent">everyone else.</span><br />
+            Somyra makes it sound like<br className="hidden sm:block" />
+            <span className="text-teal-accent relative">you.
+              <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-teal-accent/45 rounded-full origin-left scale-x-0 animate-[scale-in-x_0.5s_1s_ease_forwards]" />
+            </span>
           </h1>
 
-          <p className="text-[clamp(16px,2.5vw,19px)] font-light leading-[1.65] text-white/80 max-w-[520px] mx-auto mb-9 opacity-0 animate-[fadeUp_0.7s_0.5s_ease_forwards]">
-            Somyra learns your exact voice and writes LinkedIn posts, rewrites your profile, and crafts outreach DMs that actually get replies. Not generic AI. You.
+          {/* Subheadline */}
+          <p className="text-[clamp(16px,2.5vw,18px)] font-light leading-[1.7] text-white/60 max-w-[540px] mx-auto mb-10 opacity-0 animate-[fadeUp_0.7s_0.5s_ease_forwards]">
+            Most AI tools strip away your personality. Somyra learns your actual voice from your real posts and writes content that sounds unmistakably like you.
           </p>
 
-          <div className="flex flex-col items-center gap-3 mb-5 opacity-0 animate-[fadeUp_0.7s_0.65s_ease_forwards]">
+          {/* CTAs */}
+          <div className="flex flex-col items-center gap-4 mb-5 opacity-0 animate-[fadeUp_0.7s_0.65s_ease_forwards]">
             <div className="flex gap-3 flex-wrap justify-center">
               <button
                 onClick={() => setActiveTab('profile')}
                 className="inline-flex items-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0"
               >
                 Start for Free
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7H11M11 7L8 4M11 7L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 bg-transparent text-white font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:translate-y-[-1px]"
+                className="inline-flex items-center gap-2 bg-transparent text-white/80 font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
               >
-                <span className="w-[18px] h-[18px] rounded-full bg-white/15 flex items-center justify-center shrink-0">
-                  <svg viewBox="0 0 10 10" className="w-2 h-2 fill-white ml-[1px]"><polygon points="2,1 9,5 2,9"/></svg>
-                </span>
-                Watch It Work
+                See how it works
               </button>
             </div>
-            <div className="flex items-center gap-4 flex-wrap justify-center text-[12.5px] text-white/50 font-normal">
-              <span>No credit card required</span>
-              <span className="w-[3px] h-[3px] bg-white/50 rounded-full" />
-              <span>Cancel anytime</span>
-              <span className="w-[3px] h-[3px] bg-white/50 rounded-full" />
-              <span>Used in 10+ countries</span>
+            <div className="flex items-center gap-4 flex-wrap justify-center text-[13px] text-white/40 font-normal">
+              <span>No credit card</span>
+              <span className="w-1 h-1 bg-white/40 rounded-full" />
+              <span className="text-white/60 font-medium">Free forever</span>
+              <span className="w-1 h-1 bg-white/40 rounded-full" />
+              <span>Takes 30 seconds</span>
             </div>
           </div>
         </div>
 
-        {/* Product Preview Card */}
-        <div className="mt-[60px] relative z-10 w-full max-w-[720px] opacity-0 animate-[fadeUp_0.8s_0.8s_ease_forwards]">
-          <div className="preview-card">
-            <div className="preview-bar">
+        {/* Product Mockup */}
+        <div className="mt-[60px] relative z-10 w-full max-w-[800px] opacity-0 animate-[fadeUp_0.8s_0.8s_ease_forwards]">
+          <div className="mockup-frame">
+            {/* Browser bar */}
+            <div className="flex items-center justify-between px-4 py-3 bg-white/[0.02] border-b border-white/[0.06]">
               <div className="flex gap-1.5">
-                <span className="preview-dot bg-[#FF5F57]" />
-                <span className="preview-dot bg-[#FFBD2E]" />
-                <span className="preview-dot bg-[#28C840]" />
+                <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                <span className="w-3 h-3 rounded-full bg-[#28C840]" />
               </div>
-              <span className="text-[11.5px] text-white/50 font-medium tracking-widest uppercase">Post Writer</span>
-              <span className="text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-[3px] rounded uppercase tracking-wider">Live Preview</span>
+              <span className="text-[11px] text-white/30 font-medium">app.somyra.ai</span>
+              <div className="w-12" />
             </div>
 
-            <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex flex-col gap-3">
-                <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">What do you want to write about?</span>
-                <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[13px] text-white/80 leading-relaxed">
-                  How I landed my first enterprise client without spending a single dollar on ads
+            {/* Mockup content - clean static preview */}
+            <div className="p-5 md:p-7 grid grid-cols-1 md:grid-cols-5 gap-5">
+              {/* Left panel */}
+              <div className="md:col-span-3 space-y-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-teal-accent" />
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/70">Post Writer</span>
                 </div>
-
-                <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Post Style</span>
-                <div className="flex gap-2">
-                  <span className="preview-chip active">Storytelling</span>
-                  <span className="preview-chip">Educational</span>
-                  <span className="preview-chip">Hot Take</span>
+                <div className="bg-white/[0.03] border border-white/[0.06] rounded-lg p-4">
+                  <div className="text-[13px] text-white/70 leading-relaxed">
+                    How I landed my first enterprise client without spending a single dollar on ads
+                  </div>
                 </div>
-
-                <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Voice Mode</span>
-                <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[12px] text-white/50">
-                  Voice Profile active ✓
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[10px] text-white/40 font-medium uppercase tracking-wider">Style:</span>
+                  <div className="flex gap-1.5">
+                    <span className="text-[11px] px-2.5 py-1 rounded-md bg-teal-accent/15 text-teal-accent border border-teal-accent/20 font-medium">Storytelling</span>
+                    <span className="text-[11px] px-2.5 py-1 rounded-md bg-white/[0.04] text-white/40 border border-white/[0.06]">Educational</span>
+                    <span className="text-[11px] px-2.5 py-1 rounded-md bg-white/[0.04] text-white/40 border border-white/[0.06]">Hot Take</span>
+                  </div>
                 </div>
-
-                <button
-                  onClick={handleGenerate}
-                  disabled={isGenerating}
-                  className={`w-full ${isGenerating ? 'bg-teal-accent/20 cursor-not-allowed text-teal-accent/60' : 'bg-teal-accent hover:opacity-88 text-[#080808]'} font-bold text-[13px] py-2.5 rounded-lg transition-opacity`}
-                >
-                  {isGenerating ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      Generating...
-                    </span>
-                  ) : 'Generate Post'}
-                </button>
+                <div className="bg-teal-accent/10 border border-teal-accent/15 rounded-lg p-2.5 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-teal-accent animate-pulse" />
+                  <span className="text-[11px] font-medium text-teal-accent/80">Voice Profile active {'\u2022'} Writing in your style</span>
+                </div>
               </div>
 
-              <div className="bg-white/[0.025] border border-white/[0.07] rounded-xl p-4 flex flex-col gap-2.5">
-                <span className="text-[10px] font-semibold tracking-widest uppercase text-white/50">Generated Post</span>
-                <div className="text-[12px] leading-relaxed text-white/60">
-                  <strong className="text-white/90 font-medium">Three years ago I was broke, unheard of, and sending cold emails into a void.</strong>
+              {/* Right panel */}
+              <div className="md:col-span-2 bg-white/[0.02] border border-white/[0.06] rounded-lg p-4 flex flex-col">
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-white/40 mb-3">Generated Post</span>
+                <div className="text-[12px] leading-relaxed text-white/60 flex-grow">
+                  <strong className="text-white/80 font-medium">Three years ago I was broke, unheard of, and sending cold emails into a void.</strong>
                   <br /><br />
-                  No agency. No ad budget. No warm intros.<br /><br />
-                  The only thing I had was one clear message and the discipline to show up on LinkedIn every week.<span className="typing-cursor" />
+                  No agency. No ad budget. No warm intros.
+                  <br /><br />
+                  The only thing I had was one clear message and the discipline to show up on LinkedIn every week.
                 </div>
-                <div className="mt-auto inline-flex items-center gap-1.5 text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/15 px-2 py-1 rounded self-start">
-                  <span className="w-[5px] h-[5px] bg-teal-accent rounded-full animate-[pulse-dot_1.5s_infinite]" />
-                  Writing in your voice
+                <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-medium text-teal-accent/70">
+                  <span className="w-1 h-1 bg-teal-accent rounded-full" />
+                  Matched to your voice
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Social Proof Strip */}
-        <div className="mt-12 w-full max-w-[680px] pt-9 border-t border-white/[0.07] opacity-0 animate-[fadeUp_0.7s_1s_ease_forwards]">
-          <div className="flex items-center justify-center gap-8 flex-wrap">
+      {/* ── TRUST STRIP ── */}
+      <section className="w-full px-6 py-12 md:py-16 border-t border-white/[0.04]">
+        <div className="max-w-[680px] mx-auto text-center">
+          <div className="flex items-center justify-center gap-4 flex-wrap mb-5">
             <div className="flex items-center">
-              <div className="w-7 h-7 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[11px] font-semibold text-teal-accent z-[4]">PK</div>
-              <div className="w-7 h-7 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[11px] font-semibold text-indigo-400 z-[3]">AS</div>
-              <div className="w-7 h-7 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[11px] font-semibold text-amber-400 z-[2]">TB</div>
-              <div className="w-7 h-7 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[11px] font-semibold text-pink-400 z-[1]">MW</div>
+              <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[10px] font-bold text-teal-accent z-[4]">PK</div>
+              <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[10px] font-bold text-indigo-400 z-[3]">AS</div>
+              <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[10px] font-bold text-amber-400 z-[2]">TB</div>
+              <div className="w-8 h-8 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[10px] font-bold text-pink-400 z-[1]">MW</div>
             </div>
-            <span className="text-[12px] text-white/50"><strong className="text-white/80 font-medium">Founders and executives</strong> across 10+ countries are already growing on Somyra</span>
-            <div className="w-px h-8 bg-white/[0.07]" />
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] font-extrabold text-white tracking-tight leading-none">10+</p>
-              <span className="text-[11px] text-white/50 uppercase tracking-widest">Countries</span>
-            </div>
-            <div className="w-px h-8 bg-white/[0.07]" />
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] font-extrabold text-white tracking-tight leading-none">24%</p>
-              <span className="text-[11px] text-white/50 uppercase tracking-widest">Avg engagement lift</span>
-            </div>
+            <span className="text-[14px] text-white/50">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn with Somyra</span>
           </div>
-        </div>
 
-        {/* Scroll Hint */}
-        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-0 animate-[fadeIn_1s_1.4s_ease_forwards] z-10">
-          <span className="text-[11px] text-white/50 tracking-widest uppercase">Scroll</span>
-          <div className="scroll-mouse">
-            <div className="scroll-wheel" />
+          <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">10+</p>
+              <span className="text-[11px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
+            </div>
+            <div className="w-px h-8 bg-white/[0.06]" />
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">24%</p>
+              <span className="text-[11px] text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
+            </div>
+            <div className="w-px h-8 bg-white/[0.06]" />
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">Zero</p>
+              <span className="text-[11px] text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
+            </div>
           </div>
         </div>
       </section>
@@ -975,36 +982,66 @@ export function LandingPage({
             ))}
           </div>
 
-          {/* Video Placeholder */}
-          <div className="relative rounded-2xl overflow-hidden border border-white/[0.07] bg-[#0d0d0d] aspect-video flex flex-col items-center justify-center gap-4 cursor-pointer transition-colors hover:border-teal-accent/20 shadow-[0_32px_80px_rgba(0,0,0,0.5)] group">
-            {/* Grid texture */}
-            <div className="absolute inset-0 pointer-events-none" style={{
-              backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
-              backgroundSize: '40px 40px'
-            }} />
-            {/* Teal glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-teal-accent/[0.08] blur-[80px] rounded-full pointer-events-none" />
-            
-            {/* Badge */}
-            <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 bg-[#080808]/75 border border-white/[0.07] backdrop-blur-sm px-3 py-1.5 rounded-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400/70" />
-              <span className="text-[11px] font-medium text-white/50 tracking-wider uppercase">Coming Soon</span>
-            </div>
-            
-            {/* Duration */}
-            <div className="absolute bottom-4 right-4 z-10 text-[12px] font-medium text-white/50 bg-[#080808]/70 border border-white/[0.07] backdrop-blur-sm px-2.5 py-1 rounded">
-              2 min walkthrough
-            </div>
+          {/* Interactive Demo Card */}
+          <div className="relative rounded-2xl overflow-hidden border border-white/[0.07] shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
+            <div className="preview-card rounded-2xl">
+              <div className="preview-bar">
+                <div className="flex gap-1.5">
+                  <span className="preview-dot bg-[#FF5F57]" />
+                  <span className="preview-dot bg-[#FFBD2E]" />
+                  <span className="preview-dot bg-[#28C840]" />
+                </div>
+                <span className="text-[11.5px] text-white/50 font-medium tracking-widest uppercase">Post Writer</span>
+                <span className="text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-[3px] rounded uppercase tracking-wider">Live Preview</span>
+              </div>
 
-            {/* Play button */}
-            <div className="relative z-10 w-[72px] h-[72px] rounded-full bg-teal-accent/10 border border-teal-accent/30 flex items-center justify-center transition-all duration-300 group-hover:bg-teal-accent/20 group-hover:scale-105 group-hover:shadow-[0_0_32px_rgba(45,212,191,0.25)]">
-              <svg viewBox="0 0 24 24" className="w-7 h-7 fill-teal-accent ml-1"><polygon points="5,3 19,12 5,21"/></svg>
-            </div>
+              <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-3">
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">What do you want to write about?</span>
+                  <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[13px] text-white/80 leading-relaxed">
+                    How I landed my first enterprise client without spending a single dollar on ads
+                  </div>
 
-            {/* Label */}
-            <div className="relative z-10 flex flex-col items-center gap-1">
-              <span className="font-[family-name:var(--font-display)] text-[17px] font-bold text-white tracking-tight">Watch Somyra in action</span>
-              <span className="text-[13px] font-light text-white/50">See exactly how it works before you sign up</span>
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Post Style</span>
+                  <div className="flex gap-2">
+                    <span className="preview-chip active">Storytelling</span>
+                    <span className="preview-chip">Educational</span>
+                    <span className="preview-chip">Hot Take</span>
+                  </div>
+
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Voice Mode</span>
+                  <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[12px] text-white/50">
+                    Voice Profile active ✓
+                  </div>
+
+                  <button
+                    onClick={handleGenerate}
+                    disabled={isGenerating}
+                    className={`w-full ${isGenerating ? 'bg-teal-accent/20 cursor-not-allowed text-teal-accent/60' : 'bg-teal-accent hover:opacity-88 text-[#080808]'} font-bold text-[13px] py-2.5 rounded-lg transition-opacity`}
+                  >
+                    {isGenerating ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        Generating...
+                      </span>
+                    ) : 'Generate Post'}
+                  </button>
+                </div>
+
+                <div className="bg-white/[0.025] border border-white/[0.07] rounded-xl p-4 flex flex-col gap-2.5">
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-white/50">Generated Post</span>
+                  <div className="text-[12px] leading-relaxed text-white/60">
+                    <strong className="text-white/90 font-medium">Three years ago I was broke, unheard of, and sending cold emails into a void.</strong>
+                    <br /><br />
+                    No agency. No ad budget. No warm intros.<br /><br />
+                    The only thing I had was one clear message and the discipline to show up on LinkedIn every week.<span className="typing-cursor" />
+                  </div>
+                  <div className="mt-auto inline-flex items-center gap-1.5 text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/15 px-2 py-1 rounded self-start">
+                    <span className="w-[5px] h-[5px] bg-teal-accent rounded-full animate-[pulse-dot_1.5s_infinite]" />
+                    Writing in your voice
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

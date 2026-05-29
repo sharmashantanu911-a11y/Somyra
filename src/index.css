@@ -553,6 +553,24 @@
     margin-left: 2px;
   }
 
+  .mockup-frame {
+    background: #141414;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      0 32px 80px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 0 60px rgba(45,212,191,0.04);
+  }
+
+  @media (max-width: 640px) {
+    .mockup-frame {
+      border-radius: 8px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+  }
+
   .scroll-mouse {
     width: 20px;
     height: 30px;
