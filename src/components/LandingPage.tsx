@@ -14,6 +14,7 @@ import {
   Bookmark,
   Check,
   X,
+  Menu,
   ChevronRight,
   Minus,
   Plus,
@@ -515,6 +516,7 @@ export function LandingPage({
   const [activeFeatureTab, setActiveFeatureTab] = useState('post-writer');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [isAnnual, setIsAnnual] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [bottomBarDismissed, setBottomBarDismissed] = useState(() => {
     return localStorage.getItem('somyra_bottom_bar_dismissed') === 'true';
@@ -591,7 +593,7 @@ export function LandingPage({
     <div className="w-full max-w-full overflow-x-hidden">
       {/* ── NAVBAR ── */}
       <nav className="landing-nav">
-        <button onClick={() => scrollToHero()} className="flex items-center gap-2">
+        <button onClick={() => { scrollToHero(); setIsMobileMenuOpen(false); }} className="flex items-center gap-2 shrink-0">
           <div className="flex items-center justify-center shrink-0">
             <svg className="w-5 h-5 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
@@ -599,13 +601,14 @@ export function LandingPage({
           </div>
           <span className="font-[family-name:var(--font-display)] font-bold text-[17px] text-white tracking-tight -mb-0.5">Somyra</span>
         </button>
-        <div className="flex items-center gap-6 hidden md:flex">
+        <div className="hidden md:flex items-center gap-5">
           <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
             Explore
           </button>
           <div className="relative group/tools">
             <button className="landing-nav-link flex items-center gap-1">
               Features
+              <ChevronDown className="w-3 h-3" />
             </button>
             <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-56 rounded-xl border border-white/10 bg-[#0D0D0D] p-2 shadow-2xl opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
               <Link to="/linkedin-post-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
@@ -625,22 +628,90 @@ export function LandingPage({
               </Link>
             </div>
           </div>
-          <button onClick={() => setShowPricingModal(true)} className="landing-nav-link">
+          <button onClick={() => { setShowPricingModal(true); }} className="landing-nav-link">
             Pricing
           </button>
-          <button onClick={() => document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
+          <button onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); }} className="landing-nav-link">
             FAQ
           </button>
         </div>
-        <div className="flex items-center">
-          <button type="button" onClick={() => { setAuthMode?.('login'); setShowAuth(true); }} className="landing-nav-signin hidden sm:block">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => { setAuthMode?.('login'); setShowAuth(true); }}
+            className="landing-nav-signin"
+          >
             Log in
           </button>
-          <button type="button" onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }} className="landing-nav-cta">
+          <button
+            type="button"
+            onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
+            className="landing-nav-cta"
+          >
             Sign up
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </nav>
+
+      {/* ── MOBILE MENU ── */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[99] pt-24 px-4 md:hidden">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="relative bg-[#0D0D0D] border border-white/10 rounded-2xl p-4 shadow-2xl" style={{ animation: 'fadeInDownMobile 0.25s ease forwards' }}>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              >
+                Explore
+              </button>
+              <div className="px-4 py-3">
+                <p className="text-[11px] font-black text-[#555] uppercase tracking-[0.15em] mb-2">Features</p>
+                <div className="flex flex-col gap-1 ml-2">
+                  <Link to="/linkedin-post-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Post Generator</Link>
+                  <Link to="/linkedin-profile-audit" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Profile Audit</Link>
+                  <Link to="/linkedin-dm-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">DM Generator</Link>
+                  <Link to="/linkedin-hook-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Hook Generator</Link>
+                  <Link to="/linkedin-topic-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Topic Generator</Link>
+                </div>
+              </div>
+              <button
+                onClick={() => { setShowPricingModal(true); setIsMobileMenuOpen(false); }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              >
+                Pricing
+              </button>
+              <button
+                onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              >
+                FAQ
+              </button>
+              <hr className="border-white/5 my-2" />
+              <button
+                onClick={() => { setAuthMode?.('login'); setShowAuth(true); setIsMobileMenuOpen(false); }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-white hover:bg-white/5 transition-all"
+              >
+                Log in
+              </button>
+              <button
+                onClick={() => { setAuthMode?.('signup'); setShowAuth(true); setIsMobileMenuOpen(false); }}
+                className="w-full text-center px-4 py-3 rounded-xl bg-[#2DD4BF] text-black font-bold text-sm hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all"
+              >
+                Sign up
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── HERO ── */}
       <section id="landing-hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-[120px] pb-20 md:pb-28 text-center overflow-hidden">
@@ -677,7 +748,8 @@ export function LandingPage({
           <div className="flex flex-col items-center gap-4 mb-5 opacity-0 animate-[fadeUp_0.7s_0.65s_ease_forwards]">
             <div className="flex gap-3 flex-wrap justify-center">
               <button
-                onClick={() => setActiveTab('profile')}
+                id="hero-start-free"
+                onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
                 className="inline-flex items-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0"
               >
                 Start for Free
@@ -1178,7 +1250,7 @@ export function LandingPage({
             </h3>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={() => setActiveTab('profile')}
+                onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
                 className="px-8 py-4 bg-[#2DD4BF] text-black font-bold rounded-xl text-sm hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
               >
                 Start for Free
@@ -1262,7 +1334,7 @@ export function LandingPage({
               buttonStyle="bg-white/5 text-white hover:bg-white/10"
               cardStyle=""
               isAnnual={isAnnual}
-              onClick={() => setActiveTab('profile')}
+              onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
             />
 
             <PricingCard
@@ -1530,7 +1602,7 @@ export function LandingPage({
             Start free forever. No credit card. Takes 30 seconds.
           </p>
           <button
-            onClick={() => setActiveTab('profile')}
+            onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
             className="px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 mb-8"
           >
             Start for Free
