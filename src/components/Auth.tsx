@@ -9,10 +9,11 @@ interface AuthProps {
   onAuthSuccess: (user: any) => void;
   onClose?: () => void;
   feature?: string;
+  initialMode?: 'login' | 'signup' | 'forgot' | 'check_email';
 }
 
-export default function Auth({ onAuthSuccess, onClose, feature }: AuthProps) {
-  const [mode, setMode] = useState<AuthMode>('signup');
+export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: AuthProps) {
+  const [mode, setMode] = useState<AuthMode>(initialMode || 'signup');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

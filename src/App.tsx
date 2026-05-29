@@ -147,6 +147,7 @@ export default function App() {
   const [error, setError] = useState<AppError | null>(null);
   const [user, setUser] = useState<any>(null);
   const [showAuth, setShowAuth] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('signup');
   const [authFeature, setAuthFeature] = useState<string | undefined>();
   const [authCallback, setAuthCallback] = useState<(() => void) | null>(null);
 
@@ -1048,6 +1049,7 @@ export default function App() {
         <LandingPage 
           setActiveTab={handleTabClick}
           setShowAuth={setShowAuth}
+          setAuthMode={setAuthMode}
           setShowPricingModal={setShowPricingModal}
           onOpenChangelog={openChangelog}
           testimonials={testimonials}
@@ -1928,6 +1930,7 @@ export default function App() {
       <AnimatePresence>
         {showAuth && (
           <Auth 
+            initialMode={authMode}
             feature={authFeature}
             onAuthSuccess={(userData) => {
               setUser(userData);
@@ -1949,7 +1952,7 @@ export default function App() {
 
       
       {/* Footer */}
-      <SomyraFooter />
+      <SomyraFooter onStartFree={() => { setAuthMode('signup'); setShowAuth(true); }} />
 
       {/* Toast Notification */}
       <AnimatePresence>

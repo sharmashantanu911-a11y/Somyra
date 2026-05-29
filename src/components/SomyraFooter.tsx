@@ -37,7 +37,11 @@ const StatusDot: React.FC = () => {
   );
 };
 
-const SomyraFooter: React.FC = () => {
+interface SomyraFooterProps {
+  onStartFree?: () => void;
+}
+
+const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
   return (
     <>
       <style>{`
@@ -426,7 +430,13 @@ const SomyraFooter: React.FC = () => {
                 <li><FooterLink to="/#how-it-works">How It Works</FooterLink></li>
                 <li><FooterLink to="/#pricing">Pricing</FooterLink></li>
                 <li><FooterLink to="/blog">Blog</FooterLink></li>
-                <li><FooterLink to="/" className="highlight">Start Free →</FooterLink></li>
+                <li>
+                  {onStartFree ? (
+                    <button type="button" onClick={onStartFree} className="highlight" style={{background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', fontSize: '13px', fontWeight: 500}}>Start Free</button>
+                  ) : (
+                    <FooterLink to="/" className="highlight">Start Free</FooterLink>
+                  )}
+                </li>
               </ul>
             </div>
 

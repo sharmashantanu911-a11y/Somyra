@@ -36,6 +36,7 @@ import {
 interface LandingPageProps {
   setActiveTab: (tab: any) => void;
   setShowAuth: (show: boolean) => void;
+  setAuthMode?: (mode: 'login' | 'signup') => void;
   setShowPricingModal: (show: boolean) => void;
   onOpenChangelog?: () => void;
   testimonials: any[];
@@ -502,6 +503,7 @@ const Counter = ({ value, label }: { value: string; label: string }) => {
 export function LandingPage({
   setActiveTab,
   setShowAuth,
+  setAuthMode,
   setShowPricingModal,
   onOpenChangelog,
   testimonials,
@@ -631,10 +633,10 @@ export function LandingPage({
           </button>
         </div>
         <div className="flex items-center">
-          <button onClick={() => setShowAuth(true)} className="landing-nav-signin hidden sm:block">
+          <button type="button" onClick={() => { setAuthMode?.('login'); setShowAuth(true); }} className="landing-nav-signin hidden sm:block">
             Log in
           </button>
-          <button onClick={() => setShowAuth(true)} className="landing-nav-cta">
+          <button type="button" onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }} className="landing-nav-cta">
             Sign up
           </button>
         </div>
