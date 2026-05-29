@@ -64,8 +64,8 @@ const featureTabs: FeatureTabData[] = [
     id: 'post-writer',
     label: 'Post Writer',
     tag: 'CONTENT FACTORY',
-    title: 'Posts that actually sound like you',
-    body: 'Tell Somyra what you want to write about. Choose your style. Hit generate. Get a post that sounds like your best writing on your best day. Every time.',
+    title: 'Write posts that get noticed, not skipped',
+    body: 'Tell Somyra what you want to write about. Choose your style. Hit generate. Get a post that sounds like your best writing on your best day. Every single time.',
     dots: [
       'Storytelling, Educational, Controversial and Personal styles',
       'Deep Mode for maximum authenticity',
@@ -78,13 +78,13 @@ const featureTabs: FeatureTabData[] = [
     id: 'profile-analysis',
     label: 'Profile Analysis',
     tag: 'PERSONAL BRAND',
-    title: 'Know exactly what is killing your profile',
-    body: 'Paste your About and Experience. Get a surgical audit of every element hurting your visibility and credibility. Then get the exact rewrite to fix it.',
+    title: 'Turn your profile into a lead magnet',
+    body: 'Paste your About and Experience. Get a surgical audit of every element that is hurting your visibility and credibility. Then get the exact rewrite to fix it.',
     dots: [
       'Quick Audit for fast wins',
       'Deep Strategy for full transformation',
       'Headline, About and positioning fixes',
-      'Actionable roadmap not vague suggestions'
+      'Actionable roadmap, not vague suggestions'
     ],
     icon: UserCircle
   },
@@ -92,10 +92,10 @@ const featureTabs: FeatureTabData[] = [
     id: 'topic-generator',
     label: 'Topic Generator',
     tag: 'CONTENT FACTORY',
-    title: 'Five post ideas in 20 seconds',
+    title: 'Never wonder what to post again',
     body: 'Tell us your niche, your audience, and your goals. Get five story driven post topics tailored to what your specific audience actually engages with.',
     dots: [
-      'Niche specific not generic ideas',
+      'Niche specific ideas, not generic topics',
       'Based on real LinkedIn engagement patterns',
       'Saves to your library for later',
       'Refreshes every time you generate'
@@ -106,7 +106,7 @@ const featureTabs: FeatureTabData[] = [
     id: 'smart-outreach',
     label: 'Smart Outreach',
     tag: 'SALES AND OUTREACH',
-    title: 'DMs that get real replies',
+    title: 'Turn cold DMs into warm conversations',
     body: 'Paste what you know about your prospect. Get a message that references their actual work, speaks to their real pain, and feels like you spent an hour researching them. Because Somyra did.',
     dots: [
       'Message Builder with prospect context',
@@ -121,7 +121,7 @@ const featureTabs: FeatureTabData[] = [
     id: 'voice-profile',
     label: 'Voice Profile',
     tag: 'PRO FEATURE',
-    title: 'The AI that writes like you not like AI',
+    title: 'The AI that actually sounds like you',
     body: 'Add your best posts. Somyra studies how you structure ideas, what words you use, how you open and close. Every generation after that sounds unmistakably like you.',
     dots: [
       'Add 3 to 10 sample posts',
@@ -135,7 +135,7 @@ const featureTabs: FeatureTabData[] = [
     id: 'saved-library',
     label: 'Saved Library',
     tag: 'PRO FEATURE',
-    title: 'Your personal content vault',
+    title: 'Never lose your best content',
     body: 'Every post, DM, and audit you generate can be saved. Build a library of your best work. Repurpose it. Reference it. Never start from zero again.',
     dots: [
       'Save anything from any feature',
@@ -150,27 +150,27 @@ const featureTabs: FeatureTabData[] = [
 const faqData = [
   {
     q: 'Is this just another AI writing tool?',
-    a: 'No. Every AI writing tool gives you generic output because it knows nothing about you. Somyra learns your actual voice from your real posts, understands your niche from your profile, and writes content that sounds like you on your best day. The output is so specific to you that your audience will not be able to tell the difference.'
+    a: 'No. Every AI writing tool gives you generic output because it knows nothing about you. Somyra learns your actual voice from your real posts, understands your niche from your profile, and writes content that sounds like you on your best day. Your audience will not be able to tell the difference.'
   },
   {
     q: 'What if I have never posted on LinkedIn?',
-    a: 'Then this is exactly where you start. Profile Analysis tells you what to fix first. Topic Generator gives you ideas immediately. Post Writer helps you find your voice. You do not need existing content to get value from Somyra. You just need to show up.'
+    a: 'Then this is exactly where you start. Profile Analysis tells you what to fix first. Topic Generator gives you ideas instantly. Post Writer helps you find your voice. You do not need existing content to get value. You just need to show up.'
   },
   {
-    q: 'How is Voice Profile different from just prompting ChatGPT with my writing style?',
-    a: 'ChatGPT forgets everything the moment you close the tab. Voice Profile saves your style permanently. Every feature across Somyra pulls from it automatically. You set it once and every generation sounds like you from that point forward. No prompting. No explaining yourself every single time.'
+    q: 'Why not just use ChatGPT?',
+    a: 'ChatGPT forgets everything the moment you close the tab. Voice Profile saves your style permanently. Every feature across Somyra pulls from it automatically. Set it once and every generation sounds like you from that point forward. No prompting. No explaining yourself every time.'
   },
   {
-    q: 'Can I cancel anytime?',
-    a: 'Yes. No questions, no friction, no cancellation fees. Cancel from your account settings in under 10 seconds. We would rather earn your subscription every month than trap you into one.'
+    q: 'Is there a contract or can I leave?',
+    a: 'No contracts. Cancel from your account settings in under 10 seconds. No questions, no fees, no friction. We would rather earn your subscription every month than trap you into one.'
   },
   {
     q: 'Who is Somyra built for?',
-    a: 'Founders, executives, consultants, and sales professionals who know LinkedIn is important but cannot show up consistently because creating content takes too long and hiring a ghostwriter costs too much. If you have ever closed a tab because you did not know what to write, Somyra was built for you.'
+    a: 'Founders, executives, consultants, and sales professionals who know LinkedIn is important but cannot show up consistently because creating content takes too long. If you have ever closed a tab because you did not know what to write, Somyra was built for you.'
   },
   {
     q: 'What happens when I hit my monthly limit?',
-    a: 'You will see a clear counter throughout the app so you always know where you stand. When you hit your limit you can upgrade to Pro instantly or wait for the monthly reset. No surprise charges. Ever.'
+    a: 'You will see a clear counter throughout the app so you always know where you stand. When you hit your limit, upgrade to Pro instantly or wait for the monthly reset. No surprise charges. Ever.'
   }
 ];
 
@@ -836,9 +836,7 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-         SECTION 5: FEATURES (Superhuman-style)
-         ════════════════════════════════════════ */}
+      {/* ── FEATURES (Value Proofs) ── */}
       <motion.section 
         initial="initial"
         whileInView="animate"
@@ -847,13 +845,13 @@ export function LandingPage({
         className="w-full px-4 py-16 md:py-24 relative z-10"
       >
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>WHAT SOMYRA DOES</SectionLabel>
+          <SectionLabel>EVERYTHING YOU NEED</SectionLabel>
           <SectionHeading className="mb-4">
-            One tool that handles<br />
-            everything LinkedIn
+            Six tools in one.<br />
+            All sounding like you.
           </SectionHeading>
           <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-12 max-w-[672px]">
-            Most people use five different tools and still get average results. Somyra replaces all of them.
+            Most people juggle five different tools and still sound generic. Somyra does everything in one place, and everything sounds like you.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -1028,8 +1026,302 @@ export function LandingPage({
         </div>
       </section>
 
+      {/* ── COMPARISON ── */}
+      <section className="w-full px-4 py-16 md:py-20 bg-[#0D0D0D] relative z-10 border-t border-white/5">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center mb-12">
+            <SectionLabel>WHY SOMYRA</SectionLabel>
+            <SectionHeading className="mb-4">
+              More tools. Higher prices.<br />
+              None of them sound like you.
+            </SectionHeading>
+            <p className="text-[#888] text-[15px] md:text-lg leading-[1.7] max-w-[576px] mx-auto">
+              We built the comparison so you do not have to spend hours researching.
+            </p>
+          </div>
+
+          {/* Table Container */}
+          <div className="relative">
+            <div className="md:hidden text-center mb-4">
+              <span className="text-[11px] text-[#555] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                <ChevronRight className="w-3 h-3 rotate-180" />
+                Scroll to compare
+                <ChevronRight className="w-3 h-3" />
+              </span>
+            </div>
+
+            <div className="overflow-x-auto pb-4 no-scrollbar">
+              <div className="min-w-[800px] md:min-w-full">
+                {/* Table Header */}
+                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-end">
+                  <div className="pb-5 pl-4">
+                    <span className="text-[10px] font-black text-[#555] uppercase tracking-[0.2em]">Feature</span>
+                  </div>
+
+                  {/* Somyra */}
+                  <div className="bg-[#2DD4BF]/[0.06] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-5 text-center">
+                    <div className="flex flex-col items-center gap-0.5">
+                      <span className="text-[14px] font-bold text-white">Somyra</span>
+                      <span className="text-[12px] font-bold text-[#2DD4BF]">From $19/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Competitors */}
+                  {[
+                    { name: 'Taplio', note: 'AI at $69/mo' },
+                    { name: 'Supergrow', note: 'From $19/mo' },
+                    { name: 'MagicPost', note: 'From $27/mo' }
+                  ].map((comp, idx) => (
+                    <div key={idx} className="bg-white/[0.02] p-5 text-center border-t border-x border-white/5 rounded-t-xl mx-px">
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[14px] font-bold text-white">{comp.name}</span>
+                        <span className="text-[12px] text-[#666] font-medium">{comp.note}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Table Rows */}
+                <div className="border border-white/5 rounded-b-2xl overflow-hidden">
+                  {[
+                    {
+                      feature: 'Writes in your exact voice',
+                      somyra: true,
+                      others: [false, 'Limited', 'Basic AI']
+                    },
+                    {
+                      feature: 'Profile audit with rewrite',
+                      somyra: true,
+                      others: [false, false, false]
+                    },
+                    {
+                      feature: 'Smart outreach with CRM',
+                      somyra: true,
+                      others: ['$199/mo', false, false]
+                    },
+                    {
+                      feature: 'Voice learning from your posts',
+                      somyra: true,
+                      others: ['Basic', 'Basic', 'Basic']
+                    },
+                    {
+                      feature: 'Unlimited topic ideas',
+                      somyra: true,
+                      others: ['Limited', true, true]
+                    },
+                    {
+                      feature: 'Account safe, no automation',
+                      somyra: true,
+                      others: ['At risk', true, true]
+                    },
+                    {
+                      feature: 'Follow up sequences',
+                      somyra: true,
+                      others: ['Basic', false, false]
+                    },
+                    {
+                      feature: 'ICP targeting tool',
+                      somyra: true,
+                      others: [false, false, false]
+                    },
+                    {
+                      feature: 'Full AI included at base price',
+                      somyra: true,
+                      others: ['$69/mo', 'Limited', 'Basic']
+                    }
+                  ].map((row, i) => {
+                    const renderCell = (val: any, isSomyra: boolean) => {
+                      if (val === true) return <Check className={`w-4 h-4 ${isSomyra ? 'text-[#2DD4BF]' : 'text-[#2DD4BF]'} mb-1`} />;
+                      if (val === false) return <X className="w-4 h-4 text-red-500/50 mb-1" />;
+                      return <span className="text-[12px] md:text-[13px] font-medium text-[#777] leading-snug">{val}</span>;
+                    };
+
+                    return (
+                      <div key={i} className={`grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center ${i % 2 === 0 ? 'bg-white/[0.015]' : 'bg-transparent'}`}>
+                        <div className="p-4 md:p-5 text-[13px] font-bold text-white pl-5">{row.feature}</div>
+                        <div className="p-4 md:p-5 flex flex-col items-center justify-center bg-[#2DD4BF]/[0.03] border-x border-white/5 h-full">
+                          {renderCell(row.somyra, true)}
+                        </div>
+                        {row.others.map((val, ci) => (
+                          <div key={ci} className="p-4 md:p-5 flex flex-col items-center justify-center h-full border-r border-white/5 last:border-r-0">
+                            {renderCell(val, false)}
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-4 text-[11px] text-[#555] font-medium italic px-4">
+              *AI features require $69/mo plan on Taplio.
+            </p>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 mb-5">
+              <span className="text-[10px] font-black text-[#2DD4BF] uppercase tracking-[0.2em]">The bottom line</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
+              More features. Lower price.<br />Zero account risk.
+            </h3>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setActiveTab('profile')}
+                className="px-8 py-4 bg-[#2DD4BF] text-black font-bold rounded-xl text-sm hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
+              >
+                Start for Free
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ════════════════════════════════════════
-         SECTION 7: TESTIMONIALS
+         SECTION 9: PRICING PREVIEW
+         ════════════════════════════════════════ */}
+      <motion.section 
+        id="pricing-section"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="w-full px-6 py-16 md:py-24 relative z-10 border-t border-white/5"
+      >
+        <div className="max-w-[1024px] mx-auto">
+          <div className="text-center mb-12">
+            <SectionLabel>PRICING</SectionLabel>
+            <SectionHeading className="mb-8">
+              Start free forever.<br />
+              Upgrade when you are ready<br />
+              for more.
+            </SectionHeading>
+
+            {/* Toggle */}
+            <div className="flex justify-center mb-12">
+              <div className="inline-flex items-center gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1.5 mb-2">
+                <button
+                  onClick={() => setIsAnnual(false)}
+                  className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all ${
+                    !isAnnual ? 'bg-white/10 text-white shadow-xl' : 'text-[#888] hover:text-white'
+                  }`}
+                >
+                  Monthly
+                </button>
+                <button
+                  onClick={() => setIsAnnual(true)}
+                  className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all flex items-center gap-2 ${
+                    isAnnual ? 'bg-teal-accent/10 text-teal-accent border border-teal-accent/20' : 'text-[#888] hover:text-white'
+                  }`}
+                >
+                  Annual
+                </button>
+                {isAnnual && (
+                  <span className="text-[10px] text-teal-accent font-bold mr-2 ml-1 animate-pulse">Save up to 35%</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-5 items-start">
+            <PricingCard
+              name="Free"
+              monthlyPrice="$0"
+              annualPrice="$0"
+              annualBilling=""
+              savings=""
+              subtext="Forever free. No card needed."
+              features={[
+                'Profile Audit: 5 per month',
+                'Topic Generator: 30 topics per month',
+                'Post Writer: 10 per month',
+                'Smart Outreach: 10 messages per month',
+                'Voice Profile: up to 5 sample posts',
+                'Saved Library: up to 10 saves'
+              ]}
+              excluded={[
+                'Deep Strategy',
+                'Deep Mode',
+                'Unlimited Topic Generator',
+                'Priority AI responses',
+                'Early access to new features',
+                'Direct founder access'
+              ]}
+              buttonLabel="Start for Free"
+              buttonStyle="bg-white/5 text-white hover:bg-white/10"
+              cardStyle=""
+              isAnnual={isAnnual}
+              onClick={() => setActiveTab('profile')}
+            />
+
+            <PricingCard
+              name="Pro"
+              monthlyPrice="$19"
+              annualPrice="$13"
+              annualBilling="Billed $156/year"
+              savings="Save $72 per year"
+              subtext="Everything in Free plus:"
+              badge="Most Popular"
+              features={[
+                'Profile Audit: 30 per month',
+                'Topic Generator: Unlimited',
+                'Post Writer: 60 per month',
+                'Smart Outreach: 500 messages per month (that is 25 per working day)',
+                'Voice Profile: up to 10 sample posts',
+                'Saved Library: up to 200 saves',
+                'Deep Strategy',
+                'Deep Mode',
+                'Full Smart Outreach suite',
+                'Priority AI responses',
+                'Early access to new features'
+              ]}
+              buttonLabel="Get Pro"
+              buttonStyle=""
+              cardStyle=""
+              isAnnual={isAnnual}
+              onClick={() => setShowPricingModal(true)}
+            />
+
+            <PricingCard
+              name="Max"
+              monthlyPrice="$39"
+              annualPrice="$29"
+              annualBilling="Billed $348/year"
+              savings="Save $120 per year"
+              subtext="Everything in Pro plus:"
+              badge="For Power Users"
+              features={[
+                'Profile Audit: Unlimited',
+                'Topic Generator: Unlimited',
+                'Post Writer: Unlimited',
+                'Smart Outreach: 1000 messages per month (that is 50 per working day)',
+                'Voice Profile: up to 20 sample posts',
+                'Saved Library: Unlimited',
+                'Deep Strategy',
+                'Deep Mode',
+                'Full Smart Outreach suite',
+                'Priority AI fastest response times',
+                'Early access before Pro users',
+                'Direct founder access for feedback'
+              ]}
+              buttonLabel="Get Max Access"
+              buttonStyle=""
+              cardStyle=""
+              isAnnual={isAnnual}
+              onClick={() => setShowPricingModal(true)}
+            />
+          </div>
+
+          <p className="text-center text-[#666] text-sm md:text-base mt-10 max-w-[672px] mx-auto leading-relaxed">
+            All plans include LinkedIn Post Preview, Topic Generator, Profile Analysis, Post Writer and Smart Outreach. Upgrade or downgrade anytime.
+          </p>
+        </div>
+      </motion.section>
+
+      {/* ════════════════════════════════════════
+         SECTION 10: TESTIMONIALS
          ════════════════════════════════════════ */}
       <motion.section 
         initial="initial"
@@ -1171,388 +1463,7 @@ export function LandingPage({
         </div>
       </motion.section>
 
-      {/* ════════════════════════════════════════
-         SECTION 8: COMPARISON
-         ════════════════════════════════════════ */}
-      {/* ════════════════════════════════════════
-         SECTION 8: COMPETITIVE COMPARISON
-         ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="w-full px-4 py-20 md:py-24 bg-[#0D0D0D] relative z-10"
-      >
-        <div className="max-w-[1100px] mx-auto">
-          <div className="text-center mb-16">
-            <motion.p 
-              variants={fadeInUp}
-              className="text-[11px] md:text-[13px] font-black uppercase tracking-[0.3em] text-[#2DD4BF] mb-5 md:mb-7"
-            >
-              THE HONEST COMPARISON
-            </motion.p>
-            <SectionHeading className="mb-6 text-center">
-              You have options.<br />
-              Here is why Somyra wins.
-            </SectionHeading>
-            <motion.p 
-              variants={fadeInUp}
-              className="text-[#888] text-[15px] md:text-lg leading-[1.7] max-w-[672px] mx-auto text-center"
-            >
-              We compared ourselves against every major LinkedIn tool so you do not have to.
-            </motion.p>
-          </div>
-
-          {/* Table Container */}
-          <div className="relative">
-            {/* Mobile Scroll Hint */}
-            <div className="md:hidden text-center mb-4">
-              <span className="text-[11px] text-[#555] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                <ChevronRight className="w-3 h-3 rotate-180" />
-                Scroll to compare
-                <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
-
-            <div className="overflow-x-auto pb-6 no-scrollbar">
-              <div className="min-w-[800px] md:min-w-full">
-                {/* Table Header */}
-                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-end">
-                  <div className="pb-6 pl-4">
-                    <span className="text-[11px] font-black text-[#555] uppercase tracking-[0.2em]">Feature</span>
-                  </div>
-                  
-                  {/* Somyra Column Header */}
-                  <div className="relative bg-[#2DD4BF]/[0.05] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-6 text-center shadow-[0_-10px_20px_rgba(45,212,191,0.05)]">
-                    <div className="flex flex-col items-center gap-1">
-                      <span className="text-[15px] font-bold text-white">Somyra</span>
-                      <span className="text-[13px] font-bold text-[#2DD4BF]">Starting at $19/mo</span>
-                    </div>
-                  </div>
-
-                  {/* Competitor Headers */}
-                  {[
-                    { name: 'Taplio', price: 'From $39/mo*' },
-                    { name: 'Supergrow', price: 'From $19/mo' },
-                    { name: 'MagicPost', price: 'From $27/mo' }
-                  ].map((comp, idx) => (
-                    <div key={idx} className="bg-[#141414] p-6 text-center border-t border-x border-white/5 rounded-t-xl mx-[1px]">
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="text-[15px] font-bold text-white">{comp.name}</span>
-                        <span className="text-[13px] text-[#666] font-medium">{comp.price}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Table Body */}
-                <div className="border border-white/5 rounded-b-2xl overflow-hidden">
-                  {[
-                    {
-                      label: 'AI Post Writer',
-                      somyra: { type: 'yes', text: 'Writes in your exact voice' },
-                      taplio: { type: 'partial', text: 'Generic AI, $69/mo plan only' },
-                      supergrow: { type: 'partial', text: 'Voice learning, limited' },
-                      magicpost: { type: 'partial', text: 'Basic AI, needs editing' }
-                    },
-                    {
-                      label: 'Profile Audit & Strategy',
-                      somyra: { type: 'yes', text: 'Full Deep Strategy included' },
-                      taplio: { type: 'no', text: 'Not available' },
-                      supergrow: { type: 'no', text: 'Not available' },
-                      magicpost: { type: 'no', text: 'Not available' }
-                    },
-                    {
-                      label: 'Smart Outreach & DMs',
-                      somyra: { type: 'yes', text: '500 DMs/mo with ICP and CRM' },
-                      taplio: { type: 'partial', text: 'Pro plan only, $199/mo' },
-                      supergrow: { type: 'no', text: 'Not available' },
-                      magicpost: { type: 'no', text: 'Not available' }
-                    },
-                    {
-                      label: 'Voice Profile Learning',
-                      somyra: { type: 'yes', text: 'Learns your exact style' },
-                      taplio: { type: 'partial', text: 'Basic style matching' },
-                      supergrow: { type: 'partial', text: 'Voice learning, carousels' },
-                      magicpost: { type: 'partial', text: 'Basic voice learning' }
-                    },
-                    {
-                      label: 'Topic Generator',
-                      somyra: { type: 'yes', text: 'Unlimited on Pro' },
-                      taplio: { type: 'partial', text: 'Limited credits' },
-                      supergrow: { type: 'yes', text: 'Available' },
-                      magicpost: { type: 'yes', text: 'Available' }
-                    },
-                    {
-                      label: 'LinkedIn Account Safety',
-                      somyra: { type: 'yes', text: 'No automation, fully safe' },
-                      taplio: { type: 'partial', text: 'Cookie-based, account risk' },
-                      supergrow: { type: 'yes', text: 'OAuth, safe' },
-                      magicpost: { type: 'yes', text: 'Safe' }
-                    },
-                    {
-                      label: 'Follow-Up Intelligence',
-                      somyra: { type: 'yes', text: 'Smart follow-up sequences' },
-                      taplio: { type: 'partial', text: 'Basic automation only' },
-                      supergrow: { type: 'no', text: 'Not available' },
-                      magicpost: { type: 'no', text: 'Not available' }
-                    },
-                    {
-                      label: 'ICP Clarity Tool',
-                      somyra: { type: 'yes', text: 'Built-in ICP builder' },
-                      taplio: { type: 'no', text: 'Not available' },
-                      supergrow: { type: 'no', text: 'Not available' },
-                      magicpost: { type: 'no', text: 'Not available' }
-                    },
-                    {
-                      label: 'Saved Content Library',
-                      somyra: { type: 'yes', text: 'Up to 200 saves on Pro' },
-                      taplio: { type: 'partial', text: 'Basic saves' },
-                      supergrow: { type: 'partial', text: 'Limited' },
-                      magicpost: { type: 'no', text: 'Not available' }
-                    },
-                    {
-                      label: 'Starting Price with AI',
-                      somyra: { type: 'yes', text: '$19/mo full AI included' },
-                      taplio: { type: 'no', text: '$69/mo for AI features' },
-                      supergrow: { type: 'partial', text: '$19/mo limited AI' },
-                      magicpost: { type: 'partial', text: '$27/mo basic AI' }
-                    }
-                  ].map((row, i) => (
-                    <motion.div 
-                      key={i}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.04, duration: 0.3 }}
-                      className={`grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center ${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'}`}
-                    >
-                      {/* Row Label */}
-                      <div className="p-4 md:p-6 text-[14px] font-bold text-white pl-6">
-                        {row.label}
-                      </div>
-
-                      {/* Somyra Data */}
-                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center bg-[#2DD4BF]/[0.04] h-full border-x border-white/5">
-                        <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" />
-                        <span className="text-[13px] md:text-[14px] font-bold text-white leading-snug">{row.somyra.text}</span>
-                      </div>
-
-                      {/* Taplio Data */}
-                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center h-full border-r border-white/5">
-                        {row.taplio.type === 'yes' ? <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" /> : 
-                         row.taplio.type === 'no' ? <X className="w-4 h-4 text-red-500/60 mb-1.5" /> :
-                         <AlertTriangle className="w-4 h-4 text-amber-500/60 mb-1.5" />}
-                        <span className="text-[13px] md:text-[14px] font-medium text-[#888] leading-snug">{row.taplio.text}</span>
-                      </div>
-
-                      {/* Supergrow Data */}
-                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center h-full border-r border-white/5">
-                        {row.supergrow.type === 'yes' ? <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" /> : 
-                         row.supergrow.type === 'no' ? <X className="w-4 h-4 text-red-500/60 mb-1.5" /> :
-                         <AlertTriangle className="w-4 h-4 text-amber-500/60 mb-1.5" />}
-                        <span className="text-[13px] md:text-[14px] font-medium text-[#888] leading-snug">{row.supergrow.text}</span>
-                      </div>
-
-                      {/* MagicPost Data */}
-                      <div className="p-4 md:p-6 flex flex-col items-center justify-center text-center h-full">
-                        {row.magicpost.type === 'yes' ? <Check className="w-4 h-4 text-[#2DD4BF] mb-1.5" /> : 
-                         row.magicpost.type === 'no' ? <X className="w-4 h-4 text-red-500/60 mb-1.5" /> :
-                         <AlertTriangle className="w-4 h-4 text-amber-500/60 mb-1.5" />}
-                        <span className="text-[13px] md:text-[14px] font-medium text-[#888] leading-snug">{row.magicpost.text}</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            {/* Table Footnote */}
-            <div className="mt-4 px-4">
-              <p className="text-[12px] text-[#555] font-medium italic">
-                *AI features require $69/mo plan on Taplio.
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom Callout */}
-          <div className="mt-20 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 mb-6">
-              <span className="text-[10px] font-black text-[#2DD4BF] uppercase tracking-[0.2em]">THE VERDICT</span>
-            </div>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6">
-              More features. Lower price.<br />Zero account risk.
-            </h3>
-            <p className="text-[#888] text-[15px] md:text-lg mb-10 max-w-[600px] mx-auto leading-relaxed">
-              Somyra is the only LinkedIn tool that combines post writing, profile strategy, and smart outreach in one place. Starting at $19/month.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <button 
-                onClick={() => setActiveTab('profile')}
-                className="px-8 py-4 bg-[#2DD4BF] text-black font-bold rounded-xl text-sm hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
-              >
-                Start for Free →
-              </button>
-              <button 
-                onClick={() => document.getElementById('landing-pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-transparent border border-white/10 text-white font-bold rounded-xl text-sm hover:bg-white/5 transition-all"
-              >
-                See Pricing
-              </button>
-            </div>
-            
-            <p className="text-[11px] text-[#444] font-bold uppercase tracking-widest">
-              Competitor pricing based on publicly available information. Verified April 2026.
-            </p>
-          </div>
-        </div>
-      </motion.section>
-
-
-      {/* ════════════════════════════════════════
-         SECTION 9: PRICING PREVIEW
-         ════════════════════════════════════════ */}
-      <motion.section 
-        id="pricing-section"
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="w-full px-6 py-16 md:py-24 relative z-10 border-t border-white/5"
-      >
-        <div className="max-w-[1024px] mx-auto">
-          <div className="text-center mb-12">
-            <SectionLabel>PRICING</SectionLabel>
-            <SectionHeading className="mb-8">
-              Start free.<br />
-              Upgrade when LinkedIn<br />
-              starts working.
-            </SectionHeading>
-
-            {/* Toggle */}
-            <div className="flex justify-center mb-12">
-              <div className="inline-flex items-center gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1.5 mb-2">
-                <button
-                  onClick={() => setIsAnnual(false)}
-                  className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all ${
-                    !isAnnual ? 'bg-white/10 text-white shadow-xl' : 'text-[#888] hover:text-white'
-                  }`}
-                >
-                  Monthly
-                </button>
-                <button
-                  onClick={() => setIsAnnual(true)}
-                  className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all flex items-center gap-2 ${
-                    isAnnual ? 'bg-teal-accent/10 text-teal-accent border border-teal-accent/20' : 'text-[#888] hover:text-white'
-                  }`}
-                >
-                  Annual
-                </button>
-                {isAnnual && (
-                  <span className="text-[10px] text-teal-accent font-bold mr-2 ml-1 animate-pulse">Save up to 35%</span>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-5 items-start">
-            <PricingCard
-              name="Free"
-              monthlyPrice="$0"
-              annualPrice="$0"
-              annualBilling=""
-              savings=""
-              subtext="Forever free. No card needed."
-              features={[
-                'Profile Audit: 5 per month',
-                'Topic Generator: 30 topics per month',
-                'Post Writer: 10 per month',
-                'Smart Outreach: 10 messages per month',
-                'Voice Profile: up to 5 sample posts',
-                'Saved Library: up to 10 saves'
-              ]}
-              excluded={[
-                'Deep Strategy',
-                'Deep Mode',
-                'Unlimited Topic Generator',
-                'Priority AI responses',
-                'Early access to new features',
-                'Direct founder access'
-              ]}
-              buttonLabel="Start for Free"
-              buttonStyle="bg-white/5 text-white hover:bg-white/10"
-              cardStyle=""
-              isAnnual={isAnnual}
-              onClick={() => setActiveTab('profile')}
-            />
-
-            <PricingCard
-              name="Pro"
-              monthlyPrice="$19"
-              annualPrice="$13"
-              annualBilling="Billed $156/year"
-              savings="Save $72 per year"
-              subtext="Everything in Free plus:"
-              badge="Most Popular"
-              features={[
-                'Profile Audit: 30 per month',
-                'Topic Generator: Unlimited',
-                'Post Writer: 60 per month',
-                'Smart Outreach: 500 messages per month (that is 25 per working day)',
-                'Voice Profile: up to 10 sample posts',
-                'Saved Library: up to 200 saves',
-                'Deep Strategy',
-                'Deep Mode',
-                'Full Smart Outreach suite',
-                'Priority AI responses',
-                'Early access to new features'
-              ]}
-              buttonLabel="Get Pro"
-              buttonStyle=""
-              cardStyle=""
-              isAnnual={isAnnual}
-              onClick={() => setShowPricingModal(true)}
-            />
-
-            <PricingCard
-              name="Max"
-              monthlyPrice="$39"
-              annualPrice="$29"
-              annualBilling="Billed $348/year"
-              savings="Save $120 per year"
-              subtext="Everything in Pro plus:"
-              badge="For Power Users"
-              features={[
-                'Profile Audit: Unlimited',
-                'Topic Generator: Unlimited',
-                'Post Writer: Unlimited',
-                'Smart Outreach: 1000 messages per month (that is 50 per working day)',
-                'Voice Profile: up to 20 sample posts',
-                'Saved Library: Unlimited',
-                'Deep Strategy',
-                'Deep Mode',
-                'Full Smart Outreach suite',
-                'Priority AI fastest response times',
-                'Early access before Pro users',
-                'Direct founder access for feedback'
-              ]}
-              buttonLabel="Get Max Access"
-              buttonStyle=""
-              cardStyle=""
-              isAnnual={isAnnual}
-              onClick={() => setShowPricingModal(true)}
-            />
-          </div>
-
-          <p className="text-center text-[#666] text-sm md:text-base mt-10 max-w-[672px] mx-auto leading-relaxed">
-            All plans include LinkedIn Post Preview, Topic Generator, Profile Analysis, Post Writer and Smart Outreach. Upgrade or downgrade anytime.
-          </p>
-        </div>
-      </motion.section>
-
-      {/* ── SECTION 10: FAQ ── */}
+      {/* ── SECTION 11: FAQ ── */}
       <motion.section 
         id="faq-section"
         initial="initial"
@@ -1581,29 +1492,7 @@ export function LandingPage({
         </div>
       </motion.section>
 
-      {/* ════════════════════════════════════════
-         SECTION 11: URGENCY
-         ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="px-4 py-16 md:py-24 text-center relative z-10 border-t border-white/5"
-      >
-        <div className="max-w-[672px] mx-auto">
-          <SectionHeading className="mb-8">
-            Every week you stay quiet,<br />
-            someone in your space gets louder.
-          </SectionHeading>
-          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-10 max-w-[576px] mx-auto">
-            LinkedIn does not reward the most talented person in the room. It rewards the most visible one. The founders winning right now are not smarter than you. They just show up every week with something worth reading. Somyra makes that effortless.
-          </p>
-          <p className="text-[11px] font-black uppercase tracking-[0.25em] text-[#2DD4BF]">
-            PRO USERS AVERAGE 3.8 POSTS PER WEEK
-          </p>
-        </div>
-      </motion.section>
+
 
       {/* ════════════════════════════════════════
          SECTION 12: FINAL CTA
@@ -1617,11 +1506,11 @@ export function LandingPage({
       >
         <div className="max-w-[672px] mx-auto">
           <SectionHeading className="mb-6">
-            Your next client is on LinkedIn.<br />
-            Are you showing up?
+            Every week you stay quiet,<br />
+            someone in your space gets louder.
           </SectionHeading>
           <p className="text-[#A0A0A0] text-base mb-10">
-            Start free today. No card needed. Takes 30 seconds.
+            Start free forever. No credit card. Takes 30 seconds.
           </p>
           <button
             onClick={() => setActiveTab('profile')}
