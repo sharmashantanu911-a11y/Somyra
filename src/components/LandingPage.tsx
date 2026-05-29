@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import SomyraFooter from './SomyraFooter';
 import {
   FileText,
   UserCircle,
@@ -649,7 +650,7 @@ export function LandingPage({
           </div>
 
           <h1 className="font-[family-name:var(--font-display)] text-[clamp(38px,7vw,68px)] font-extrabold leading-[1.07] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
-            Write posts. Close clients.<br />
+            <span className="whitespace-nowrap">Write posts. Close clients.</span><br />
             Sound like <span className="text-teal-accent relative">you<span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-teal-accent/45 rounded-full origin-left scale-x-0 animate-[scale-in-x_0.5s_1s_ease_forwards]" /></span> every time.
           </h1>
 
@@ -788,12 +789,11 @@ export function LandingPage({
          SECTION 4: PROBLEM
          ════════════════════════════════════════ */}
       <motion.section 
-        id="pricing-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-16 md:py-24 relative z-10 border-t border-white/5"
+        className="w-full px-4 py-12 md:py-16 relative z-10"
       >
         <div className="max-w-[896px] mx-auto">
           <div className="text-center mb-16 md:mb-20">
@@ -913,64 +913,98 @@ export function LandingPage({
       </motion.section>
 
       {/* ════════════════════════════════════════
-         SECTION 6: HOW IT WORKS
+         SECTION: HOW IT WORKS (new design)
          ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        id="how-it-works" 
-        className="px-4 py-12 md:py-16 relative z-10 border-t border-white/5"
-      >
-        <div className="max-w-[896px] mx-auto">
-          <div className="text-center mb-16 md:mb-20">
-            <SectionLabel>THE PROCESS</SectionLabel>
-            <SectionHeading>
-              From signup to your best<br />
-              post ever. In under 5 minutes.
-            </SectionHeading>
+      <section id="how-it-works" className="relative px-6 py-24 md:py-28 overflow-hidden">
+        <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.07] blur-[120px] rounded-full pointer-events-none z-0" />
+
+        <div className="max-w-[1060px] mx-auto relative z-10">
+          {/* Eyebrow */}
+          <div className="flex items-center justify-center gap-2.5 mb-5">
+            <span className="w-8 h-px bg-teal-accent/40" />
+            <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-teal-accent/85">The Process</span>
+            <span className="w-8 h-px bg-teal-accent/40" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 relative">
-            {/* Dotted connecting line (desktop) */}
-            <div className="hidden md:block absolute top-[52px] left-[16.66%] right-[16.66%] h-0 border-t-2 border-dashed border-[#2DD4BF]/20 z-0" />
+          {/* Headline */}
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,5vw,52px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white text-center max-w-[640px] mx-auto mb-3">
+            From signup to your best post ever. In under 5 minutes.
+          </h2>
 
+          <p className="text-[clamp(15px,2vw,17px)] font-light leading-[1.7] text-white/50 text-center max-w-[480px] mx-auto mb-14">
+            Most tools make you do the work. Somyra does it with you. Three steps and you are live.
+          </p>
+
+          {/* Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.07] border border-white/[0.07] rounded-[20px] overflow-hidden mb-16">
             {[
               {
                 num: '01',
                 title: 'Tell Somyra who you are',
-                body: 'Paste your LinkedIn About and Experience sections. Somyra maps your niche, your positioning, and the gaps that are costing you opportunities.'
+                body: 'Paste your LinkedIn About section and your recent experience. Somyra reads it and maps out <strong>your niche, your positioning, and the exact gaps costing you opportunities</strong> right now.'
               },
               {
                 num: '02',
                 title: 'Show Somyra how you write',
-                body: 'Add three to ten of your real posts. This is what separates Somyra from every other AI tool. It learns your actual voice not a generic one.'
+                body: 'Add three to ten of your real posts. This is what separates Somyra from every other AI tool. <strong>It learns your actual voice</strong> — not a generic professional tone. Yours.'
               },
               {
                 num: '03',
                 title: 'Generate everything. Sound like yourself.',
-                body: 'Posts, DMs, profile rewrites, topic ideas. All of it sounds like you wrote it on your sharpest day. Because in a way you did.'
+                body: 'Posts, DMs, profile rewrites, topic ideas. All of it sounds like <strong>you wrote it on your sharpest day</strong>. Because that is exactly what Somyra is trained to do.'
               }
             ].map((step, i) => (
-              <motion.div 
-                key={i} 
-                variants={fadeInUp}
-                className="relative z-10 flex flex-col items-center text-center"
-              >
-                <motion.div 
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-[72px] h-[72px] rounded-full bg-[#141414] border-2 border-[#2DD4BF]/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(45,212,191,0.1)] transition-transform"
-                >
-                  <span className="text-[#2DD4BF] text-lg font-black">{step.num}</span>
-                </motion.div>
-                <h3 className="text-lg md:text-xl font-bold text-white mb-4 leading-tight">{step.title}</h3>
-                <p className="text-[#A0A0A0] text-[14px] md:text-[15px] leading-[1.7] max-w-[320px]">{step.body}</p>
-              </motion.div>
+              <div key={i} className="bg-[#0d0d0d] p-8 md:p-10 relative group transition-colors hover:bg-[#111]">
+                {/* Large faded number */}
+                <div className="absolute top-4 right-5 font-[family-name:var(--font-display)] text-[80px] font-extrabold text-teal-accent/[0.04] leading-none pointer-events-none select-none tracking-[-0.04em]">
+                  {step.num}
+                </div>
+                {/* Step number badge */}
+                <div className="w-9 h-9 rounded-xl bg-teal-accent/10 border border-teal-accent/20 flex items-center justify-center font-[family-name:var(--font-display)] text-[14px] font-extrabold text-teal-accent mb-6 tracking-tight">
+                  {step.num}
+                </div>
+                <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white leading-snug tracking-[-0.02em] mb-3">{step.title}</h3>
+                <p className="text-[14.5px] font-light leading-[1.72] text-white/50" dangerouslySetInnerHTML={{ __html: step.body }} />
+                {/* Arrow between steps (desktop) */}
+                {i < 2 && <div className="hidden md:block absolute top-10 -right-[9px] text-teal-accent/30 text-lg z-10">→</div>}
+              </div>
             ))}
           </div>
+
+          {/* Video Placeholder */}
+          <div className="relative rounded-2xl overflow-hidden border border-white/[0.07] bg-[#0d0d0d] aspect-video flex flex-col items-center justify-center gap-4 cursor-pointer transition-colors hover:border-teal-accent/20 shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
+            {/* Grid texture */}
+            <div className="absolute inset-0 pointer-events-none" style={{
+              backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+              backgroundSize: '40px 40px'
+            }} />
+            {/* Teal glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-teal-accent/[0.08] blur-[80px] rounded-full pointer-events-none" />
+            
+            {/* Badge */}
+            <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 bg-[#080808]/75 border border-white/[0.07] backdrop-blur-sm px-3 py-1.5 rounded-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400/70" />
+              <span className="text-[11px] font-medium text-white/50 tracking-wider uppercase">Coming Soon</span>
+            </div>
+            
+            {/* Duration */}
+            <div className="absolute bottom-4 right-4 z-10 text-[12px] font-medium text-white/50 bg-[#080808]/70 border border-white/[0.07] backdrop-blur-sm px-2.5 py-1 rounded">
+              2 min walkthrough
+            </div>
+
+            {/* Play button */}
+            <div className="relative z-10 w-[72px] h-[72px] rounded-full bg-teal-accent/10 border border-teal-accent/30 flex items-center justify-center transition-all duration-300 group-hover:bg-teal-accent/20 group-hover:scale-105 group-hover:shadow-[0_0_32px_rgba(45,212,191,0.25)]">
+              <svg viewBox="0 0 24 24" className="w-7 h-7 fill-teal-accent ml-1"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+
+            {/* Label */}
+            <div className="relative z-10 flex flex-col items-center gap-1">
+              <span className="font-[family-name:var(--font-display)] text-[17px] font-bold text-white tracking-tight">Watch Somyra in action</span>
+              <span className="text-[13px] font-light text-white/50">See exactly how it works before you sign up</span>
+            </div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ════════════════════════════════════════
          SECTION 7: TESTIMONIALS
@@ -1359,6 +1393,7 @@ export function LandingPage({
          SECTION 9: PRICING PREVIEW
          ════════════════════════════════════════ */}
       <motion.section 
+        id="pricing-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
@@ -1575,6 +1610,8 @@ export function LandingPage({
           </button>
         </div>
       </motion.section>
+
+      <SomyraFooter />
 
       {/* ════════════════════════════════════════
          SCROLL-TRIGGERED BOTTOM BAR
