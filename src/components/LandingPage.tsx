@@ -36,6 +36,7 @@ interface LandingPageProps {
   setActiveTab: (tab: any) => void;
   setShowAuth: (show: boolean) => void;
   setShowPricingModal: (show: boolean) => void;
+  onOpenChangelog?: () => void;
   testimonials: any[];
   loadingTestimonials: boolean;
   showReviewModal: boolean;
@@ -501,6 +502,7 @@ export function LandingPage({
   setActiveTab,
   setShowAuth,
   setShowPricingModal,
+  onOpenChangelog,
   testimonials,
   loadingTestimonials,
   showReviewModal,
@@ -515,9 +517,6 @@ export function LandingPage({
     return localStorage.getItem('somyra_bottom_bar_dismissed') === 'true';
   });
 
-  const mouseX = useRef(50);
-  const mouseY = useRef(50);
-
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const xPercent = (e.clientX / window.innerWidth) * 100;
@@ -529,51 +528,6 @@ export function LandingPage({
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  // --- Hero Word Swap Logic ---
-  const words = ['founders', 'executives', 'consultants', 'sales pros', 'creators'];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const currentWord = words[currentWordIndex];
-    
-    if (!isDeleting && displayText === currentWord) {
-      const timeout = setTimeout(() => {
-        setIsDeleting(true);
-      }, 1500);
-      return () => clearTimeout(timeout);
-    }
-    
-    if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setCurrentWordIndex(prev => (prev + 1) % words.length);
-      return;
-    }
-    
-    const timeout = setTimeout(() => {
-      if (isDeleting) {
-        setDisplayText(prev => prev.slice(0, -1));
-      } else {
-        setDisplayText(currentWord.slice(0, displayText.length + 1));
-      }
-    }, isDeleting ? 50 : 80);
-    
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentWordIndex, prefersReducedMotion]);
-  // -----------------------------
 
   const activeFeature = featureTabs.find(f => f.id === activeFeatureTab) || featureTabs[0];
 
@@ -632,243 +586,214 @@ export function LandingPage({
 
   return (
     <div className="w-full max-w-full overflow-x-hidden">
-      {/* ════════════════════════════════════════
-      {/* ════════════════════════════════════════
-         SECTION 2: HERO
-         ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        animate="animate"
-        variants={staggerContainer}
-        id="landing-hero" 
-        className="w-full px-6 pt-6 pb-16 md:pt-8 md:pb-24 lg:pt-12 lg:pb-32 flex flex-col items-center text-center relative overflow-hidden"
-      >
-        {/* Animated Background Aura */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-teal-accent/10 blur-[120px] rounded-full pointer-events-none z-0" />
-
-        {/* Badge pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#2DD4BF]/40 bg-gradient-to-br from-[#2DD4BF]/[0.08] to-[#2DD4BF]/[0.03] backdrop-blur-[10px] shadow-[inset_0_0_20px_rgba(45,212,191,0.1)] mb-10">
-          <div className="w-1.5 h-1.5 bg-[#2DD4BF] rounded-full animate-pulse shadow-[0_0_6px_#2DD4BF]" />
-          <span className="text-[10px] md:text-[11px] font-semibold text-[#2DD4BF] uppercase tracking-[2px] md:tracking-[3px]">AI POWERED LINKEDIN COPILOT</span>
-        </div>
-
-        {/* Headline */}
-        <motion.h1 
-          variants={fadeInUp}
-          className="text-[32px] md:text-[48px] lg:text-[60px] font-extrabold text-white leading-[1.1] mb-6 max-w-[1024px] tracking-tight relative z-10 flex flex-col items-center"
-        >
-          <div className="flex flex-wrap justify-center items-baseline gap-x-[0.3em]">
-            <span className="headline-static">
-              Built for
-            </span>
-            <span 
-              className="headline-animated text-teal-accent inline-flex items-center"
-              style={{ 
-                fontFamily: "'Playfair Display', serif",
-                fontStyle: 'italic',
-                fontWeight: 700,
-                fontSize: '1.1em',
-                lineHeight: 1
-              }}
-            >
-              {prefersReducedMotion ? words[0] : displayText}
-              {!prefersReducedMotion && (isDeleting || displayText !== words[currentWordIndex]) && (
-                <span className="cursor">|</span>
-              )}
-            </span>
+      {/* ── NAVBAR ── */}
+      <nav className="landing-nav">
+        <button onClick={() => scrollToHero()} className="flex items-center gap-2.5">
+          <div className="w-8 h-8 bg-teal-accent rounded-lg flex items-center justify-center font-[family-name:var(--font-display)] font-extrabold text-sm text-[#080808] shrink-0">
+            S
           </div>
-          <span className="headline-static">
-            who take LinkedIn seriously.
-          </span>
-        </motion.h1>
-
-        {/* Subheadline */}
-        <motion.p 
-          variants={fadeInUp}
-          className="mb-10 max-w-[672px] text-[16px] md:text-[19px] text-[#A0A0A0] leading-[1.7] relative z-10"
-        >
-          Somyra writes posts, rewrites your profile, and crafts outreach DMs in your exact voice. Not generic AI. You.
-        </motion.p>
-
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 w-full sm:w-auto max-w-[384px] sm:max-w-none mx-auto">
-          <button
-            id="hero-start-free"
-            onClick={() => setActiveTab('profile')}
-            className="w-full sm:w-auto px-8 md:px-10 py-4 bg-[#2DD4BF] text-black font-bold rounded-2xl text-base md:text-lg hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 animate-[ring-pulse_4s_infinite]"
-          >
-            Start for Free
+          <span className="font-[family-name:var(--font-display)] font-bold text-[17px] text-white tracking-tight">Somyra</span>
+        </button>
+        <div className="flex items-center gap-3">
+          <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
+            How It Works
           </button>
-          <button
-            onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-            className="w-full sm:w-auto px-8 md:px-10 py-4 bg-transparent border border-[#333] text-white rounded-2xl text-base md:text-lg hover:border-[#2DD4BF] hover:text-[#2DD4BF] hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all"
-          >
-            Watch it Work
+          <div className="relative group/tools">
+            <button className="landing-nav-link flex items-center gap-1">
+              Tools
+              <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover/tools:rotate-180" />
+            </button>
+            <div className="absolute right-0 top-full mt-1 w-56 rounded-xl border border-white/10 bg-[#0D0D0D] p-2 shadow-2xl opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
+              <Link to="/linkedin-post-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                LinkedIn Post Generator
+              </Link>
+              <Link to="/linkedin-profile-audit" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                LinkedIn Profile Audit
+              </Link>
+              <Link to="/linkedin-dm-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                LinkedIn DM Generator
+              </Link>
+              <Link to="/linkedin-hook-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                LinkedIn Hook Generator
+              </Link>
+              <Link to="/linkedin-topic-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
+                Topic Generator
+              </Link>
+            </div>
+          </div>
+          <Link to="/blog" className="landing-nav-link">Blog</Link>
+          <button onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
+            Pricing
+          </button>
+          <button onClick={onOpenChangelog} className="landing-nav-link">
+            What's New
+          </button>
+          <button onClick={() => setShowAuth(true)} className="landing-nav-signin">
+            Sign In
+          </button>
+          <button onClick={() => setActiveTab('profile')} className="landing-nav-cta">
+            Start Free
           </button>
         </div>
+      </nav>
 
-        {/* Trust line */}
-        <motion.div 
-          variants={fadeInUp}
-          className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 relative z-10"
-        >
-          <p className="text-[#555] text-[12px] md:text-sm font-medium tracking-wide">
-            Free to use. No card. No catch.
+      {/* ── HERO ── */}
+      <section id="landing-hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-[120px] pb-20 text-center overflow-hidden">
+        <div className="hero-glow" />
+        <div className="hero-grid-lines" />
+
+        <div className="relative z-10 max-w-[740px] w-full">
+          <div className="inline-flex items-center gap-[7px] bg-teal-accent/10 border border-teal-accent/25 rounded-full px-3.5 py-1.5 mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
+            <span className="w-1.5 h-1.5 bg-teal-accent rounded-full animate-[pulse-dot_2s_infinite]" />
+            <span className="text-[11px] font-semibold text-teal-accent tracking-widest uppercase">AI Powered LinkedIn Copilot</span>
+          </div>
+
+          <h1 className="font-[family-name:var(--font-display)] text-[clamp(38px,7vw,68px)] font-extrabold leading-[1.07] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
+            Write posts. Close clients.<br />
+            Sound like <span className="text-teal-accent relative">you<span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-teal-accent/45 rounded-full origin-left scale-x-0 animate-[scale-in-x_0.5s_1s_ease_forwards]" /></span> every time.
+          </h1>
+
+          <p className="text-[clamp(16px,2.5vw,19px)] font-light leading-[1.65] text-white/80 max-w-[520px] mx-auto mb-9 opacity-0 animate-[fadeUp_0.7s_0.5s_ease_forwards]">
+            Somyra learns your exact voice and writes LinkedIn posts, rewrites your profile, and crafts outreach DMs that actually get replies. Not generic AI. You.
           </p>
-          <div className="flex items-center gap-4 text-[#555] text-[12px] md:text-sm font-medium border-l border-white/10 pl-6">
-            <div className="flex -space-x-1.5 transition-all cursor-default">
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-white/5 z-[4] transition-all hover:scale-110 hover:z-[10]">
-                <img src="https://flagcdn.com/us.svg" alt="US" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
-              </div>
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-white/5 z-[3] transition-all hover:scale-110 hover:z-[10]">
-                <img src="https://flagcdn.com/in.svg" alt="IN" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
-              </div>
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-white/5 z-[2] transition-all hover:scale-110 hover:z-[10]">
-                <img src="https://flagcdn.com/ca.svg" alt="CA" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
-              </div>
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-white/5 z-[1] transition-all hover:scale-110 hover:z-[10]">
-                <img src="https://flagcdn.com/de.svg" alt="DE" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
-              </div>
-            </div>
-            <span className="opacity-80">Used in 10+ countries</span>
-          </div>
-        </motion.div>
-      </motion.section>
 
-      <motion.section 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, delay: 0.2 }}
-        className="w-full px-4 -mt-16 md:-mt-24 relative z-20 pb-16 md:pb-24"
-      >
-        <div className="w-full max-w-[672px] mx-auto" style={{ perspective: '1200px' }}>
-          <div
-            className="relative rounded-[24px] border border-white/10 bg-[#0D0D0D]/60 backdrop-blur-xl p-6 md:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.5),0_0_60px_rgba(45,212,191,0.05)] overflow-hidden"
-            style={{ transform: 'rotateX(2deg) rotateY(-1deg)' }}
-          >
-            {/* Glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#2DD4BF]/5 blur-[80px] rounded-full pointer-events-none" />
-
-            {/* Mockup header */}
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2">
-                <div className="w-3.5 h-3.5 rounded-full bg-[#2DD4BF]/40" />
-                <span className="text-[11px] font-black text-[#2DD4BF] uppercase tracking-[0.2em]">Post Writer</span>
-              </div>
-              <div className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full">
-                <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">Interactive Preview</span>
-              </div>
-            </div>
-
-            {/* Input area */}
-            <div className="rounded-xl border border-white/10 bg-[#141414]/80 p-5 mb-5 shadow-inner">
-              <p className="text-[14px] md:text-[15px] text-white/90 leading-relaxed font-medium">How I landed my first enterprise client without a single cold email</p>
-            </div>
-
-            {/* Generate button */}
-            <div className="relative mb-6">
-              <button 
-                onClick={handleGenerate}
-                disabled={isGenerating}
-                className={`w-full py-4 ${isGenerating ? 'bg-[#2DD4BF]/20 cursor-not-allowed text-[#2DD4BF]/60' : 'bg-[#2DD4BF] hover:shadow-[0_0_25px_rgba(45,212,191,0.4)] text-black'} font-black rounded-xl text-sm transition-all duration-300 flex items-center justify-center gap-2 relative z-10`}
+          <div className="flex flex-col items-center gap-3 mb-5 opacity-0 animate-[fadeUp_0.7s_0.65s_ease_forwards]">
+            <div className="flex gap-3 flex-wrap justify-center">
+              <button
+                onClick={() => setActiveTab('profile')}
+                className="inline-flex items-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0"
               >
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin text-[#2DD4BF]" />
-                    AI is writing...
-                  </>
-                ) : 'Generate Post'}
+                Start for Free
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7H11M11 7L8 4M11 7L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </button>
-              
-              {isGenerating && (
-                <div className="absolute bottom-0 left-0 h-0.5 bg-[#2DD4BF] rounded-full z-20 animate-[progress-loading_2.5s_ease-out_forwards]" />
-              )}
+              <button
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center gap-2 bg-transparent text-white font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:translate-y-[-1px]"
+              >
+                <span className="w-[18px] h-[18px] rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                  <svg viewBox="0 0 10 10" className="w-2 h-2 fill-white ml-[1px]"><polygon points="2,1 9,5 2,9"/></svg>
+                </span>
+                Watch It Work
+              </button>
             </div>
-
-            {/* Full preview */}
-            <div className="relative rounded-xl border border-white/5 bg-[#141414] p-5 md:p-6 overflow-hidden min-h-[140px] shadow-2xl">
-              <AnimatePresence mode="wait">
-                {showResult ? (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="relative space-y-6"
-                  >
-                    <div className="space-y-3">
-                      <p className="text-[13px] md:text-[14px] text-white/90 leading-relaxed font-medium">
-                        I spent 100 hours analyzing why some LinkedIn posts go viral while others die in silence. <br /><br />
-                        The secret isn't the algorithm. It's the hook. Most people fail because they start with "I'm so excited to announce..." instead of talking about the reader's pain. <br /><br />
-                        Here are 3 frameworks that work every single time:<br /><br />
-                        1. The Contrarian Hook: State a commonly held belief in your industry, then instantly destroy it.<br /><br />
-                        2. The Vulnerability Hook: Share a massive failure before you share the lesson. People connect with scars, not trophies.<br /><br />
-                        3. The X to Y Framework: "How I went from [Painful State] to [Dream State] in [Timeframe]." Be specific.<br /><br />
-                        Stop writing for your peers. Start writing for your past self.<br /><br />
-                        What's the best hook you've seen this week?
-                      </p>
-                    </div>
-                    
-                    <div className="pt-4 border-t border-white/5 flex justify-center">
-                      <Link 
-                        to="/linkedin-post-generator"
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-teal-accent text-teal-accent text-xs font-bold uppercase tracking-wider hover:bg-teal-accent hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(45,212,191,0.15)] hover:shadow-[0_0_25px_rgba(45,212,191,0.3)]"
-                      >
-                        Write your own post →
-                      </Link>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <div className="space-y-3 opacity-20">
-                    <div className="h-3 bg-white/10 rounded w-full" />
-                    <div className="h-3 bg-white/8 rounded w-[90%]" />
-                    <div className="h-3 bg-white/6 rounded w-[95%]" />
-                  </div>
-                )}
-              </AnimatePresence>
+            <div className="flex items-center gap-4 flex-wrap justify-center text-[12.5px] text-white/50 font-normal">
+              <span>No credit card required</span>
+              <span className="w-[3px] h-[3px] bg-white/50 rounded-full" />
+              <span>Cancel anytime</span>
+              <span className="w-[3px] h-[3px] bg-white/50 rounded-full" />
+              <span>Used in 10+ countries</span>
             </div>
           </div>
         </div>
-      </motion.section>
+
+        {/* Product Preview Card */}
+        <div className="mt-[60px] relative z-10 w-full max-w-[720px] opacity-0 animate-[fadeUp_0.8s_0.8s_ease_forwards]">
+          <div className="preview-card">
+            <div className="preview-bar">
+              <div className="flex gap-1.5">
+                <span className="preview-dot bg-[#FF5F57]" />
+                <span className="preview-dot bg-[#FFBD2E]" />
+                <span className="preview-dot bg-[#28C840]" />
+              </div>
+              <span className="text-[11.5px] text-white/50 font-medium tracking-widest uppercase">Post Writer</span>
+              <span className="text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-[3px] rounded uppercase tracking-wider">Live Preview</span>
+            </div>
+
+            <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-3">
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">What do you want to write about?</span>
+                <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[13px] text-white/80 leading-relaxed">
+                  How I landed my first enterprise client without spending a single dollar on ads
+                </div>
+
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Post Style</span>
+                <div className="flex gap-2">
+                  <span className="preview-chip active">Storytelling</span>
+                  <span className="preview-chip">Educational</span>
+                  <span className="preview-chip">Hot Take</span>
+                </div>
+
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Voice Mode</span>
+                <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[12px] text-white/50">
+                  Voice Profile active ✓
+                </div>
+
+                <button
+                  onClick={handleGenerate}
+                  disabled={isGenerating}
+                  className={`w-full ${isGenerating ? 'bg-teal-accent/20 cursor-not-allowed text-teal-accent/60' : 'bg-teal-accent hover:opacity-88 text-[#080808]'} font-bold text-[13px] py-2.5 rounded-lg transition-opacity`}
+                >
+                  {isGenerating ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      Generating...
+                    </span>
+                  ) : 'Generate Post'}
+                </button>
+              </div>
+
+              <div className="bg-white/[0.025] border border-white/[0.07] rounded-xl p-4 flex flex-col gap-2.5">
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-white/50">Generated Post</span>
+                <div className="text-[12px] leading-relaxed text-white/60">
+                  <strong className="text-white/90 font-medium">Three years ago I was broke, unheard of, and sending cold emails into a void.</strong>
+                  <br /><br />
+                  No agency. No ad budget. No warm intros.<br /><br />
+                  The only thing I had was one clear message and the discipline to show up on LinkedIn every week.<span className="typing-cursor" />
+                </div>
+                <div className="mt-auto inline-flex items-center gap-1.5 text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/15 px-2 py-1 rounded self-start">
+                  <span className="w-[5px] h-[5px] bg-teal-accent rounded-full animate-[pulse-dot_1.5s_infinite]" />
+                  Writing in your voice
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Social Proof Strip */}
+        <div className="mt-12 w-full max-w-[680px] pt-9 border-t border-white/[0.07] opacity-0 animate-[fadeUp_0.7s_1s_ease_forwards]">
+          <div className="flex items-center justify-center gap-8 flex-wrap">
+            <div className="flex items-center">
+              <div className="w-7 h-7 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[11px] font-semibold text-teal-accent z-[4]">PK</div>
+              <div className="w-7 h-7 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[11px] font-semibold text-indigo-400 z-[3]">AS</div>
+              <div className="w-7 h-7 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[11px] font-semibold text-amber-400 z-[2]">TB</div>
+              <div className="w-7 h-7 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[11px] font-semibold text-pink-400 z-[1]">MW</div>
+            </div>
+            <span className="text-[12px] text-white/50"><strong className="text-white/80 font-medium">Founders and executives</strong> across 10+ countries are already growing on Somyra</span>
+            <div className="w-px h-8 bg-white/[0.07]" />
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[22px] font-extrabold text-white tracking-tight leading-none">10+</p>
+              <span className="text-[11px] text-white/50 uppercase tracking-widest">Countries</span>
+            </div>
+            <div className="w-px h-8 bg-white/[0.07]" />
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[22px] font-extrabold text-white tracking-tight leading-none">24%</p>
+              <span className="text-[11px] text-white/50 uppercase tracking-widest">Avg engagement lift</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Hint */}
+        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-0 animate-[fadeIn_1s_1.4s_ease_forwards] z-10">
+          <span className="text-[11px] text-white/50 tracking-widest uppercase">Scroll</span>
+          <div className="scroll-mouse">
+            <div className="scroll-wheel" />
+          </div>
+        </div>
+      </section>
 
       {/* ════════════════════════════════════════
-         SECTION 3: SOCIAL PROOF BAR
+         SECTION: PROBLEM AMPLIFICATION
          ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="w-full py-10 md:py-12 relative z-10 border-y border-white/5"
-      >
-        <div className="max-w-[896px] mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:flex md:flex-nowrap justify-center items-stretch gap-y-12 md:gap-0">
-            {[
-              { value: '2,400+', label: 'Posts Written' },
-              { value: '850+', label: 'Profiles Analyzed' },
-              { value: '10+', label: 'Countries' },
-              { value: '24%', label: 'Avg Engagement Lift' }
-            ].map((stat, i) => (
-              <React.Fragment key={i}>
-                {i > 0 && <div className="hidden md:block w-[1px] bg-white/10 mx-4 lg:mx-8 self-stretch my-2 opacity-50" />}
-                <Counter value={stat.value} label={stat.label} />
-              </React.Fragment>
-            ))}
-          </div>
-          <p className="text-center text-sm text-[#666] italic mt-8 max-w-[576px] mx-auto leading-relaxed">
-            Founders from India, USA, Germany and Canada are already building their brand on Somyra.
-          </p>
-        </div>
-      </motion.section>
-
       {/* ════════════════════════════════════════
          SECTION 4: PROBLEM
          ════════════════════════════════════════ */}
       <motion.section 
+        id="pricing-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-4 py-12 md:py-16 relative z-10"
+        className="w-full px-6 py-16 md:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[896px] mx-auto">
           <div className="text-center mb-16 md:mb-20">

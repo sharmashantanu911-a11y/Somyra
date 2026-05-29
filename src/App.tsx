@@ -75,6 +75,7 @@ import { SavedLibrary } from './features/SavedLibrary';
 import { Terms } from './components/Terms';
 import { Privacy } from './components/Privacy';
 import { Contact } from './components/Contact';
+import { LandingPage } from './components/LandingPage';
 import SomyraFooter from './components/SomyraFooter';
 
 const dailyTips = [
@@ -1043,6 +1044,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
+      {authChecked && !user ? (
+        <LandingPage 
+          setActiveTab={handleTabClick}
+          setShowAuth={setShowAuth}
+          setShowPricingModal={setShowPricingModal}
+          onOpenChangelog={openChangelog}
+          testimonials={testimonials}
+          loadingTestimonials={loadingTestimonials}
+          showReviewModal={showReviewModal}
+          setShowReviewModal={setShowReviewModal}
+          user={user}
+        />
+      ) : (
+      <>
       <header className="fixed top-0 left-0 right-0 z-[40] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 md:px-6 lg:px-8">
           <div className="flex items-center gap-4">
@@ -1378,6 +1393,7 @@ export default function App() {
 
         <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12 lg:gap-8 xl:gap-10 items-start">
           
+          {user && (
           <aside className="sticky top-28 hidden lg:flex flex-col col-span-1 lg:col-span-3 max-h-[calc(100vh-140px)] overflow-y-auto rounded-[28px] border border-white/5 bg-bg-sidebar p-5 custom-scrollbar">
             <div className="space-y-1">
               <nav className="flex flex-col">
@@ -1437,6 +1453,7 @@ export default function App() {
               </nav>
             </div>
           </aside>
+          )}
 
           <div className="col-span-1 lg:col-span-9 w-full min-w-0 space-y-6">
             <AnimatePresence mode="wait">
@@ -2003,6 +2020,8 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      </>
+      )}
       {/* Modals */}
       <AnimatePresence>
         {showPricingModal && (
