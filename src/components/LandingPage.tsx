@@ -37,7 +37,7 @@ import {
 interface LandingPageProps {
   setActiveTab: (tab: any) => void;
   setShowAuth: (show: boolean) => void;
-  setAuthMode?: (mode: 'login' | 'signup') => void;
+  setAuthMode: (mode: 'login' | 'signup') => void;
   setShowPricingModal: (show: boolean) => void;
   onOpenChangelog?: () => void;
   testimonials: any[];
@@ -638,14 +638,14 @@ export function LandingPage({
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => { setAuthMode?.('login'); setShowAuth(true); }}
+            onClick={() => { setAuthMode('login'); setShowAuth(true); }}
             className="landing-nav-signin"
           >
             Log in
           </button>
           <button
             type="button"
-            onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
+            onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
             className="landing-nav-cta"
           >
             Sign up
@@ -697,13 +697,13 @@ export function LandingPage({
               </button>
               <hr className="border-white/5 my-2" />
               <button
-                onClick={() => { setAuthMode?.('login'); setShowAuth(true); setIsMobileMenuOpen(false); }}
+                onClick={() => { setAuthMode('login'); setShowAuth(true); setIsMobileMenuOpen(false); }}
                 className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-white hover:bg-white/5 transition-all"
               >
                 Log in
               </button>
               <button
-                onClick={() => { setAuthMode?.('signup'); setShowAuth(true); setIsMobileMenuOpen(false); }}
+                onClick={() => { setAuthMode('signup'); setShowAuth(true); setIsMobileMenuOpen(false); }}
                 className="w-full text-center px-4 py-3 rounded-xl bg-[#2DD4BF] text-black font-bold text-sm hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all"
               >
                 Sign up
@@ -749,7 +749,7 @@ export function LandingPage({
             <div className="flex gap-3 flex-wrap justify-center">
               <button
                 id="hero-start-free"
-                onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
+                onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
                 className="inline-flex items-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0"
               >
                 Start for Free
@@ -1250,7 +1250,7 @@ export function LandingPage({
             </h3>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
+                onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
                 className="px-8 py-4 bg-[#2DD4BF] text-black font-bold rounded-xl text-sm hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
               >
                 Start for Free
@@ -1334,7 +1334,7 @@ export function LandingPage({
               buttonStyle="bg-white/5 text-white hover:bg-white/10"
               cardStyle=""
               isAnnual={isAnnual}
-              onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
+              onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
             />
 
             <PricingCard
@@ -1602,7 +1602,7 @@ export function LandingPage({
             Start free forever. No credit card. Takes 30 seconds.
           </p>
           <button
-            onClick={() => { setAuthMode?.('signup'); setShowAuth(true); }}
+            onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
             className="px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 mb-8"
           >
             Start for Free

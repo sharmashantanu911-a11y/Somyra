@@ -399,24 +399,22 @@
 
   .landing-nav {
     position: fixed;
-    top: 20px;
+    top: 24px;
     left: 50%;
     z-index: 100;
-    height: 60px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8px 0 22px;
-    background: rgba(8, 8, 8, 0.55);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    border: 1px solid rgba(255,255,255,0.06);
+    padding: 0 12px 0 24px;
+    background: rgba(8, 8, 8, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 9999px;
     width: max-content;
-    min-width: 320px;
-    max-width: calc(100% - 32px);
-    gap: 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    gap: 48px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     animation: fadeDownNav 0.6s ease forwards;
   }
 
@@ -450,37 +448,34 @@
   .landing-nav-link:hover { color: #FFFFFF; }
 
   .landing-nav-signin {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     color: #FFFFFF;
     text-decoration: none;
-    padding: 8px 16px;
+    padding: 0;
     border: none;
-    transition: all 0.2s;
+    transition: color 0.2s;
     cursor: pointer;
-    background: rgba(255,255,255,0.06);
+    background: none;
     font-family: inherit;
-    border-radius: 9999px;
   }
-  .landing-nav-signin:hover { background: rgba(255,255,255,0.1); color: #FFFFFF; }
-  .landing-nav-signin:active { transform: scale(0.97); }
+  .landing-nav-signin:hover { color: rgba(255,255,255,0.7); }
 
   .landing-nav-cta {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     color: #080808;
     text-decoration: none;
-    padding: 9px 22px;
+    padding: 10px 24px;
     background: #FFFFFF;
     border-radius: 9999px;
-    transition: all 0.2s;
+    transition: opacity 0.2s, transform 0.15s;
     cursor: pointer;
     border: none;
     font-family: inherit;
-    box-shadow: 0 0 20px rgba(255,255,255,0.06);
+    margin-left: 12px;
   }
-  .landing-nav-cta:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 0 30px rgba(255,255,255,0.12); }
-  .landing-nav-cta:active { transform: scale(0.97); }
+  .landing-nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
   .hero-glow {
     position: absolute;
@@ -594,12 +589,7 @@
   }
 
   @media (max-width: 900px) {
-    .landing-nav { width: calc(100% - 24px); max-width: 100%; justify-content: space-between; gap: 0; padding: 0 8px 0 16px; top: 14px; height: 54px; }
-    .landing-nav-signin { display: none; }
-  }
-
-  .animate-in {
-    animation: scale-in-x 0.2s ease forwards;
+    .landing-nav { width: calc(100% - 32px); max-width: 100%; justify-content: space-between; gap: 16px; padding: 0 12px 0 20px;}
   }
 }
 

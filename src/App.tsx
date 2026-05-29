@@ -1927,30 +1927,6 @@ export default function App() {
         </div>
       </main>
 
-      <AnimatePresence>
-        {showAuth && (
-          <Auth 
-            initialMode={authMode}
-            feature={authFeature}
-            onAuthSuccess={(userData) => {
-              setUser(userData);
-              if (authCallback) {
-                authCallback();
-                setAuthCallback(null);
-              }
-              setAuthFeature(undefined);
-              setShowAuth(false);
-            }} 
-            onClose={() => {
-              setShowAuth(false);
-              setAuthCallback(null);
-              setAuthFeature(undefined);
-            }} 
-          />
-        )}
-      </AnimatePresence>
-
-      
       {/* Footer */}
       <SomyraFooter onStartFree={() => { setAuthMode('signup'); setShowAuth(true); }} />
 
@@ -2026,6 +2002,28 @@ export default function App() {
       </>
       )}
       {/* Modals */}
+      <AnimatePresence>
+        {showAuth && (
+          <Auth 
+            initialMode={authMode}
+            feature={authFeature}
+            onAuthSuccess={(userData) => {
+              setUser(userData);
+              if (authCallback) {
+                authCallback();
+                setAuthCallback(null);
+              }
+              setAuthFeature(undefined);
+              setShowAuth(false);
+            }} 
+            onClose={() => {
+              setShowAuth(false);
+              setAuthCallback(null);
+              setAuthFeature(undefined);
+            }} 
+          />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {showPricingModal && (
           <PricingModal 
