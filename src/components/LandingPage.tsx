@@ -623,10 +623,10 @@ export function LandingPage({
               </Link>
             </div>
           </div>
-          <button onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
+          <button onClick={() => setShowPricingModal(true)} className="landing-nav-link">
             Pricing
           </button>
-          <button onClick={onOpenChangelog} className="landing-nav-link">
+          <button onClick={() => document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
             FAQ
           </button>
         </div>
@@ -634,7 +634,7 @@ export function LandingPage({
           <button onClick={() => setShowAuth(true)} className="landing-nav-signin hidden sm:block">
             Log in
           </button>
-          <button onClick={() => setActiveTab('profile')} className="landing-nav-cta">
+          <button onClick={() => setShowAuth(true)} className="landing-nav-cta">
             Sign up
           </button>
         </div>
@@ -1532,10 +1532,9 @@ export function LandingPage({
         </div>
       </motion.section>
 
-      {/* ════════════════════════════════════════
-         SECTION 10: FAQ
-         ════════════════════════════════════════ */}
+      {/* ── SECTION 10: FAQ ── */}
       <motion.section 
+        id="faq-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
