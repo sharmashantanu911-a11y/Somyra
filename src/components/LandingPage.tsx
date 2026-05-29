@@ -589,22 +589,23 @@ export function LandingPage({
     <div className="w-full max-w-full overflow-x-hidden">
       {/* ── NAVBAR ── */}
       <nav className="landing-nav">
-        <button onClick={() => scrollToHero()} className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-teal-accent rounded-lg flex items-center justify-center font-[family-name:var(--font-display)] font-extrabold text-sm text-[#080808] shrink-0">
-            S
+        <button onClick={() => scrollToHero()} className="flex items-center gap-2">
+          <div className="flex items-center justify-center shrink-0">
+            <svg className="w-5 h-5 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
+            </svg>
           </div>
-          <span className="font-[family-name:var(--font-display)] font-bold text-[17px] text-white tracking-tight">Somyra</span>
+          <span className="font-[family-name:var(--font-display)] font-bold text-[17px] text-white tracking-tight -mb-0.5">Somyra</span>
         </button>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-6 hidden md:flex">
           <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
-            How It Works
+            Explore
           </button>
           <div className="relative group/tools">
             <button className="landing-nav-link flex items-center gap-1">
-              Tools
-              <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover/tools:rotate-180" />
+              Features
             </button>
-            <div className="absolute right-0 top-full mt-1 w-56 rounded-xl border border-white/10 bg-[#0D0D0D] p-2 shadow-2xl opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-56 rounded-xl border border-white/10 bg-[#0D0D0D] p-2 shadow-2xl opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
               <Link to="/linkedin-post-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
                 LinkedIn Post Generator
               </Link>
@@ -622,18 +623,19 @@ export function LandingPage({
               </Link>
             </div>
           </div>
-          <Link to="/blog" className="landing-nav-link">Blog</Link>
           <button onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
             Pricing
           </button>
           <button onClick={onOpenChangelog} className="landing-nav-link">
-            What's New
+            FAQ
           </button>
-          <button onClick={() => setShowAuth(true)} className="landing-nav-signin">
-            Sign In
+        </div>
+        <div className="flex items-center">
+          <button onClick={() => setShowAuth(true)} className="landing-nav-signin hidden sm:block">
+            Log in
           </button>
           <button onClick={() => setActiveTab('profile')} className="landing-nav-cta">
-            Start Free
+            Sign up
           </button>
         </div>
       </nav>
@@ -972,7 +974,7 @@ export function LandingPage({
           </div>
 
           {/* Video Placeholder */}
-          <div className="relative rounded-2xl overflow-hidden border border-white/[0.07] bg-[#0d0d0d] aspect-video flex flex-col items-center justify-center gap-4 cursor-pointer transition-colors hover:border-teal-accent/20 shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
+          <div className="relative rounded-2xl overflow-hidden border border-white/[0.07] bg-[#0d0d0d] aspect-video flex flex-col items-center justify-center gap-4 cursor-pointer transition-colors hover:border-teal-accent/20 shadow-[0_32px_80px_rgba(0,0,0,0.5)] group">
             {/* Grid texture */}
             <div className="absolute inset-0 pointer-events-none" style={{
               backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
