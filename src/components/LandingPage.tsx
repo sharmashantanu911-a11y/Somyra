@@ -659,10 +659,10 @@ export function LandingPage({
           </div>
 
           {/* Headline */}
-          <h1 className="font-[family-name:var(--font-display)] text-[clamp(34px,6vw,62px)] font-extrabold leading-[1.08] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
-            Your LinkedIn sounds like<br className="hidden sm:block" />
-            <span className="text-teal-accent">everyone else.</span><br />
-            Somyra makes it sound like<br className="hidden sm:block" />
+          <h1 className="font-[family-name:var(--font-display)] text-[clamp(30px,5vw,56px)] font-extrabold leading-[1.15] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
+            Your LinkedIn sounds like everyone else.
+            <br />
+            Somyra makes it sound like{' '}
             <span className="text-teal-accent relative">you.
               <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-teal-accent/45 rounded-full origin-left scale-x-0 animate-[scale-in-x_0.5s_1s_ease_forwards]" />
             </span>
@@ -793,67 +793,48 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-         SECTION: PROBLEM AMPLIFICATION
-         ════════════════════════════════════════ */}
-      {/* ════════════════════════════════════════
-         SECTION 4: PROBLEM
-         ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="w-full px-4 py-12 md:py-16 relative z-10"
-      >
+      {/* ── BENEFITS ── */}
+      <section className="w-full px-4 py-16 md:py-24 relative z-10">
         <div className="max-w-[896px] mx-auto">
-          <div className="text-center mb-16 md:mb-20">
-            <SectionHeading>
-              You already know LinkedIn matters.<br />
-              You just never know what to say.
-            </SectionHeading>
-            <motion.p variants={fadeInUp} className="text-[#2DD4BF] text-lg md:text-xl font-semibold mt-6">That changes today.</motion.p>
-          </div>
+          <SectionLabel>WHAT YOU GET</SectionLabel>
+          <SectionHeading className="mb-4">
+            From invisible to unstoppable<br />
+            on LinkedIn.
+          </SectionHeading>
+          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-14 max-w-[576px] mx-auto text-center">
+            Three ways Somyra turns your profile into your biggest asset.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: FileText,
-                title: 'The blank screen problem',
-                body: 'You have something to say. The words never come out right. So you close the tab and tell yourself you will post tomorrow.'
+                title: 'Write posts that sound like you',
+                body: 'No more staring at a blank screen. You pick the topic, choose your style, and Somyra writes a post that sounds like you on your best day. Ready to publish in 30 seconds.'
               },
               {
                 icon: UserCircle,
-                title: 'The invisible profile problem',
-                body: 'People visit your profile every day. Most leave without doing anything. You have no idea why. That is the real cost.'
+                title: 'Fix your profile to attract opportunity',
+                body: 'People visit your profile every day. Most leave because something is off. Somyra audits every line of your About and Experience and rewrites it so the right people reach out to you.'
               },
               {
                 icon: MessageSquare,
-                title: 'The ignored outreach problem',
-                body: 'You write the DM. You send it. Nothing. Because it reads like every other DM they got that week. Because it is.'
+                title: 'Send DMs that get real replies',
+                body: 'Generic outreach gets ignored. Somyra writes personalized messages that reference each prospect and speak to their real pain. Your reply rate goes up from the first message.'
               }
             ].map((card, i) => (
-              <motion.div 
-                key={i} 
-                variants={fadeInUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-8 relative overflow-hidden group hover:border-[#2DD4BF]/30 transition-all duration-300 h-full flex flex-col shadow-premium"
-              >
+              <div key={i} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-8 relative overflow-hidden group hover:border-[#2DD4BF]/30 transition-all duration-300 h-full flex flex-col shadow-premium hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2DD4BF]/40 via-[#2DD4BF]/60 to-[#2DD4BF]/40 opacity-50 group-hover:opacity-100 transition-opacity" />
                 <div className="w-12 h-12 bg-[#2DD4BF]/10 rounded-xl flex items-center justify-center mb-6 shrink-0 group-hover:scale-110 transition-transform duration-300">
                   <card.icon className="w-6 h-6 text-[#2DD4BF]" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">{card.title}</h3>
                 <p className="text-[#A0A0A0] leading-[1.7] text-[15px] flex-grow">{card.body}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
-
-          <motion.p variants={fadeInUp} className="text-center mt-16 text-lg md:text-xl font-bold text-white">
-            Somyra was built to solve all three.
-          </motion.p>
         </div>
-      </motion.section>
+      </section>
 
       {/* ════════════════════════════════════════
          SECTION 5: FEATURES (Superhuman-style)
@@ -951,18 +932,18 @@ export function LandingPage({
             {[
               {
                 num: '01',
-                title: 'Tell Somyra who you are',
-                body: 'Paste your LinkedIn About section and your recent experience. Somyra reads it and maps out <strong>your niche, your positioning, and the exact gaps costing you opportunities</strong> right now.'
+                title: 'Paste your profile',
+                body: 'Share your LinkedIn link. Somyra scans your About, Experience, and recent posts to understand your niche, your positioning, and what makes you different from everyone else.'
               },
               {
                 num: '02',
-                title: 'Show Somyra how you write',
-                body: 'Add three to ten of your real posts. This is what separates Somyra from every other AI tool. <strong>It learns your actual voice</strong> — not a generic professional tone. Yours.'
+                title: 'Teach Somyra your voice',
+                body: 'Add three of your best posts. Somyra studies how you structure ideas, the words you choose, and how you open and close. This is how it learns to write like you.'
               },
               {
                 num: '03',
-                title: 'Generate everything. Sound like yourself.',
-                body: 'Posts, DMs, profile rewrites, topic ideas. All of it sounds like <strong>you wrote it on your sharpest day</strong>. Because that is exactly what Somyra is trained to do.'
+                title: 'Generate content that sounds like you',
+                body: 'Posts, DMs, profile rewrites, topic ideas. All of it sounds like you wrote it on your best day. Because that is exactly what Somyra is trained to do.'
               }
             ].map((step, i) => (
               <div key={i} className="bg-[#0d0d0d] p-8 md:p-10 relative group transition-colors hover:bg-[#111]">
@@ -975,7 +956,7 @@ export function LandingPage({
                   {step.num}
                 </div>
                 <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white leading-snug tracking-[-0.02em] mb-3">{step.title}</h3>
-                <p className="text-[14.5px] font-light leading-[1.72] text-white/50" dangerouslySetInnerHTML={{ __html: step.body }} />
+                <p className="text-[14.5px] font-light leading-[1.72] text-white/50">{step.body}</p>
                 {/* Arrow between steps (desktop) */}
                 {i < 2 && <div className="hidden md:block absolute top-10 -right-[9px] text-teal-accent/30 text-lg z-10">→</div>}
               </div>
