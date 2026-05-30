@@ -1264,163 +1264,145 @@ export function LandingPage({
       </section>
 
       {/* ── COMPARISON ── */}
-      <section className="w-full px-4 py-[60px] md:py-20 bg-[#0D0D0D] relative z-10 border-t border-white/5">
+      <section className="w-full px-4 py-[60px] md:py-[70px] ds:py-[100px] bg-[#0D0D0D] relative z-10 border-t border-white/5">
         <div className="max-w-[1100px] mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <SectionLabel>WHY SOMYRA</SectionLabel>
-            <SectionHeading className="mb-4">
-              More tools. Higher prices.<br />
-              None of them sound like you.
-            </SectionHeading>
-            <p className="text-[#888] text-[15px] md:text-lg leading-[1.7] max-w-[576px] mx-auto">
-              We built the comparison so you do not have to spend hours researching.
-            </p>
+          <div className="text-center mb-6 sm:mb-8 ds:mb-10">
+            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+              WHY SOMYRA
+            </span>
           </div>
 
-          {/* Table Container */}
-          <div className="relative">
-            <div className="md:hidden text-center mb-4">
-              <span className="text-[11px] text-[#555] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                <ChevronRight className="w-3 h-3 rotate-180" />
-                Scroll to compare
-                <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
+          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
+            More tools. Higher prices.<br />
+            None of them sound like you.
+          </h2>
 
-            <div className="overflow-x-auto pb-4 no-scrollbar">
-              <div className="min-w-[800px] md:min-w-full">
-                {/* Table Header */}
-                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-end">
-                  <div className="pb-5 pl-4">
-                    <span className="text-[10px] font-black text-[#555] uppercase tracking-[0.2em]">Feature</span>
-                  </div>
+          <p className="text-[#888] text-base leading-[1.6] text-center mx-auto mb-8 sm:mb-10 ds:mb-12" style={{ maxWidth: '380px' }}>
+            We did the research so you do not have to.
+          </p>
 
-                  {/* Somyra */}
-                  <div className="bg-gradient-to-b from-[#2DD4BF]/[0.08] to-[#2DD4BF]/[0.02] border-t-[3px] border-[#2DD4BF] rounded-t-2xl p-4 md:p-5 text-center relative">
-                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#2DD4BF] text-black text-[9px] font-black uppercase tracking-[0.15em] shadow-[0_0_12px_rgba(45,212,191,0.4)]">
-                      Best Value
+          {/* Table with scroll + entrance animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="overflow-x-auto no-scrollbar"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            <div className="min-w-[600px]">
+              {/* Table container */}
+              <div className="bg-[#0D0D0D] rounded-[16px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+                {/* Header Row */}
+                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] bg-[#141414] text-[13px] font-semibold" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div className="p-[16px_20px] text-white">Features</div>
+                  <div className="p-[16px_20px] text-center relative" style={{ background: 'rgba(45,212,191,0.06)', borderLeft: '1px solid rgba(45,212,191,0.15)', borderRight: '1px solid rgba(45,212,191,0.15)' }}>
+                    <span className="px-[10px] py-[3px] rounded-full bg-[#2DD4BF] text-[#080808] text-[10px] font-bold uppercase tracking-[0.08em] mb-1.5 inline-block">
+                      BEST VALUE
                     </span>
-                    <div className="flex flex-col items-center gap-0.5 mt-2">
-                      <span className="text-[14px] font-bold text-white flex items-center gap-1.5">
-                        <Crown className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                        Somyra
-                      </span>
-                      <span className="text-[12px] font-bold text-[#2DD4BF]">From $19/mo</span>
-                    </div>
+                    <div className="text-white">Somyra</div>
+                    <span className="block text-[12px] text-[#2DD4BF] font-semibold">From $19/mo</span>
                   </div>
-
-                  {/* Competitors */}
                   {[
-                    { name: 'Taplio', note: 'AI at $69/mo' },
-                    { name: 'Supergrow', note: 'From $19/mo' },
-                    { name: 'MagicPost', note: 'From $27/mo' }
+                    { name: 'Taplio', price: '$69/mo' },
+                    { name: 'Supergrow', price: '$19/mo' },
+                    { name: 'MagicPost', price: '$27/mo' }
                   ].map((comp, idx) => (
-                    <div key={idx} className="bg-white/[0.02] p-5 text-center border-t border-x border-white/5 rounded-t-xl mx-px">
-                      <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[14px] font-bold text-white">{comp.name}</span>
-                        <span className="text-[12px] text-[#666] font-medium">{comp.note}</span>
-                      </div>
+                    <div key={idx} className="p-[16px_20px] text-center">
+                      <div className="text-white">{comp.name}</div>
+                      <span className="block text-[12px] text-[#666] font-normal">{comp.price}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Table Rows */}
-                <div className="border border-white/5 rounded-b-2xl overflow-hidden">
-                  {[
-                    {
-                      feature: 'Writes in your exact voice',
-                      somyra: true,
-                      others: [false, 'Limited', 'Basic AI']
-                    },
-                    {
-                      feature: 'Profile audit with rewrite',
-                      somyra: true,
-                      others: [false, false, false]
-                    },
-                    {
-                      feature: 'Smart outreach with CRM',
-                      somyra: true,
-                      others: ['$199/mo', false, false]
-                    },
-                    {
-                      feature: 'Voice learning from your posts',
-                      somyra: true,
-                      others: ['Basic', 'Basic', 'Basic']
-                    },
-                    {
-                      feature: 'Unlimited topic ideas',
-                      somyra: true,
-                      others: ['Limited', true, true]
-                    },
-                    {
-                      feature: 'Account safe, no automation',
-                      somyra: true,
-                      others: ['At risk', true, true]
-                    },
-                    {
-                      feature: 'Follow up sequences',
-                      somyra: true,
-                      others: ['Basic', false, false]
-                    },
-                    {
-                      feature: 'ICP targeting tool',
-                      somyra: true,
-                      others: [false, false, false]
-                    },
-                    {
-                      feature: 'Full AI included at base price',
-                      somyra: true,
-                      others: ['$69/mo', 'Limited', 'Basic']
+                {/* Data Rows */}
+                {[
+                  { feature: 'Writes in your exact voice', somyra: true, others: [false, 'Limited', 'Basic AI'] },
+                  { feature: 'Profile audit with rewrite', somyra: true, others: [false, false, false] },
+                  { feature: 'Smart outreach with CRM', somyra: true, others: ['$199/mo', false, false] },
+                  { feature: 'Voice learning from your posts', somyra: true, others: ['Basic', 'Basic', 'Basic'] },
+                  { feature: 'Unlimited topic ideas', somyra: true, others: ['Limited', true, true] },
+                  { feature: 'Account safe, no automation', somyra: true, others: ['At risk', true, true] },
+                  { feature: 'Follow up sequences', somyra: true, others: ['Basic', false, false] },
+                  { feature: 'ICP targeting tool', somyra: true, others: [false, false, false] },
+                  { feature: 'Full AI included at base price', somyra: true, others: ['$69/mo', 'Limited', 'Basic'] },
+                  { feature: 'Built specifically for LinkedIn', somyra: true, others: [false, false, false] }
+                ].map((row, i) => {
+                  const renderCell = (val: any, isSomyra: boolean) => {
+                    if (val === true) {
+                      return <div className="w-[22px] h-[22px] rounded-full bg-[#2DD4BF]/[0.15] flex items-center justify-center"><Check className="w-3.5 h-3.5 text-[#2DD4BF]" /></div>;
                     }
-                  ].map((row, i) => {
-                    const renderCell = (val: any, isSomyra: boolean) => {
-                      if (val === true) return <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[#2DD4BF]/10"><Check className="w-3.5 h-3.5 text-[#2DD4BF]" /></div>;
-                      if (val === false) return <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-500/10"><X className="w-3.5 h-3.5 text-red-500/60" /></div>;
-                      if (val === 'At risk') return <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-500/10"><AlertTriangle className="w-3.5 h-3.5 text-red-400" /></div>;
-                      if (val.toString().startsWith('$')) return <span className="text-[12px] md:text-[13px] font-bold text-[#EF4444]/70 leading-snug">{val}</span>;
-                      if (val === 'Limited' || val === 'Basic' || val === 'Basic AI') return <span className="text-[12px] md:text-[13px] font-medium text-[#777] leading-snug">{val}</span>;
-                      return <span className="text-[12px] md:text-[13px] font-medium text-[#777] leading-snug">{val}</span>;
-                    };
+                    if (val === false) {
+                      return <div className="w-[22px] h-[22px] rounded-full bg-red-500/[0.1] flex items-center justify-center"><X className="w-3 h-3 text-[#EF4444]" /></div>;
+                    }
+                    if (val === 'At risk') {
+                      return <div className="w-[22px] h-[22px] rounded-full bg-red-500/[0.1] flex items-center justify-center"><AlertTriangle className="w-3 h-3 text-[#EF4444]" /></div>;
+                    }
+                    if (val.toString().startsWith('$')) {
+                      return <span className="text-[13px] font-medium leading-snug text-[#666]">{val}</span>;
+                    }
+                    return <span className="text-[13px] text-[#666] leading-snug">{val}</span>;
+                  };
 
-                    return (
-                      <div key={i} className={`grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center ${i % 2 === 0 ? 'bg-white/[0.015]' : 'bg-transparent'}`}>
-                        <div className="p-4 md:p-5 text-[13px] font-bold text-white pl-5">{row.feature}</div>
-                        <div className="p-4 md:p-5 flex flex-col items-center justify-center bg-[#2DD4BF]/[0.03] border-x border-white/5 h-full">
-                          {renderCell(row.somyra, true)}
-                        </div>
-                        {row.others.map((val, ci) => (
-                          <div key={ci} className="p-4 md:p-5 flex flex-col items-center justify-center h-full border-r border-white/5 last:border-r-0">
-                            {renderCell(val, false)}
-                          </div>
-                        ))}
+                  return (
+                    <div
+                      key={i}
+                      className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center min-h-[52px]"
+                      style={{
+                        background: i % 2 === 0 ? 'rgba(255,255,255,0.01)' : '#0D0D0D',
+                        borderBottom: i < 10 ? '1px solid rgba(255,255,255,0.04)' : 'none'
+                      }}
+                    >
+                      <div className="p-[16px_20px] text-[14px] text-[#ccc] font-normal">{row.feature}</div>
+                      <div className="p-[16px_20px] flex flex-col items-center justify-center" style={{ background: 'rgba(45,212,191,0.03)', borderLeft: '1px solid rgba(45,212,191,0.15)', borderRight: '1px solid rgba(45,212,191,0.15)' }}>
+                        {renderCell(row.somyra, true)}
                       </div>
-                    );
-                  })}
+                      {row.others.map((val, ci) => (
+                        <div key={ci} className="p-[16px_20px] flex flex-col items-center justify-center">
+                          {renderCell(val, false)}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+
+                {/* Summary Row */}
+                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center min-h-[52px] bg-[#141414]">
+                  <div className="p-[16px_20px] text-[14px] font-semibold text-white">Starting price</div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center" style={{ background: 'rgba(45,212,191,0.03)', borderLeft: '1px solid rgba(45,212,191,0.15)', borderRight: '1px solid rgba(45,212,191,0.15)' }}>
+                    <span className="text-[15px] font-bold text-[#2DD4BF]">$19/mo</span>
+                  </div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#666]">$69/mo</span></div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#666]">$19/mo</span></div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#666]">$27/mo</span></div>
                 </div>
               </div>
             </div>
+          </motion.div>
 
-            <p className="mt-4 text-[11px] text-[#555] font-medium italic px-4">
-              *AI features require $69/mo plan on Taplio.
-            </p>
+          {/* Mobile scroll hint */}
+          <div className="text-right mt-2 md:hidden">
+            <span className="text-[12px] text-[#555]">Scroll to compare &rarr;</span>
           </div>
+
+          <p className="mt-4 text-[11px] text-[#555] font-medium italic px-4">
+            *AI features require $69/mo plan on Taplio.
+          </p>
 
           {/* Bottom CTA */}
           <div className="mt-10 sm:mt-16 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 mb-5">
-              <span className="text-[10px] font-black text-[#2DD4BF] uppercase tracking-[0.2em]">The bottom line</span>
+            <div className="text-center mb-5">
+              <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">THE BOTTOM LINE</span>
             </div>
-            <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
+            <h3 className="text-[24px] ds:text-[32px] font-bold text-white mb-5 leading-tight">
               More features. Lower price.<br />Zero account risk.
             </h3>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-                className="px-8 py-4 bg-[#2DD4BF] text-black font-bold rounded-xl text-sm hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
-              >
-                Start for Free
-              </button>
-            </div>
+            <button
+              onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
+              className="px-9 py-[14px] bg-[#2DD4BF] text-black font-bold rounded-xl text-base hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
+            >
+              Start for Free
+            </button>
           </div>
         </div>
       </section>
