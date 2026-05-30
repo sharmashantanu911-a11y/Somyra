@@ -219,24 +219,24 @@ const getInitials = (name: string) =>
   name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
 
 const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; idx: number }) => (
-  <div className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[12px] p-5 flex flex-col shadow-xl relative overflow-hidden group hover:border-[#2DD4BF]/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] transition-all duration-300">
+  <div className="min-w-[280px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[14px] p-5 md:p-6 flex flex-col shadow-xl relative overflow-hidden group hover:border-[#2DD4BF]/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] transition-all duration-300">
     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2DD4BF]/50 to-transparent" />
     <div className="flex gap-1 mb-4">
       {[...Array(5)].map((_, s) => (
-        <Star key={s} className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
+        <Star key={s} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
       ))}
     </div>
     <div className="relative">
-      <span className="absolute -top-1 -left-1 text-[40px] leading-none text-[#2DD4BF]/10 font-serif select-none pointer-events-none">&ldquo;</span>
-      <p className="text-[14px] leading-[1.6] text-[#D1D5DB] mb-6 pl-3 relative z-10 italic font-medium">&ldquo;{review.text}&rdquo;</p>
+      <span className="absolute -top-1 -left-0.5 text-[44px] leading-none text-[#2DD4BF]/8 font-serif select-none pointer-events-none">{"\u201C"}</span>
+      <p className="text-[13px] md:text-[14px] leading-[1.7] text-[#D1D5DB] mb-5 pl-4 relative z-10 font-medium">{"\u201C"}{review.text}{"\u201D"}</p>
     </div>
     <div className="mt-auto flex items-center gap-3">
-      <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[11px] font-bold text-white shrink-0 shadow-lg`}>
+      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[12px] font-bold text-white shrink-0 shadow-lg`}>
         {getInitials(review.name)}
       </div>
       <div className="min-w-0">
-        <p className="text-white font-bold text-[14px] leading-tight truncate">{review.name}</p>
-        <p className="text-[#9CA3AF] text-[12px] mt-0.5 truncate">{review.title}</p>
+        <p className="text-white font-bold text-[14px] leading-tight">{review.name}</p>
+        <p className="text-[#9CA3AF] text-[12px] mt-0.5 leading-tight">{review.title}</p>
       </div>
     </div>
     <div className="mt-4">
@@ -280,6 +280,36 @@ const hardcodedReviewsRow1 = [
     title: "LinkedIn Ghostwriter",
     text: "As a ghostwriter I was worried AI would sound generic. Somyra proved me completely wrong. The voice matching is genuinely impressive.",
     badge: "PROFILE VIEWS DOUBLED"
+  },
+  {
+    name: "Elena Voss",
+    title: "Marketing Director, B2B Tech",
+    text: "I have tried every LinkedIn growth tool on the market. Somyra is the only one that writes content I do not have to rewrite before posting.",
+    badge: "HOURS SAVED PER WEEK"
+  },
+  {
+    name: "Rohan Mehta",
+    title: "Founder at DevTools SaaS",
+    text: "My LinkedIn used to get maybe 200 impressions per post. Now I average over 2,000. The topic generator alone changed my entire content strategy.",
+    badge: "10X IMPRESSION GROWTH"
+  },
+  {
+    name: "Claire Dubois",
+    title: "Executive Career Coach",
+    text: "I recommend Somyra to every client I work with. The profile audit catches things I miss even as a trained career coach. It is that thorough.",
+    badge: "RECOMMENDED TO CLIENTS"
+  },
+  {
+    name: "Arjun Patel",
+    title: "Demand Gen Director",
+    text: "The Smart Outreach CRM integration is a game changer. I track every prospect, every follow up, and every conversion. All inside one tool.",
+    badge: "PIPELINE GROWTH 3X"
+  },
+  {
+    name: "Maya Lindström",
+    title: "Content Strategist",
+    text: "I manage three brand accounts on LinkedIn. Somyra keeps each voice distinct and authentic. My clients cannot believe I am using AI.",
+    badge: "3 BRANDS, 1 TOOL"
   }
 ];
 
@@ -313,6 +343,36 @@ const hardcodedReviewsRow2 = [
     title: "SaaS Founder",
     text: "I upgraded to Pro after the free trial and have not looked back. The Deep Strategy audit completely changed how I position myself online.",
     badge: "POSITIONING TRANSFORMED"
+  },
+  {
+    name: "Nina Choudhury",
+    title: "CEO at HealthTech Startup",
+    text: "I was posting once a month because writing felt like a chore. Somyra made it effortless. Now I post three times a week and the engagement keeps climbing.",
+    badge: "3X POST FREQUENCY"
+  },
+  {
+    name: "Carlos Rivera",
+    title: "Brand Strategist",
+    text: "The Voice Profile feature is witchcraft. It captured my tone so accurately that my long time clients asked if I had hired a ghostwriter.",
+    badge: "SPOT ON VOICE MATCH"
+  },
+  {
+    name: "Aisha Diallo",
+    title: "Business Development Lead",
+    text: "I closed two enterprise deals from LinkedIn DMs written by Somyra. The personalized outreach makes prospects feel like you actually did your homework.",
+    badge: "2 ENTERPRISE DEALS CLOSED"
+  },
+  {
+    name: "Liam O'Brien",
+    title: "Freelance Product Designer",
+    text: "I went from zero LinkedIn presence to getting inbound messages from recruiters every week. All because I finally had content worth engaging with.",
+    badge: "WEEKLY INBOUND MESSAGES"
+  },
+  {
+    name: "Fatima Al-Rashid",
+    title: "HR Director at Tech Corp",
+    text: "We use Somyra for our entire leadership team's LinkedIn presence. Consistent, authentic, professional. Exactly what a modern company brand needs.",
+    badge: "TEAM WIDE ADOPTION"
   }
 ];
 
