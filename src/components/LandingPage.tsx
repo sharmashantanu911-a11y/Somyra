@@ -454,7 +454,7 @@ const PricingCard = ({
   <motion.div 
     variants={fadeInUp}
     whileHover="hover"
-    className={`relative flex flex-col rounded-3xl p-5 md:p-7 transition-all duration-500 border h-full shadow-premium backdrop-blur-sm ${
+    className={`relative flex flex-col rounded-2xl ds:rounded-3xl p-5 md:p-7 transition-all duration-500 border h-full shadow-premium backdrop-blur-sm ${
       name === 'Pro' ? 'border-2 border-teal-accent bg-[#0A1A19]/40 shadow-[0_0_50px_rgba(45,212,191,0.05)]' : 
       name === 'Max' ? 'border border-red-500/30 bg-red-500/[0.01] hover:border-red-500/50' : 
       'border-white/5 bg-white/[0.02] hover:border-white/10'
@@ -864,16 +864,16 @@ export function LandingPage({
 
         <div className="relative z-10 max-w-[720px] w-full">
           {/* Badge */}
-          <div className="inline-flex items-center gap-3 bg-white/[0.04] border border-white/[0.08] rounded-full px-5 py-2 mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
-            <div className="flex items-center">
-              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-teal-accent/40 to-teal-accent/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[6] shadow-[0_0_0_2px_#080808]">PK</div>
-              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-indigo-500/40 to-indigo-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[5] shadow-[0_0_0_2px_#080808]">AS</div>
-              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-amber-500/40 to-amber-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[4] shadow-[0_0_0_2px_#080808]">SM</div>
-              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-rose-500/40 to-rose-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[3] shadow-[0_0_0_2px_#080808]">JO</div>
-              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-emerald-500/40 to-emerald-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[2] shadow-[0_0_0_2px_#080808]">PR</div>
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-sky-500/40 to-sky-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[1] shadow-[0_0_0_2px_#080808]">AS</div>
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-4 sm:px-5 py-2 mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards] max-w-full">
+            <div className="flex items-center shrink-0">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-teal-accent/40 to-teal-accent/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[6] shadow-[0_0_0_2px_#080808]">PK</div>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-indigo-500/40 to-indigo-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[5] shadow-[0_0_0_2px_#080808]">AS</div>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-amber-500/40 to-amber-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[4] shadow-[0_0_0_2px_#080808]">SM</div>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-rose-500/40 to-rose-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[3] shadow-[0_0_0_2px_#080808]">JO</div>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-emerald-500/40 to-emerald-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[2] shadow-[0_0_0_2px_#080808]">PR</div>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-sky-500/40 to-sky-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[1] shadow-[0_0_0_2px_#080808]">AS</div>
             </div>
-            <span className="text-[13px] font-medium text-[#888]">Trusted by <strong className="text-white font-bold">2,400+ founders</strong></span>
+            <span className="text-[12px] sm:text-[13px] font-medium text-[#888] whitespace-nowrap">Trusted by <strong className="text-white font-bold">2,400+ founders</strong></span>
           </div>
 
           {/* Headline */}
@@ -921,7 +921,7 @@ export function LandingPage({
 
         {/* Product Demo Video */}
         <div
-          className="mt-[60px] relative z-10 w-full max-w-[860px] mx-auto px-4 md:px-0 opacity-0"
+          className="mt-10 sm:mt-[60px] relative z-10 w-full max-w-[860px] mx-auto opacity-0"
           style={{ animation: 'fadeUpVideo 0.7s 0.2s ease-out forwards' }}
         >
           <div
@@ -966,47 +966,48 @@ export function LandingPage({
       {/* ── TRUST STRIP ── */}
       <section className="w-full px-5 md:px-6 py-[60px] md:py-20 border-t border-white/[0.04]">
         <div className="max-w-[680px] mx-auto text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8">
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[10px] font-bold text-teal-accent z-[4]">PK</div>
-              <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[10px] font-bold text-indigo-400 z-[3]">AS</div>
-              <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[10px] font-bold text-amber-400 z-[2]">TB</div>
-              <div className="w-8 h-8 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[10px] font-bold text-pink-400 z-[1]">MW</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] -mr-1.5 sm:-mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-teal-accent z-[4]">PK</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] -mr-1.5 sm:-mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-indigo-400 z-[3]">AS</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] -mr-1.5 sm:-mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-amber-400 z-[2]">TB</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-pink-400 z-[1]">MW</div>
             </div>
-            <span className="text-[13px] sm:text-[14px] text-white/50 px-2">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn</span>
+            <span className="text-[12px] sm:text-[14px] text-white/50">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn</span>
           </div>
 
-          <div className="hidden sm:flex items-center justify-center gap-5 sm:gap-8 md:gap-12 bg-[#0D0D0D] border border-white/[0.06] rounded-xl px-6 py-5 mt-8">
+          {/* Desktop stats row with container */}
+          <div className="hidden sm:flex items-center justify-center bg-[#0D0D0D] border border-white/[0.06] rounded-xl px-6 py-5 gap-8 md:gap-12">
             <div className="flex-1 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] ds:text-[32px] font-extrabold text-white tracking-tight">10+</p>
-              <span className="text-[10px] sm:text-[11px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Countries</span>
+              <p className="font-[family-name:var(--font-display)] text-[22px] ds:text-[32px] font-extrabold text-white tracking-tight">10+</p>
+              <span className="text-[10px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Countries</span>
             </div>
-            <div className="w-px h-6 ds:h-8 bg-white/[0.06]" />
+            <div className="w-px h-8 bg-white/[0.06]" />
             <div className="flex-1 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] ds:text-[32px] font-extrabold text-white tracking-tight">24%</p>
-              <span className="text-[10px] sm:text-[11px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
+              <p className="font-[family-name:var(--font-display)] text-[22px] ds:text-[32px] font-extrabold text-white tracking-tight">24%</p>
+              <span className="text-[10px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
             </div>
-            <div className="w-px h-6 ds:h-8 bg-white/[0.06]" />
+            <div className="w-px h-8 bg-white/[0.06]" />
             <div className="flex-1 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] ds:text-[32px] font-extrabold text-white tracking-tight">Zero</p>
-              <span className="text-[10px] sm:text-[11px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
+              <p className="font-[family-name:var(--font-display)] text-[22px] ds:text-[32px] font-extrabold text-white tracking-tight">Zero</p>
+              <span className="text-[10px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
             </div>
           </div>
 
-          {/* Mobile stats row: inline-flex, no container */}
-          <div className="flex sm:hidden items-center justify-center gap-5 mt-6">
+          {/* Mobile stats row */}
+          <div className="flex sm:hidden items-center justify-center gap-6 px-2">
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[26px] font-extrabold text-white tracking-tight">10+</p>
+              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">10+</p>
               <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
             </div>
-            <div className="w-px h-7 bg-white/[0.06]" />
+            <div className="w-px h-8 bg-white/[0.06]" />
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[26px] font-extrabold text-white tracking-tight">24%</p>
+              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">24%</p>
               <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Engagement</span>
             </div>
-            <div className="w-px h-7 bg-white/[0.06]" />
+            <div className="w-px h-8 bg-white/[0.06]" />
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[26px] font-extrabold text-white tracking-tight">Zero</p>
+              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">Zero</p>
               <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Risk</span>
             </div>
           </div>
@@ -1420,7 +1421,7 @@ export function LandingPage({
             </h3>
             <button
               onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-              className="px-9 py-[14px] bg-[#2DD4BF] text-black font-bold rounded-xl text-base hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02]"
+              className="px-9 py-[14px] bg-[#2DD4BF] text-black font-bold rounded-xl text-base hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] w-full sm:w-auto"
             >
               Start for Free
             </button>
@@ -1437,7 +1438,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
+        className="w-full px-4 sm:px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[1024px] mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -1450,10 +1451,10 @@ export function LandingPage({
 
             {/* Toggle */}
             <div className="flex justify-center mb-8 sm:mb-12">
-              <div className="inline-flex items-center gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1.5 mb-2">
+              <div className="inline-flex items-center gap-1.5 sm:gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1">
                 <button
                   onClick={() => setIsAnnual(false)}
-                  className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all ${
+                  className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-bold transition-all whitespace-nowrap ${
                     !isAnnual ? 'bg-white/10 text-white shadow-xl' : 'text-[#888] hover:text-white'
                   }`}
                 >
@@ -1461,14 +1462,14 @@ export function LandingPage({
                 </button>
                 <button
                   onClick={() => setIsAnnual(true)}
-                  className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all flex items-center gap-2 ${
+                  className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-bold transition-all flex items-center gap-1 sm:gap-2 whitespace-nowrap ${
                     isAnnual ? 'bg-teal-accent/10 text-teal-accent border border-teal-accent/20' : 'text-[#888] hover:text-white'
                   }`}
                 >
                   Annual
                 </button>
                 {isAnnual && (
-                  <span className="text-[10px] text-teal-accent font-bold mr-2 ml-1 animate-pulse">Save up to 35%</span>
+                  <span className="text-[9px] sm:text-[10px] text-teal-accent font-bold mr-1 sm:mr-2 animate-pulse whitespace-nowrap">Save up to 35%</span>
                 )}
               </div>
             </div>
@@ -1614,7 +1615,7 @@ export function LandingPage({
           }
         `}</style>
 
-        <div className="max-w-[896px] mx-auto px-6 text-center mb-8 sm:mb-12 md:mb-16">
+        <div className="max-w-[896px] mx-auto px-5 sm:px-6 text-center mb-10 sm:mb-12 md:mb-16">
           <SectionLabel>REAL RESULTS</SectionLabel>
           <SectionHeading>
             What happens when your<br />
@@ -1670,10 +1671,10 @@ export function LandingPage({
           </div>
         </div>
 
-        <div className="text-center mt-12 md:mt-16">
+        <div className="text-center mt-12 md:mt-16 px-5 sm:px-0">
           <button
             onClick={() => setShowReviewModal(true)}
-            className="px-8 py-4 rounded-xl border border-white/10 text-sm font-bold text-white hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-all bg-white/5 active:scale-95"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/10 text-sm font-bold text-white hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-all bg-white/5 active:scale-95"
           >
             Leave a Review
           </button>
@@ -1723,11 +1724,11 @@ export function LandingPage({
           </div>
 
           {/* Still have questions? */}
-          <div className="text-center mt-10">
-            <p className="text-[14px] text-[#666] mb-1">Still have questions?</p>
+          <div className="text-center mt-10 sm:mt-12">
+            <p className="text-[13px] sm:text-[14px] text-[#666] mb-1">Still have questions?</p>
             <Link
               to="/contact"
-              className="text-[#2DD4BF] text-[14px] font-medium hover:underline transition-all"
+              className="text-[#2DD4BF] text-[13px] sm:text-[14px] font-medium hover:underline transition-all"
             >
               Talk to us &rarr;
             </Link>
@@ -1760,7 +1761,7 @@ export function LandingPage({
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-white/[0.08] mb-8"
           >
             <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B] shrink-0" />
-            <span className="text-[13px] text-[#999] whitespace-nowrap">
+            <span className="text-[13px] text-[#999]">
               &ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span>
             </span>
           </motion.div>
@@ -1843,9 +1844,9 @@ export function LandingPage({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-[#141414] border-t border-white/5 border-l-4 border-l-[#2DD4BF] px-4 md:px-6 py-3.5 flex items-center justify-between gap-4 shadow-[0_-4px_30px_rgba(0,0,0,0.5)]"
+            className="fixed bottom-0 left-0 right-0 z-50 bg-[#141414] border-t border-white/5 border-l-4 border-l-[#2DD4BF] px-4 md:px-6 py-3 md:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 shadow-[0_-4px_30px_rgba(0,0,0,0.5)]"
           >
-            <p className="text-white text-sm font-medium">Start building your brand today for free.</p>
+            <p className="text-white text-[13px] sm:text-sm font-medium text-center sm:text-left">Start building your brand today for free.</p>
             <div className="flex items-center gap-3 shrink-0">
               <button
                 onClick={() => {
