@@ -847,19 +847,22 @@ export function LandingPage({
       )}
 
       {/* ── HERO ── */}
-      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-6 pt-20 md:pt-[120px] ds:pt-[160px] pb-[60px] md:pb-20 ds:pb-24 md:min-h-screen text-center overflow-hidden">
+      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-6 pt-20 md:pt-[120px] ds:pt-[160px] pb-10 md:pb-[60px] text-center overflow-hidden">
         {/* Subtle ambient glow */}
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-[720px] w-full">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-4 py-1.5 mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
+          <div className="inline-flex items-center gap-3 bg-white/[0.04] border border-white/[0.08] rounded-full px-5 py-2 mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
             <div className="flex items-center">
-              <div className="w-5 h-5 rounded-full border-2 border-[#080808] -mr-1.5 bg-gradient-to-br from-teal-accent/30 to-teal-accent/50 flex items-center justify-center text-[8px] font-bold text-[#080808] z-[4]">PK</div>
-              <div className="w-5 h-5 rounded-full border-2 border-[#080808] -mr-1.5 bg-gradient-to-br from-indigo-500/30 to-indigo-500/50 flex items-center justify-center text-[8px] font-bold text-[#080808] z-[3]">AS</div>
-              <div className="w-5 h-5 rounded-full border-2 border-[#080808] bg-gradient-to-br from-amber-500/30 to-amber-500/50 flex items-center justify-center text-[8px] font-bold text-[#080808] z-[2]">TB</div>
+              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-teal-accent/40 to-teal-accent/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[6] shadow-[0_0_0_2px_#080808]">PK</div>
+              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-indigo-500/40 to-indigo-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[5] shadow-[0_0_0_2px_#080808]">AS</div>
+              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-amber-500/40 to-amber-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[4] shadow-[0_0_0_2px_#080808]">SM</div>
+              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-rose-500/40 to-rose-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[3] shadow-[0_0_0_2px_#080808]">JO</div>
+              <div className="w-7 h-7 rounded-full -mr-2 bg-gradient-to-br from-emerald-500/40 to-emerald-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[2] shadow-[0_0_0_2px_#080808]">PR</div>
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-sky-500/40 to-sky-500/60 flex items-center justify-center text-[10px] font-bold text-[#080808] z-[1] shadow-[0_0_0_2px_#080808]">AS</div>
             </div>
-            <span className="text-[12px] font-medium text-white/60">Trusted by <strong className="text-white/90 font-semibold">2,400+ founders</strong></span>
+            <span className="text-[13px] font-medium text-[#888]">Trusted by <strong className="text-white font-bold">2,400+ founders</strong></span>
           </div>
 
           {/* Headline */}
@@ -873,8 +876,8 @@ export function LandingPage({
           </h1>
 
           {/* Subheadline */}
-          <p className="text-[clamp(16px,2.5vw,18px)] font-light leading-[1.7] text-white/60 max-w-[540px] mx-auto mb-10 opacity-0 animate-[fadeUp_0.7s_0.5s_ease_forwards]">
-            Most AI tools strip away your personality. Somyra learns your actual voice from your real posts and writes content that sounds unmistakably like you.
+          <p className="text-[16px] md:text-[18px] text-[#999] max-w-[480px] mx-auto mb-10 opacity-0 animate-[fadeUp_0.7s_0.5s_ease_forwards]">
+            Most AI tools strip your personality. Somyra learns your voice and writes like you on your best day.
           </p>
 
           {/* CTAs */}
@@ -892,14 +895,14 @@ export function LandingPage({
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex items-center gap-2 bg-transparent text-white/80 font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
               >
-                See how it works
+                Watch it in action
               </button>
             </div>
             <div className="flex items-center gap-4 flex-wrap justify-center text-[13px] text-white/40 font-normal">
               <span>No credit card</span>
-              <span className="w-1 h-1 bg-white/40 rounded-full" />
+              <span className="w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
               <span className="text-white/60 font-medium">Free forever</span>
-              <span className="w-1 h-1 bg-white/40 rounded-full" />
+              <span className="w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
               <span>Takes 30 seconds</span>
             </div>
           </div>
