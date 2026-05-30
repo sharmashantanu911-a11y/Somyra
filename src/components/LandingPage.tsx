@@ -618,6 +618,7 @@ export function LandingPage({
   setShowReviewModal,
   user
 }: LandingPageProps) {
+  const [scrolled, setScrolled] = useState(false);
   const [activeFeatureTab, setActiveFeatureTab] = useState('post-writer');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [isAnnual, setIsAnnual] = useState(true);
@@ -637,6 +638,13 @@ export function LandingPage({
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const activeFeature = featureTabs.find(f => f.id === activeFeatureTab) || featureTabs[0];
@@ -697,7 +705,7 @@ export function LandingPage({
   return (
     <div className="w-full max-w-full overflow-x-hidden">
       {/* ── NAVBAR ── */}
-      <nav className="landing-nav">
+      <nav className={`landing-nav${scrolled ? ' landing-nav-scrolled' : ''}`}>
         <button onClick={() => { scrollToHero(); setIsMobileMenuOpen(false); }} className="flex items-center gap-2 shrink-0">
           <div className="flex items-center justify-center shrink-0">
             <svg className="w-5 h-5 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -715,21 +723,41 @@ export function LandingPage({
               Features
               <ChevronDown className="w-3 h-3" />
             </button>
-            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-56 rounded-xl border border-white/10 bg-[#0D0D0D] p-2 shadow-2xl opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
-              <Link to="/linkedin-post-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
-                LinkedIn Post Generator
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[280px] rounded-xl border border-white/[0.08] bg-[#0D0D0D] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.4)] opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
+              <Link to="/linkedin-post-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
+                <PenTool className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[14px] font-medium text-white leading-tight">Post Generator</p>
+                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Write posts that sound like you</p>
+                </div>
               </Link>
-              <Link to="/linkedin-profile-audit" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
-                LinkedIn Profile Audit
+              <Link to="/linkedin-profile-audit" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
+                <UserCircle className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[14px] font-medium text-white leading-tight">Profile Audit</p>
+                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Fix your profile to attract opportunity</p>
+                </div>
               </Link>
-              <Link to="/linkedin-dm-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
-                LinkedIn DM Generator
+              <Link to="/linkedin-dm-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
+                <Send className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[14px] font-medium text-white leading-tight">DM Generator</p>
+                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Turn cold DMs into warm conversations</p>
+                </div>
               </Link>
-              <Link to="/linkedin-hook-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
-                LinkedIn Hook Generator
+              <Link to="/linkedin-hook-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
+                <Sparkles className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[14px] font-medium text-white leading-tight">Hook Generator</p>
+                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Hooks that stop the scroll</p>
+                </div>
               </Link>
-              <Link to="/linkedin-topic-generator" className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all text-left">
-                Topic Generator
+              <Link to="/linkedin-topic-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
+                <FileText className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[14px] font-medium text-white leading-tight">Topic Generator</p>
+                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Never wonder what to post again</p>
+                </div>
               </Link>
             </div>
           </div>
