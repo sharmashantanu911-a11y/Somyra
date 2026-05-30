@@ -779,11 +779,11 @@ export function LandingPage({
             FAQ
           </button>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <button
             type="button"
             onClick={() => { setAuthMode('login'); setShowAuth(true); }}
-            className="landing-nav-signin"
+            className="landing-nav-signin hidden sm:block"
           >
             Log in
           </button>
@@ -792,64 +792,80 @@ export function LandingPage({
             onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
             className="landing-nav-cta"
           >
-            Sign up
+            Start for Free
           </button>
           <button
             type="button"
-            onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-            className="landing-nav-cta"
+            onClick={() => setIsMobileMenuOpen(prev => !prev)}
+            className="landing-hamburger"
+            aria-label="Toggle menu"
           >
-            Start for Free
+            {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </nav>
 
       {/* ── MOBILE MENU ── */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[99] pt-24 px-4 md:hidden">
-          <div className="absolute inset-0 bg-[rgba(8,8,8,0.98)] backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)} />
-          <div className="relative bg-[#0D0D0D] border border-white/10 rounded-2xl p-4 shadow-2xl" style={{ animation: 'fadeInDownMobile 0.25s ease forwards' }}>
-            <div className="flex flex-col gap-2">
+        <div className="fixed inset-0 z-[99] pt-20 px-4 md:hidden">
+          <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="relative bg-[#0D0D0D]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 shadow-[0_32px_64px_rgba(0,0,0,0.6)]" style={{ animation: 'fadeInDownMobile 0.25s ease forwards' }}>
+            <div className="flex flex-col gap-1">
               <button
                 onClick={() => { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all"
               >
                 Explore
               </button>
               <div className="px-4 py-3">
-                <p className="text-[11px] font-black text-[#555] uppercase tracking-[0.15em] mb-2">Features</p>
-                <div className="flex flex-col gap-1 ml-2">
-                  <Link to="/linkedin-post-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Post Generator</Link>
-                  <Link to="/linkedin-profile-audit" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Profile Audit</Link>
-                  <Link to="/linkedin-dm-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">DM Generator</Link>
-                  <Link to="/linkedin-hook-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Hook Generator</Link>
-                  <Link to="/linkedin-topic-generator" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-400 hover:text-white py-1.5 transition-colors">Topic Generator</Link>
+                <p className="text-[10px] font-semibold text-[#555] uppercase tracking-[0.15em] mb-3">Features</p>
+                <div className="flex flex-col gap-0.5">
+                  <Link to="/linkedin-post-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                    <PenTool className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                    <span>Post Generator</span>
+                  </Link>
+                  <Link to="/linkedin-profile-audit" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                    <UserCircle className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                    <span>Profile Audit</span>
+                  </Link>
+                  <Link to="/linkedin-dm-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                    <Send className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                    <span>DM Generator</span>
+                  </Link>
+                  <Link to="/linkedin-hook-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                    <Sparkles className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                    <span>Hook Generator</span>
+                  </Link>
+                  <Link to="/linkedin-topic-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                    <FileText className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                    <span>Topic Generator</span>
+                  </Link>
                 </div>
               </div>
               <button
                 onClick={() => { setShowPricingModal(true); setIsMobileMenuOpen(false); }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all"
               >
                 Pricing
               </button>
               <button
                 onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all"
               >
                 FAQ
               </button>
-              <hr className="border-white/5 my-2" />
+              <hr className="border-white/[0.06] my-2" />
               <button
                 onClick={() => { setAuthMode('login'); setShowAuth(true); setIsMobileMenuOpen(false); }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-white hover:bg-white/5 transition-all"
+                className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-white hover:bg-white/[0.04] transition-all"
               >
                 Log in
               </button>
               <button
                 onClick={() => { setAuthMode('signup'); setShowAuth(true); setIsMobileMenuOpen(false); }}
-                className="w-full text-center px-4 py-3 rounded-xl bg-[#2DD4BF] text-black font-bold text-sm hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all"
+                className="w-full text-center px-4 py-3.5 rounded-xl bg-[#2DD4BF] text-black font-semibold text-[15px] hover:shadow-[0_0_24px_rgba(45,212,191,0.3)] transition-all"
               >
-                Sign up
+                Start for Free
               </button>
             </div>
           </div>
