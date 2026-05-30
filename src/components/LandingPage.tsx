@@ -202,6 +202,51 @@ const SectionHeading = ({ children, className = '' }: { children: React.ReactNod
   </motion.h2>
 );
 
+const avatarColors = [
+  'from-teal-400 to-emerald-500',
+  'from-violet-400 to-purple-500',
+  'from-amber-400 to-orange-500',
+  'from-rose-400 to-pink-500',
+  'from-sky-400 to-blue-500',
+  'from-teal-400 to-cyan-500',
+  'from-fuchsia-400 to-pink-500',
+  'from-lime-400 to-green-500',
+  'from-indigo-400 to-violet-500',
+  'from-red-400 to-rose-500'
+];
+
+const getInitials = (name: string) =>
+  name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
+const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; idx: number }) => (
+  <div className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[12px] p-5 flex flex-col shadow-xl relative overflow-hidden group hover:border-[#2DD4BF]/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] transition-all duration-300">
+    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2DD4BF]/50 to-transparent" />
+    <div className="flex gap-1 mb-4">
+      {[...Array(5)].map((_, s) => (
+        <Star key={s} className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
+      ))}
+    </div>
+    <div className="relative">
+      <span className="absolute -top-1 -left-1 text-[40px] leading-none text-[#2DD4BF]/10 font-serif select-none pointer-events-none">&ldquo;</span>
+      <p className="text-[14px] leading-[1.6] text-[#D1D5DB] mb-6 pl-3 relative z-10 italic font-medium">&ldquo;{review.text}&rdquo;</p>
+    </div>
+    <div className="mt-auto flex items-center gap-3">
+      <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[11px] font-bold text-white shrink-0 shadow-lg`}>
+        {getInitials(review.name)}
+      </div>
+      <div className="min-w-0">
+        <p className="text-white font-bold text-[14px] leading-tight truncate">{review.name}</p>
+        <p className="text-[#9CA3AF] text-[12px] mt-0.5 truncate">{review.title}</p>
+      </div>
+    </div>
+    <div className="mt-4">
+      <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[11px] font-semibold tracking-[0.05em] uppercase">
+        {review.badge}
+      </span>
+    </div>
+  </div>
+);
+
 /* ─────────────────────────────────────────────
    CONSTANTS & HELPERS
    ───────────────────────────────────────────── */
@@ -1456,23 +1501,7 @@ export function LandingPage({
                     })).concat(hardcodedReviewsRow1) : 
                     hardcodedReviewsRow1
                   ).slice(0, 10).map((review, idx) => (
-                    <div key={idx} className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[12px] p-5 flex flex-col h-full shadow-xl">
-                      <div className="flex gap-1 mb-4">
-                        {[...Array(5)].map((_, s) => (
-                          <Star key={s} className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
-                        ))}
-                      </div>
-                      <p className="text-[14px] leading-[1.6] text-[#D1D5DB] mb-6 flex-grow italic font-medium">"{review.text}"</p>
-                      <div>
-                        <p className="text-white font-bold text-[15px]">{review.name}</p>
-                        <p className="text-[#9CA3AF] text-[13px] mt-0.5">{review.title}</p>
-                        <div className="mt-4">
-                          <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[11px] font-semibold tracking-[0.05em] uppercase">
-                            {review.badge}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                    <ReviewCard key={idx} review={review} idx={idx} />
                   ))}
                 </React.Fragment>
               ))}
@@ -1493,23 +1522,7 @@ export function LandingPage({
                     })).concat(hardcodedReviewsRow2) : 
                     hardcodedReviewsRow2
                   ).slice(0, 10).map((review, idx) => (
-                    <div key={idx} className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[12px] p-5 flex flex-col h-full shadow-xl">
-                      <div className="flex gap-1 mb-4">
-                        {[...Array(5)].map((_, s) => (
-                          <Star key={s} className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
-                        ))}
-                      </div>
-                      <p className="text-[14px] leading-[1.6] text-[#D1D5DB] mb-6 flex-grow italic font-medium">"{review.text}"</p>
-                      <div>
-                        <p className="text-white font-bold text-[15px]">{review.name}</p>
-                        <p className="text-[#9CA3AF] text-[13px] mt-0.5">{review.title}</p>
-                        <div className="mt-4">
-                          <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[11px] font-semibold tracking-[0.05em] uppercase">
-                            {review.badge}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                    <ReviewCard key={idx} review={review} idx={idx} />
                   ))}
                 </React.Fragment>
               ))}
