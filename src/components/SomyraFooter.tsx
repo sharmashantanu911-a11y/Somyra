@@ -339,10 +339,27 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             padding: 48px 24px 40px;
           }
           .nav-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 32px 24px;
           }
           .brand-tagline { max-width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+          .nav-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px 24px;
+          }
+          .nav-col-title {
+            font-size: 10px;
+            color: #2DD4BF;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+          }
+          .footer-link {
+            font-size: 14px;
+            line-height: 2;
+          }
         }
 
         @media (max-width: 600px) {
@@ -350,35 +367,48 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             padding: 40px 20px 32px;
           }
           .nav-grid {
-            grid-template-columns: 1fr;
-            gap: 28px 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px 24px;
           }
           .nav-col-title {
             color: #2DD4BF;
-            font-size: 11px;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
           }
           .footer-link {
             font-size: 14px;
+            line-height: 2;
             color: #6B7280;
           }
           .footer-bottom {
             padding: 16px 20px 24px;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 4px;
             text-align: center;
           }
           .footer-copy {
             font-size: 12px;
-          }
-          .legal-links {
-            flex-wrap: wrap;
-            justify-content: center;
-          }
-          .legal-link {
-            font-size: 12px;
+            color: #555;
+            font-family: 'DM Mono', monospace;
           }
           .built-with {
+            display: flex;
+            font-size: 12px;
+            color: #555;
+            font-family: 'DM Mono', monospace;
+            align-items: center;
+            gap: 5px;
+            justify-content: center;
+          }
+          .built-with svg {
+            fill: #EF4444;
+          }
+          .built-with span {
+            color: #555;
+          }
+          .legal-links {
             display: none;
           }
         }
@@ -426,31 +456,31 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             <div className="nav-col">
               <p className="nav-col-title">Tools</p>
               <ul className="nav-list">
-                <li><FooterLink to="/linkedin-profile-audit">Profile Audit</FooterLink></li>
-                <li><FooterLink to="/linkedin-post-generator">Post Writer</FooterLink></li>
-                <li><FooterLink to="/linkedin-topic-generator">Topic Generator</FooterLink></li>
+                <li><FooterLink to="/#features">Profile Audit</FooterLink></li>
+                <li><FooterLink to="/#features">Post Writer</FooterLink></li>
+                <li><FooterLink to="/#features">Topic Generator</FooterLink></li>
                 <li>
-                  <FooterLink to="/linkedin-dm-generator">
+                  <FooterLink to="/#features">
                     Smart Outreach
                     <span className="badge-new">NEW</span>
                   </FooterLink>
                 </li>
-                <li><FooterLink to="/linkedin-hook-generator">Hook Generator</FooterLink></li>
+                <li><FooterLink to="/#features">Hook Generator</FooterLink></li>
               </ul>
             </div>
 
-            {/* PRODUCT */}
+            {/* RESOURCES */}
             <div className="nav-col">
-              <p className="nav-col-title">Product</p>
+              <p className="nav-col-title">Resources</p>
               <ul className="nav-list">
-                <li><FooterLink to="/#how-it-works">How It Works</FooterLink></li>
+                <li><FooterLink to="/#process">How It Works</FooterLink></li>
                 <li><FooterLink to="/#pricing">Pricing</FooterLink></li>
                 <li><FooterLink to="/blog">Blog</FooterLink></li>
                 <li>
                   {onStartFree ? (
                     <button type="button" onClick={onStartFree} className="highlight" style={{background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', fontSize: '13px', fontWeight: 500}}>Start Free</button>
                   ) : (
-                    <FooterLink to="/" className="highlight">Start Free</FooterLink>
+                    <FooterLink to="/signup" className="highlight">Start Free</FooterLink>
                   )}
                 </li>
               </ul>
@@ -460,10 +490,10 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             <div className="nav-col">
               <p className="nav-col-title">Use Cases</p>
               <ul className="nav-list">
-                <li><FooterLink to="/">Founders</FooterLink></li>
-                <li><FooterLink to="/">Executives</FooterLink></li>
-                <li><FooterLink to="/">Sales Pros</FooterLink></li>
-                <li><FooterLink to="/">Consultants</FooterLink></li>
+                <li><FooterLink to="/signup">Founders</FooterLink></li>
+                <li><FooterLink to="/signup">Executives</FooterLink></li>
+                <li><FooterLink to="/signup">Sales Pros</FooterLink></li>
+                <li><FooterLink to="/signup">Consultants</FooterLink></li>
               </ul>
             </div>
 

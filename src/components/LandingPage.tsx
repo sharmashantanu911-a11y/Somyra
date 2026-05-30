@@ -796,11 +796,10 @@ export function LandingPage({
           </button>
           <button
             type="button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
-            aria-label="Toggle menu"
+            onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
+            className="landing-nav-cta"
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            Start for Free
           </button>
         </div>
       </nav>
@@ -858,22 +857,24 @@ export function LandingPage({
       )}
 
       {/* ── HERO ── */}
-      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-5 md:px-6 pt-[92px] md:pt-[120px] ds:pt-[160px] pb-10 md:pb-[60px] text-center overflow-hidden">
+      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-5 md:px-6 pt-[108px] md:pt-[130px] ds:pt-[164px] pb-10 md:pb-[60px] text-center overflow-hidden">
         {/* Subtle ambient glow */}
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-[720px] w-full">
-          {/* Badge */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-4 sm:px-5 py-2 mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards] max-w-full">
-            <div className="flex items-center shrink-0">
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-teal-accent/40 to-teal-accent/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[6] shadow-[0_0_0_2px_#080808]">PK</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-indigo-500/40 to-indigo-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[5] shadow-[0_0_0_2px_#080808]">AS</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-amber-500/40 to-amber-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[4] shadow-[0_0_0_2px_#080808]">SM</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-rose-500/40 to-rose-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[3] shadow-[0_0_0_2px_#080808]">JO</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full -mr-1.5 sm:-mr-2 bg-gradient-to-br from-emerald-500/40 to-emerald-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[2] shadow-[0_0_0_2px_#080808]">PR</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-sky-500/40 to-sky-500/60 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-[#080808] z-[1] shadow-[0_0_0_2px_#080808]">AS</div>
+          {/* Badge — compact centered inline pill */}
+          <div className="flex justify-center mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
+            <div className="inline-flex items-center gap-[10px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-[999px] p-[8px_16px_8px_8px] w-auto">
+              <div className="flex items-center">
+                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-teal-accent/40 to-teal-accent/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[6] shadow-[0_0_0_2px_#080808]">PK</div>
+                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-indigo-500/40 to-indigo-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[5] shadow-[0_0_0_2px_#080808]">AS</div>
+                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-amber-500/40 to-amber-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[4] shadow-[0_0_0_2px_#080808]">SM</div>
+                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-rose-500/40 to-rose-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[3] shadow-[0_0_0_2px_#080808]">JO</div>
+                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-emerald-500/40 to-emerald-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[2] shadow-[0_0_0_2px_#080808]">PR</div>
+                <div className="w-[26px] h-[26px] rounded-full bg-gradient-to-br from-sky-500/40 to-sky-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[1] shadow-[0_0_0_2px_#080808]">AS</div>
+              </div>
+              <span className="text-[13px] font-medium text-[#888] whitespace-nowrap">Trusted by <strong className="text-white font-bold">2,400+ founders</strong></span>
             </div>
-            <span className="text-[12px] sm:text-[13px] font-medium text-[#888] whitespace-nowrap">Trusted by <strong className="text-white font-bold">2,400+ founders</strong></span>
           </div>
 
           {/* Headline */}
@@ -909,12 +910,12 @@ export function LandingPage({
                 Watch it in action
               </button>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-[13px] text-white/40 font-normal">
-              <span>No credit card</span>
-              <span className="hidden sm:inline-block w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
-              <span className="text-white/60 font-medium">Free forever</span>
-              <span className="hidden sm:inline-block w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
-              <span>Takes 30 seconds</span>
+            <div className="flex flex-row items-center justify-center gap-[6px] flex-nowrap text-[12px] text-[#666] whitespace-nowrap">
+              <span className="inline-flex items-center gap-[4px]">No credit card</span>
+              <span className="text-[#444] text-[10px]">·</span>
+              <span className="inline-flex items-center gap-[4px] font-medium">Free forever</span>
+              <span className="text-[#444] text-[10px]">·</span>
+              <span className="inline-flex items-center gap-[4px]">Takes 30 seconds</span>
             </div>
           </div>
         </div>
@@ -963,59 +964,8 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* ── TRUST STRIP ── */}
-      <section className="w-full px-5 md:px-6 py-[60px] md:py-20 border-t border-white/[0.04]">
-        <div className="max-w-[680px] mx-auto text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8">
-            <div className="flex items-center">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] -mr-1.5 sm:-mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-teal-accent z-[4]">PK</div>
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] -mr-1.5 sm:-mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-indigo-400 z-[3]">AS</div>
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] -mr-1.5 sm:-mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-amber-400 z-[2]">TB</div>
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-pink-400 z-[1]">MW</div>
-            </div>
-            <span className="text-[12px] sm:text-[14px] text-white/50">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn</span>
-          </div>
-
-          {/* Desktop stats row with container */}
-          <div className="hidden sm:flex items-center justify-center bg-[#0D0D0D] border border-white/[0.06] rounded-xl px-6 py-5 gap-8 md:gap-12">
-            <div className="flex-1 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] ds:text-[32px] font-extrabold text-white tracking-tight">10+</p>
-              <span className="text-[10px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Countries</span>
-            </div>
-            <div className="w-px h-8 bg-white/[0.06]" />
-            <div className="flex-1 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] ds:text-[32px] font-extrabold text-white tracking-tight">24%</p>
-              <span className="text-[10px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
-            </div>
-            <div className="w-px h-8 bg-white/[0.06]" />
-            <div className="flex-1 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] ds:text-[32px] font-extrabold text-white tracking-tight">Zero</p>
-              <span className="text-[10px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
-            </div>
-          </div>
-
-          {/* Mobile stats row */}
-          <div className="flex sm:hidden items-center justify-center gap-6 px-2">
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">10+</p>
-              <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
-            </div>
-            <div className="w-px h-8 bg-white/[0.06]" />
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">24%</p>
-              <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Engagement</span>
-            </div>
-            <div className="w-px h-8 bg-white/[0.06]" />
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">Zero</p>
-              <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Risk</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── BENEFITS ── */}
-      <section className="w-full px-4 py-[60px] md:py-[70px] ds:py-[100px] relative z-10">
+      <section className="w-full px-4 pt-5 md:pt-10 ds:pt-[60px] pb-[60px] md:pb-[70px] ds:pb-[100px] relative z-10">
         <div className="max-w-[896px] mx-auto">
           {/* Label */}
           <div className="text-center mb-6 sm:mb-8 ds:mb-10">
@@ -1078,11 +1028,12 @@ export function LandingPage({
 
       {/* ── FEATURES (Value Proofs) ── */}
       <motion.section 
+        id="features"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-4 py-[60px] md:py-[70px] ds:py-[100px] relative z-10"
+        className="w-full px-4 py-8 md:py-[60px] ds:py-[80px] relative z-10"
       >
         <div className="max-w-5xl mx-auto">
           {/* Section label */}
@@ -1177,7 +1128,8 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION: HOW IT WORKS
          ════════════════════════════════════════ */}
-      <section id="how-it-works" className="relative px-4 sm:px-6 py-[60px] md:py-[70px] ds:py-[100px] overflow-hidden">
+      <section id="how-it-works" className="relative px-4 sm:px-6 py-8 md:py-[60px] ds:py-[80px] overflow-hidden">
+        <div id="process" className="absolute -top-24" />
         <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.07] blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="max-w-[1060px] mx-auto relative z-10">
@@ -1286,7 +1238,7 @@ export function LandingPage({
       </section>
 
       {/* ── COMPARISON ── */}
-      <section className="w-full px-4 py-[60px] md:py-[70px] ds:py-[100px] bg-[#0D0D0D] relative z-10 border-t border-white/5">
+      <section className="w-full px-4 py-8 md:py-[60px] ds:py-[80px] bg-[#0D0D0D] relative z-10 border-t border-white/5">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-6 sm:mb-8 ds:mb-10">
             <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
@@ -1438,7 +1390,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-4 sm:px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
+        className="w-full px-4 sm:px-6 py-8 md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[1024px] mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -1578,7 +1530,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full py-[60px] md:py-20 ds:py-24 relative overflow-hidden border-y border-white/5 bg-[#080808]"
+        className="w-full py-8 md:py-16 ds:py-24 relative overflow-hidden border-y border-white/5 bg-[#080808]"
       >
         <style>{`
           @keyframes scrollLeft {
@@ -1634,12 +1586,19 @@ export function LandingPage({
               {[...Array(2)].map((_, i) => (
                 <React.Fragment key={i}>
                   {(testimonials?.length > 0 ? 
-                    testimonials.map(t => ({
-                      name: t.user_name || 'Anonymous',
-                      title: t.user_title || 'LinkedIn User',
-                      text: t.content,
-                      badge: t.badge_text || 'VERIFIED USER'
-                    })).concat(hardcodedReviewsRow1) : 
+                    testimonials
+                      .filter(t => {
+                        const name = (t.user_name || '').trim();
+                        const text = (t.content || '').trim();
+                        const rating = Number(t.rating) || 0;
+                        return name !== 'Anonymous' && name.length > 2 && text.length > 20 && rating > 0;
+                      })
+                      .map(t => ({
+                        name: t.user_name,
+                        title: t.user_title || 'LinkedIn User',
+                        text: t.content,
+                        badge: t.badge_text || 'VERIFIED USER'
+                      })).concat(hardcodedReviewsRow1) : 
                     hardcodedReviewsRow1
                   ).slice(0, 10).map((review, idx) => (
                     <ReviewCard key={idx} review={review} idx={idx} />
@@ -1655,12 +1614,19 @@ export function LandingPage({
               {[...Array(2)].map((_, i) => (
                 <React.Fragment key={i}>
                   {(testimonials?.length > 5 ? 
-                    testimonials.slice(5).map(t => ({
-                      name: t.user_name || 'Anonymous',
-                      title: t.user_title || 'LinkedIn User',
-                      text: t.content,
-                      badge: t.badge_text || 'VERIFIED USER'
-                    })).concat(hardcodedReviewsRow2) : 
+                    testimonials
+                      .filter(t => {
+                        const name = (t.user_name || '').trim();
+                        const text = (t.content || '').trim();
+                        const rating = Number(t.rating) || 0;
+                        return name !== 'Anonymous' && name.length > 2 && text.length > 20 && rating > 0;
+                      })
+                      .slice(5).map(t => ({
+                        name: t.user_name,
+                        title: t.user_title || 'LinkedIn User',
+                        text: t.content,
+                        badge: t.badge_text || 'VERIFIED USER'
+                      })).concat(hardcodedReviewsRow2) : 
                     hardcodedReviewsRow2
                   ).slice(0, 10).map((review, idx) => (
                     <ReviewCard key={idx} review={review} idx={idx} />
@@ -1684,7 +1650,7 @@ export function LandingPage({
       {/* ── SECTION 11: FAQ ── */}
       <section 
         id="faq-section"
-        className="w-full px-4 sm:px-6 py-[60px] md:py-[70px] ds:py-[100px] relative z-10 border-t border-white/5"
+        className="w-full px-4 sm:px-6 py-8 md:py-[60px] ds:py-[80px] relative z-10 border-t border-white/5"
       >
         <div className="max-w-[896px] mx-auto">
           <div className="text-center mb-5 sm:mb-6 ds:mb-8">
@@ -1746,7 +1712,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-4 sm:px-8 ds:px-0 py-[60px] md:py-20 ds:py-[120px] text-center relative z-10 border-t border-white/5 overflow-hidden"
+        className="w-full px-4 sm:px-8 ds:px-0 py-8 md:py-20 ds:py-[120px] text-center relative z-10 border-t border-white/5 overflow-hidden"
         style={{
           background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45,212,191,0.04) 0%, transparent 70%)'
         }}
@@ -1758,12 +1724,14 @@ export function LandingPage({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-white/[0.08] mb-8"
+            className="flex justify-center mb-8"
           >
-            <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B] shrink-0" />
-            <span className="text-[13px] text-[#999]">
-              &ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span>
-            </span>
+            <div className="inline-flex items-center gap-[10px] px-5 py-[10px] rounded-[999px] bg-[#141414] border border-white/[0.08] max-w-[90vw] sm:max-w-none">
+              <Star className="w-[14px] h-[14px] text-[#F59E0B] fill-[#F59E0B] shrink-0" />
+              <span className="text-[13px] text-[#999] leading-[1.4]">
+                &ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span>
+              </span>
+            </div>
           </motion.div>
 
           {/* Headline */}
