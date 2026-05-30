@@ -29,7 +29,8 @@ import {
   Loader2,
   Lock,
   AlertTriangle,
-  Play
+  Play,
+  Infinity
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -227,28 +228,28 @@ const getInitials = (name: string) =>
   name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
 
 const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; idx: number }) => (
-  <div className="min-w-[280px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[14px] p-5 md:p-6 flex flex-col shadow-xl relative overflow-hidden group hover:border-[#2DD4BF]/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] transition-all duration-300">
+  <div className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[14px] p-4 md:p-6 flex flex-col shadow-xl relative overflow-hidden group hover:border-[#2DD4BF]/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] transition-all duration-300">
     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2DD4BF]/50 to-transparent" />
-    <div className="flex gap-1 mb-4">
+    <div className="flex gap-1 mb-3 md:mb-4">
       {[...Array(5)].map((_, s) => (
-        <Star key={s} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
+        <Star key={s} className="w-3 md:w-4 h-3 md:h-4 text-[#F59E0B] fill-[#F59E0B]" />
       ))}
     </div>
     <div className="relative">
       <span className="absolute -top-1 -left-0.5 text-[44px] leading-none text-[#2DD4BF]/8 font-serif select-none pointer-events-none">{"\u201C"}</span>
-      <p className="text-[13px] md:text-[14px] leading-[1.7] text-[#D1D5DB] mb-5 pl-4 relative z-10 font-medium">{"\u201C"}{review.text}{"\u201D"}</p>
+      <p className="text-[13px] leading-[1.7] text-[#D1D5DB] mb-4 md:mb-5 pl-4 relative z-10 font-medium">{"\u201C"}{review.text}{"\u201D"}</p>
     </div>
     <div className="mt-auto flex items-center gap-3">
-      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[12px] font-bold text-white shrink-0 shadow-lg`}>
+      <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[11px] md:text-[12px] font-bold text-white shrink-0 shadow-lg`}>
         {getInitials(review.name)}
       </div>
       <div className="min-w-0">
-        <p className="text-white font-bold text-[14px] leading-tight">{review.name}</p>
-        <p className="text-[#9CA3AF] text-[12px] mt-0.5 leading-tight">{review.title}</p>
+        <p className="text-white font-bold text-[13px] md:text-[14px] leading-tight">{review.name}</p>
+        <p className="text-[#9CA3AF] text-[11px] md:text-[12px] mt-0.5 leading-tight">{review.title}</p>
       </div>
     </div>
-    <div className="mt-4">
-      <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[11px] font-semibold tracking-[0.05em] uppercase">
+    <div className="mt-3 md:mt-4">
+      <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[10px] md:text-[11px] font-semibold tracking-[0.05em] uppercase">
         {review.badge}
       </span>
     </div>
@@ -388,19 +389,19 @@ const hardcodedReviewsRow2 = [
    FAQ ACCORDION ITEM
    ───────────────────────────────────────────── */
 const FaqItem = ({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) => (
-  <div className="bg-[#0D0D0D] rounded-[12px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+  <div className="bg-[#0D0D0D] rounded-[12px] ds:rounded-[16px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
     <button
       onClick={onToggle}
-      className="w-full flex items-center justify-between p-[20px_24px] text-left cursor-pointer transition-all duration-200 hover:bg-[rgba(255,255,255,0.02)]"
+      className="w-full flex items-center justify-between p-4 ds:p-[20px_24px] text-left cursor-pointer transition-all duration-200 hover:bg-[rgba(255,255,255,0.02)]"
     >
-      <span className={`text-[15px] font-medium leading-[1.4] pr-4 transition-colors duration-200 ${isOpen ? 'text-[#2DD4BF]' : 'text-white'}`}>
+      <span className={`text-[14px] ds:text-[15px] font-medium leading-[1.4] pr-4 transition-colors duration-200 ${isOpen ? 'text-[#2DD4BF]' : 'text-white'}`}>
         {q}
       </span>
       <div
-        className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${isOpen ? 'bg-[#2DD4BF]/[0.08]' : 'bg-[#141414]'}`}
+        className={`shrink-0 w-6 h-6 ds:w-7 ds:h-7 rounded-full flex items-center justify-center transition-all duration-200 ${isOpen ? 'bg-[#2DD4BF]/[0.08]' : 'bg-[#141414]'}`}
         style={{ border: isOpen ? '1px solid rgba(45,212,191,0.2)' : '1px solid rgba(255,255,255,0.08)' }}
       >
-        {isOpen ? <Minus className="w-3.5 h-3.5 text-[#2DD4BF]" /> : <Plus className="w-3.5 h-3.5 text-[#666]" />}
+        {isOpen ? <Minus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#2DD4BF]" /> : <Plus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#666]" />}
       </div>
     </button>
     <div
@@ -411,7 +412,7 @@ const FaqItem = ({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
         transition: 'max-height 0.35s ease, opacity 0.2s ease'
       }}
     >
-      <p className="text-[14px] text-[#888] leading-[1.8] px-6 pb-5">{a}</p>
+      <p className="text-[13px] ds:text-[14px] text-[#888] leading-[1.8] px-4 ds:px-6 pb-4 ds:pb-5">{a}</p>
     </div>
   </div>
 );
@@ -478,7 +479,7 @@ const PricingCard = ({
         name === 'Max' ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]' : 'text-[#888888]'
       }`}>{name === 'Free' ? 'FREE' : name === 'Pro' ? 'PRO' : 'MAX'}</span>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className={`text-[32px] md:text-[44px] font-black text-white ${name === 'Max' ? 'text-red-500' : ''}`}>{isAnnual ? annualPrice : monthlyPrice}</span>
+        <span className={`text-[32px] ds:text-[44px] font-black text-white leading-none ${name === 'Max' ? 'text-red-500' : ''}`}>{isAnnual ? annualPrice : monthlyPrice}</span>
         <span className="text-[13px] text-[#555555]">/mo</span>
       </div>
       {isAnnual && annualBilling && (
@@ -493,7 +494,7 @@ const PricingCard = ({
       {name === 'Free' && <p className="text-[10px] font-bold text-[#555555] tracking-[2px] uppercase">INCLUDES</p>}
       <ul className="space-y-3 mt-4">
         {features.map((f, i) => (
-          <li key={i} className="flex items-start gap-3 text-[12px] leading-snug text-white/90">
+          <li key={i} className="flex items-start gap-3 text-[13px] leading-snug text-white/90">
             {name === 'Free' ? (
               <Check className="w-3.5 h-3.5 text-teal-accent mt-0.5 shrink-0" />
             ) : (
@@ -511,7 +512,7 @@ const PricingCard = ({
 
     <button 
       onClick={onClick}
-      className={`w-full py-4 rounded-2xl text-[14px] font-black transition-all transform hover:scale-[1.02] active:scale-100 shadow-xl ${
+      className={`w-full py-4 rounded-2xl text-[14px] font-black transition-all shadow-xl ${
         name === 'Pro' ? 'bg-teal-accent text-black hover:shadow-teal-accent/40 shadow-teal-accent/20' : 
         name === 'Max' ? 'bg-red-500 text-white hover:shadow-red-500/40 shadow-red-500/20' : 
         'border border-white/10 text-white hover:bg-white/[0.03]'
@@ -796,7 +797,7 @@ export function LandingPage({
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
+            className="md:hidden w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -807,7 +808,7 @@ export function LandingPage({
       {/* ── MOBILE MENU ── */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[99] pt-24 px-4 md:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="absolute inset-0 bg-[rgba(8,8,8,0.98)] backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)} />
           <div className="relative bg-[#0D0D0D] border border-white/10 rounded-2xl p-4 shadow-2xl" style={{ animation: 'fadeInDownMobile 0.25s ease forwards' }}>
             <div className="flex flex-col gap-2">
               <button
@@ -892,27 +893,27 @@ export function LandingPage({
 
           {/* CTAs */}
           <div className="flex flex-col items-center gap-4 mb-5 opacity-0 animate-[fadeUp_0.7s_0.65s_ease_forwards]">
-            <div className="flex gap-3 flex-wrap justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <button
                 id="hero-start-free"
                 onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-                className="inline-flex items-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0"
+                className="inline-flex items-center justify-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0 w-full sm:w-auto"
               >
                 Start for Free
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 bg-transparent text-white/80 font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
+                className="inline-flex items-center justify-center gap-2 bg-transparent text-white/80 font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:text-white w-full sm:w-auto"
               >
                 Watch it in action
               </button>
             </div>
-            <div className="flex items-center gap-4 flex-wrap justify-center text-[13px] text-white/40 font-normal">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-[13px] text-white/40 font-normal">
               <span>No credit card</span>
-              <span className="w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
+              <span className="hidden sm:inline-block w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
               <span className="text-white/60 font-medium">Free forever</span>
-              <span className="w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
+              <span className="hidden sm:inline-block w-1 h-1 bg-[#2DD4BF]/40 rounded-full" />
               <span>Takes 30 seconds</span>
             </div>
           </div>
@@ -975,20 +976,38 @@ export function LandingPage({
             <span className="text-[13px] sm:text-[14px] text-white/50 px-2">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn</span>
           </div>
 
-          <div className="flex items-center justify-center gap-5 sm:gap-8 md:gap-12 flex-wrap">
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] font-extrabold text-white tracking-tight">10+</p>
-              <span className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
+          <div className="hidden sm:flex items-center justify-center gap-5 sm:gap-8 md:gap-12 bg-[#0D0D0D] border border-white/[0.06] rounded-xl px-6 py-5 mt-8">
+            <div className="flex-1 text-center">
+              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] ds:text-[32px] font-extrabold text-white tracking-tight">10+</p>
+              <span className="text-[10px] sm:text-[11px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Countries</span>
             </div>
-            <div className="w-px h-7 sm:h-8 bg-white/[0.06]" />
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] font-extrabold text-white tracking-tight">24%</p>
-              <span className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
+            <div className="w-px h-6 ds:h-8 bg-white/[0.06]" />
+            <div className="flex-1 text-center">
+              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] ds:text-[32px] font-extrabold text-white tracking-tight">24%</p>
+              <span className="text-[10px] sm:text-[11px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
             </div>
-            <div className="w-px h-7 sm:h-8 bg-white/[0.06]" />
+            <div className="w-px h-6 ds:h-8 bg-white/[0.06]" />
+            <div className="flex-1 text-center">
+              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] ds:text-[32px] font-extrabold text-white tracking-tight">Zero</p>
+              <span className="text-[10px] sm:text-[11px] ds:text-xs text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
+            </div>
+          </div>
+
+          {/* Mobile stats row: inline-flex, no container */}
+          <div className="flex sm:hidden items-center justify-center gap-5 mt-6">
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] font-extrabold text-white tracking-tight">Zero</p>
-              <span className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
+              <p className="font-[family-name:var(--font-display)] text-[26px] font-extrabold text-white tracking-tight">10+</p>
+              <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
+            </div>
+            <div className="w-px h-7 bg-white/[0.06]" />
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[26px] font-extrabold text-white tracking-tight">24%</p>
+              <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Engagement</span>
+            </div>
+            <div className="w-px h-7 bg-white/[0.06]" />
+            <div className="text-center">
+              <p className="font-[family-name:var(--font-display)] text-[26px] font-extrabold text-white tracking-tight">Zero</p>
+              <span className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Risk</span>
             </div>
           </div>
         </div>
@@ -1016,7 +1035,7 @@ export function LandingPage({
           </p>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 ds:grid-cols-3 gap-4 md:gap-5 ds:gap-6 max-w-[480px] ds:max-w-none mx-auto ds:mx-0">
+          <div className="grid grid-cols-1 ds:grid-cols-3 gap-3 md:gap-5 ds:gap-6 max-w-[480px] ds:max-w-none mx-auto ds:mx-0">
             {[
               {
                 icon: FileText,
@@ -1043,10 +1062,10 @@ export function LandingPage({
                 className="bg-[#0D0D0D] border border-white/[0.06] hover:border-[#2DD4BF]/20 rounded-[16px] p-5 md:p-7 h-full flex flex-col transition-all duration-300 hover:shadow-[0_0_30px_rgba(45,212,191,0.05)]"
               >
                 <div
-                  className="w-10 h-10 rounded-[10px] flex items-center justify-center mb-4 shrink-0"
+                  className="w-9 h-9 ds:w-10 ds:h-10 rounded-[10px] flex items-center justify-center mb-4 shrink-0"
                   style={{ backgroundColor: 'rgba(45,212,191,0.08)' }}
                 >
-                  <card.icon className="w-5 h-5 text-[#2DD4BF]" />
+                  <card.icon className="w-[18px] h-[18px] ds:w-5 ds:h-5 text-[#2DD4BF]" />
                 </div>
                 <h3 className="text-[17px] font-bold text-white mb-2 leading-snug">{card.title}</h3>
                 <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{card.body}</p>
@@ -1113,7 +1132,7 @@ export function LandingPage({
                     activeFeatureTab === tab.id
                       ? 'bg-[#141414] border border-[#2DD4BF] text-white'
                       : 'bg-[#141414] border border-white/[0.08] text-[#666]'
-                  } px-3.5 py-1.5 md:px-4 md:py-2 text-[12px] md:text-[13px] font-medium`}
+                  } px-3.5 py-2 md:px-4 md:py-2 text-[12px] md:text-[13px] font-medium`}
                 >
                   {tab.label}
                 </button>
@@ -1122,7 +1141,7 @@ export function LandingPage({
 
             {/* ── Content Panel ── */}
             <div
-              className="bg-[#0D0D0D] rounded-[16px] p-6 sm:p-8 md:p-9"
+              className="bg-[#0D0D0D] rounded-[16px] p-5 sm:p-8 md:p-9"
               style={{
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderTop: '2px solid #2DD4BF'
@@ -1137,13 +1156,13 @@ export function LandingPage({
                   transition={{ duration: 0.2, ease: "ease" }}
                 >
                   <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em] mb-3 block">{activeFeature.tag}</span>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight">{activeFeature.title}</h3>
+                  <h3 className="text-[18px] md:text-2xl font-bold text-white mb-4 leading-tight">{activeFeature.title}</h3>
                   <p className="text-[#A0A0A0] text-[14px] md:text-[15px] leading-[1.7] mb-6 max-w-full">{activeFeature.body}</p>
                   <div className="space-y-3">
                     {activeFeature.dots.map((dot, i) => (
                       <div key={i} className="flex items-start gap-3">
                         <Check className="w-4 h-4 text-[#2DD4BF] mt-0.5 shrink-0" />
-                        <span className="text-[15px] text-[#ccc] leading-[1.7]">{dot}</span>
+                        <span className="text-[13px] md:text-[15px] text-[#ccc] leading-[1.7]">{dot}</span>
                       </div>
                     ))}
                   </div>
@@ -1185,7 +1204,7 @@ export function LandingPage({
             <div className="absolute top-[18px] left-0 right-0 h-0 border-t border-dashed border-[rgba(45,212,191,0.2)] pointer-events-none -z-10 hidden ds:block" />
 
             {/* Step cards */}
-            <div className="grid grid-cols-1 ds:grid-cols-3 gap-5 ds:gap-6 max-w-[480px] ds:max-w-none mx-auto ds:mx-0">
+            <div className="grid grid-cols-1 ds:grid-cols-3 gap-3 ds:gap-6 max-w-[480px] ds:max-w-none mx-auto ds:mx-0">
               {[
                 {
                   num: '01',
@@ -1212,7 +1231,7 @@ export function LandingPage({
                   className="bg-[#0D0D0D] border border-white/[0.06] hover:border-[#2DD4BF]/15 rounded-[16px] p-5 md:p-7 flex flex-col transition-all duration-300 hover:shadow-[0_0_24px_rgba(45,212,191,0.05)]"
                 >
                   {/* Step number circle */}
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-[13px] font-semibold text-[#2DD4BF] mb-5 shrink-0"
+                  <div className="w-8 h-8 ds:w-9 ds:h-9 rounded-full flex items-center justify-center text-[12px] ds:text-[13px] font-semibold text-[#2DD4BF] mb-4 ds:mb-5 shrink-0"
                     style={{ backgroundColor: 'rgba(45,212,191,0.08)', border: '1px solid rgba(45,212,191,0.2)' }}>
                     {step.num}
                   </div>
@@ -1243,22 +1262,22 @@ export function LandingPage({
             </div>
 
             {/* Placeholder area */}
-            <div className="relative h-[240px] md:h-[380px] bg-[#080808] flex flex-col items-center justify-center gap-4 overflow-hidden"
+            <div className="relative h-[200px] md:h-[380px] bg-[#080808] flex flex-col items-center justify-center gap-3 md:gap-4 overflow-hidden"
               style={{
                 backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
                 backgroundSize: '24px 24px'
               }}
             >
               {/* Play button with pulse */}
-              <div className="w-16 h-16 rounded-full flex items-center justify-center animate-[pulse-play_2s_ease-in-out_infinite] cursor-pointer"
+              <div className="w-[52px] md:w-16 h-[52px] md:h-16 rounded-full flex items-center justify-center animate-[pulse-play_2s_ease-in-out_infinite] cursor-pointer"
                 style={{ backgroundColor: 'rgba(45,212,191,0.1)', border: '1px solid rgba(45,212,191,0.3)' }}
               >
-                <Play className="w-6 h-6 text-[#2DD4BF] ml-0.5" />
+                <Play className="w-5 h-5 md:w-6 md:h-6 text-[#2DD4BF] ml-0.5" />
               </div>
 
               <div className="text-center">
-                <p className="text-white text-base font-medium">Full product walkthrough</p>
-                <p className="text-[#2DD4BF] text-[13px] uppercase tracking-[0.1em] mt-1 font-semibold">Coming soon</p>
+                <p className="text-white text-[14px] md:text-base font-medium">Full product walkthrough</p>
+                <p className="text-[#2DD4BF] text-[11px] md:text-[13px] uppercase tracking-[0.1em] mt-1 font-semibold">Coming soon</p>
               </div>
             </div>
           </motion.div>
@@ -1289,10 +1308,10 @@ export function LandingPage({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="overflow-x-auto no-scrollbar"
+            className="overflow-x-auto no-scrollbar relative"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
-            <div className="min-w-[600px]">
+            <div className="min-w-[580px]">
               {/* Table container */}
               <div className="bg-[#0D0D0D] rounded-[16px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
                 {/* Header Row */}
@@ -1383,7 +1402,7 @@ export function LandingPage({
           </motion.div>
 
           {/* Mobile scroll hint */}
-          <div className="text-right mt-2 md:hidden">
+          <div className="text-right mt-2 ds:hidden">
             <span className="text-[12px] text-[#555]">Scroll to compare &rarr;</span>
           </div>
 
@@ -1455,7 +1474,7 @@ export function LandingPage({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 ds:grid-cols-3 gap-6 md:gap-5 items-start max-w-[420px] mx-auto ds:max-w-none ds:mx-0">
+          <div className="grid grid-cols-1 ds:grid-cols-3 gap-4 ds:gap-6 items-start max-w-[420px] mx-auto ds:max-w-none ds:mx-0">
             <PricingCard
               name="Free"
               monthlyPrice="$0"
@@ -1582,7 +1601,7 @@ export function LandingPage({
           }
           @media (max-width: 768px) {
             .marquee-row-left, .marquee-row-right {
-              animation-duration: 25s;
+              animation-duration: 28s;
             }
           }
           @media (prefers-reduced-motion: reduce) {
@@ -1726,46 +1745,89 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-[60px] md:py-20 ds:py-24 text-center relative z-10 border-t border-white/5"
+        className="w-full px-4 sm:px-8 ds:px-0 py-[60px] md:py-20 ds:py-[120px] text-center relative z-10 border-t border-white/5 overflow-hidden"
+        style={{
+          background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45,212,191,0.04) 0%, transparent 70%)'
+        }}
       >
-        <div className="max-w-[672px] mx-auto">
-          {/* Micro quote */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 mb-6 sm:mb-8">
-            <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
-            <span className="text-[13px] text-[#999]">
-              "The first tool that actually sounds like me." <span className="text-white font-semibold">— James O.</span>
-            </span>
-          </div>
-
-          <SectionHeading className="mb-5 sm:mb-6">
-            Every week you stay quiet,<br />
-            someone in your space gets louder.
-          </SectionHeading>
-          <p className="text-[#A0A0A0] text-base mb-6 sm:mb-8">
-            Start free forever. No credit card. Takes 30 seconds.
-          </p>
-          <button
-            onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-            className="px-8 sm:px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-base sm:text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 mb-8"
+        <div className="max-w-[700px] mx-auto relative z-10">
+          {/* Quote pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-white/[0.08] mb-8"
           >
-            Start for Free
-          </button>
+            <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B] shrink-0" />
+            <span className="text-[13px] text-[#999] whitespace-nowrap">
+              &ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span>
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+          >
+            <h2 className="text-[26px] sm:text-[32px] ds:text-[44px] font-extrabold text-white leading-[1.2] mx-auto" style={{ maxWidth: '640px' }}>
+              Every week you stay quiet,<br />
+              someone in your space gets louder.
+            </h2>
+          </motion.div>
+
+          {/* Subtext */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+          >
+            <p className="text-[#666] text-base mt-4">
+              Start free forever. No credit card. Takes 30 seconds.
+            </p>
+          </motion.div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.35 }}
+          >
+            <button
+              onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
+              className="mt-8 px-12 py-4 bg-[#2DD4BF] text-[#080808] font-bold text-[17px] rounded-xl hover:brightness-110 hover:scale-[1.02] active:scale-100 transition-all duration-200 animate-[breathe-glow_2s_ease-in-out_infinite] w-full sm:w-auto"
+            >
+              Start for Free
+            </button>
+          </motion.div>
 
           {/* Trust badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
-              <Lock className="w-3 h-3 text-[#2DD4BF]" />
-              <span className="text-[11px] text-[#888] font-medium">No credit card required</span>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+            className="mt-4"
+          >
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
+              <div className="inline-flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-[#2DD4BF]" />
+                <span className="text-[13px] text-[#666]">No credit card required</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5">
+                <Infinity className="w-3.5 h-3.5 text-[#2DD4BF]" />
+                <span className="text-[13px] text-[#666]">Free forever</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5 text-[#2DD4BF]" />
+                <span className="text-[13px] text-[#666]">30 second signup</span>
+              </div>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
-              <Shield className="w-3 h-3 text-[#2DD4BF]" />
-              <span className="text-[11px] text-[#888] font-medium">Free forever</span>
-            </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
-              <Zap className="w-3 h-3 text-[#2DD4BF]" />
-              <span className="text-[11px] text-[#888] font-medium">30 second signup</span>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 

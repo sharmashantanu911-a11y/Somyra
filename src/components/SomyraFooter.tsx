@@ -350,17 +350,33 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             padding: 40px 20px 32px;
           }
           .nav-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 28px 20px;
+          }
+          .nav-col-title {
+            color: #2DD4BF;
+            font-size: 11px;
+          }
+          .footer-link {
+            font-size: 14px;
+            color: #6B7280;
           }
           .footer-bottom {
             padding: 16px 20px 24px;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             gap: 12px;
+            text-align: center;
+          }
+          .footer-copy {
+            font-size: 12px;
           }
           .legal-links {
             flex-wrap: wrap;
+            justify-content: center;
+          }
+          .legal-link {
+            font-size: 12px;
           }
           .built-with {
             display: none;
