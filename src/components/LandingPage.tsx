@@ -847,7 +847,7 @@ export function LandingPage({
       )}
 
       {/* ── HERO ── */}
-      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-6 pt-20 md:pt-[120px] ds:pt-[160px] pb-10 md:pb-[60px] text-center overflow-hidden">
+      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-5 md:px-6 pt-16 md:pt-[120px] ds:pt-[160px] pb-10 md:pb-[60px] text-center overflow-hidden">
         {/* Subtle ambient glow */}
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
@@ -953,32 +953,32 @@ export function LandingPage({
       </section>
 
       {/* ── TRUST STRIP ── */}
-      <section className="w-full px-6 py-[60px] md:py-20 border-t border-white/[0.04]">
+      <section className="w-full px-5 md:px-6 py-[60px] md:py-20 border-t border-white/[0.04]">
         <div className="max-w-[680px] mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 flex-wrap mb-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
             <div className="flex items-center">
               <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-teal-accent/20 to-teal-accent/40 flex items-center justify-center text-[10px] font-bold text-teal-accent z-[4]">PK</div>
               <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-indigo-500/20 to-indigo-500/40 flex items-center justify-center text-[10px] font-bold text-indigo-400 z-[3]">AS</div>
               <div className="w-8 h-8 rounded-full border-2 border-[#080808] -mr-2 bg-gradient-to-br from-amber-500/20 to-amber-500/40 flex items-center justify-center text-[10px] font-bold text-amber-400 z-[2]">TB</div>
               <div className="w-8 h-8 rounded-full border-2 border-[#080808] bg-gradient-to-br from-pink-500/20 to-pink-500/40 flex items-center justify-center text-[10px] font-bold text-pink-400 z-[1]">MW</div>
             </div>
-            <span className="text-[14px] text-white/50">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn with Somyra</span>
+            <span className="text-[13px] sm:text-[14px] text-white/50 px-2">Join <strong className="text-white/80 font-semibold">2,400+ founders</strong> growing on LinkedIn</span>
           </div>
 
-          <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
+          <div className="flex items-center justify-center gap-5 sm:gap-8 md:gap-12 flex-wrap">
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">10+</p>
-              <span className="text-[11px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
+              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] font-extrabold text-white tracking-tight">10+</p>
+              <span className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest font-medium">Countries</span>
             </div>
-            <div className="w-px h-8 bg-white/[0.06]" />
+            <div className="w-px h-7 sm:h-8 bg-white/[0.06]" />
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">24%</p>
-              <span className="text-[11px] text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
+              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] font-extrabold text-white tracking-tight">24%</p>
+              <span className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest font-medium">Avg Engagement Lift</span>
             </div>
-            <div className="w-px h-8 bg-white/[0.06]" />
+            <div className="w-px h-7 sm:h-8 bg-white/[0.06]" />
             <div className="text-center">
-              <p className="font-[family-name:var(--font-display)] text-[24px] font-extrabold text-white tracking-tight">Zero</p>
-              <span className="text-[11px] text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
+              <p className="font-[family-name:var(--font-display)] text-[22px] sm:text-[24px] font-extrabold text-white tracking-tight">Zero</p>
+              <span className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest font-medium">Risk to Start</span>
             </div>
           </div>
         </div>
@@ -992,7 +992,7 @@ export function LandingPage({
             From invisible to unstoppable<br />
             on LinkedIn.
           </SectionHeading>
-          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-14 max-w-[576px] mx-auto text-center">
+          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-8 sm:mb-14 max-w-[576px] mx-auto text-center">
             Three ways Somyra turns your profile into your biggest asset.
           </p>
 
@@ -1014,13 +1014,13 @@ export function LandingPage({
                 body: 'Generic outreach gets ignored. Somyra writes personalized messages that reference each prospect and speak to their real pain. Your reply rate goes up from the first message.'
               }
             ].map((card, i) => (
-              <div key={i} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-8 relative overflow-hidden group hover:border-[#2DD4BF]/30 transition-all duration-300 h-full flex flex-col shadow-premium hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+              <div key={i} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#2DD4BF]/30 transition-all duration-300 h-full flex flex-col shadow-premium hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2DD4BF]/40 via-[#2DD4BF]/60 to-[#2DD4BF]/40 opacity-50 group-hover:opacity-100 transition-opacity" />
-                <div className="w-12 h-12 bg-[#2DD4BF]/10 rounded-xl flex items-center justify-center mb-6 shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <card.icon className="w-6 h-6 text-[#2DD4BF]" />
+                <div className="w-11 h-11 sm:w-12 sm:h-12 bg-[#2DD4BF]/10 rounded-xl flex items-center justify-center mb-5 sm:mb-6 shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <card.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#2DD4BF]" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">{card.title}</h3>
-                <p className="text-[#A0A0A0] leading-[1.7] text-[15px] flex-grow">{card.body}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">{card.title}</h3>
+                <p className="text-[#A0A0A0] leading-[1.7] text-[14px] sm:text-[15px] flex-grow">{card.body}</p>
               </div>
             ))}
           </div>
@@ -1041,7 +1041,7 @@ export function LandingPage({
             Six tools in one.<br />
             All sounding like you.
           </SectionHeading>
-          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-12 max-w-[672px]">
+          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-8 sm:mb-12 max-w-[672px]">
             Most people juggle five different tools and still sound generic. Somyra does everything in one place, and everything sounds like you.
           </p>
 
@@ -1073,7 +1073,7 @@ export function LandingPage({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.25 }}
-                  className="bg-[#0D0D0D] border border-[#1f1f1f] rounded-[24px] p-8 md:p-10"
+                  className="bg-[#0D0D0D] border border-[#1f1f1f] rounded-[24px] p-6 sm:p-8 md:p-10"
                 >
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#2DD4BF]/70 mb-3 block">{activeFeature.tag}</span>
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight">{activeFeature.title}</h3>
@@ -1112,12 +1112,12 @@ export function LandingPage({
             From signup to your best post ever. In under 5 minutes.
           </h2>
 
-          <p className="text-[clamp(15px,2vw,17px)] font-light leading-[1.7] text-white/50 text-center max-w-[480px] mx-auto mb-14">
+          <p className="text-[clamp(15px,2vw,17px)] font-light leading-[1.7] text-white/50 text-center max-w-[480px] mx-auto mb-8 sm:mb-14">
             Most tools make you do the work. Somyra does it with you. Three steps and you are live.
           </p>
 
           {/* Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.07] border border-white/[0.07] rounded-[20px] overflow-hidden mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.07] border border-white/[0.07] rounded-[20px] overflow-hidden mb-10 sm:mb-16">
             {[
               {
                 num: '01',
@@ -1135,7 +1135,7 @@ export function LandingPage({
                 body: 'Posts, DMs, profile rewrites, topic ideas. All of it sounds like you wrote it on your best day. Because that is exactly what Somyra is trained to do.'
               }
             ].map((step, i) => (
-              <div key={i} className="bg-[#0d0d0d] p-8 md:p-10 relative group transition-colors hover:bg-[#111]">
+              <div key={i} className="bg-[#0d0d0d] p-6 sm:p-8 md:p-10 relative group transition-colors hover:bg-[#111]">
                 {/* Large faded number */}
                 <div className="absolute top-4 right-5 font-[family-name:var(--font-display)] text-[80px] font-extrabold text-teal-accent/[0.04] leading-none pointer-events-none select-none tracking-[-0.04em]">
                   {step.num}
@@ -1165,7 +1165,7 @@ export function LandingPage({
                 <span className="text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-[3px] rounded uppercase tracking-wider">Live Preview</span>
               </div>
 
-              <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-3">
                   <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">What do you want to write about?</span>
                   <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[13px] text-white/80 leading-relaxed">
@@ -1220,7 +1220,7 @@ export function LandingPage({
       {/* ── COMPARISON ── */}
       <section className="w-full px-4 py-[60px] md:py-20 bg-[#0D0D0D] relative z-10 border-t border-white/5">
         <div className="max-w-[1100px] mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <SectionLabel>WHY SOMYRA</SectionLabel>
             <SectionHeading className="mb-4">
               More tools. Higher prices.<br />
@@ -1360,7 +1360,7 @@ export function LandingPage({
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-16 text-center">
+          <div className="mt-10 sm:mt-16 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 mb-5">
               <span className="text-[10px] font-black text-[#2DD4BF] uppercase tracking-[0.2em]">The bottom line</span>
             </div>
@@ -1391,16 +1391,16 @@ export function LandingPage({
         className="w-full px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[1024px] mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <SectionLabel>PRICING</SectionLabel>
-            <SectionHeading className="mb-8">
+            <SectionHeading className="mb-6 sm:mb-8">
               Start free forever.<br />
               Upgrade when you are ready<br />
               for more.
             </SectionHeading>
 
             {/* Toggle */}
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-8 sm:mb-12">
               <div className="inline-flex items-center gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1.5 mb-2">
                 <button
                   onClick={() => setIsAnnual(false)}
@@ -1565,7 +1565,7 @@ export function LandingPage({
           }
         `}</style>
 
-        <div className="max-w-[896px] mx-auto px-6 text-center mb-12 md:mb-16">
+        <div className="max-w-[896px] mx-auto px-6 text-center mb-8 sm:mb-12 md:mb-16">
           <SectionLabel>REAL RESULTS</SectionLabel>
           <SectionHeading>
             What happens when your<br />
@@ -1641,7 +1641,7 @@ export function LandingPage({
         className="w-full px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[768px] mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <SectionLabel>QUESTIONS</SectionLabel>
             <SectionHeading>Stuff people ask before signing up</SectionHeading>
           </div>
@@ -1674,23 +1674,23 @@ export function LandingPage({
       >
         <div className="max-w-[672px] mx-auto">
           {/* Micro quote */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 mb-6 sm:mb-8">
             <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
             <span className="text-[13px] text-[#999]">
               "The first tool that actually sounds like me." <span className="text-white font-semibold">— James O.</span>
             </span>
           </div>
 
-          <SectionHeading className="mb-6">
+          <SectionHeading className="mb-5 sm:mb-6">
             Every week you stay quiet,<br />
             someone in your space gets louder.
           </SectionHeading>
-          <p className="text-[#A0A0A0] text-base mb-8">
+          <p className="text-[#A0A0A0] text-base mb-6 sm:mb-8">
             Start free forever. No credit card. Takes 30 seconds.
           </p>
           <button
             onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-            className="px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 mb-8"
+            className="px-8 sm:px-10 py-4.5 bg-[#2DD4BF] text-black font-bold rounded-2xl text-base sm:text-lg hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-all transform hover:scale-[1.02] active:scale-100 mb-8"
           >
             Start for Free
           </button>
