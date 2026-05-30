@@ -772,63 +772,43 @@ export function LandingPage({
           </div>
         </div>
 
-        {/* Product Mockup */}
-        <div className="mt-[60px] relative z-10 w-full max-w-[800px] opacity-0 animate-[fadeUp_0.8s_0.8s_ease_forwards]">
-          <div className="mockup-frame">
-            {/* Browser bar */}
-            <div className="flex items-center justify-between px-4 py-3 bg-white/[0.02] border-b border-white/[0.06]">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-                <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                <span className="w-3 h-3 rounded-full bg-[#28C840]" />
+        {/* Product Demo Video */}
+        <div
+          className="mt-[60px] relative z-10 w-full max-w-[860px] mx-auto px-4 md:px-0 opacity-0"
+          style={{ animation: 'fadeUpVideo 0.7s 0.2s ease-out forwards' }}
+        >
+          <div
+            className="w-full rounded-xl overflow-hidden bg-[#0D0D0D]"
+            style={{
+              border: '1px solid rgba(45,212,191,0.15)',
+              boxShadow: '0 0 80px rgba(45,212,191,0.07), 0 0 160px rgba(45,212,191,0.03)'
+            }}
+          >
+            {/* Browser chrome bar */}
+            <div
+              className="flex items-center h-9 px-3.5 bg-[#141414]"
+              style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+            >
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#FF5F57' }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#FFBD2E' }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#28C840' }} />
               </div>
-              <span className="text-[11px] text-white/30 font-medium">app.somyra.ai</span>
-              <div className="w-12" />
+              <span className="flex-1 text-center text-[12px] text-[#555]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                somyra.online
+              </span>
+              <div className="w-[52px]" />
             </div>
-
-            {/* Mockup content - clean static preview */}
-            <div className="p-5 md:p-7 grid grid-cols-1 md:grid-cols-5 gap-5">
-              {/* Left panel */}
-              <div className="md:col-span-3 space-y-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-teal-accent" />
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/70">Post Writer</span>
-                </div>
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-lg p-4">
-                  <div className="text-[13px] text-white/70 leading-relaxed">
-                    How I landed my first enterprise client without spending a single dollar on ads
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[10px] text-white/40 font-medium uppercase tracking-wider">Style:</span>
-                  <div className="flex gap-1.5">
-                    <span className="text-[11px] px-2.5 py-1 rounded-md bg-teal-accent/15 text-teal-accent border border-teal-accent/20 font-medium">Storytelling</span>
-                    <span className="text-[11px] px-2.5 py-1 rounded-md bg-white/[0.04] text-white/40 border border-white/[0.06]">Educational</span>
-                    <span className="text-[11px] px-2.5 py-1 rounded-md bg-white/[0.04] text-white/40 border border-white/[0.06]">Hot Take</span>
-                  </div>
-                </div>
-                <div className="bg-teal-accent/10 border border-teal-accent/15 rounded-lg p-2.5 flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-teal-accent animate-pulse" />
-                  <span className="text-[11px] font-medium text-teal-accent/80">Voice Profile active {'\u2022'} Writing in your style</span>
-                </div>
-              </div>
-
-              {/* Right panel */}
-              <div className="md:col-span-2 bg-white/[0.02] border border-white/[0.06] rounded-lg p-4 flex flex-col">
-                <span className="text-[10px] font-semibold tracking-widest uppercase text-white/40 mb-3">Generated Post</span>
-                <div className="text-[12px] leading-relaxed text-white/60 flex-grow">
-                  <strong className="text-white/80 font-medium">Three years ago I was broke, unheard of, and sending cold emails into a void.</strong>
-                  <br /><br />
-                  No agency. No ad budget. No warm intros.
-                  <br /><br />
-                  The only thing I had was one clear message and the discipline to show up on LinkedIn every week.
-                </div>
-                <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-medium text-teal-accent/70">
-                  <span className="w-1 h-1 bg-teal-accent rounded-full" />
-                  Matched to your voice
-                </div>
-              </div>
-            </div>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full block"
+              style={{ display: 'block' }}
+            >
+              <source src="/Somyra_postwriter.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </section>
