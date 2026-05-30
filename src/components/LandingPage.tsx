@@ -799,16 +799,19 @@ export function LandingPage({
               </span>
               <div className="w-[52px]" />
             </div>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full block"
-              style={{ display: 'block' }}
-            >
-              <source src="/Somyra_postwriter.mp4" type="video/mp4" />
-            </video>
+            <div className="w-full bg-gradient-to-br from-[#2DD4BF]/10 via-[#0D0D0D] to-[#0D0D0D]">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="w-full block"
+                style={{ display: 'block' }}
+              >
+                <source src="/Somyra_postwriter.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       </section>
