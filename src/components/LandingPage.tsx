@@ -159,27 +159,27 @@ const featureTabs: FeatureTabData[] = [
 const faqData = [
   {
     q: 'Is this just another AI writing tool?',
-    a: 'No. Every AI writing tool gives you generic output because it knows nothing about you. Somyra learns your actual voice from your real posts, understands your niche from your profile, and writes content that sounds like you on your best day. Your audience will not be able to tell the difference.'
+    a: 'No — and that is the entire point. Most AI tools give everyone the same output. Somyra learns how you specifically write — your sentence length, your word choices, how you open and close — and generates content that is unmistakably yours. The output sounds like your best writing, not a template.'
   },
   {
     q: 'What if I have never posted on LinkedIn?',
-    a: 'Then this is exactly where you start. Profile Analysis tells you what to fix first. Topic Generator gives you ideas instantly. Post Writer helps you find your voice. You do not need existing content to get value. You just need to show up.'
+    a: 'You are actually the ideal user. Somyra helps you build a voice from scratch — you do not need existing posts to get started. Paste your profile, describe how you want to sound, and Somyra builds from there. Most users publish their first post within 10 minutes of signing up.'
   },
   {
     q: 'Why not just use ChatGPT?',
-    a: 'ChatGPT forgets everything the moment you close the tab. Voice Profile saves your style permanently. Every feature across Somyra pulls from it automatically. Set it once and every generation sounds like you from that point forward. No prompting. No explaining yourself every time.'
+    a: 'ChatGPT writes for everyone. Somyra writes for you. ChatGPT has no idea what your niche is, who your audience is, or how you naturally communicate. Somyra is trained specifically on LinkedIn content, knows what performs, and writes in your voice — not a generic AI voice.'
   },
   {
     q: 'Is there a contract or can I leave?',
-    a: 'No contracts. Cancel from your account settings in under 10 seconds. No questions, no fees, no friction. We would rather earn your subscription every month than trap you into one.'
+    a: 'Zero contracts. Cancel from your dashboard in one click, anytime. You keep access until the end of your billing period. No cancellation fees, no questions asked, no annoying retention flow.'
   },
   {
     q: 'Who is Somyra built for?',
-    a: 'Founders, executives, consultants, and sales professionals who know LinkedIn is important but cannot show up consistently because creating content takes too long. If you have ever closed a tab because you did not know what to write, Somyra was built for you.'
+    a: 'Founders, executives, consultants, and sales professionals who want LinkedIn to work for them without spending hours on it every week. If your personal brand directly affects your business outcomes, Somyra is built for you.'
   },
   {
     q: 'What happens when I hit my monthly limit?',
-    a: 'You will see a clear counter throughout the app so you always know where you stand. When you hit your limit, upgrade to Pro instantly or wait for the monthly reset. No surprise charges. Ever.'
+    a: 'You will see a clear warning before you hit the limit so you are never surprised. When you do hit it, you can upgrade instantly from the dashboard or wait for the next month. Nothing gets deleted. Your Voice Profile, saved content, and settings stay exactly as they are.'
   }
 ];
 
@@ -388,29 +388,31 @@ const hardcodedReviewsRow2 = [
    FAQ ACCORDION ITEM
    ───────────────────────────────────────────── */
 const FaqItem = ({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) => (
-  <div className="border-b border-white/5">
+  <div className="bg-[#0D0D0D] rounded-[12px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
     <button
       onClick={onToggle}
-      className="w-full flex items-center justify-between py-6 md:py-7 text-left gap-4 group transition-all"
+      className="w-full flex items-center justify-between p-[20px_24px] text-left cursor-pointer transition-all duration-200 hover:bg-[rgba(255,255,255,0.02)]"
     >
-      <span className="text-[15px] md:text-lg font-bold text-white group-hover:text-teal-accent transition-colors leading-relaxed">{q}</span>
-      <div className="shrink-0 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-teal-accent/30 transition-all group-hover:bg-teal-accent/5">
-        {isOpen ? <Minus className="w-4 h-4 text-teal-accent" /> : <Plus className="w-4 h-4 text-[#555] group-hover:text-teal-accent/70" />}
+      <span className={`text-[15px] font-medium leading-[1.4] pr-4 transition-colors duration-200 ${isOpen ? 'text-[#2DD4BF]' : 'text-white'}`}>
+        {q}
+      </span>
+      <div
+        className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${isOpen ? 'bg-[#2DD4BF]/[0.08]' : 'bg-[#141414]'}`}
+        style={{ border: isOpen ? '1px solid rgba(45,212,191,0.2)' : '1px solid rgba(255,255,255,0.08)' }}
+      >
+        {isOpen ? <Minus className="w-3.5 h-3.5 text-[#2DD4BF]" /> : <Plus className="w-3.5 h-3.5 text-[#666]" />}
       </div>
     </button>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="overflow-hidden"
-        >
-          <p className="pb-7 text-[15px] md:text-base text-[#A0A0A0] leading-[1.8] max-w-3xl">{a}</p>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className="overflow-hidden transition-all duration-[350ms] ease"
+      style={{
+        maxHeight: isOpen ? '400px' : '0',
+        opacity: isOpen ? 1 : 0,
+        transition: 'max-height 0.35s ease, opacity 0.2s ease'
+      }}
+    >
+      <p className="text-[14px] text-[#888] leading-[1.8] px-6 pb-5">{a}</p>
+    </div>
   </div>
 );
 
@@ -1660,33 +1662,59 @@ export function LandingPage({
       </motion.section>
 
       {/* ── SECTION 11: FAQ ── */}
-      <motion.section 
+      <section 
         id="faq-section"
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="w-full px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
+        className="w-full px-4 sm:px-6 py-[60px] md:py-[70px] ds:py-[100px] relative z-10 border-t border-white/5"
       >
-        <div className="max-w-[768px] mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <SectionLabel>QUESTIONS</SectionLabel>
-            <SectionHeading>Stuff people ask before signing up</SectionHeading>
+        <div className="max-w-[896px] mx-auto">
+          <div className="text-center mb-5 sm:mb-6 ds:mb-8">
+            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+              QUESTIONS
+            </span>
           </div>
 
-          <div className="divide-y divide-white/5">
-            {faqData.map((item, i) => (
-              <FaqItem
-                key={i}
-                q={item.q}
-                a={item.a}
-                isOpen={openFaqIndex === i}
-                onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
-              />
-            ))}
+          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
+            Stuff people ask<br />
+            before signing up.
+          </h2>
+
+          <div className="grid grid-cols-1 ds:grid-cols-2 gap-4">
+            {faqData.map((item, i) => {
+              const colIndex = i % 2;
+              const rowIndex = Math.floor(i / 2);
+              const delay = rowIndex * 80 + colIndex * 40;
+
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: delay / 1000 }}
+                >
+                  <FaqItem
+                    q={item.q}
+                    a={item.a}
+                    isOpen={openFaqIndex === i}
+                    onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Still have questions? */}
+          <div className="text-center mt-10">
+            <p className="text-[14px] text-[#666] mb-1">Still have questions?</p>
+            <Link
+              to="/contact"
+              className="text-[#2DD4BF] text-[14px] font-medium hover:underline transition-all"
+            >
+              Talk to us &rarr;
+            </Link>
           </div>
         </div>
-      </motion.section>
+      </section>
 
 
 
