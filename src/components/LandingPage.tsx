@@ -50,6 +50,7 @@ interface LandingPageProps {
 interface FeatureTabData {
   id: string;
   label: string;
+  desc: string;
   tag: string;
   title: string;
   body: string;
@@ -64,85 +65,91 @@ const featureTabs: FeatureTabData[] = [
   {
     id: 'post-writer',
     label: 'Post Writer',
+    desc: 'Write posts in your exact voice',
     tag: 'CONTENT FACTORY',
     title: 'Write posts that get noticed, not skipped',
     body: 'Tell Somyra what you want to write about. Choose your style. Hit generate. Get a post that sounds like your best writing on your best day. Every single time.',
     dots: [
-      'Storytelling, Educational, Controversial and Personal styles',
-      'Deep Mode for maximum authenticity',
-      'Voice Profile integration for Pro users',
-      'LinkedIn post preview before you publish'
+      'Get a post that sounds like your best writing, every time',
+      'Deep Mode rewrites until it matches your voice exactly',
+      'Voice Profile makes every post unmistakably yours',
+      'Preview exactly how it looks on LinkedIn before publishing'
     ],
     icon: PenTool
   },
   {
     id: 'profile-analysis',
     label: 'Profile Analysis',
+    desc: 'Audit and rewrite your entire profile',
     tag: 'PERSONAL BRAND',
     title: 'Turn your profile into a lead magnet',
     body: 'Paste your About and Experience. Get a surgical audit of every element that is hurting your visibility and credibility. Then get the exact rewrite to fix it.',
     dots: [
-      'Quick Audit for fast wins',
-      'Deep Strategy for full transformation',
-      'Headline, About and positioning fixes',
-      'Actionable roadmap, not vague suggestions'
+      'Get a full audit of your profile in seconds, not hours',
+      'Transform your About, Headline, and Experience into a magnet',
+      'Fix the exact spots that are costing you opportunities',
+      'Walk away with a clear rewrite, not generic advice'
     ],
     icon: UserCircle
   },
   {
     id: 'topic-generator',
     label: 'Topic Generator',
+    desc: 'Never run out of content ideas',
     tag: 'CONTENT FACTORY',
     title: 'Never wonder what to post again',
     body: 'Tell us your niche, your audience, and your goals. Get five story driven post topics tailored to what your specific audience actually engages with.',
     dots: [
-      'Niche specific ideas, not generic topics',
-      'Based on real LinkedIn engagement patterns',
-      'Saves to your library for later',
-      'Refreshes every time you generate'
+      'Get topics your audience actually wants to read',
+      'Ideas proven to stop the scroll and spark conversations',
+      'Never lose a good idea — save it and post when ready',
+      'Fresh ideas every time, so you never run dry'
     ],
     icon: Sparkles
   },
   {
     id: 'smart-outreach',
     label: 'Smart Outreach',
+    desc: 'Personalized DMs that get replies',
     tag: 'SALES AND OUTREACH',
     title: 'Turn cold DMs into warm conversations',
     body: 'Paste what you know about your prospect. Get a message that references their actual work, speaks to their real pain, and feels like you spent an hour researching them. Because Somyra did.',
     dots: [
-      'Message Builder with prospect context',
-      'Follow Up Intelligence sequence generator',
-      'CRM Tracker for pipeline management',
-      'ICP Clarity to find your ideal buyer',
-      'Templates library for fast execution'
+      'Personalized DMs that reference their actual work',
+      'Follow-ups that feel natural, not pushy',
+      'Track every conversation without leaving Somyra',
+      'Know exactly who to reach out to and why',
+      'Proven templates you can customize in seconds'
     ],
     icon: Send
   },
   {
     id: 'voice-profile',
     label: 'Voice Profile',
+    desc: 'Teach Somyra how you write',
     tag: 'PRO FEATURE',
     title: 'The AI that actually sounds like you',
     body: 'Add your best posts. Somyra studies how you structure ideas, what words you use, how you open and close. Every generation after that sounds unmistakably like you.',
     dots: [
-      'Add 3 to 10 sample posts',
-      'Gets sharper with every use',
-      'Works across all features',
-      'The reason Pro users never go back'
+      'Teach Somyra your voice in under 2 minutes',
+      'Every generation sounds more like you over time',
+      'Your voice carries into posts, DMs, and profile rewrites',
+      'The one feature that makes every other tool feel generic'
     ],
     icon: Mic
   },
   {
     id: 'saved-library',
     label: 'Saved Library',
+    desc: 'Save your best generations',
     tag: 'PRO FEATURE',
     title: 'Never lose your best content',
     body: 'Every post, DM, and audit you generate can be saved. Build a library of your best work. Repurpose it. Reference it. Never start from zero again.',
     dots: [
-      'Save anything from any feature',
-      'Organize and search your library',
-      'Up to 200 saves for Pro users',
-      'Access across all devices'
+      'Save your best posts, DMs, and audits in one place',
+      'Find exactly what you need in seconds',
+      'Build a library of proven content over time',
+      'Access your library anywhere, anytime'
     ],
     icon: Bookmark
   }
@@ -1052,56 +1059,88 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-4 py-[60px] md:py-20 ds:py-24 relative z-10"
+        className="w-full px-4 py-[60px] md:py-[70px] ds:py-[100px] relative z-10"
       >
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>EVERYTHING YOU NEED</SectionLabel>
-          <SectionHeading className="mb-4">
+          {/* Section label */}
+          <div className="text-center mb-5 sm:mb-6">
+            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+              EVERYTHING YOU NEED
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
             Six tools in one.<br />
             All sounding like you.
-          </SectionHeading>
-          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-8 sm:mb-12 max-w-[672px]">
-            Most people juggle five different tools and still sound generic. Somyra does everything in one place, and everything sounds like you.
-          </p>
+          </h2>
 
-          <div className="grid grid-cols-1 ds:grid-cols-3 gap-6 md:gap-8">
-            {/* Tab list (left) */}
-            <div className="ds:col-span-1 flex flex-row md:flex-col gap-2 overflow-x-auto snap-x md:overflow-visible pb-4 md:pb-0 no-scrollbar">
+          {/* Desktop: two-column grid | Mobile/Tablet: stacked */}
+          <div className="flex flex-col gap-6 ds:grid ds:grid-cols-[1fr_2fr] ds:gap-8 ds:items-center">
+            {/* ── Desktop vertical tab list ── */}
+            <div className="hidden ds:flex ds:flex-col gap-1">
               {featureTabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveFeatureTab(tab.id)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left whitespace-nowrap md:whitespace-normal text-[13px] md:text-sm font-medium transition-all duration-300 shrink-0 snap-start md:shrink ${
+                  className={`flex items-start gap-3 w-full text-left rounded-[10px] transition-all duration-200 border-l-2 ${
                     activeFeatureTab === tab.id
-                      ? 'bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 shadow-[inset_0_0_20px_rgba(45,212,191,0.05)]'
-                      : 'text-[#888] hover:text-white hover:bg-white/5 border border-transparent'
-                  }`}
+                      ? 'bg-[#141414] border-l-[#2DD4BF] text-white shadow-[0_0_20px_rgba(45,212,191,0.06)]'
+                      : 'bg-transparent border-l-transparent text-[#666] hover:bg-[#0D0D0D] hover:text-[#999]'
+                  } ${activeFeatureTab === tab.id ? 'border border-[rgba(45,212,191,0.2)]' : 'border border-transparent'} px-5 py-[14px]`}
                 >
-                  <tab.icon className={`w-4 h-4 shrink-0 col-span-1 ${activeFeatureTab === tab.id ? 'text-[#2DD4BF]' : 'text-[#666]'}`} />
+                  <tab.icon className={`w-4 h-4 shrink-0 mt-0.5 ${activeFeatureTab === tab.id ? 'text-[#2DD4BF]' : 'text-[#444]'}`} />
+                  <div className="min-w-0">
+                    <span className="block text-[14px] font-medium leading-tight">{tab.label}</span>
+                    <span className={`block text-[12px] leading-tight mt-0.5 ${activeFeatureTab === tab.id ? 'text-[#777]' : 'text-[#555]'}`}>
+                      {tab.desc}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* ── Mobile/Tablet horizontal pills ── */}
+            <div className="flex ds:hidden overflow-x-auto gap-2 snap-x no-scrollbar pb-2 -mx-4 px-4">
+              {featureTabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveFeatureTab(tab.id)}
+                  className={`shrink-0 snap-start rounded-full whitespace-nowrap transition-all duration-200 ${
+                    activeFeatureTab === tab.id
+                      ? 'bg-[#141414] border border-[#2DD4BF] text-white'
+                      : 'bg-[#141414] border border-white/[0.08] text-[#666]'
+                  } px-3.5 py-1.5 md:px-4 md:py-2 text-[12px] md:text-[13px] font-medium`}
+                >
                   {tab.label}
                 </button>
               ))}
             </div>
 
-            {/* Detail panel (right) */}
-            <div className="ds:col-span-2">
+            {/* ── Content Panel ── */}
+            <div
+              className="bg-[#0D0D0D] rounded-[16px] p-6 sm:p-8 md:p-9"
+              style={{
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderTop: '2px solid #2DD4BF'
+              }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFeature.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.25 }}
-                  className="bg-[#0D0D0D] border border-[#1f1f1f] rounded-[24px] p-6 sm:p-8 md:p-10"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2, ease: "ease" }}
                 >
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#2DD4BF]/70 mb-3 block">{activeFeature.tag}</span>
+                  <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em] mb-3 block">{activeFeature.tag}</span>
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight">{activeFeature.title}</h3>
                   <p className="text-[#A0A0A0] text-[14px] md:text-[15px] leading-[1.7] mb-6 max-w-full">{activeFeature.body}</p>
                   <div className="space-y-3">
                     {activeFeature.dots.map((dot, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="text-[#2DD4BF] mt-1.5 text-lg leading-none">·</span>
-                        <span className="text-[14px] text-[#ccc] leading-relaxed">{dot}</span>
+                        <Check className="w-4 h-4 text-[#2DD4BF] mt-0.5 shrink-0" />
+                        <span className="text-[15px] text-[#ccc] leading-[1.7]">{dot}</span>
                       </div>
                     ))}
                   </div>
