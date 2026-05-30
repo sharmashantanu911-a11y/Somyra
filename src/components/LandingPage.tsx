@@ -714,7 +714,7 @@ export function LandingPage({
       )}
 
       {/* ── HERO ── */}
-      <section id="landing-hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-[120px] pb-20 md:pb-28 text-center overflow-hidden">
+      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-6 pt-20 md:pt-[120px] ds:pt-[160px] pb-[60px] md:pb-20 ds:pb-24 md:min-h-screen text-center overflow-hidden">
         {/* Subtle ambient glow */}
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
@@ -814,7 +814,7 @@ export function LandingPage({
       </section>
 
       {/* ── TRUST STRIP ── */}
-      <section className="w-full px-6 py-12 md:py-16 border-t border-white/[0.04]">
+      <section className="w-full px-6 py-[60px] md:py-20 border-t border-white/[0.04]">
         <div className="max-w-[680px] mx-auto text-center">
           <div className="flex items-center justify-center gap-4 flex-wrap mb-5">
             <div className="flex items-center">
@@ -846,7 +846,7 @@ export function LandingPage({
       </section>
 
       {/* ── BENEFITS ── */}
-      <section className="w-full px-4 py-16 md:py-24 relative z-10">
+      <section className="w-full px-4 py-[60px] md:py-20 ds:py-24 relative z-10">
         <div className="max-w-[896px] mx-auto">
           <SectionLabel>WHAT YOU GET</SectionLabel>
           <SectionHeading className="mb-4">
@@ -857,7 +857,7 @@ export function LandingPage({
             Three ways Somyra turns your profile into your biggest asset.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 ds:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: FileText,
@@ -894,7 +894,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-4 py-16 md:py-24 relative z-10"
+        className="w-full px-4 py-[60px] md:py-20 ds:py-24 relative z-10"
       >
         <div className="max-w-5xl mx-auto">
           <SectionLabel>EVERYTHING YOU NEED</SectionLabel>
@@ -906,9 +906,9 @@ export function LandingPage({
             Most people juggle five different tools and still sound generic. Somyra does everything in one place, and everything sounds like you.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 ds:grid-cols-3 gap-6 md:gap-8">
             {/* Tab list (left) */}
-            <div className="md:col-span-1 flex flex-row md:flex-col gap-2 overflow-x-auto snap-x md:overflow-visible pb-4 md:pb-0 no-scrollbar">
+            <div className="ds:col-span-1 flex flex-row md:flex-col gap-2 overflow-x-auto snap-x md:overflow-visible pb-4 md:pb-0 no-scrollbar">
               {featureTabs.map(tab => (
                 <button
                   key={tab.id}
@@ -926,7 +926,7 @@ export function LandingPage({
             </div>
 
             {/* Detail panel (right) */}
-            <div className="md:col-span-2">
+            <div className="ds:col-span-2">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFeature.id}
@@ -957,7 +957,7 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION: HOW IT WORKS (new design)
          ════════════════════════════════════════ */}
-      <section id="how-it-works" className="relative px-6 py-24 md:py-28 overflow-hidden">
+      <section id="how-it-works" className="relative px-6 py-[60px] md:py-20 ds:py-24 overflow-hidden">
         <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.07] blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="max-w-[1060px] mx-auto relative z-10">
@@ -1079,7 +1079,7 @@ export function LandingPage({
       </section>
 
       {/* ── COMPARISON ── */}
-      <section className="w-full px-4 py-16 md:py-20 bg-[#0D0D0D] relative z-10 border-t border-white/5">
+      <section className="w-full px-4 py-[60px] md:py-20 bg-[#0D0D0D] relative z-10 border-t border-white/5">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-12">
             <SectionLabel>WHY SOMYRA</SectionLabel>
@@ -1249,7 +1249,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-16 md:py-24 relative z-10 border-t border-white/5"
+        className="w-full px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[1024px] mx-auto">
           <div className="text-center mb-12">
@@ -1286,7 +1286,7 @@ export function LandingPage({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-5 items-start">
+          <div className="grid grid-cols-1 ds:grid-cols-3 gap-6 md:gap-5 items-start max-w-[420px] mx-auto ds:max-w-none ds:mx-0">
             <PricingCard
               name="Free"
               monthlyPrice="$0"
@@ -1389,7 +1389,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full py-16 md:py-24 relative overflow-hidden border-y border-white/5 bg-[#080808]"
+        className="w-full py-[60px] md:py-20 ds:py-24 relative overflow-hidden border-y border-white/5 bg-[#080808]"
       >
         <style>{`
           @keyframes scrollLeft {
@@ -1531,7 +1531,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-16 md:py-24 relative z-10 border-t border-white/5"
+        className="w-full px-6 py-[60px] md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[768px] mx-auto">
           <div className="text-center mb-12">
@@ -1563,7 +1563,7 @@ export function LandingPage({
         whileInView="animate"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="w-full px-6 py-16 md:py-24 text-center relative z-10 border-t border-white/5"
+        className="w-full px-6 py-[60px] md:py-20 ds:py-24 text-center relative z-10 border-t border-white/5"
       >
         <div className="max-w-[672px] mx-auto">
           {/* Micro quote */}
