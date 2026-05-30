@@ -847,7 +847,7 @@ export function LandingPage({
       )}
 
       {/* ── HERO ── */}
-      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-5 md:px-6 pt-16 md:pt-[120px] ds:pt-[160px] pb-10 md:pb-[60px] text-center overflow-hidden">
+      <section id="landing-hero" className="relative flex flex-col items-center justify-center px-5 md:px-6 pt-[92px] md:pt-[120px] ds:pt-[160px] pb-10 md:pb-[60px] text-center overflow-hidden">
         {/* Subtle ambient glow */}
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
@@ -985,43 +985,62 @@ export function LandingPage({
       </section>
 
       {/* ── BENEFITS ── */}
-      <section className="w-full px-4 py-[60px] md:py-20 ds:py-24 relative z-10">
+      <section className="w-full px-4 py-[60px] md:py-[70px] ds:py-[100px] relative z-10">
         <div className="max-w-[896px] mx-auto">
-          <SectionLabel>WHAT YOU GET</SectionLabel>
-          <SectionHeading className="mb-4">
+          {/* Label */}
+          <div className="text-center mb-6 sm:mb-8 ds:mb-10">
+            <span className="text-[#2DD4BF] uppercase text-[12px] font-semibold tracking-[0.2em]">
+              WHAT YOU GET
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h2 className="text-[28px] ds:text-[40px] font-bold text-white leading-[1.2] ds:leading-[1.15] tracking-tight text-center mb-5 sm:mb-6">
             From invisible to unstoppable<br />
             on LinkedIn.
-          </SectionHeading>
-          <p className="text-[#A0A0A0] text-base md:text-lg leading-[1.7] mb-8 sm:mb-14 max-w-[576px] mx-auto text-center">
-            Three ways Somyra turns your profile into your biggest asset.
+          </h2>
+
+          {/* Subtext */}
+          <p className="text-[#888] text-base leading-[1.6] text-center mx-auto mb-8 sm:mb-10 ds:mb-12" style={{ maxWidth: '440px' }}>
+            Three ways Somyra turns your LinkedIn into your biggest growth asset.
           </p>
 
-          <div className="grid grid-cols-1 ds:grid-cols-3 gap-6 md:gap-8">
+          {/* Cards */}
+          <div className="grid grid-cols-1 ds:grid-cols-3 gap-4 md:gap-5 ds:gap-6 max-w-[480px] ds:max-w-none mx-auto ds:mx-0">
             {[
               {
                 icon: FileText,
                 title: 'Write posts that sound like you',
-                body: 'No more staring at a blank screen. You pick the topic, choose your style, and Somyra writes a post that sounds like you on your best day. Ready to publish in 30 seconds.'
+                body: 'Pick a topic, choose your style, and get a post that sounds like you wrote it on your best day.'
               },
               {
                 icon: UserCircle,
                 title: 'Fix your profile to attract opportunity',
-                body: 'People visit your profile every day. Most leave because something is off. Somyra audits every line of your About and Experience and rewrites it so the right people reach out to you.'
+                body: 'Somyra audits every line of your profile and rewrites it so the right people reach out to you.'
               },
               {
                 icon: MessageSquare,
                 title: 'Send DMs that get real replies',
-                body: 'Generic outreach gets ignored. Somyra writes personalized messages that reference each prospect and speak to their real pain. Your reply rate goes up from the first message.'
+                body: 'Somyra writes personalized outreach that references each prospect and speaks directly to their pain.'
               }
             ].map((card, i) => (
-              <div key={i} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#2DD4BF]/30 transition-all duration-300 h-full flex flex-col shadow-premium hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2DD4BF]/40 via-[#2DD4BF]/60 to-[#2DD4BF]/40 opacity-50 group-hover:opacity-100 transition-opacity" />
-                <div className="w-11 h-11 sm:w-12 sm:h-12 bg-[#2DD4BF]/10 rounded-xl flex items-center justify-center mb-5 sm:mb-6 shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <card.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#2DD4BF]" />
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                className="bg-[#0D0D0D] border border-white/[0.06] hover:border-[#2DD4BF]/20 rounded-[16px] p-5 md:p-7 h-full flex flex-col transition-all duration-300 hover:shadow-[0_0_30px_rgba(45,212,191,0.05)]"
+              >
+                <div
+                  className="w-10 h-10 rounded-[10px] flex items-center justify-center mb-4 shrink-0"
+                  style={{ backgroundColor: 'rgba(45,212,191,0.08)' }}
+                >
+                  <card.icon className="w-5 h-5 text-[#2DD4BF]" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">{card.title}</h3>
-                <p className="text-[#A0A0A0] leading-[1.7] text-[14px] sm:text-[15px] flex-grow">{card.body}</p>
-              </div>
+                <h3 className="text-[17px] font-bold text-white mb-2 leading-snug">{card.title}</h3>
+                <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{card.body}</p>
+              </motion.div>
             ))}
           </div>
         </div>
