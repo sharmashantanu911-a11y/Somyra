@@ -513,7 +513,6 @@ export function LandingPage({
   setShowReviewModal,
   user
 }: LandingPageProps) {
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [activeFeatureTab, setActiveFeatureTab] = useState('post-writer');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [isAnnual, setIsAnnual] = useState(true);
@@ -800,9 +799,8 @@ export function LandingPage({
               </span>
               <div className="w-[52px]" />
             </div>
-            <div className="w-full bg-gradient-to-br from-[#2DD4BF]/10 via-[#0D0D0D] to-[#0D0D0D]">
+            <div className="w-full">
               <video
-                ref={heroVideoRef}
                 autoPlay
                 loop
                 muted
@@ -810,11 +808,6 @@ export function LandingPage({
                 preload="auto"
                 className="w-full block"
                 style={{ display: 'block' }}
-                onLoadedMetadata={() => {
-                  if (heroVideoRef.current && heroVideoRef.current.duration > 1.5) {
-                    heroVideoRef.current.currentTime = 1.2;
-                  }
-                }}
               >
                 <source src="/Somyra_postwriter.mp4" type="video/mp4" />
               </video>
