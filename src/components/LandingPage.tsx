@@ -28,7 +28,8 @@ import {
   ChevronDown,
   Loader2,
   Lock,
-  AlertTriangle
+  AlertTriangle,
+  Play
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -1152,126 +1153,113 @@ export function LandingPage({
       </motion.section>
 
       {/* ════════════════════════════════════════
-         SECTION: HOW IT WORKS (new design)
+         SECTION: HOW IT WORKS
          ════════════════════════════════════════ */}
-      <section id="how-it-works" className="relative px-6 py-[60px] md:py-20 ds:py-24 overflow-hidden">
+      <section id="how-it-works" className="relative px-4 sm:px-6 py-[60px] md:py-[70px] ds:py-[100px] overflow-hidden">
         <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.07] blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="max-w-[1060px] mx-auto relative z-10">
-          {/* Eyebrow */}
-          <div className="flex items-center justify-center gap-2.5 mb-5">
-            <span className="w-8 h-px bg-teal-accent/40" />
-            <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-teal-accent/85">The Process</span>
-            <span className="w-8 h-px bg-teal-accent/40" />
+          {/* Label */}
+          <div className="text-center mb-5">
+            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+              THE PROCESS
+            </span>
           </div>
 
           {/* Headline */}
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,5vw,52px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white text-center max-w-[640px] mx-auto mb-3">
-            From signup to your best post ever. In under 5 minutes.
+          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
+            From signup to your first post.<br />
+            In under 5 minutes.
           </h2>
 
-          <p className="text-[clamp(15px,2vw,17px)] font-light leading-[1.7] text-white/50 text-center max-w-[480px] mx-auto mb-8 sm:mb-14">
-            Most tools make you do the work. Somyra does it with you. Three steps and you are live.
+          {/* Subtext */}
+          <p className="text-[#888] text-base leading-[1.6] text-center mx-auto mb-8 sm:mb-10 ds:mb-12" style={{ maxWidth: '420px' }}>
+            No learning curve. No setup hell. Three steps and you are live.
           </p>
 
-          {/* Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.07] border border-white/[0.07] rounded-[20px] overflow-hidden mb-10 sm:mb-16">
-            {[
-              {
-                num: '01',
-                title: 'Paste your profile',
-                body: 'Share your LinkedIn link. Somyra scans your About, Experience, and recent posts to understand your niche, your positioning, and what makes you different from everyone else.'
-              },
-              {
-                num: '02',
-                title: 'Teach Somyra your voice',
-                body: 'Add three of your best posts. Somyra studies how you structure ideas, the words you choose, and how you open and close. This is how it learns to write like you.'
-              },
-              {
-                num: '03',
-                title: 'Generate content that sounds like you',
-                body: 'Posts, DMs, profile rewrites, topic ideas. All of it sounds like you wrote it on your best day. Because that is exactly what Somyra is trained to do.'
-              }
-            ].map((step, i) => (
-              <div key={i} className="bg-[#0d0d0d] p-6 sm:p-8 md:p-10 relative group transition-colors hover:bg-[#111]">
-                {/* Large faded number */}
-                <div className="absolute top-4 right-5 font-[family-name:var(--font-display)] text-[80px] font-extrabold text-teal-accent/[0.04] leading-none pointer-events-none select-none tracking-[-0.04em]">
-                  {step.num}
-                </div>
-                {/* Step number badge */}
-                <div className="w-9 h-9 rounded-xl bg-teal-accent/10 border border-teal-accent/20 flex items-center justify-center font-[family-name:var(--font-display)] text-[14px] font-extrabold text-teal-accent mb-6 tracking-tight">
-                  {step.num}
-                </div>
-                <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white leading-snug tracking-[-0.02em] mb-3">{step.title}</h3>
-                <p className="text-[14.5px] font-light leading-[1.72] text-white/50">{step.body}</p>
-                {/* Arrow between steps (desktop) */}
-                {i < 2 && <div className="hidden md:block absolute top-10 -right-[9px] text-teal-accent/30 text-lg z-10">→</div>}
-              </div>
-            ))}
-          </div>
+          {/* Steps + connector */}
+          <div className="relative z-0">
+            {/* Desktop connector — behind cards, visible only in gaps */}
+            <div className="absolute top-[18px] left-0 right-0 h-0 border-t border-dashed border-[rgba(45,212,191,0.2)] pointer-events-none -z-10 hidden ds:block" />
 
-          {/* Interactive Demo Card */}
-          <div className="relative rounded-2xl overflow-hidden border border-white/[0.07] shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
-            <div className="preview-card rounded-2xl">
-              <div className="preview-bar">
-                <div className="flex gap-1.5">
-                  <span className="preview-dot bg-[#FF5F57]" />
-                  <span className="preview-dot bg-[#FFBD2E]" />
-                  <span className="preview-dot bg-[#28C840]" />
-                </div>
-                <span className="text-[11.5px] text-white/50 font-medium tracking-widest uppercase">Post Writer</span>
-                <span className="text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-[3px] rounded uppercase tracking-wider">Live Preview</span>
-              </div>
-
-              <div className="p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-3">
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">What do you want to write about?</span>
-                  <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[13px] text-white/80 leading-relaxed">
-                    How I landed my first enterprise client without spending a single dollar on ads
+            {/* Step cards */}
+            <div className="grid grid-cols-1 ds:grid-cols-3 gap-5 ds:gap-6 max-w-[480px] ds:max-w-none mx-auto ds:mx-0">
+              {[
+                {
+                  num: '01',
+                  title: 'Paste your LinkedIn profile',
+                  body: 'Drop your profile URL. Somyra reads your About, Experience, and recent posts to understand exactly who you are.'
+                },
+                {
+                  num: '02',
+                  title: 'Teach Somyra your voice',
+                  body: 'Add three of your best posts. Somyra learns your structure, your words, and what makes your writing yours.'
+                },
+                {
+                  num: '03',
+                  title: 'Generate content that wins',
+                  body: 'Posts, DMs, profile rewrites, topic ideas — all sounding like you wrote them on your best day.'
+                }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                  className="bg-[#0D0D0D] border border-white/[0.06] hover:border-[#2DD4BF]/15 rounded-[16px] p-5 md:p-7 flex flex-col transition-all duration-300 hover:shadow-[0_0_24px_rgba(45,212,191,0.05)]"
+                >
+                  {/* Step number circle */}
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-[13px] font-semibold text-[#2DD4BF] mb-5 shrink-0"
+                    style={{ backgroundColor: 'rgba(45,212,191,0.08)', border: '1px solid rgba(45,212,191,0.2)' }}>
+                    {step.num}
                   </div>
-
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Post Style</span>
-                  <div className="flex gap-2">
-                    <span className="preview-chip active">Storytelling</span>
-                    <span className="preview-chip">Educational</span>
-                    <span className="preview-chip">Hot Take</span>
-                  </div>
-
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-teal-accent/80">Voice Mode</span>
-                  <div className="bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-[12px] text-white/50">
-                    Voice Profile active ✓
-                  </div>
-
-                  <button
-                    onClick={handleGenerate}
-                    disabled={isGenerating}
-                    className={`w-full ${isGenerating ? 'bg-teal-accent/20 cursor-not-allowed text-teal-accent/60' : 'bg-teal-accent hover:opacity-88 text-[#080808]'} font-bold text-[13px] py-2.5 rounded-lg transition-opacity`}
-                  >
-                    {isGenerating ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                        Generating...
-                      </span>
-                    ) : 'Generate Post'}
-                  </button>
-                </div>
-
-                <div className="bg-white/[0.025] border border-white/[0.07] rounded-xl p-4 flex flex-col gap-2.5">
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-white/50">Generated Post</span>
-                  <div className="text-[12px] leading-relaxed text-white/60">
-                    <strong className="text-white/90 font-medium">Three years ago I was broke, unheard of, and sending cold emails into a void.</strong>
-                    <br /><br />
-                    No agency. No ad budget. No warm intros.<br /><br />
-                    The only thing I had was one clear message and the discipline to show up on LinkedIn every week.<span className="typing-cursor" />
-                  </div>
-                  <div className="mt-auto inline-flex items-center gap-1.5 text-[10px] font-semibold text-teal-accent bg-teal-accent/10 border border-teal-accent/15 px-2 py-1 rounded self-start">
-                    <span className="w-[5px] h-[5px] bg-teal-accent rounded-full animate-[pulse-dot_1.5s_infinite]" />
-                    Writing in your voice
-                  </div>
-                </div>
-              </div>
+                  <h3 className="text-[17px] font-bold text-white leading-snug mb-2">{step.title}</h3>
+                  <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{step.body}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
+
+          {/* Video container — Coming Soon */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-[860px] mx-auto mt-10 sm:mt-16"
+            style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: '16px', overflow: 'hidden', background: '#0D0D0D' }}
+          >
+            {/* Chrome bar */}
+            <div className="h-9 bg-[#141414] flex items-center gap-2 px-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="flex gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                <span className="w-3 h-3 rounded-full bg-[#28C840]" />
+              </div>
+              <span className="text-[12px] text-[#555] flex-1 text-center">app.somyra.ai</span>
+            </div>
+
+            {/* Placeholder area */}
+            <div className="relative h-[240px] md:h-[380px] bg-[#080808] flex flex-col items-center justify-center gap-4 overflow-hidden"
+              style={{
+                backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
+                backgroundSize: '24px 24px'
+              }}
+            >
+              {/* Play button with pulse */}
+              <div className="w-16 h-16 rounded-full flex items-center justify-center animate-[pulse-play_2s_ease-in-out_infinite] cursor-pointer"
+                style={{ backgroundColor: 'rgba(45,212,191,0.1)', border: '1px solid rgba(45,212,191,0.3)' }}
+              >
+                <Play className="w-6 h-6 text-[#2DD4BF] ml-0.5" />
+              </div>
+
+              <div className="text-center">
+                <p className="text-white text-base font-medium">Full product walkthrough</p>
+                <p className="text-[#2DD4BF] text-[13px] uppercase tracking-[0.1em] mt-1 font-semibold">Coming soon</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
