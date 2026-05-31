@@ -233,20 +233,20 @@ const avatarMap: Record<string, string> = {
   'Charlie': '/user-images/Charlie.webp',
   'Lisa': '/user-images/Lisa.webp',
   'Arora': '/user-images/Arora.webp',
-  'Rohan': '/user-images/Rohan.webp',
+  'Sophie': '/user-images/Sophie.webp',
   'Claire': '/user-images/Claire.webp',
-  'Arjun': '/user-images/Arjun.webp',
+  'James': '/user-images/James.webp',
   'Maya': '/user-images/Maya.webp',
   'Marcus': '/user-images/Marcus.webp',
-  'Priya': '/user-images/Priya.webp',
-  'Daniel': '/user-images/Daniel.webp',
-  'Ananya': '/user-images/Ananya.webp',
+  'Charlotte': '/user-images/Charlotte.webp',
+  'Natalia': '/user-images/Natalia.webp',
+  'Emily': '/user-images/Emily.webp',
   'Tom': '/user-images/Tom.webp',
   'Nina': '/user-images/Nina.webp',
   'Carlos': '/user-images/Carlos.webp',
-  'Aisha': '/user-images/Aisha.webp',
-  'Liam': '/user-images/Liam.webp',
-  'Fatima': '/user-images/Fatima.webp'
+  'Max': '/user-images/Max.webp',
+  'Hannah': '/user-images/Hannah.webp',
+  'David': '/user-images/David.webp'
 };
 
 const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; idx: number }) => (
@@ -323,7 +323,7 @@ const hardcodedReviewsRow1 = [
     badge: "HOURS SAVED PER WEEK"
   },
   {
-    name: "Rohan",
+    name: "Sophie",
     title: "Founder at DevTools SaaS",
     text: "My LinkedIn used to get maybe 200 impressions per post. Now I average over 2,000. The topic generator alone changed my entire content strategy.",
     badge: "10X IMPRESSION GROWTH"
@@ -335,7 +335,7 @@ const hardcodedReviewsRow1 = [
     badge: "RECOMMENDED TO CLIENTS"
   },
   {
-    name: "Arjun",
+    name: "James",
     title: "Demand Gen Director",
     text: "The Smart Outreach CRM integration is a game changer. I track every prospect, every follow up, and every conversion. All inside one tool.",
     badge: "PIPELINE GROWTH 3X"
@@ -356,19 +356,19 @@ const hardcodedReviewsRow2 = [
     badge: "FIRST CLIENT IN 10 DAYS"
   },
   {
-    name: "Priya",
+    name: "Charlotte",
     title: "Founder at EdTech SaaS",
     text: "The topic generator alone saves me hours every week. I never stare at a blank screen anymore. Ideas on demand.",
     badge: "SAVES 3 HOURS EVERY WEEK"
   },
   {
-    name: "Daniel",
+    name: "Natalia",
     title: "Growth Advisor",
     text: "My connection requests went from getting ignored to a 60 percent acceptance rate. The outreach messages feel genuinely personal.",
     badge: "60% CONNECTION ACCEPTANCE"
   },
   {
-    name: "Ananya",
+    name: "Emily",
     title: "Executive Coach",
     text: "Somyra helped me go from invisible on LinkedIn to getting inbound leads every week. This is the tool I wished existed two years ago.",
     badge: "WEEKLY INBOUND LEADS"
@@ -392,19 +392,19 @@ const hardcodedReviewsRow2 = [
     badge: "SPOT ON VOICE MATCH"
   },
   {
-    name: "Aisha",
-    title: "Business Development Lead",
+    name: "Max",
+    title: "Lead Product Designer",
     text: "I closed two enterprise deals from LinkedIn DMs written by Somyra. The personalized outreach makes prospects feel like you actually did your homework.",
     badge: "2 ENTERPRISE DEALS CLOSED"
   },
   {
-    name: "Liam",
+    name: "Hannah",
     title: "Freelance Product Designer",
     text: "I went from zero LinkedIn presence to getting inbound messages from recruiters every week. All because I finally had content worth engaging with.",
     badge: "WEEKLY INBOUND MESSAGES"
   },
   {
-    name: "Fatima",
+    name: "David",
     title: "HR Director at Tech Corp",
     text: "We use Somyra for our entire leadership team's LinkedIn presence. Consistent, authentic, professional. Exactly what a modern company brand needs.",
     badge: "TEAM WIDE ADOPTION"
