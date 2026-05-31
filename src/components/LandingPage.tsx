@@ -1772,10 +1772,11 @@ export function LandingPage({
             transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
             className="flex justify-center mb-8"
           >
-            <div className="inline-flex items-center gap-[10px] px-5 py-[10px] rounded-[999px] bg-[#141414] border border-white/[0.08] max-w-[90vw] sm:max-w-none">
+            <div className="inline-flex items-center gap-[10px] px-4 py-2 rounded-[999px] bg-[#141414] border border-white/[0.08] max-w-[calc(100vw-48px)] overflow-hidden">
               <Star className="w-[14px] h-[14px] text-[#F59E0B] fill-[#F59E0B] shrink-0" />
-              <span className="text-[13px] text-[#999] leading-[1.4]">
-                &ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span>
+              <span className="text-[13px] text-[#999] whitespace-nowrap overflow-hidden text-ellipsis">
+                <span className="hidden max-[400px]:inline">&ldquo;Sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span></span>
+                <span className="max-[400px]:hidden">&ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span></span>
               </span>
             </div>
           </motion.div>
@@ -1828,18 +1829,18 @@ export function LandingPage({
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
             className="mt-4"
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
-              <div className="inline-flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                <span className="text-[13px] text-[#666]">No credit card required</span>
+            <div className="flex flex-row items-center justify-center gap-4 flex-nowrap max-[360px]:gap-[10px]">
+              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#666]">
+                <Lock className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
+                <span>No credit card required</span>
               </div>
-              <div className="inline-flex items-center gap-1.5">
-                <Infinity className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                <span className="text-[13px] text-[#666]">Free forever</span>
+              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#666]">
+                <Infinity className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
+                <span>Free forever</span>
               </div>
-              <div className="inline-flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                <span className="text-[13px] text-[#666]">30 second signup</span>
+              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#666]">
+                <Zap className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
+                <span>30 second signup</span>
               </div>
             </div>
           </motion.div>
