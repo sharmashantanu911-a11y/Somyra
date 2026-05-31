@@ -906,16 +906,16 @@ export function LandingPage({
         <div className="relative z-10 max-w-[720px] w-full">
           {/* Badge — social proof with real headshots */}
           <div className="flex justify-center mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
-            <div className="inline-flex items-center gap-3 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-[999px] p-[6px_18px_6px_6px] w-auto shadow-[0_0_30px_rgba(45,212,191,0.04)] hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] hover:border-[rgba(255,255,255,0.10)] transition-all duration-300">
+            <div className="inline-flex items-center gap-2.5 bg-[#0E0E0E] border border-white/[0.07] rounded-[999px] pl-[5px] pr-[14px] py-[5px] shadow-[0_0_40px_rgba(45,212,191,0.04)] hover:shadow-[0_0_50px_rgba(45,212,191,0.08)] hover:border-white/[0.12] transition-all duration-500">
               <div className="flex items-center">
-                <img src="/user-images/Alex.webp" alt="Alex" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[6] shadow-[0_0_0_3px_rgba(45,212,191,0.25)]" loading="lazy" />
-                <img src="/user-images/Ama.webp" alt="Ama" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[5] shadow-[0_0_0_3px_rgba(45,212,191,0.2)]" loading="lazy" />
-                <img src="/user-images/Arora.webp" alt="Arora" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[4] shadow-[0_0_0_3px_rgba(45,212,191,0.15)]" loading="lazy" />
-                <img src="/user-images/Charlie.webp" alt="Charlie" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[3] shadow-[0_0_0_3px_rgba(45,212,191,0.1)]" loading="lazy" />
-                <img src="/user-images/Lisa.webp" alt="Lisa" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[2] shadow-[0_0_0_3px_rgba(45,212,191,0.05)]" loading="lazy" />
-                <img src="/user-images/Mark.webp" alt="Mark" className="w-[28px] h-[28px] rounded-full object-cover z-[1]" loading="lazy" />
+                <img src="/user-images/Alex.webp" alt="" className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full object-cover z-[3] shadow-[0_0_0_2px_rgba(45,212,191,0.3)]" loading="lazy" />
+                <img src="/user-images/Ama.webp" alt="" className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full -ml-[8px] object-cover z-[2] shadow-[0_0_0_2px_rgba(45,212,191,0.2)]" loading="lazy" />
+                <img src="/user-images/Arora.webp" alt="" className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full -ml-[8px] object-cover z-[1] shadow-[0_0_0_2px_rgba(45,212,191,0.1)]" loading="lazy" />
+                <div className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full -ml-[8px] bg-teal-accent/15 border border-teal-accent/30 flex items-center justify-center z-[4]">
+                  <span className="text-[9px] font-bold text-teal-accent">+2.4K</span>
+                </div>
               </div>
-              <span className="text-[13px] font-medium text-[#999] whitespace-nowrap">Join <strong className="text-white font-semibold">2,400+ founders</strong> building their brand</span>
+              <span className="text-[12px] md:text-[13px] font-medium text-[#777] whitespace-nowrap tracking-tight">Trusted by <strong className="text-white font-semibold">founders</strong> like you</span>
             </div>
           </div>
 
