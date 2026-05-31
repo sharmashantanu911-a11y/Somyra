@@ -67,14 +67,14 @@ const featureTabs: FeatureTabData[] = [
   {
     id: 'post-writer',
     label: 'Post Writer',
-    desc: 'Write posts in your exact voice',
+    desc: 'Write posts that sound like you',
     tag: 'CONTENT FACTORY',
-    title: 'Write posts that get noticed, not skipped',
-    body: 'Tell Somyra what you want to write about. Choose your style. Hit generate. Get a post that sounds like your best writing on your best day. Every single time.',
+    title: 'Write posts that people actually read',
+    body: 'Tell Somyra what you want to write about. Pick your style. Get a post that sounds like your best writing on your best day.',
     dots: [
-      'Get a post that sounds like your best writing, every time',
-      'Deep Mode rewrites until it matches your voice exactly',
-      'Voice Profile makes every post unmistakably yours',
+      'Get a post that reads like your best writing, every time',
+      'Deep Mode keeps reworking it until it matches your voice',
+      'Voice Profile learns what makes your writing yours',
       'Preview exactly how it looks on LinkedIn before publishing'
     ],
     icon: PenTool
@@ -84,13 +84,13 @@ const featureTabs: FeatureTabData[] = [
     label: 'Profile Analysis',
     desc: 'Audit and rewrite your entire profile',
     tag: 'PERSONAL BRAND',
-    title: 'Turn your profile into a lead magnet',
-    body: 'Paste your About and Experience. Get a surgical audit of every element that is hurting your visibility and credibility. Then get the exact rewrite to fix it.',
+    title: 'Turn your profile into something that works for you',
+    body: 'Paste your About and Experience. Somyra finds what is holding your profile back and rewrites it so the right people notice you.',
     dots: [
-      'Get a full audit of your profile in seconds, not hours',
-      'Transform your About, Headline, and Experience into a magnet',
-      'Fix the exact spots that are costing you opportunities',
-      'Walk away with a clear rewrite, not generic advice'
+      'Get a complete review of your profile in seconds',
+      'Rewrite your About, Headline, and Experience from scratch',
+      'Fix the parts that push people away instead of pulling them in',
+      'Walk away with a rewrite that is yours, not a template'
     ],
     icon: UserCircle
   },
@@ -100,12 +100,12 @@ const featureTabs: FeatureTabData[] = [
     desc: 'Never run out of content ideas',
     tag: 'CONTENT FACTORY',
     title: 'Never wonder what to post again',
-    body: 'Tell us your niche, your audience, and your goals. Get five story driven post topics tailored to what your specific audience actually engages with.',
+    body: 'Tell us your niche, your audience, and your goals. Get five post topics your specific audience actually wants to read.',
     dots: [
-      'Get topics your audience actually wants to read',
-      'Ideas proven to stop the scroll and spark conversations',
-      'Never lose a good idea — save it and post when ready',
-      'Fresh ideas every time, so you never run dry'
+      'Get topics your audience actually clicks on',
+      'Ideas that start conversations, not just scrolls',
+      'Save the good ones and post them when you are ready',
+      'Fresh ideas every time, so you never stare at a blank screen'
     ],
     icon: Sparkles
   },
@@ -114,14 +114,13 @@ const featureTabs: FeatureTabData[] = [
     label: 'Smart Outreach',
     desc: 'Personalized DMs that get replies',
     tag: 'SALES AND OUTREACH',
-    title: 'Turn cold DMs into warm conversations',
-    body: 'Paste what you know about your prospect. Get a message that references their actual work, speaks to their real pain, and feels like you spent an hour researching them. Because Somyra did.',
+    title: 'Turn cold DMs into conversations that actually go somewhere',
+    body: 'Paste what you know about your prospect. Get a message that references their actual work, speaks to what matters to them, and feels like you spent an hour researching them. Because Somyra did.',
     dots: [
-      'Personalized DMs that reference their actual work',
-      'Follow-ups that feel natural, not pushy',
+      'Personalized DMs that show you actually did your homework',
+      'Follow-ups that feel natural, not scripted',
       'Track every conversation without leaving Somyra',
-      'Know exactly who to reach out to and why',
-      'Proven templates you can customize in seconds'
+      'Know exactly who to reach out to and why'
     ],
     icon: Send
   },
@@ -131,10 +130,10 @@ const featureTabs: FeatureTabData[] = [
     desc: 'Teach Somyra how you write',
     tag: 'PRO FEATURE',
     title: 'The AI that actually sounds like you',
-    body: 'Add your best posts. Somyra studies how you structure ideas, what words you use, how you open and close. Every generation after that sounds unmistakably like you.',
+    body: 'Add your best posts. Somyra studies how you structure ideas, what words you use, how you open and close. Everything after that sounds more like you.',
     dots: [
       'Teach Somyra your voice in under 2 minutes',
-      'Every generation sounds more like you over time',
+      'Every post sounds more like you over time',
       'Your voice carries into posts, DMs, and profile rewrites',
       'The one feature that makes every other tool feel generic'
     ],
@@ -143,14 +142,14 @@ const featureTabs: FeatureTabData[] = [
   {
     id: 'saved-library',
     label: 'Saved Library',
-    desc: 'Save your best generations',
+    desc: 'Save your best posts and drafts',
     tag: 'PRO FEATURE',
-    title: 'Never lose your best content',
-    body: 'Every post, DM, and audit you generate can be saved. Build a library of your best work. Repurpose it. Reference it. Never start from zero again.',
+    title: 'Keep your best content in one place',
+    body: 'Every post, DM, and audit you generate can be saved. Build a library of your best work. Never start from zero again.',
     dots: [
       'Save your best posts, DMs, and audits in one place',
       'Find exactly what you need in seconds',
-      'Build a library of proven content over time',
+      'Build a library of your best content over time',
       'Access your library anywhere, anytime'
     ],
     icon: Bookmark
@@ -160,27 +159,27 @@ const featureTabs: FeatureTabData[] = [
 const faqData = [
   {
     q: 'Is this just another AI writing tool?',
-    a: 'No — and that is the entire point. Most AI tools give everyone the same output. Somyra learns how you specifically write — your sentence length, your word choices, how you open and close — and generates content that is unmistakably yours. The output sounds like your best writing, not a template.'
+    a: 'No. That is the whole point. Most AI tools give everyone the same output. Somyra learns how you write, your sentence length, your word choices, how you open and close, and generates content that actually sounds like you.'
   },
   {
     q: 'What if I have never posted on LinkedIn?',
-    a: 'You are actually the ideal user. Somyra helps you build a voice from scratch — you do not need existing posts to get started. Paste your profile, describe how you want to sound, and Somyra builds from there. Most users publish their first post within 10 minutes of signing up.'
+    a: 'You are the ideal user for this. Somyra helps you build a voice from scratch. You do not need existing posts to get started. Paste your profile, describe how you want to sound, and Somyra builds from there. Most users publish their first post within 10 minutes of signing up.'
   },
   {
     q: 'Why not just use ChatGPT?',
-    a: 'ChatGPT writes for everyone. Somyra writes for you. ChatGPT has no idea what your niche is, who your audience is, or how you naturally communicate. Somyra is trained specifically on LinkedIn content, knows what performs, and writes in your voice — not a generic AI voice.'
+    a: 'ChatGPT writes for everyone. Somyra writes for you. ChatGPT has no idea what your niche is, who your audience is, or how you naturally communicate. Somyra is built for LinkedIn content, knows what actually works, and writes in your voice, not some generic AI tone.'
   },
   {
     q: 'Is there a contract or can I leave?',
-    a: 'Zero contracts. Cancel from your dashboard in one click, anytime. You keep access until the end of your billing period. No cancellation fees, no questions asked, no annoying retention flow.'
+    a: 'Zero contracts. Cancel from your dashboard in one click, anytime. You keep access until the end of your billing period. No fees, no questions, no hassle.',
   },
   {
     q: 'Who is Somyra built for?',
-    a: 'Founders, executives, consultants, and sales professionals who want LinkedIn to work for them without spending hours on it every week. If your personal brand directly affects your business outcomes, Somyra is built for you.'
+    a: 'Founders, executives, consultants, and sales pros who want LinkedIn to work for them without spending hours every week. If your personal brand brings in business, Somyra is built for you.',
   },
   {
     q: 'What happens when I hit my monthly limit?',
-    a: 'You will see a clear warning before you hit the limit so you are never surprised. When you do hit it, you can upgrade instantly from the dashboard or wait for the next month. Nothing gets deleted. Your Voice Profile, saved content, and settings stay exactly as they are.'
+    a: 'You will see a warning before you hit it so there are no surprises. When you do, upgrade instantly from your dashboard or wait for the next month. Nothing gets deleted. Your Voice Profile, saved content, and settings stay exactly where they are.'
   }
 ];
 
@@ -760,7 +759,7 @@ export function LandingPage({
                 <Sparkles className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[14px] font-medium text-white leading-tight">Hook Generator</p>
-                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Hooks that stop the scroll</p>
+                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Hooks that actually grab attention</p>
                 </div>
               </Link>
               <Link to="/linkedin-topic-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
@@ -878,18 +877,18 @@ export function LandingPage({
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-teal-accent/[0.06] blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-[720px] w-full">
-          {/* Badge — compact centered inline pill */}
+          {/* Badge — social proof with real headshots */}
           <div className="flex justify-center mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
-            <div className="inline-flex items-center gap-[10px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-[999px] p-[8px_16px_8px_8px] w-auto">
+            <div className="inline-flex items-center gap-3 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-[999px] p-[6px_18px_6px_6px] w-auto shadow-[0_0_30px_rgba(45,212,191,0.04)] hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] hover:border-[rgba(255,255,255,0.10)] transition-all duration-300">
               <div className="flex items-center">
-                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-teal-accent/40 to-teal-accent/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[6] shadow-[0_0_0_2px_#080808]">PK</div>
-                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-indigo-500/40 to-indigo-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[5] shadow-[0_0_0_2px_#080808]">AS</div>
-                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-amber-500/40 to-amber-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[4] shadow-[0_0_0_2px_#080808]">SM</div>
-                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-rose-500/40 to-rose-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[3] shadow-[0_0_0_2px_#080808]">JO</div>
-                <div className="w-[26px] h-[26px] rounded-full -mr-[8px] bg-gradient-to-br from-emerald-500/40 to-emerald-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[2] shadow-[0_0_0_2px_#080808]">PR</div>
-                <div className="w-[26px] h-[26px] rounded-full bg-gradient-to-br from-sky-500/40 to-sky-500/60 flex items-center justify-center text-[9px] font-bold text-[#080808] z-[1] shadow-[0_0_0_2px_#080808]">AS</div>
+                <img src="/user-images/Alex.webp" alt="Alex" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[6] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.25)]" loading="lazy" />
+                <img src="/user-images/Ama.webp" alt="Ama" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[5] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.2)]" loading="lazy" />
+                <img src="/user-images/Arora.webp" alt="Arora" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[4] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.15)]" loading="lazy" />
+                <img src="/user-images/Charlie.webp" alt="Charlie" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[3] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.1)]" loading="lazy" />
+                <img src="/user-images/Lisa.webp" alt="Lisa" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[2] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.05)]" loading="lazy" />
+                <img src="/user-images/Mark.webp" alt="Mark" className="w-[28px] h-[28px] rounded-full object-cover z-[1] shadow-[0_0_0_2px_#080808]" loading="lazy" />
               </div>
-              <span className="text-[13px] font-medium text-[#888] whitespace-nowrap">Trusted by <strong className="text-white font-bold">2,400+ founders</strong></span>
+              <span className="text-[13px] font-medium text-[#999] whitespace-nowrap">Join <strong className="text-white font-semibold">2,400+ founders</strong> building their brand</span>
             </div>
           </div>
 
@@ -992,13 +991,13 @@ export function LandingPage({
 
           {/* Headline */}
           <h2 className="text-[28px] ds:text-[40px] font-bold text-white leading-[1.2] ds:leading-[1.15] tracking-tight text-center mb-5 sm:mb-6">
-            From invisible to unstoppable<br />
-            on LinkedIn.
+            Go from invisible to someone people<br />
+            actually notice on LinkedIn.
           </h2>
 
           {/* Subtext */}
           <p className="text-[#888] text-base leading-[1.6] text-center mx-auto mb-8 sm:mb-10 ds:mb-12" style={{ maxWidth: '440px' }}>
-            Three ways Somyra turns your LinkedIn into your biggest growth asset.
+            Three ways Somyra turns your LinkedIn into your biggest advantage.
           </p>
 
           {/* Cards */}
@@ -1017,7 +1016,7 @@ export function LandingPage({
               {
                 icon: MessageSquare,
                 title: 'Send DMs that get real replies',
-                body: 'Somyra writes personalized outreach that references each prospect and speaks directly to their pain.'
+                body: 'Somyra writes personalized outreach that references each prospect and speaks to what actually matters to them.'
               }
             ].map((card, i) => (
               <motion.div
@@ -1061,8 +1060,8 @@ export function LandingPage({
 
           {/* Headline */}
           <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
-            Six tools in one.<br />
-            All sounding like you.
+            Six tools that all write<br />
+            in your voice.
           </h2>
 
           {/* Desktop: two-column grid | Mobile/Tablet: stacked */}
@@ -1159,12 +1158,12 @@ export function LandingPage({
           {/* Headline */}
           <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
             From signup to your first post.<br />
-            In under 5 minutes.
+            Takes less than five minutes.
           </h2>
 
           {/* Subtext */}
           <p className="text-[#888] text-base leading-[1.6] text-center mx-auto mb-8 sm:mb-10 ds:mb-12" style={{ maxWidth: '420px' }}>
-            No learning curve. No setup hell. Three steps and you are live.
+            No learning curve, no setup headache. Three steps and you are posting.
           </p>
 
           {/* Steps + connector */}
@@ -1188,7 +1187,7 @@ export function LandingPage({
                 {
                   num: '03',
                   title: 'Generate content that wins',
-                  body: 'Posts, DMs, profile rewrites, topic ideas — all sounding like you wrote them on your best day.'
+                  body: 'Posts, DMs, profile rewrites, topic ideas. Everything sounding like you wrote it on your best day.'
                 }
               ].map((step, i) => (
                 <motion.div
@@ -1263,8 +1262,8 @@ export function LandingPage({
           </div>
 
           <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
-            More tools. Higher prices.<br />
-            None of them sound like you.
+            Other tools cost more and<br />
+            none of them write like you.
           </h2>
 
           <p className="text-[#888] text-base leading-[1.6] text-center mx-auto mb-8 sm:mb-10 ds:mb-12" style={{ maxWidth: '380px' }}>
@@ -1385,7 +1384,7 @@ export function LandingPage({
               <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">THE BOTTOM LINE</span>
             </div>
             <h3 className="text-[24px] ds:text-[32px] font-bold text-white mb-5 leading-tight">
-              More features. Lower price.<br />Zero account risk.
+              More features. Lower price.<br />No risk to your account.
             </h3>
             <button
               onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
@@ -1413,8 +1412,8 @@ export function LandingPage({
             <SectionLabel>PRICING</SectionLabel>
             <SectionHeading className="mb-6 sm:mb-8">
               Start free forever.<br />
-              Upgrade when you are ready<br />
-              for more.
+              Upgrade when you need<br />
+              more firepower.
             </SectionHeading>
 
             {/* Toggle */}
@@ -1533,7 +1532,7 @@ export function LandingPage({
           </div>
 
           <p className="text-center text-[#666] text-sm md:text-base mt-10 max-w-[672px] mx-auto leading-relaxed">
-            All plans include LinkedIn Post Preview, Topic Generator, Profile Analysis, Post Writer and Smart Outreach. Upgrade or downgrade anytime.
+            Every plan comes with Post Writer, Profile Analysis, Topic Generator, Smart Outreach, and LinkedIn Preview. Move up or down anytime.
           </p>
         </div>
       </motion.section>
@@ -1758,8 +1757,8 @@ export function LandingPage({
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
           >
             <h2 className="text-[26px] sm:text-[32px] ds:text-[44px] font-extrabold text-white leading-[1.2] mx-auto" style={{ maxWidth: '640px' }}>
-              Every week you stay quiet,<br />
-              someone in your space gets louder.
+              Every week you stay quiet is a week<br />
+              someone else takes your spot.
             </h2>
           </motion.div>
 
