@@ -227,26 +227,26 @@ const getInitials = (name: string) =>
   name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
 
 const avatarMap: Record<string, string> = {
-  'Ama Ashanti': '/user-images/Ama.webp',
-  'Alex Turner': '/user-images/Alex.webp',
-  'Mark Williams': '/user-images/Mark.webp',
-  'Charlie Brooks': '/user-images/Charlie.webp',
-  'Lisa Chen': '/user-images/Lisa.webp',
-  'Arora Kapoor': '/user-images/Arora.webp',
-  'Sophie Laurent': '/user-images/Sophie.webp',
-  'Claire Dubois': '/user-images/Claire.webp',
-  'James Mitchell': '/user-images/James.webp',
-  'Maya Lindström': '/user-images/Maya.webp',
-  'Marcus Webb': '/user-images/Marcus.webp',
-  'Charlotte Hayes': '/user-images/Charlotte.webp',
-  'Natalia Petrova': '/user-images/Natalia.webp',
-  'Malik Thompson': '/user-images/Malik.webp',
-  'Tom Blackwell': '/user-images/Tom.webp',
-  'Nina Choudhury': '/user-images/Nina.webp',
-  'Carlos Rivera': '/user-images/Carlos.webp',
-  'Max Foster': '/user-images/Max.webp',
-  'Hannah Walsh': '/user-images/Hannah.webp',
-  'David Chen': '/user-images/David.webp'
+  'Olivia Collins': '/user-images/Ama.webp',
+  'Jordan Smith': '/user-images/Alex.webp',
+  'Ryan Gallagher': '/user-images/Mark.webp',
+  'Leo Kim': '/user-images/Charlie.webp',
+  'Chloe Chen': '/user-images/Lisa.webp',
+  'Aurora Murphy': '/user-images/Arora.webp',
+  'Emma Watson': '/user-images/Sophie.webp',
+  'Sarah Jenkins': '/user-images/Claire.webp',
+  'Aaron Brooks': '/user-images/James.webp',
+  'Sofia Gomez': '/user-images/Maya.webp',
+  'Trey Washington': '/user-images/Marcus.webp',
+  'Lily Edwards': '/user-images/Charlotte.webp',
+  'Elena Petrova': '/user-images/Natalia.webp',
+  'Tariq Mansoor': '/user-images/Malik.webp',
+  'Jack Reynolds': '/user-images/Tom.webp',
+  'Maria Lopez': '/user-images/Nina.webp',
+  'Mateo Silva': '/user-images/Carlos.webp',
+  'Ben Kaplan': '/user-images/Max.webp',
+  'Emily Larson': '/user-images/Hannah.webp',
+  'Adam Klein': '/user-images/David.webp'
 };
 
 const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; idx: number }) => (
@@ -287,61 +287,61 @@ const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; i
    ───────────────────────────────────────────── */
 const hardcodedReviewsRow1 = [
   {
-    name: "Ama Ashanti",
+    name: "Olivia Collins",
     title: "Product Manager at FinTech Startup",
     text: "I was skeptical at first but Somyra rewrote my headline and about section in a way I never could have. Three recruiters reached out the following week.",
     badge: "3 RECRUITER CALLS IN A WEEK"
   },
   {
-    name: "Alex Turner",
+    name: "Jordan Smith",
     title: "B2B Sales Consultant",
     text: "The Smart Outreach feature alone is worth every penny. My reply rate went from basically zero to getting real conversations started.",
     badge: "REPLY RATE UP 4X"
   },
   {
-    name: "Mark Williams",
+    name: "Ryan Gallagher",
     title: "Personal Brand Strategist",
     text: "I have tried every LinkedIn tool out there. Somyra is the first one that actually sounds like me and not like a robot wrote it.",
     badge: "3X INBOUND IN 2 WEEKS"
   },
   {
-    name: "Charlie Brooks",
+    name: "Leo Kim",
     title: "AI Workflow Specialist",
     text: "The profile audit gave me more clarity in 30 seconds than months of guessing what was wrong with my LinkedIn presence.",
     badge: "FIRST REPLY IN 24 HOURS"
   },
   {
-    name: "Lisa Chen",
+    name: "Chloe Chen",
     title: "LinkedIn Ghostwriter",
     text: "As a ghostwriter I was worried AI would sound generic. Somyra proved me completely wrong. The voice matching is genuinely impressive.",
     badge: "PROFILE VIEWS DOUBLED"
   },
   {
-    name: "Arora Kapoor",
+    name: "Aurora Murphy",
     title: "Marketing Director, B2B Tech",
     text: "I have tried every LinkedIn growth tool on the market. Somyra is the only one that writes content I do not have to rewrite before posting.",
     badge: "HOURS SAVED PER WEEK"
   },
   {
-    name: "Sophie Laurent",
+    name: "Emma Watson",
     title: "Founder at DevTools SaaS",
     text: "My LinkedIn used to get maybe 200 impressions per post. Now I average over 2,000. The topic generator alone changed my entire content strategy.",
     badge: "10X IMPRESSION GROWTH"
   },
   {
-    name: "Claire Dubois",
+    name: "Sarah Jenkins",
     title: "Executive Career Coach",
     text: "I recommend Somyra to every client I work with. The profile audit catches things I miss even as a trained career coach. It is that thorough.",
     badge: "RECOMMENDED TO CLIENTS"
   },
   {
-    name: "James Mitchell",
+    name: "Aaron Brooks",
     title: "Demand Gen Director",
     text: "The Smart Outreach CRM integration is a game changer. I track every prospect, every follow up, and every conversion. All inside one tool.",
     badge: "PIPELINE GROWTH 3X"
   },
   {
-    name: "Maya Lindström",
+    name: "Sofia Gomez",
     title: "Content Strategist",
     text: "I manage three brand accounts on LinkedIn. Somyra keeps each voice distinct and authentic. My clients cannot believe I am using AI.",
     badge: "3 BRANDS, 1 TOOL"
@@ -350,61 +350,61 @@ const hardcodedReviewsRow1 = [
 
 const hardcodedReviewsRow2 = [
   {
-    name: "Marcus Webb",
+    name: "Trey Washington",
     title: "Operations Consultant",
     text: "I landed my first consulting client directly from LinkedIn within 10 days of using Somyra. I had been trying for months before that.",
     badge: "FIRST CLIENT IN 10 DAYS"
   },
   {
-    name: "Charlotte Hayes",
+    name: "Lily Edwards",
     title: "Founder at EdTech SaaS",
     text: "The topic generator alone saves me hours every week. I never stare at a blank screen anymore. Ideas on demand.",
     badge: "SAVES 3 HOURS EVERY WEEK"
   },
   {
-    name: "Natalia Petrova",
+    name: "Elena Petrova",
     title: "Growth Advisor",
     text: "My connection requests went from getting ignored to a 60 percent acceptance rate. The outreach messages feel genuinely personal.",
     badge: "60% CONNECTION ACCEPTANCE"
   },
   {
-    name: "Malik Thompson",
+    name: "Tariq Mansoor",
     title: "Executive Coach",
     text: "Somyra helped me go from invisible on LinkedIn to getting inbound leads every week. This is the tool I wished existed two years ago.",
     badge: "WEEKLY INBOUND LEADS"
   },
   {
-    name: "Tom Blackwell",
+    name: "Jack Reynolds",
     title: "SaaS Founder",
     text: "I upgraded to Pro after the free trial and have not looked back. The Deep Strategy audit completely changed how I position myself online.",
     badge: "POSITIONING TRANSFORMED"
   },
   {
-    name: "Nina Choudhury",
+    name: "Maria Lopez",
     title: "CEO at HealthTech Startup",
     text: "I was posting once a month because writing felt like a chore. Somyra made it effortless. Now I post three times a week and the engagement keeps climbing.",
     badge: "3X POST FREQUENCY"
   },
   {
-    name: "Carlos Rivera",
+    name: "Mateo Silva",
     title: "Brand Strategist",
     text: "The Voice Profile feature is witchcraft. It captured my tone so accurately that my long time clients asked if I had hired a ghostwriter.",
     badge: "SPOT ON VOICE MATCH"
   },
   {
-    name: "Max Foster",
+    name: "Ben Kaplan",
     title: "Lead Product Designer",
     text: "I closed two enterprise deals from LinkedIn DMs written by Somyra. The personalized outreach makes prospects feel like you actually did your homework.",
     badge: "2 ENTERPRISE DEALS CLOSED"
   },
   {
-    name: "Hannah Walsh",
+    name: "Emily Larson",
     title: "Freelance Product Designer",
     text: "I went from zero LinkedIn presence to getting inbound messages from recruiters every week. All because I finally had content worth engaging with.",
     badge: "WEEKLY INBOUND MESSAGES"
   },
   {
-    name: "David Chen",
+    name: "Adam Klein",
     title: "HR Director at Tech Corp",
     text: "We use Somyra for our entire leadership team's LinkedIn presence. Consistent, authentic, professional. Exactly what a modern company brand needs.",
     badge: "TEAM WIDE ADOPTION"
