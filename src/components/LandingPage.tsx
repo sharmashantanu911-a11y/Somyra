@@ -905,17 +905,21 @@ export function LandingPage({
 
         <div className="relative z-10 max-w-[720px] w-full">
           {/* Badge — social proof with real headshots */}
-          <div className="flex justify-center mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
-            <div className="inline-flex items-center gap-2.5 bg-[#0E0E0E] border border-white/[0.07] rounded-[999px] pl-[5px] pr-[14px] py-[5px] shadow-[0_0_40px_rgba(45,212,191,0.04)] hover:shadow-[0_0_50px_rgba(45,212,191,0.08)] hover:border-white/[0.12] transition-all duration-500">
-              <div className="flex items-center">
-                <img src="/user-images/Alex.webp" alt="" className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full object-cover z-[3] shadow-[0_0_0_2px_rgba(45,212,191,0.3)]" loading="lazy" />
-                <img src="/user-images/Ama.webp" alt="" className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full -ml-[8px] object-cover z-[2] shadow-[0_0_0_2px_rgba(45,212,191,0.2)]" loading="lazy" />
-                <img src="/user-images/Arora.webp" alt="" className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full -ml-[8px] object-cover z-[1] shadow-[0_0_0_2px_rgba(45,212,191,0.1)]" loading="lazy" />
-                <div className="w-[24px] h-[24px] md:w-[26px] md:h-[26px] rounded-full -ml-[8px] bg-teal-accent/15 border border-teal-accent/30 flex items-center justify-center z-[4]">
-                  <span className="text-[9px] font-bold text-teal-accent">+2.4K</span>
-                </div>
+          <div className="flex justify-center mb-6 sm:mb-8" style={{ animation: 'none' }}>
+            <div className="inline-flex items-center gap-[10px] w-auto max-w-[calc(100vw-48px)] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] rounded-[999px] p-[6px_14px_6px_6px] shadow-[0_0_30px_rgba(45,212,191,0.04)] hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] hover:border-[rgba(255,255,255,0.15)] transition-all duration-300" style={{ animation: 'trustPillDrop 0.6s ease-out 0.2s forwards', opacity: 0 }}>
+              <div className="flex flex-row items-center pl-[4px]">
+                <img src="/user-images/Alex.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Ama.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Arora.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Charlie.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Lisa.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Mark.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
               </div>
-              <span className="text-[12px] md:text-[13px] font-medium text-[#777] whitespace-nowrap tracking-tight">Trusted by <strong className="text-white font-semibold">founders</strong> like you</span>
+              <div className="w-[1px] h-[16px] bg-[rgba(255,255,255,0.1)] shrink-0" />
+              <div className="flex flex-col gap-[1px] shrink-0">
+                <span className="text-white text-[13px] max-[360px]:text-[12px] font-bold leading-[1.3] whitespace-nowrap">2,400+ founders</span>
+                <span className="text-[#777] text-[11px] max-[360px]:text-[10px] font-normal whitespace-nowrap">building their brand on LinkedIn</span>
+              </div>
             </div>
           </div>
 
