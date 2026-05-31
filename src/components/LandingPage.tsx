@@ -226,6 +226,29 @@ const avatarColors = [
 const getInitials = (name: string) =>
   name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
 
+const avatarMap: Record<string, string> = {
+  'Ama': '/user-images/Ama.webp',
+  'Alex': '/user-images/Alex.webp',
+  'Mark': '/user-images/Mark.webp',
+  'Charlie': '/user-images/Charlie.webp',
+  'Lisa': '/user-images/Lisa.webp',
+  'Arora': '/user-images/Arora.webp',
+  'Rohan': '/user-images/Rohan.webp',
+  'Claire': '/user-images/Claire.webp',
+  'Arjun': '/user-images/Arjun.webp',
+  'Maya': '/user-images/Maya.webp',
+  'Marcus': '/user-images/Marcus.webp',
+  'Priya': '/user-images/Priya.webp',
+  'Daniel': '/user-images/Daniel.webp',
+  'Ananya': '/user-images/Ananya.webp',
+  'Tom': '/user-images/Tom.webp',
+  'Nina': '/user-images/Nina.webp',
+  'Carlos': '/user-images/Carlos.webp',
+  'Aisha': '/user-images/Aisha.webp',
+  'Liam': '/user-images/Liam.webp',
+  'Fatima': '/user-images/Fatima.webp'
+};
+
 const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; idx: number }) => (
   <div className="min-w-[260px] md:min-w-[320px] max-w-[360px] bg-[#141414] border border-white/[0.06] rounded-[14px] p-4 md:p-6 flex flex-col shadow-xl relative overflow-hidden group hover:border-[#2DD4BF]/20 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] transition-all duration-300">
     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2DD4BF]/50 to-transparent" />
@@ -239,9 +262,13 @@ const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; i
       <p className="text-[13px] leading-[1.7] text-[#D1D5DB] mb-4 md:mb-5 pl-4 relative z-10 font-medium">{"\u201C"}{review.text}{"\u201D"}</p>
     </div>
     <div className="mt-auto flex items-center gap-3">
-      <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[11px] md:text-[12px] font-bold text-white shrink-0 shadow-lg`}>
-        {getInitials(review.name)}
-      </div>
+      {avatarMap[review.name] ? (
+        <img src={avatarMap[review.name]} alt={review.name} className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0 shadow-[0_0_0_2px_rgba(45,212,191,0.15)]" loading="lazy" />
+      ) : (
+        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[11px] md:text-[12px] font-bold text-white shrink-0 shadow-lg`}>
+          {getInitials(review.name)}
+        </div>
+      )}
       <div className="min-w-0">
         <p className="text-white font-bold text-[13px] md:text-[14px] leading-tight">{review.name}</p>
         <p className="text-[#9CA3AF] text-[11px] md:text-[12px] mt-0.5 leading-tight">{review.title}</p>
@@ -260,61 +287,61 @@ const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; i
    ───────────────────────────────────────────── */
 const hardcodedReviewsRow1 = [
   {
-    name: "Sarah Mitchell",
+    name: "Ama",
     title: "Product Manager at FinTech Startup",
     text: "I was skeptical at first but Somyra rewrote my headline and about section in a way I never could have. Three recruiters reached out the following week.",
     badge: "3 RECRUITER CALLS IN A WEEK"
   },
   {
-    name: "James Okonkwo",
+    name: "Alex",
     title: "B2B Sales Consultant",
     text: "The Smart Outreach feature alone is worth every penny. My reply rate went from basically zero to getting real conversations started.",
     badge: "REPLY RATE UP 4X"
   },
   {
-    name: "Pradeep Kumar",
+    name: "Mark",
     title: "Personal Brand Strategist",
     text: "I have tried every LinkedIn tool out there. Somyra is the first one that actually sounds like me and not like a robot wrote it.",
     badge: "3X INBOUND IN 2 WEEKS"
   },
   {
-    name: "Aditya Singh",
+    name: "Charlie",
     title: "AI Workflow Specialist",
     text: "The profile audit gave me more clarity in 30 seconds than months of guessing what was wrong with my LinkedIn presence.",
     badge: "FIRST REPLY IN 24 HOURS"
   },
   {
-    name: "Shehzadi Rabia",
+    name: "Lisa",
     title: "LinkedIn Ghostwriter",
     text: "As a ghostwriter I was worried AI would sound generic. Somyra proved me completely wrong. The voice matching is genuinely impressive.",
     badge: "PROFILE VIEWS DOUBLED"
   },
   {
-    name: "Elena Voss",
+    name: "Arora",
     title: "Marketing Director, B2B Tech",
     text: "I have tried every LinkedIn growth tool on the market. Somyra is the only one that writes content I do not have to rewrite before posting.",
     badge: "HOURS SAVED PER WEEK"
   },
   {
-    name: "Rohan Mehta",
+    name: "Rohan",
     title: "Founder at DevTools SaaS",
     text: "My LinkedIn used to get maybe 200 impressions per post. Now I average over 2,000. The topic generator alone changed my entire content strategy.",
     badge: "10X IMPRESSION GROWTH"
   },
   {
-    name: "Claire Dubois",
+    name: "Claire",
     title: "Executive Career Coach",
     text: "I recommend Somyra to every client I work with. The profile audit catches things I miss even as a trained career coach. It is that thorough.",
     badge: "RECOMMENDED TO CLIENTS"
   },
   {
-    name: "Arjun Patel",
+    name: "Arjun",
     title: "Demand Gen Director",
     text: "The Smart Outreach CRM integration is a game changer. I track every prospect, every follow up, and every conversion. All inside one tool.",
     badge: "PIPELINE GROWTH 3X"
   },
   {
-    name: "Maya Lindström",
+    name: "Maya",
     title: "Content Strategist",
     text: "I manage three brand accounts on LinkedIn. Somyra keeps each voice distinct and authentic. My clients cannot believe I am using AI.",
     badge: "3 BRANDS, 1 TOOL"
@@ -323,61 +350,61 @@ const hardcodedReviewsRow1 = [
 
 const hardcodedReviewsRow2 = [
   {
-    name: "Marcus Webb",
+    name: "Marcus",
     title: "Operations Consultant",
     text: "I landed my first consulting client directly from LinkedIn within 10 days of using Somyra. I had been trying for months before that.",
     badge: "FIRST CLIENT IN 10 DAYS"
   },
   {
-    name: "Priya Nair",
+    name: "Priya",
     title: "Founder at EdTech SaaS",
     text: "The topic generator alone saves me hours every week. I never stare at a blank screen anymore. Ideas on demand.",
     badge: "SAVES 3 HOURS EVERY WEEK"
   },
   {
-    name: "Daniel Ferreira",
+    name: "Daniel",
     title: "Growth Advisor",
     text: "My connection requests went from getting ignored to a 60 percent acceptance rate. The outreach messages feel genuinely personal.",
     badge: "60% CONNECTION ACCEPTANCE"
   },
   {
-    name: "Ananya Sharma",
+    name: "Ananya",
     title: "Executive Coach",
     text: "Somyra helped me go from invisible on LinkedIn to getting inbound leads every week. This is the tool I wished existed two years ago.",
     badge: "WEEKLY INBOUND LEADS"
   },
   {
-    name: "Tom Blackwell",
+    name: "Tom",
     title: "SaaS Founder",
     text: "I upgraded to Pro after the free trial and have not looked back. The Deep Strategy audit completely changed how I position myself online.",
     badge: "POSITIONING TRANSFORMED"
   },
   {
-    name: "Nina Choudhury",
+    name: "Nina",
     title: "CEO at HealthTech Startup",
     text: "I was posting once a month because writing felt like a chore. Somyra made it effortless. Now I post three times a week and the engagement keeps climbing.",
     badge: "3X POST FREQUENCY"
   },
   {
-    name: "Carlos Rivera",
+    name: "Carlos",
     title: "Brand Strategist",
     text: "The Voice Profile feature is witchcraft. It captured my tone so accurately that my long time clients asked if I had hired a ghostwriter.",
     badge: "SPOT ON VOICE MATCH"
   },
   {
-    name: "Aisha Diallo",
+    name: "Aisha",
     title: "Business Development Lead",
     text: "I closed two enterprise deals from LinkedIn DMs written by Somyra. The personalized outreach makes prospects feel like you actually did your homework.",
     badge: "2 ENTERPRISE DEALS CLOSED"
   },
   {
-    name: "Liam O'Brien",
+    name: "Liam",
     title: "Freelance Product Designer",
     text: "I went from zero LinkedIn presence to getting inbound messages from recruiters every week. All because I finally had content worth engaging with.",
     badge: "WEEKLY INBOUND MESSAGES"
   },
   {
-    name: "Fatima Al-Rashid",
+    name: "Fatima",
     title: "HR Director at Tech Corp",
     text: "We use Somyra for our entire leadership team's LinkedIn presence. Consistent, authentic, professional. Exactly what a modern company brand needs.",
     badge: "TEAM WIDE ADOPTION"
@@ -881,12 +908,12 @@ export function LandingPage({
           <div className="flex justify-center mb-6 sm:mb-8 opacity-0 animate-[fadeUp_0.7s_0.2s_ease_forwards]">
             <div className="inline-flex items-center gap-3 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-[999px] p-[6px_18px_6px_6px] w-auto shadow-[0_0_30px_rgba(45,212,191,0.04)] hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] hover:border-[rgba(255,255,255,0.10)] transition-all duration-300">
               <div className="flex items-center">
-                <img src="/user-images/Alex.webp" alt="Alex" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[6] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.25)]" loading="lazy" />
-                <img src="/user-images/Ama.webp" alt="Ama" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[5] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.2)]" loading="lazy" />
-                <img src="/user-images/Arora.webp" alt="Arora" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[4] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.15)]" loading="lazy" />
-                <img src="/user-images/Charlie.webp" alt="Charlie" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[3] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.1)]" loading="lazy" />
-                <img src="/user-images/Lisa.webp" alt="Lisa" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[2] shadow-[0_0_0_2px_#080808,0_0_0_3px_rgba(45,212,191,0.05)]" loading="lazy" />
-                <img src="/user-images/Mark.webp" alt="Mark" className="w-[28px] h-[28px] rounded-full object-cover z-[1] shadow-[0_0_0_2px_#080808]" loading="lazy" />
+                <img src="/user-images/Alex.webp" alt="Alex" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[6] shadow-[0_0_0_3px_rgba(45,212,191,0.25)]" loading="lazy" />
+                <img src="/user-images/Ama.webp" alt="Ama" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[5] shadow-[0_0_0_3px_rgba(45,212,191,0.2)]" loading="lazy" />
+                <img src="/user-images/Arora.webp" alt="Arora" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[4] shadow-[0_0_0_3px_rgba(45,212,191,0.15)]" loading="lazy" />
+                <img src="/user-images/Charlie.webp" alt="Charlie" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[3] shadow-[0_0_0_3px_rgba(45,212,191,0.1)]" loading="lazy" />
+                <img src="/user-images/Lisa.webp" alt="Lisa" className="w-[28px] h-[28px] rounded-full -mr-[9px] object-cover z-[2] shadow-[0_0_0_3px_rgba(45,212,191,0.05)]" loading="lazy" />
+                <img src="/user-images/Mark.webp" alt="Mark" className="w-[28px] h-[28px] rounded-full object-cover z-[1]" loading="lazy" />
               </div>
               <span className="text-[13px] font-medium text-[#999] whitespace-nowrap">Join <strong className="text-white font-semibold">2,400+ founders</strong> building their brand</span>
             </div>
