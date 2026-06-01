@@ -20,32 +20,32 @@ const publishedPosts: BlogPost[] = [
     excerpt: "Stop posting generic advice that gets ignored. Here is the framework for writing LinkedIn content that your target audience actually wants to read and engage with.",
     category: "Content Writing",
     slug: "how-to-write-linkedin-posts-that-get-engagement",
-    publishedDate: "May 18, 2026",
-    wordCount: 1400
+    publishedDate: "May 23, 2026",
+    wordCount: 2000
   },
   {
     title: "The LinkedIn Outreach Strategy That Actually Gets Replies",
     excerpt: "Most outbound on LinkedIn is terrible. This strategy breaks down exactly how to find, approach, and convert high-value prospects without sounding like a spam bot.",
     category: "Outreach",
     slug: "linkedin-outreach-strategy-that-gets-replies",
-    publishedDate: "May 18, 2026",
-    wordCount: 1400
+    publishedDate: "May 23, 2026",
+    wordCount: 1800
   },
   {
     title: "The No-Nonsense LinkedIn Personal Branding Guide for Founders",
     excerpt: "Founders don't have time for generic personal branding advice. Here is the framework to build a LinkedIn presence that actually drives pipeline.",
     category: "Personal Brand",
     slug: "linkedin-personal-branding-guide-founders",
-    publishedDate: "May 18, 2026",
-    wordCount: 1600
+    publishedDate: "May 23, 2026",
+    wordCount: 2200
   },
   {
     title: "LinkedIn Profile Optimization: The Complete Checklist for 2025",
     excerpt: "Most LinkedIn profiles are passive. They wait for someone to care. This checklist fixes every section — headline, About, experience, featured — so your profile works while you sleep.",
     category: "Profile",
     slug: "linkedin-profile-optimization-checklist",
-    publishedDate: "May 18, 2026",
-    wordCount: 1200
+    publishedDate: "May 23, 2026",
+    wordCount: 1800
   },
   {
     title: "How to Write a LinkedIn About Section That Actually Converts",
@@ -53,23 +53,23 @@ const publishedPosts: BlogPost[] = [
     category: "Profile",
     slug: "how-to-write-linkedin-about-section",
     publishedDate: "May 23, 2026",
-    wordCount: 1000
+    wordCount: 1700
   },
   {
     title: "7 LinkedIn Hook Formulas That Stop the Scroll (With Real Examples)",
-    excerpt: "Your first line is the only line most people read. Here are 7 hook formulas that create genuine curiosity — with real examples you can adapt today.",
+    excerpt: "Your first line is the only line most people read. Here are 7 hook formulas that create genuine curiosity with real examples you can adapt today.",
     category: "Content Writing",
     slug: "linkedin-hook-formulas-that-stop-the-scroll",
     publishedDate: "May 23, 2026",
-    wordCount: 800
+    wordCount: 1600
   },
   {
     title: "The LinkedIn DM Formula That Gets Replies (Without Being Salesy)",
-    excerpt: "Most LinkedIn DMs get ignored in the first sentence. Here is the exact message structure — with real examples — that makes people actually want to reply.",
+    excerpt: "Most LinkedIn DMs get ignored in the first sentence. Here is the exact message structure with real examples that makes people actually want to reply.",
     category: "Outreach",
     slug: "linkedin-dm-formula-that-gets-replies",
     publishedDate: "May 23, 2026",
-    wordCount: 800
+    wordCount: 1600
   },
   {
     title: "What to Post on LinkedIn When You Have Absolutely No Ideas",
@@ -77,39 +77,39 @@ const publishedPosts: BlogPost[] = [
     category: "Content Writing",
     slug: "what-to-post-on-linkedin-when-you-have-no-ideas",
     publishedDate: "May 23, 2026",
-    wordCount: 800
+    wordCount: 1600
   },
   {
     title: "Why Most AI LinkedIn Posts Sound Like a Cheerful Robot",
     excerpt: "If your LinkedIn content sounds like an overly enthusiastic robot wrote it, you are losing credibility. Here is why the AI defaults to that tone and how to fix it.",
     category: "Writing",
     slug: "why-linkedin-posts-sound-robotic",
-    publishedDate: "May 18, 2026",
-    wordCount: 1200
+    publishedDate: "May 23, 2026",
+    wordCount: 1500
   },
   {
     title: "What Is the Best LinkedIn Post Generator in 2025?",
-    excerpt: "An honest breakdown of the best AI LinkedIn post generators — what each does well, who each is built for, and which one actually learns your writing voice.",
+    excerpt: "An honest breakdown of the best AI LinkedIn post generators including what each does well, who each is built for, and which one actually learns your writing voice.",
     category: "Tools",
     slug: "best-linkedin-post-generator-2025",
     publishedDate: "May 23, 2026",
-    wordCount: 600
+    wordCount: 1800
   },
   {
     title: "Does LinkedIn Penalize AI-Generated Content? The Honest Answer",
-    excerpt: "LinkedIn has not announced any AI content penalty. But there is a real engagement penalty — and it has nothing to do with the algorithm. Here is what actually matters.",
+    excerpt: "LinkedIn has not announced any AI content penalty. But there is a real engagement penalty and it has nothing to do with the algorithm. Here is what actually matters.",
     category: "Tools",
     slug: "does-ai-linkedin-content-get-penalized",
     publishedDate: "May 23, 2026",
-    wordCount: 600
+    wordCount: 1600
   },
   {
     title: "How Long Should a LinkedIn Post Be? The Data-Backed Answer",
-    excerpt: "LinkedIn posts have a 3,000 character limit. The optimal length for engagement is much shorter. Here is exactly how long your posts should be and why.",
+    excerpt: "LinkedIn posts have a 3,000 character limit but the optimal length for engagement is much shorter. Here is exactly how long your posts should be for every format and why.",
     category: "Content Writing",
     slug: "how-long-should-linkedin-post-be",
     publishedDate: "May 23, 2026",
-    wordCount: 400
+    wordCount: 3200
   }
 ];
 
