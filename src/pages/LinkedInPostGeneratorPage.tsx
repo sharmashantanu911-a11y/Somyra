@@ -132,7 +132,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
               </a>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#555555] font-semibold tracking-wide uppercase">
+            <p className="text-xs sm:text-sm text-[#888888] font-semibold tracking-wide uppercase">
               Used by founders and professionals building real audiences on LinkedIn
             </p>
           </motion.div>
@@ -293,7 +293,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
           </div>
 
           <div className="text-center">
-            <p className="text-xs sm:text-sm text-[#555555] font-bold uppercase tracking-wider">
+            <p className="text-xs sm:text-sm text-[#888888] font-bold uppercase tracking-wider">
               Somyra generates posts in YOUR voice, not a template.
             </p>
           </div>

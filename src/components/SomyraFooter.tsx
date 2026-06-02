@@ -119,7 +119,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
 
         .brand-tagline {
           font-size: 13px;
-          color: #6B7280;
+          color: #888888;
           line-height: 1.6;
           margin-bottom: 20px;
           font-weight: 400;
@@ -132,7 +132,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           align-items: center;
           gap: 7px;
           font-size: 12px;
-          color: #6B7280;
+          color: #888888;
           background: #141414;
           border: 1px solid rgba(255,255,255,0.06);
           border-radius: 20px;
@@ -148,11 +148,24 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           border-radius: 50%;
           background: #22C55E;
           flex-shrink: 0;
-          transition: box-shadow 0.6s ease;
+          position: relative;
         }
-
-        .status-dot.pulse {
-          box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+        .status-dot::after {
+          content: '';
+          position: absolute;
+          inset: -3px;
+          border-radius: 50%;
+          background: rgba(34, 197, 94, 0.2);
+          opacity: 0;
+          transform: scale(0.8);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+          will-change: opacity, transform;
+          pointer-events: none;
+          z-index: -1;
+        }
+        .status-dot.pulse::after {
+          opacity: 1;
+          transform: scale(1);
         }
 
         /* Social icons */
@@ -199,7 +212,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         .nav-col-title {
           font-size: 11px;
           font-weight: 600;
-          color: #374151;
+          color: #6B7280;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin-bottom: 16px;
@@ -217,7 +230,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
 
         .footer-link {
           font-size: 13.5px;
-          color: #6B7280;
+          color: #888888;
           text-decoration: none;
           font-weight: 400;
           transition: color 0.2s ease;
@@ -276,13 +289,13 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
 
         .footer-copy {
           font-size: 12.5px;
-          color: #374151;
+          color: #6B7280;
           font-family: 'Geist Mono', monospace;
           letter-spacing: 0.01em;
         }
 
         .footer-copy span {
-          color: #6B7280;
+          color: #888888;
         }
 
         .legal-links {
@@ -293,7 +306,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
 
         .legal-link {
           font-size: 12.5px;
-          color: #374151;
+          color: #6B7280;
           text-decoration: none;
           transition: color 0.2s ease;
           padding: 0 8px;
@@ -302,7 +315,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .legal-link:hover {
-          color: #6B7280;
+          color: #888888;
         }
 
         .legal-sep {
@@ -313,7 +326,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
 
         .built-with {
           font-size: 12.5px;
-          color: #374151;
+          color: #6B7280;
           font-family: 'Geist Mono', monospace;
           display: flex;
           align-items: center;
@@ -390,13 +403,13 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           }
           .footer-copy {
             font-size: 12px;
-            color: #555;
+            color: #6B7280;
             font-family: 'Geist Mono', monospace;
           }
           .built-with {
             display: flex;
             font-size: 12px;
-            color: #555;
+            color: #6B7280;
             font-family: 'Geist Mono', monospace;
             align-items: center;
             gap: 5px;
@@ -406,7 +419,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             fill: #EF4444;
           }
           .built-with span {
-            color: #555;
+            color: #6B7280;
           }
           .legal-links {
             display: none;

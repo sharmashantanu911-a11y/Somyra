@@ -114,7 +114,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#555555] font-bold uppercase tracking-widest">
+            <p className="text-xs sm:text-sm text-[#888888] font-bold uppercase tracking-widest">
               Unleash consistent, engaging, and highly professional positioning angles
             </p>
           </motion.div>

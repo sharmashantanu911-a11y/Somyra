@@ -827,7 +827,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             className="w-full flex items-center justify-between px-2 group"
           >
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isExpanded ? 'bg-teal-accent/10 text-teal-accent' : 'bg-white/5 text-[#555555] group-hover:text-[#888888]'}`}>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isExpanded ? 'bg-teal-accent/10 text-teal-accent' : 'bg-white/5 text-[#888888] group-hover:text-[#888888]'}`}>
                 <Icon className="w-4 h-4" />
               </div>
               <div className="flex items-center gap-3">
@@ -839,7 +839,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 )}
               </div>
             </div>
-            <ChevronDown className={`w-4 h-4 text-[#555555] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-4 h-4 text-[#888888] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
           </button>
           <AnimatePresence>
             {isExpanded && (
@@ -902,7 +902,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 handleCopy(text, 'share-score');
                 // Zero friction sharing toast is handled by handleCopy
               }}
-              className="flex items-center gap-2 text-[10px] font-bold text-[#555555] uppercase tracking-wide hover:text-white transition-colors"
+              className="flex items-center gap-2 text-[10px] font-bold text-[#888888] uppercase tracking-wide hover:text-white transition-colors"
             >
               <Share2 className="w-3.5 h-3.5" />
               {copied === 'share-score' ? 'Copied Link!' : 'Share Score'}
@@ -953,7 +953,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">{safeProfile.overallScore}</span>
-                  <span className="text-[11px] font-bold text-[#555555] uppercase tracking-widest mt-1">/ 100</span>
+                  <span className="text-[11px] font-bold text-[#888888] uppercase tracking-widest mt-1">/ 100</span>
                 </div>
               </div>
             </div>
@@ -964,7 +964,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   {status.text}
                 </span>
                 <div className="hidden sm:block h-px w-8 bg-white/10" />
-                <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest shrink-0">The Diagnosis</span>
+                <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest shrink-0">The Diagnosis</span>
               </div>
               
               <div className="space-y-3">
@@ -1004,7 +1004,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div key={key} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 space-y-4 relative overflow-hidden group hover:border-teal-accent/30 transition-all">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-teal-accent/5 blur-2xl -mr-12 -mt-12 group-hover:bg-teal-accent/10 transition-colors" />
                 <div className="flex items-center justify-between relative z-10">
-                  <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest">{key} Lens</span>
+                  <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest">{key} Lens</span>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-teal-accent animate-pulse" />
                     <span className="text-xs font-black text-teal-accent">{lens.score}/100</span>
@@ -1105,8 +1105,8 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <div className="space-y-8">
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-[#555555]" />
-                      <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest block">The Who</span>
+                      <Users className="w-4 h-4 text-[#888888]" />
+                      <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">The Who</span>
                     </div>
                     <p className="text-xl font-bold text-white leading-tight">{safeProfile.messagingClarity.who}</p>
                   </div>
@@ -1121,15 +1121,15 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <div className="space-y-8">
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <PenTool className="w-4 h-4 text-[#555555]" />
-                      <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest block">The How</span>
+                      <PenTool className="w-4 h-4 text-[#888888]" />
+                      <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">The How</span>
                     </div>
                     <p className="text-sm text-[#AAAAAA] leading-relaxed">{safeProfile.messagingClarity.how}</p>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-[#555555]" />
-                      <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest block">The Why</span>
+                      <Sparkles className="w-4 h-4 text-[#888888]" />
+                      <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">The Why</span>
                     </div>
                     <p className="text-sm text-[#AAAAAA] leading-relaxed">{safeProfile.messagingClarity.why}</p>
                   </div>
@@ -1146,7 +1146,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
                 {Object.entries(safeProfile.authorityBreakdown).map(([key, val]: [string, any]) => (
                   <div key={key} className="space-y-4 text-center group">
-                    <span className="text-[9px] font-black text-[#555555] group-hover:text-teal-accent uppercase tracking-widest block transition-colors">{key}</span>
+                    <span className="text-[9px] font-black text-[#888888] group-hover:text-teal-accent uppercase tracking-widest block transition-colors">{key}</span>
                     <div className="relative w-20 h-20 mx-auto">
                       <svg className="w-full h-full transform -rotate-90">
                         <circle cx="40" cy="40" r="36" fill="transparent" stroke="rgba(255,255,255,0.03)" strokeWidth="6" />
@@ -1219,11 +1219,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
                  <div className="space-y-8">
                    <div className="space-y-3">
-                     <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest block">Category Ownership</span>
+                     <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">Category Ownership</span>
                      <p className="text-xl font-bold text-white leading-tight">{safeProfile.positioning.category}</p>
                    </div>
                    <div className="space-y-3">
-                     <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest block">Unfair Advantage</span>
+                     <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">Unfair Advantage</span>
                      <p className="text-sm text-[#AAAAAA] leading-relaxed">{safeProfile.positioning.unfairAdvantage}</p>
                    </div>
                  </div>
@@ -1242,7 +1242,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                            setIdentityConfirmed(true);
                            handleCopy('Identity confirmed!', 'identity-confirm');
                          }}
-                         className="text-[9px] font-bold text-[#555555] hover:text-teal-accent uppercase tracking-widest transition-colors border border-[#333333] px-2 py-1 rounded-lg hover:border-teal-accent/30"
+                         className="text-[9px] font-bold text-[#888888] hover:text-teal-accent uppercase tracking-widest transition-colors border border-[#333333] px-2 py-1 rounded-lg hover:border-teal-accent/30"
                        >
                          This feels right
                        </button>
@@ -1270,7 +1270,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
-                    <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest">Current Positioning (Before)</span>
+                    <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest">Current Positioning (Before)</span>
                   </div>
                   <p className="text-sm text-[#888888] italic leading-relaxed relative z-10">
                     "{safeProfile.transformation.before}"
@@ -1290,7 +1290,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 </div>
               </div>
               <div className="p-6 bg-white/[0.02] border-t border-[#1f1f1f] text-center">
-                <p className="text-xs text-[#555555] font-medium italic">
+                <p className="text-xs text-[#888888] font-medium italic">
                   <span className="text-teal-accent/50 font-bold not-italic mr-2">BRIDGE:</span> {safeProfile.transformation.bridge}
                 </p>
               </div>
@@ -1335,7 +1335,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         <div className="space-y-3">
                           <span className="text-[9px] font-bold text-red-400/50 uppercase tracking-widest block">Current (Before)</span>
                           <div className="p-4 rounded-xl bg-red-500/[0.02] border border-red-500/10">
-                            <p className="text-xs text-[#555555] leading-relaxed line-through opacity-50">{rewrite.original || 'No original content provided.'}</p>
+                            <p className="text-xs text-[#888888] leading-relaxed line-through opacity-50">{rewrite.original || 'No original content provided.'}</p>
                           </div>
                         </div>
                         <div className="space-y-3">
@@ -1359,12 +1359,12 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         </div>
                         <div>
                           <h4 className="text-base font-bold text-white">Improved Headline</h4>
-                          <p className="text-[10px] text-[#555555] font-bold uppercase tracking-widest">The Conversion Hook</p>
+                          <p className="text-[10px] text-[#888888] font-bold uppercase tracking-widest">The Conversion Hook</p>
                         </div>
                       </div>
                       <button
                         onClick={() => handleCopy((safeProfile.rewrites as any).headline || '', 'headline')}
-                        className="p-2.5 bg-white/5 border border-white/10 rounded-xl transition-all text-[#555555] hover:text-teal-accent hover:border-teal-accent/30"
+                        className="p-2.5 bg-white/5 border border-white/10 rounded-xl transition-all text-[#888888] hover:text-teal-accent hover:border-teal-accent/30"
                       >
                         {copied === 'headline' ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                       </button>
@@ -1393,12 +1393,12 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         </div>
                         <div>
                           <h4 className="text-base font-bold text-white">Improved About Section</h4>
-                          <p className="text-[10px] text-[#555555] font-bold uppercase tracking-widest">The Authority Narrative</p>
+                          <p className="text-[10px] text-[#888888] font-bold uppercase tracking-widest">The Authority Narrative</p>
                         </div>
                       </div>
                       <button
                         onClick={() => handleCopy((safeProfile.rewrites as any).about || '', 'about')}
-                        className="p-2.5 bg-white/5 border border-white/10 rounded-xl transition-all text-[#555555] hover:text-teal-accent hover:border-teal-accent/30"
+                        className="p-2.5 bg-white/5 border border-white/10 rounded-xl transition-all text-[#888888] hover:text-teal-accent hover:border-teal-accent/30"
                       >
                         {copied === 'about' ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                       </button>
@@ -1428,7 +1428,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="divide-y divide-[#1f1f1f]">
                 {safeProfile.actionPlan.map((step: any, idx: number) => (
                   <div key={idx} className="p-6 md:p-8 flex flex-col sm:flex-row gap-6 group hover:bg-white/[0.02] transition-all">
-                    <div className="w-12 h-12 rounded-2xl bg-[#1a1a1a] border border-[#222222] flex items-center justify-center shrink-0 text-sm font-black text-[#555555] group-hover:bg-teal-accent group-hover:text-black group-hover:border-teal-accent transition-all duration-300 shadow-lg">
+                    <div className="w-12 h-12 rounded-2xl bg-[#1a1a1a] border border-[#222222] flex items-center justify-center shrink-0 text-sm font-black text-[#888888] group-hover:bg-teal-accent group-hover:text-black group-hover:border-teal-accent transition-all duration-300 shadow-lg">
                       {idx + 1}
                     </div>
                     <div className="flex-1 space-y-4">
@@ -1582,7 +1582,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <span className="text-sm font-black text-white uppercase tracking-tighter">Overall Profile Completeness</span>
-                  <p className="text-xs text-[#555555] font-medium">Based on Somyra's 50-point surgical analysis</p>
+                  <p className="text-xs text-[#888888] font-medium">Based on Somyra's 50-point surgical analysis</p>
                 </div>
                 <span className="text-2xl font-black text-teal-accent">{safeProfile.completeness || 0}%</span>
               </div>
@@ -1703,7 +1703,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 </p>
               </div>
               <div className="pt-6">
-                <p className="text-[11px] text-[#555555] font-medium leading-relaxed">
+                <p className="text-[11px] text-[#888888] font-medium leading-relaxed">
                   Come back after updating your profile — you’ll see the difference.
                 </p>
               </div>
@@ -1717,7 +1717,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
           </div>
         </motion.div>
 
-        <p className="text-center text-[11px] text-[#555555] font-medium pt-4">
+        <p className="text-center text-[11px] text-[#888888] font-medium pt-4">
           This is fixable. You just need the right positioning.
         </p>
 
@@ -1810,12 +1810,12 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               className="bg-[#141414] border border-[#1f1f1f] rounded-xl px-4 py-3 flex items-center justify-between mb-4"
             >
               <div className="flex items-center gap-3">
-                <History className="w-4 h-4 text-[#555555]" />
-                <span className="text-xs text-[#555555]">We saved your previous answers.</span>
+                <History className="w-4 h-4 text-[#888888]" />
+                <span className="text-xs text-[#888888]">We saved your previous answers.</span>
               </div>
               <button 
                 onClick={clearDraft}
-                className="text-xs text-[#555555] hover:text-white transition-colors"
+                className="text-xs text-[#888888] hover:text-white transition-colors"
               >
                 Clear and start fresh
               </button>
@@ -1833,7 +1833,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             />
           </div>
           <div className="flex justify-between items-center mt-2">
-            <span className="text-[11px] text-[#555555]">Complete your profile for a more accurate analysis.</span>
+            <span className="text-[11px] text-[#888888]">Complete your profile for a more accurate analysis.</span>
             {progress > 0 && (
               <span className="text-[11px] font-bold text-teal-accent">{progress}% complete</span>
             )}
@@ -1899,9 +1899,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex justify-between items-center mt-2">
               <div className="flex items-center gap-1.5">
                 <Sparkles className="w-3 h-3 text-teal-accent" />
-                <span className="text-[11px] text-[#555555] italic">One sentence is enough — we figure out the rest.</span>
+                <span className="text-[11px] text-[#888888] italic">One sentence is enough — we figure out the rest.</span>
               </div>
-              <span className={`text-[11px] ${quickForm.whoAreYou.length < 10 ? 'text-orange-400' : quickForm.whoAreYou.length > 50 ? 'text-green-400' : 'text-[#555555]'}`}>
+              <span className={`text-[11px] ${quickForm.whoAreYou.length < 10 ? 'text-orange-400' : quickForm.whoAreYou.length > 50 ? 'text-green-400' : 'text-[#888888]'}`}>
                 {quickForm.whoAreYou.length} characters
               </span>
             </div>
@@ -1925,7 +1925,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex items-center gap-2 mb-3">
               <PenTool className="w-4 h-4 text-teal-accent" />
               <label className="text-xs font-bold uppercase tracking-widest text-white">YOUR CURRENT HEADLINE</label>
-              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#555555] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
+              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-2 mb-3">
@@ -1967,7 +1967,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   />
                   <div className="flex justify-between mt-1.5">
                     <div />
-                    <span className={`text-[11px] ${quickForm.currentHeadline.length > 210 ? 'text-red-400' : quickForm.currentHeadline.length > 180 ? 'text-orange-400' : 'text-[#555555]'}`}>
+                    <span className={`text-[11px] ${quickForm.currentHeadline.length > 210 ? 'text-red-400' : quickForm.currentHeadline.length > 180 ? 'text-orange-400' : 'text-[#888888]'}`}>
                       {quickForm.currentHeadline.length} of 220
                     </span>
                   </div>
@@ -2022,9 +2022,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex items-center gap-2 mb-3">
               <FileText className="w-4 h-4 text-teal-accent" />
               <label className="text-xs font-bold uppercase tracking-widest text-white">YOUR ABOUT SECTION</label>
-              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#555555] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
+              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
             </div>
-            <p className="text-xs text-[#555555] mb-3 leading-relaxed">
+            <p className="text-xs text-[#888888] mb-3 leading-relaxed">
               This is the summary section on your LinkedIn profile — below your photo. It is the most important section after your headline.
             </p>
 
@@ -2067,7 +2067,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   />
                   <div className="flex justify-between mt-1.5">
                     <div />
-                    <span className={`text-[11px] ${quickForm.aboutSection.length > 2400 ? 'text-red-400' : quickForm.aboutSection.length > 2000 ? 'text-orange-400' : 'text-[#555555]'}`}>
+                    <span className={`text-[11px] ${quickForm.aboutSection.length > 2400 ? 'text-red-400' : quickForm.aboutSection.length > 2000 ? 'text-orange-400' : 'text-[#888888]'}`}>
                       {quickForm.aboutSection.length} of 2600
                     </span>
                   </div>
@@ -2143,9 +2143,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex items-center gap-2 mb-1">
               <Target className="w-4 h-4 text-teal-accent" />
               <label className="text-xs font-bold uppercase tracking-widest text-white">WHAT DO YOU WANT FROM LINKEDIN</label>
-              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#555555] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
+              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
             </div>
-            <p className="text-xs text-[#555555] mb-4 mt-1 leading-relaxed">
+            <p className="text-xs text-[#888888] mb-4 mt-1 leading-relaxed">
               Select all that apply. The more specific you are the sharper and more personalized your analysis will be.
             </p>
 
@@ -2185,7 +2185,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   </div>
                 )}
                 <ChevronDown 
-                  className={`w-4 h-4 text-[#555555] transition-transform duration-200 flex-shrink-0 ml-auto ${
+                  className={`w-4 h-4 text-[#888888] transition-transform duration-200 flex-shrink-0 ml-auto ${
                     isDropdownOpen ? 'rotate-180' : ''
                   }`} 
                 />
@@ -2201,7 +2201,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     className="absolute top-full left-0 right-0 mt-2 bg-[#141414] border border-[#1f1f1f] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] z-50 overflow-hidden"
                   >
                     <div className="px-4 py-3 border-b border-[#1f1f1f] flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#555555]">Select all that apply</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#888888]">Select all that apply</span>
                       {quickForm.goals.length > 0 && (
                         <button
                           type="button"
@@ -2227,13 +2227,13 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                             }`}
                           >
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                              isSelected ? 'bg-teal-accent/10 border border-teal-accent/20 text-teal-accent' : 'bg-[#1a1a1a] border border-[#222222] text-[#555555]'
+                              isSelected ? 'bg-teal-accent/10 border border-teal-accent/20 text-teal-accent' : 'bg-[#1a1a1a] border border-[#222222] text-[#888888]'
                             }`}>
                               <goal.icon className="w-4 h-4" />
                             </div>
                             <div className="flex-1 min-w-0">
                               <h4 className="text-sm font-semibold text-white leading-tight">{goal.title}</h4>
-                              <p className="text-[11px] text-[#555555] mt-0.5 leading-relaxed">{goal.description}</p>
+                              <p className="text-[11px] text-[#888888] mt-0.5 leading-relaxed">{goal.description}</p>
                             </div>
                             <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${
                               isSelected ? 'bg-teal-accent' : 'border border-[#333333]'
@@ -2261,13 +2261,13 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                             }`}
                           >
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                              isSelected ? 'bg-teal-accent/10 border border-teal-accent/20 text-teal-accent' : 'bg-[#1a1a1a] border border-[#222222] text-[#555555]'
+                              isSelected ? 'bg-teal-accent/10 border border-teal-accent/20 text-teal-accent' : 'bg-[#1a1a1a] border border-[#222222] text-[#888888]'
                             }`}>
                               <Plus className="w-4 h-4" />
                             </div>
                             <div className="flex-1 min-w-0">
                               <h4 className="text-sm font-semibold text-white leading-tight">{goal}</h4>
-                              <p className="text-[11px] text-[#555555] mt-0.5 leading-relaxed">Custom goal</p>
+                              <p className="text-[11px] text-[#888888] mt-0.5 leading-relaxed">Custom goal</p>
                             </div>
                             <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${
                               isSelected ? 'bg-teal-accent' : 'border border-[#333333]'
@@ -2295,9 +2295,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                               className="w-full px-4 py-3.5 flex items-center gap-3 hover:bg-white/[0.02] transition-colors min-h-[52px]"
                             >
                               <div className="w-8 h-8 rounded-lg bg-[#1a1a1a] border border-dashed border-[#333333] flex items-center justify-center flex-shrink-0">
-                                <Plus className="w-4 h-4 text-[#555555]" />
+                                <Plus className="w-4 h-4 text-[#888888]" />
                               </div>
-                              <span className="text-sm text-[#555555]">Add your own goal</span>
+                              <span className="text-sm text-[#888888]">Add your own goal</span>
                             </button>
                           ) : (
                             <div className="px-4 py-3 flex items-center gap-3 min-h-[52px]">
@@ -2333,7 +2333,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                                 }}
                                 className="w-7 h-7 bg-[#1a1a1a] rounded-lg flex items-center justify-center flex-shrink-0 hover:bg-[#222222] transition-colors"
                               >
-                                <X className="w-3 h-3 text-[#555555]" />
+                                <X className="w-3 h-3 text-[#888888]" />
                               </button>
                             </div>
                           )}
@@ -2354,7 +2354,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   className="flex items-center gap-1.5 mt-2"
                 >
                   <CheckCircle2 className="w-3 h-3 text-teal-accent" />
-                  <span className="text-xs text-[#555555]">
+                  <span className="text-xs text-[#888888]">
                     <span className="text-teal-accent font-bold">{quickForm.goals.length}</span> goals selected
                   </span>
                 </motion.div>
@@ -2385,7 +2385,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Primary Audience</label>
+                <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Primary Audience</label>
                 <input
                   type="text"
                   value={quickForm.primaryAudience}
@@ -2395,7 +2395,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Secondary Audience</label>
+                <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Secondary Audience</label>
                 <input
                   type="text"
                   value={quickForm.secondaryAudience}
@@ -2430,7 +2430,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             </button>
             
             <div className="text-center mt-3 space-y-1.5">
-              <p className="text-xs text-[#555555] italic">Takes about 15 seconds. The more you share the sharper your analysis.</p>
+              <p className="text-xs text-[#888888] italic">Takes about 15 seconds. The more you share the sharper your analysis.</p>
               <div className="flex items-center justify-center gap-1.5">
                 <Lock className="w-3 h-3 text-[#444444]" />
                 <span className="text-[11px] text-[#444444]">Your profile data is never stored or shared.</span>
@@ -2520,7 +2520,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <React.Fragment key={step.id}>
                 <div 
                   className={`flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer group transition-all duration-300 shrink-0 ${
-                    deepStep >= step.id ? 'text-teal-accent' : 'text-[#555555]'
+                    deepStep >= step.id ? 'text-teal-accent' : 'text-[#888888]'
                   }`}
                   onClick={() => deepStep > step.id && setDeepStep(step.id)}
                 >
@@ -2658,7 +2658,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Primary Audience</label>
+                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Primary Audience</label>
                         <input
                           type="text"
                           value={quickForm.primaryAudience}
@@ -2668,7 +2668,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Secondary Audience</label>
+                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Secondary Audience</label>
                         <input
                           type="text"
                           value={quickForm.secondaryAudience}
@@ -2756,7 +2756,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         </div>
                         <span className="text-sm font-medium text-white">Need help with your headline?</span>
                       </div>
-                      <ChevronDown className="w-5 h-5 text-[#555555] transition-transform group-open:rotate-180" />
+                      <ChevronDown className="w-5 h-5 text-[#888888] transition-transform group-open:rotate-180" />
                     </summary>
                     <div className="pt-[12px] md:pt-[16px] pl-11 space-y-[8px] md:space-y-[12px]">
                       <p className="text-xs text-[#888888] leading-relaxed">
@@ -2974,7 +2974,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Primary Audience</label>
+                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Primary Audience</label>
                         {deepForm.primaryAudience && (
                           <button
                             type="button"
@@ -2997,7 +2997,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <label className="text-[10px] font-bold text-[#555555] uppercase tracking-widest ml-1">Secondary Audience</label>
+                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Secondary Audience</label>
                         {deepForm.secondaryAudience && (
                           <button
                             type="button"
@@ -3064,7 +3064,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsAddingCustomStruggle(true)}
-                      className="px-4 py-2 rounded-full text-xs font-medium border border-dashed border-[#1f1f1f] text-[#555555] hover:border-[#333333] flex items-center gap-2"
+                      className="px-4 py-2 rounded-full text-xs font-medium border border-dashed border-[#1f1f1f] text-[#888888] hover:border-[#333333] flex items-center gap-2"
                     >
                       {isAddingCustomStruggle ? (
                         <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
@@ -3144,7 +3144,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               className={`w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center justify-center gap-2 min-h-[48px] ${
                 isStepValid() 
                   ? 'bg-white text-black hover:bg-[#CCCCCC]' 
-                  : 'bg-[#1f1f1f] text-[#555555] cursor-not-allowed'
+                  : 'bg-[#1f1f1f] text-[#888888] cursor-not-allowed'
               }`}
             >
               Next Step
@@ -3244,7 +3244,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               className="h-full bg-teal-accent transition-all duration-500"
             />
           </div>
-          <div className="flex justify-between text-[10px] text-[#555555] mt-2">
+          <div className="flex justify-between text-[10px] text-[#888888] mt-2">
             <span>Step {deepStep} of {TOTAL_DEEP_STEPS}</span>
             <span>
               {deepStep === 1 && "Step 1: Basics"}
@@ -3279,7 +3279,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   className="absolute right-0 mt-2 w-64 bg-[#141414] border border-[#1f1f1f] rounded-2xl shadow-2xl z-50 overflow-hidden"
                 >
                   <div className="p-3 border-b border-[#1f1f1f]">
-                    <p className="text-[10px] font-bold text-[#555555] uppercase tracking-widest">Your Last 3 Audits</p>
+                    <p className="text-[10px] font-bold text-[#888888] uppercase tracking-widest">Your Last 3 Audits</p>
                   </div>
                   <div className="divide-y divide-[#1f1f1f]">
                     {recentScans.map((scan) => (
@@ -3296,9 +3296,9 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                           <span className="text-xs font-bold text-white group-hover:text-teal-accent transition-colors">
                             Score: {scan.overall_score}/100
                           </span>
-                          <span className="text-[9px] text-[#555555] uppercase font-bold">{scan.mode}</span>
+                          <span className="text-[9px] text-[#888888] uppercase font-bold">{scan.mode}</span>
                         </div>
-                        <p className="text-[10px] text-[#555555]">
+                        <p className="text-[10px] text-[#888888]">
                           {new Date(scan.created_at).toLocaleDateString()}
                         </p>
                       </button>
@@ -3371,7 +3371,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="p-4 bg-teal-accent/5 border border-teal-accent/10 rounded-2xl backdrop-blur-sm">
                     <p className="text-[10px] font-bold text-teal-accent uppercase tracking-[0.3em]">Awaiting Analysis</p>
                   </div>
-                  <p className="text-xs text-[#555555] font-medium">Your results dashboard will appear here.</p>
+                  <p className="text-xs text-[#888888] font-medium">Your results dashboard will appear here.</p>
                 </div>
               </div>
             </div>

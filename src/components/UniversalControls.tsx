@@ -504,7 +504,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                     setShowSuggestion(false);
                     sessionStorage.setItem('somyra_suggestion_dismissed', 'true');
                   }}
-                  className="absolute top-3 right-3 tab:static text-[#555555] hover:text-white transition-colors"
+                  className="absolute top-3 right-3 tab:static text-[#888888] hover:text-white transition-colors"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -516,9 +516,9 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* Tone Selector */}
                 <div className="ds:col-span-2">
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Voice and Tone</span>
+                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Voice and Tone</span>
                     <div className="group relative">
-                      <Info className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#555555] cursor-help" />
+                      <Info className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
                         This controls how your post sounds to the reader.
                       </div>
@@ -552,7 +552,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                     })}
                   </div>
                   {isVoiceProfileActive && (
-                    <p className="mt-2 text-[11px] text-[#555555]">
+                    <p className="mt-2 text-[11px] text-[#888888]">
                       Your Voice Profile is guiding the tone. You can override it here for this post.
                     </p>
                   )}
@@ -561,9 +561,9 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* Length Selector */}
                 <div>
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Post Length</span>
+                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Post Length</span>
                     <div className="group relative">
-                      <Ruler className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#555555] cursor-help" />
+                      <Ruler className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
                         Approximate word count of the final post.
                       </div>
@@ -604,9 +604,9 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* Format Selector */}
                 <div>
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Post Format</span>
+                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Post Format</span>
                     <div className="group relative">
-                      <Layout className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#555555] cursor-help" />
+                      <Layout className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
                         The structure and flow of your post.
                       </div>
@@ -643,9 +643,9 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* CTA Style */}
                 <div className="ds:col-span-2">
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">How should it end</span>
+                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">How should it end</span>
                     <div className="group relative">
-                      <Flag className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#555555] cursor-help" />
+                      <Flag className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
                         What action or feeling should the reader leave with.
                       </div>
@@ -693,9 +693,9 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 <div className="flex flex-col ml:flex-row ml:items-center justify-between gap-2 mb-[8px] ds:mb-[10px]">
                   <div className="flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">What is the real story or moment behind this?</span>
+                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">What is the real story or moment behind this?</span>
                     <div className="group relative">
-                      <Info className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#555555] cursor-help" />
+                      <Info className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
                         This single field transforms generic AI output into something specific and human. Even one sentence helps.
                       </div>
@@ -750,7 +750,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                             <button 
                               type="button"
                               onClick={() => setIsVoiceProfileSummaryDismissed(true)}
-                              className="text-[#555555] hover:text-white transition-colors"
+                              className="text-[#888888] hover:text-white transition-colors"
                             >
                               <X className="w-3.5 h-3.5" />
                             </button>
@@ -761,32 +761,32 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                           </div>
                           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                             <div className="text-[11px]">
-                              <span className="text-[#555555]">Hook Style:</span>
+                              <span className="text-[#888888]">Hook Style:</span>
                               <span className="text-white ml-1.5 font-medium capitalize">{styleReport.hook_style || 'Detected'}</span>
                             </div>
                             <div className="text-[11px]">
-                              <span className="text-[#555555]">Structure:</span>
+                              <span className="text-[#888888]">Structure:</span>
                               <span className="text-white ml-1.5 font-medium capitalize">{styleReport.structure || 'Detected'}</span>
                             </div>
                             <div className="text-[11px]">
-                              <span className="text-[#555555]">Perspective:</span>
+                              <span className="text-[#888888]">Perspective:</span>
                               <span className="text-white ml-1.5 font-medium capitalize">{styleReport.perspective || 'Detected'}</span>
                             </div>
                             <div className="text-[11px]">
-                              <span className="text-[#555555]">Emojis:</span>
+                              <span className="text-[#888888]">Emojis:</span>
                               <span className="text-white ml-1.5 font-medium">{styleReport.emoji_usage ? 'Active' : 'None'}</span>
                             </div>
                           </div>
-                          <p className="text-[10px] text-[#555555] mt-3 italic">All controls pre-filled based on your writing. Override anything for this post.</p>
+                          <p className="text-[10px] text-[#888888] mt-3 italic">All controls pre-filled based on your writing. Override anything for this post.</p>
                         </div>
                       )}
 
                       {/* Hook Style */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Hook Style</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Hook Style</span>
                           <div className="group relative">
-                            <HelpCircle className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#555555] cursor-help" />
+                            <HelpCircle className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                             <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
                               The very first line of your post.
                             </div>
@@ -813,7 +813,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Content Structure */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Content Structure</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Content Structure</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {contentStructureOptions.map(option => (
@@ -836,7 +836,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Proof and Credibility */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Proof and Credibility</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Proof and Credibility</span>
                         </div>
                         <div className="space-y-3">
                           {proofOptions.map(option => (
@@ -871,7 +871,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Engagement Elements */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Engagement Elements</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Engagement Elements</span>
                         </div>
                         <div className="space-y-3">
                           {engagementOptions.map(option => (
@@ -906,7 +906,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Hashtag Strategy */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Hashtag Strategy</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Hashtag Strategy</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {hashtagOptions.map(option => (
@@ -929,7 +929,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Writing Perspective */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Writing Perspective</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Writing Perspective</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {perspectiveOptions.map(option => (
@@ -952,7 +952,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Emotional Core */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Emotional Core</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Emotional Core</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {emotionOptions.map(option => (
@@ -975,7 +975,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Industry Context */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Industry Context</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Industry Context</span>
                         </div>
                         <input 
                           type="text"
@@ -989,7 +989,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Audience Definition */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#555555]">Audience Definition</span>
+                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Audience Definition</span>
                         </div>
                         <input 
                           type="text"
@@ -1008,7 +1008,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
               <div className="flex items-center justify-between gap-4 mt-8 bg-[#141414]/50 p-4 rounded-xl border border-[#1f1f1f]">
                 <div className="flex flex-col">
                   <span className="text-white text-[13px] font-medium">Set as Defaults</span>
-                  <span className="text-[#555555] text-[11px]">Quick Generate will use these settings.</span>
+                  <span className="text-[#888888] text-[11px]">Quick Generate will use these settings.</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <AnimatePresence>
@@ -1053,13 +1053,13 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                   {isLoading ? 'Generating your post...' : 'Generate Post'}
                 </button>
                 
-                <div className="hidden ds:block text-center mt-2 text-[11px] text-[#555555]">
+                <div className="hidden ds:block text-center mt-2 text-[11px] text-[#888888]">
                   Cmd Enter to Quick Generate
                 </div>
 
                 <button 
                   onClick={toggleCustomize}
-                  className="w-full text-center text-[#555555] text-xs mt-4 ds:hover:text-[#888888] transition-colors min-h-[44px] flex items-center justify-center"
+                  className="w-full text-center text-[#888888] text-xs mt-4 ds:hover:text-[#888888] transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   Collapse options
                 </button>

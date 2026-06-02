@@ -16,7 +16,7 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
         canonical="https://somyra.online/privacy"
       />
       <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth">
-      <div className="flex flex-col items-center w-full min-h-screen py-20 md:py-32 px-6">
+      <main className="flex flex-col items-center w-full min-h-screen py-20 md:py-32 px-6">
         <div className="w-full max-w-[800px]">
           <button 
             onClick={onBack}
@@ -113,7 +113,7 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
             </section>
           </div>
         </div>
-      </div>
+      </main>
     </div>
     </>
   );

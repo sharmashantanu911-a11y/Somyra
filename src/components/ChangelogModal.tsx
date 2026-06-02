@@ -381,7 +381,7 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                 >
                   {filter}
                   <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[9px] ${
-                    activeFilter === filter ? 'bg-[#2DD4BF]/20 text-[#2DD4BF]' : 'bg-white/5 text-[#555555]'
+                    activeFilter === filter ? 'bg-[#2DD4BF]/20 text-[#2DD4BF]' : 'bg-white/5 text-[#888888]'
                   }`}>
                     {getFilterCount(filter)}
                   </span>

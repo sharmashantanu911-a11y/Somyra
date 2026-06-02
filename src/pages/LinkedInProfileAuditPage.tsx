@@ -118,7 +118,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#555555] font-bold uppercase tracking-widest">
+            <p className="text-xs sm:text-sm text-[#888888] font-bold uppercase tracking-widest">
               Deep Strategy mode analyzes 8+ profile dimensions with actionable rewrites
             </p>
           </motion.div>

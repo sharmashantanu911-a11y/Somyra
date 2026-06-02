@@ -211,7 +211,7 @@ const BlogPage: React.FC = () => {
 
             {/* Search bar */}
             <div className="max-w-md mx-auto relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555555]" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
               <input
                 type="text"
                 placeholder="Search articles..."
@@ -272,7 +272,7 @@ const BlogPage: React.FC = () => {
                       <span className="text-[11px] font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/10 px-2.5 py-1 rounded-md">
                         {featuredPost.category}
                       </span>
-                      <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest flex items-center gap-1">
+                      <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {Math.ceil(featuredPost.wordCount / 200)} MIN READ
                       </span>
@@ -303,7 +303,7 @@ const BlogPage: React.FC = () => {
                         <span className="text-[10px] font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/5 px-2.5 py-1 rounded-md">
                           {post.category}
                         </span>
-                        <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest flex items-center gap-1">
+                        <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {Math.ceil(post.wordCount / 200)} MIN
                         </span>
@@ -319,7 +319,7 @@ const BlogPage: React.FC = () => {
                     </div>
 
                     <div className="mt-5 pt-4 border-t border-white/5">
-                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#555555] group-hover:text-[#2DD4BF] transition-colors">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#888888] group-hover:text-[#2DD4BF] transition-colors">
                         Read more <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
                       </span>
                     </div>

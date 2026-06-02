@@ -114,7 +114,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#555555] font-bold uppercase tracking-widest">
+            <p className="text-xs sm:text-sm text-[#888888] font-bold uppercase tracking-widest">
               Stop blasting copy-paste templates and start starting conversations
             </p>
           </motion.div>

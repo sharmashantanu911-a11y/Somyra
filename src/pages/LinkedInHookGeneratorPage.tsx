@@ -110,7 +110,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#555555] font-bold uppercase tracking-widest">
+            <p className="text-xs sm:text-sm text-[#888888] font-bold uppercase tracking-widest">
               Capture attention, open curiosity loops, and trigger high-converting clicks
             </p>
           </motion.div>

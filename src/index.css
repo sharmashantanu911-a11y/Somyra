@@ -664,6 +664,21 @@
 }
 
 @keyframes breathe-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(45,212,191,0.4); }
-  50% { box-shadow: 0 0 0 12px rgba(45,212,191,0); }
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0; transform: scale(1.2); }
+}
+
+.btn-glow {
+  position: relative;
+}
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: rgba(45, 212, 191, 0.3);
+  animation: breathe-glow 2s ease-in-out infinite;
+  will-change: opacity, transform;
+  pointer-events: none;
+  z-index: -1;
 }

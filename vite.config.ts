@@ -16,6 +16,7 @@ export default defineConfig(({mode}) => {
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
+      sourcemap: 'hidden',
       chunkSizeWarningLimit: 700,
       rollupOptions: {
         output: {

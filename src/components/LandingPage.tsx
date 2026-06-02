@@ -428,7 +428,7 @@ const FaqItem = ({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
         className={`shrink-0 w-6 h-6 ds:w-7 ds:h-7 rounded-full flex items-center justify-center transition-all duration-200 ${isOpen ? 'bg-[#2DD4BF]/[0.08]' : 'bg-[#141414]'}`}
         style={{ border: isOpen ? '1px solid rgba(45,212,191,0.2)' : '1px solid rgba(255,255,255,0.08)' }}
       >
-        {isOpen ? <Minus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#2DD4BF]" /> : <Plus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#666]" />}
+        {isOpen ? <Minus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#2DD4BF]" /> : <Plus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#999]" />}
       </div>
     </button>
     <div
@@ -507,7 +507,7 @@ const PricingCard = ({
       }`}>{name === 'Free' ? 'FREE' : name === 'Pro' ? 'PRO' : 'MAX'}</span>
       <div className="mt-2 flex items-baseline gap-1">
         <span className={`text-[32px] ds:text-[44px] font-black text-white leading-none ${name === 'Max' ? 'text-red-500' : ''}`}>{isAnnual ? annualPrice : monthlyPrice}</span>
-        <span className="text-[13px] text-[#555555]">/mo</span>
+        <span className="text-[13px] text-[#888888]">/mo</span>
       </div>
       {isAnnual && annualBilling && (
         <div className="mt-1">
@@ -518,7 +518,7 @@ const PricingCard = ({
     </div>
 
     <div className="space-y-4 mb-8 flex-grow">
-      {name === 'Free' && <p className="text-[10px] font-bold text-[#555555] tracking-[2px] uppercase">INCLUDES</p>}
+      {name === 'Free' && <p className="text-[10px] font-bold text-[#888888] tracking-[2px] uppercase">INCLUDES</p>}
       <ul className="space-y-3 mt-4">
         {features.map((f, i) => (
           <li key={i} className="flex items-start gap-3 text-[13px] leading-snug text-white/90">
@@ -667,18 +667,6 @@ export function LandingPage({
   });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const xPercent = (e.clientX / window.innerWidth) * 100;
-      const yPercent = (e.clientY / window.innerHeight) * 100;
-      document.body.style.setProperty('--mouse-x', `${xPercent}%`);
-      document.body.style.setProperty('--mouse-y', `${yPercent}%`);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -772,35 +760,35 @@ export function LandingPage({
                 <PenTool className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[14px] font-medium text-white leading-tight">Post Generator</p>
-                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Write posts that sound like you</p>
+                  <p className="text-[12px] text-[#999] leading-tight mt-0.5">Write posts that sound like you</p>
                 </div>
               </Link>
               <Link to="/linkedin-profile-audit" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
                 <UserCircle className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[14px] font-medium text-white leading-tight">Profile Audit</p>
-                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Fix your profile to attract opportunity</p>
+                  <p className="text-[12px] text-[#999] leading-tight mt-0.5">Fix your profile to attract opportunity</p>
                 </div>
               </Link>
               <Link to="/linkedin-dm-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
                 <Send className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[14px] font-medium text-white leading-tight">DM Generator</p>
-                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Turn cold DMs into warm conversations</p>
+                  <p className="text-[12px] text-[#999] leading-tight mt-0.5">Turn cold DMs into warm conversations</p>
                 </div>
               </Link>
               <Link to="/linkedin-hook-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
                 <Sparkles className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[14px] font-medium text-white leading-tight">Hook Generator</p>
-                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Hooks that actually grab attention</p>
+                  <p className="text-[12px] text-[#999] leading-tight mt-0.5">Hooks that actually grab attention</p>
                 </div>
               </Link>
               <Link to="/linkedin-topic-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
                 <FileText className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[14px] font-medium text-white leading-tight">Topic Generator</p>
-                  <p className="text-[12px] text-[#666] leading-tight mt-0.5">Never wonder what to post again</p>
+                  <p className="text-[12px] text-[#999] leading-tight mt-0.5">Never wonder what to post again</p>
                 </div>
               </Link>
             </div>
@@ -851,7 +839,7 @@ export function LandingPage({
                 Explore
               </button>
               <div className="px-4 py-3">
-                <p className="text-[10px] font-semibold text-[#555] uppercase tracking-[0.15em] mb-3">Features</p>
+                <p className="text-[10px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-3">Features</p>
                 <div className="flex flex-col gap-0.5">
                   <Link to="/linkedin-post-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
                     <PenTool className="w-4 h-4 text-[#2DD4BF] shrink-0" />
@@ -905,6 +893,7 @@ export function LandingPage({
         </div>
       )}
 
+      <main>
       {/* ── HERO ── */}
       <section id="landing-hero" className="relative flex flex-col items-center justify-center px-5 md:px-6 pt-[108px] md:pt-[130px] ds:pt-[164px] pb-10 md:pb-[60px] text-center overflow-hidden">
         {/* Subtle ambient glow */}
@@ -925,7 +914,7 @@ export function LandingPage({
               <div className="w-[1px] h-[16px] bg-[rgba(255,255,255,0.1)] shrink-0" />
               <div className="flex flex-col gap-[1px] shrink-0">
                 <span className="text-white text-[13px] max-[360px]:text-[12px] font-bold leading-[1.3] whitespace-nowrap">2,400+ founders</span>
-                <span className="text-[#777] text-[11px] max-[360px]:text-[10px] font-normal whitespace-nowrap">building their brand on LinkedIn</span>
+                <span className="text-[#999] text-[11px] max-[360px]:text-[10px] font-normal whitespace-nowrap">building their brand on LinkedIn</span>
               </div>
             </div>
           </div>
@@ -963,7 +952,7 @@ export function LandingPage({
                 Watch it in action
               </button>
             </div>
-            <div className="flex flex-row items-center justify-center gap-[6px] flex-nowrap text-[12px] text-[#666] whitespace-nowrap">
+            <div className="flex flex-row items-center justify-center gap-[6px] flex-nowrap text-[12px] text-[#999] whitespace-nowrap">
               <span className="inline-flex items-center gap-[4px]">No credit card</span>
               <span className="text-[#444] text-[10px]">·</span>
               <span className="inline-flex items-center gap-[4px] font-medium">Free forever</span>
@@ -995,7 +984,7 @@ export function LandingPage({
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#FFBD2E' }} />
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#28C840' }} />
               </div>
-              <span className="flex-1 text-center text-[12px] text-[#555] font-sans">
+              <span className="flex-1 text-center text-[12px] text-[#888] font-sans">
                 somyra.online
               </span>
               <div className="w-[52px]" />
@@ -1006,11 +995,12 @@ export function LandingPage({
                 loop
                 muted
                 playsInline
-                preload="none"
+                preload="metadata"
                 poster="/Somyra_postwriter_poster.webp"
                 className="w-full block aspect-video"
                 width={860}
                 height={540}
+                fetchpriority="high"
               >
                 <source src="/Somyra_postwriter.mp4" type="video/mp4" />
               </video>
@@ -1115,13 +1105,13 @@ export function LandingPage({
                   className={`flex items-start gap-3 w-full text-left rounded-[10px] transition-all duration-200 border-l-2 ${
                     activeFeatureTab === tab.id
                       ? 'bg-[#141414] border-l-[#2DD4BF] text-white shadow-[0_0_20px_rgba(45,212,191,0.06)]'
-                      : 'bg-transparent border-l-transparent text-[#666] hover:bg-[#0D0D0D] hover:text-[#999]'
+                      : 'bg-transparent border-l-transparent text-[#999] hover:bg-[#0D0D0D] hover:text-[#999]'
                   } ${activeFeatureTab === tab.id ? 'border border-[rgba(45,212,191,0.2)]' : 'border border-transparent'} px-5 py-[14px]`}
                 >
                   <tab.icon className={`w-4 h-4 shrink-0 mt-0.5 ${activeFeatureTab === tab.id ? 'text-[#2DD4BF]' : 'text-[#444]'}`} />
                   <div className="min-w-0">
                     <span className="block text-[14px] font-medium leading-tight">{tab.label}</span>
-                    <span className={`block text-[12px] leading-tight mt-0.5 ${activeFeatureTab === tab.id ? 'text-[#777]' : 'text-[#555]'}`}>
+                    <span className={`block text-[12px] leading-tight mt-0.5 ${activeFeatureTab === tab.id ? 'text-[#999]' : 'text-[#888]'}`}>
                       {tab.desc}
                     </span>
                   </div>
@@ -1138,7 +1128,7 @@ export function LandingPage({
                   className={`shrink-0 snap-start rounded-full whitespace-nowrap transition-all duration-200 ${
                     activeFeatureTab === tab.id
                       ? 'bg-[#141414] border border-[#2DD4BF] text-white'
-                      : 'bg-[#141414] border border-white/[0.08] text-[#666]'
+                      : 'bg-[#141414] border border-white/[0.08] text-[#999]'
                   } px-3.5 py-2 md:px-4 md:py-2 text-[12px] md:text-[13px] font-medium`}
                 >
                   {tab.label}
@@ -1266,7 +1256,7 @@ export function LandingPage({
                 <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                 <span className="w-3 h-3 rounded-full bg-[#28C840]" />
               </div>
-              <span className="text-[12px] text-[#555] flex-1 text-center">app.somyra.ai</span>
+              <span className="text-[12px] text-[#888] flex-1 text-center">app.somyra.ai</span>
             </div>
 
             {/* Placeholder area */}
@@ -1339,7 +1329,7 @@ export function LandingPage({
                   ].map((comp, idx) => (
                     <div key={idx} className="p-[16px_20px] text-center">
                       <div className="text-white">{comp.name}</div>
-                      <span className="block text-[12px] text-[#666] font-normal">{comp.price}</span>
+                      <span className="block text-[12px] text-[#999] font-normal">{comp.price}</span>
                     </div>
                   ))}
                 </div>
@@ -1368,9 +1358,9 @@ export function LandingPage({
                       return <div className="w-[22px] h-[22px] rounded-full bg-red-500/[0.1] flex items-center justify-center"><AlertTriangle className="w-3 h-3 text-[#EF4444]" /></div>;
                     }
                     if (val.toString().startsWith('$')) {
-                      return <span className="text-[13px] font-medium leading-snug text-[#666]">{val}</span>;
+                      return <span className="text-[13px] font-medium leading-snug text-[#999]">{val}</span>;
                     }
-                    return <span className="text-[13px] text-[#666] leading-snug">{val}</span>;
+                    return <span className="text-[13px] text-[#999] leading-snug">{val}</span>;
                   };
 
                   return (
@@ -1401,9 +1391,9 @@ export function LandingPage({
                   <div className="p-[16px_20px] flex flex-col items-center justify-center" style={{ background: 'rgba(45,212,191,0.03)', borderLeft: '1px solid rgba(45,212,191,0.15)', borderRight: '1px solid rgba(45,212,191,0.15)' }}>
                     <span className="text-[15px] font-bold text-[#2DD4BF]">$19/mo</span>
                   </div>
-                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#666]">$69/mo</span></div>
-                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#666]">$19/mo</span></div>
-                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#666]">$27/mo</span></div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#999]">$69/mo</span></div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#999]">$19/mo</span></div>
+                  <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#999]">$27/mo</span></div>
                 </div>
               </div>
             </div>
@@ -1411,10 +1401,10 @@ export function LandingPage({
 
           {/* Mobile scroll hint */}
           <div className="text-right mt-2 ds:hidden">
-            <span className="text-[12px] text-[#555]">Scroll to compare &rarr;</span>
+            <span className="text-[12px] text-[#888]">Scroll to compare &rarr;</span>
           </div>
 
-          <p className="mt-4 text-[11px] text-[#555] font-medium italic px-4">
+          <p className="mt-4 text-[11px] text-[#888] font-medium italic px-4">
             *AI features require $69/mo plan on Taplio.
           </p>
 
@@ -1571,7 +1561,7 @@ export function LandingPage({
             />
           </div>
 
-          <p className="text-center text-[#666] text-sm md:text-base mt-10 max-w-[672px] mx-auto leading-relaxed">
+          <p className="text-center text-[#999] text-sm md:text-base mt-10 max-w-[672px] mx-auto leading-relaxed">
             Every plan comes with Post Writer, Profile Analysis, Topic Generator, Smart Outreach, and LinkedIn Preview. Move up or down anytime.
           </p>
         </div>
@@ -1746,7 +1736,7 @@ export function LandingPage({
 
           {/* Still have questions? */}
           <div className="text-center mt-10 sm:mt-12">
-            <p className="text-[13px] sm:text-[14px] text-[#666] mb-1">Still have questions?</p>
+            <p className="text-[13px] sm:text-[14px] text-[#999] mb-1">Still have questions?</p>
             <Link
               to="/contact"
               className="text-[#2DD4BF] text-[13px] sm:text-[14px] font-medium hover:underline transition-all"
@@ -1810,7 +1800,7 @@ export function LandingPage({
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
           >
-            <p className="text-[#666] text-base mt-4">
+            <p className="text-[#999] text-base mt-4">
               Start free forever. No credit card. Takes 30 seconds.
             </p>
           </motion.div>
@@ -1824,7 +1814,7 @@ export function LandingPage({
           >
             <button
               onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-              className="mt-8 px-12 py-4 bg-[#2DD4BF] text-[#080808] font-bold text-[17px] rounded-xl hover:brightness-110 hover:scale-[1.02] active:scale-100 transition-all duration-200 animate-[breathe-glow_2s_ease-in-out_infinite] w-full sm:w-auto"
+              className="mt-8 px-12 py-4 bg-[#2DD4BF] text-[#080808] font-bold text-[17px] rounded-xl hover:brightness-110 hover:scale-[1.02] active:scale-100 transition-all duration-200 btn-glow w-full sm:w-auto"
             >
               Start for Free
             </button>
@@ -1839,15 +1829,15 @@ export function LandingPage({
             className="mt-4"
           >
             <div className="flex flex-row items-center justify-center gap-4 flex-nowrap max-[360px]:gap-[10px]">
-              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#666]">
+              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#999]">
                 <Lock className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
                 <span>No credit card required</span>
               </div>
-              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#666]">
+              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#999]">
                 <Infinity className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
                 <span>Free forever</span>
               </div>
-              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#666]">
+              <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#999]">
                 <Zap className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
                 <span>30 second signup</span>
               </div>
@@ -1891,6 +1881,7 @@ export function LandingPage({
           </motion.div>
         )}
       </AnimatePresence>
+    </main>
     </div>
     </>
   );

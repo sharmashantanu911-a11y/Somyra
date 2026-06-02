@@ -108,7 +108,7 @@ const PhoneInput = ({ value, onChange, onCountryChange, error }: any) => {
         >
           <span className="text-lg">{selectedCountry.flag}</span>
           <span className="text-sm font-medium text-white">{selectedCountry.code}</span>
-          <ChevronDown className={`w-3.5 h-3.5 text-[#555555] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-3.5 h-3.5 text-[#888888] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </div>
 
         <input 
@@ -118,7 +118,7 @@ const PhoneInput = ({ value, onChange, onCountryChange, error }: any) => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={selectedCountry.placeholder}
-          className="flex-grow bg-transparent border-none px-4 py-3 text-sm text-white outline-none placeholder:text-[#555555]"
+          className="flex-grow bg-transparent border-none px-4 py-3 text-sm text-white outline-none placeholder:text-[#888888]"
         />
       </div>
 
@@ -134,7 +134,7 @@ const PhoneInput = ({ value, onChange, onCountryChange, error }: any) => {
             }`}
           >
             <div className="p-2 bg-[#141414] border-b border-[#2a2a2a] flex items-center gap-2">
-              <Search className="w-3.5 h-3.5 text-[#555555]" />
+              <Search className="w-3.5 h-3.5 text-[#888888]" />
               <input 
                 type="text"
                 autoFocus
@@ -158,7 +158,7 @@ const PhoneInput = ({ value, onChange, onCountryChange, error }: any) => {
                 >
                   <span className="text-lg">{c.flag}</span>
                   <span className="text-[13px] text-white flex-grow">{c.name}</span>
-                  <span className="text-[13px] text-[#555555] group-hover:text-teal-accent transition-colors">{c.code}</span>
+                  <span className="text-[13px] text-[#888888] group-hover:text-teal-accent transition-colors">{c.code}</span>
                   {selectedCountry.name === c.name && <Check className="w-4 h-4 text-teal-accent" />}
                 </div>
               ))}
@@ -391,13 +391,13 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                 <span className="text-[10px] font-bold text-[#888888] tracking-[2px] uppercase">FREE</span>
                 <div className="mt-2 flex items-baseline gap-1">
                   <span className="text-[32px] md:text-[44px] font-black text-white">$0</span>
-                  <span className="text-[13px] text-[#555555]">/mo</span>
+                  <span className="text-[13px] text-[#888888]">/mo</span>
                 </div>
                 <p className="text-[13px] text-[#888888] mt-2">Forever free — start building your brand without compromise.</p>
               </div>
 
               <div className="space-y-4 mb-8">
-                <p className="text-[10px] font-bold text-[#555555] tracking-[2px] uppercase">INCLUDES</p>
+                <p className="text-[10px] font-bold text-[#888888] tracking-[2px] uppercase">INCLUDES</p>
                 <ul className="space-y-3">
                   {[
                     "Profile Audit: 5 per month",
@@ -420,8 +420,8 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     "Early access to new features",
                     "Direct founder access"
                   ].map((f, i) => (
-                    <li key={`not-${i}`} className="flex items-start gap-3 text-[12px] text-[#555555] leading-snug line-through opacity-70">
-                      <X className="w-3.5 h-3.5 text-[#555555] mt-0.5 shrink-0" />
+                    <li key={`not-${i}`} className="flex items-start gap-3 text-[12px] text-[#888888] leading-snug line-through opacity-70">
+                      <X className="w-3.5 h-3.5 text-[#888888] mt-0.5 shrink-0" />
                       {f}
                     </li>
                   ))}
@@ -583,7 +583,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           </div>
 
           <div className="mt-6 text-center">
-            <p className="text-[11px] text-[#555555] italic">Made with ❤️ in India for professionals worldwide.</p>
+            <p className="text-[11px] text-[#888888] italic">Made with ❤️ in India for professionals worldwide.</p>
           </div>
           
           {/* Sticky Fade Gradient */}
@@ -713,7 +713,7 @@ export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, on
         {/* Reset date indicator — only show for monthly features of logged-in users */}
         {user && !isCumulativeCap && (
           <div className="dialog-section mt-6 bg-[#141414] border border-[#1f1f1f] rounded-xl p-4">
-            <div className="text-[10px] text-[#555555] uppercase tracking-widest mb-1">Monthly Reset</div>
+            <div className="text-[10px] text-[#888888] uppercase tracking-widest mb-1">Monthly Reset</div>
             <div className="text-lg font-bold text-white">
               {resetDateStr}
             </div>
@@ -729,7 +729,7 @@ export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, on
           </button>
           <button 
             onClick={onClose}
-            className="w-full py-3 text-[#555555] font-bold rounded-xl hover:text-white transition-all"
+            className="w-full py-3 text-[#888888] font-bold rounded-xl hover:text-white transition-all"
           >
             {!user ? 'Maybe Later' : 'Got it'}
           </button>

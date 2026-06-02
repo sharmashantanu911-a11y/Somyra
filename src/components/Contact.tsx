@@ -50,7 +50,7 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
         canonical="https://somyra.online/contact"
       />
       <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth w-full h-full">
-      <div className="w-full max-w-[800px] mx-auto px-6 py-20 md:py-32">
+      <main className="w-full max-w-[800px] mx-auto px-6 py-20 md:py-32">
         <button 
           onClick={onBack}
           className="group flex items-center gap-2 text-muted hover:text-teal-accent transition-colors mb-12 text-sm font-bold uppercase tracking-widest"
@@ -122,7 +122,7 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
             <p className="text-muted text-sm font-medium">Uttar Pradesh, India</p>
           </div>
         </footer>
-      </div>
+      </main>
     </div>
     </>
   );
