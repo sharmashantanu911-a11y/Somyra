@@ -1,9 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import App from './App';
-import { Terms } from './components/Terms';
-import { Privacy } from './components/Privacy';
-import { Contact } from './components/Contact';
 
 const LinkedInPostGeneratorPage = lazy(() => import('./pages/LinkedInPostGeneratorPage'));
 const LinkedInProfileAuditPage = lazy(() => import('./pages/LinkedInProfileAuditPage'));
@@ -13,6 +10,9 @@ const LinkedInTopicGeneratorPage = lazy(() => import('./pages/LinkedInTopicGener
 const CompareTaplioPage = lazy(() => import('./pages/compare/CompareTaplioPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
+const Privacy = lazy(() => import('./components/Privacy').then(m => ({ default: m.Privacy })));
+const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })));
 
 const blogComponents: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {
   'linkedin-personal-branding-guide-founders': lazy(() => import('./content/posts/linkedin-personal-branding-guide-founders')),
@@ -55,9 +55,21 @@ export const AppRoutes: React.FC = () => {
     <Suspense fallback={<div style={{background:'#080808', minHeight:'100vh'}}/>}>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/terms" element={<Terms onBack={() => navigate('/')} />} />
-        <Route path="/privacy" element={<Privacy onBack={() => navigate('/')} />} />
-        <Route path="/contact" element={<Contact onBack={() => navigate('/')} />} />
+        <Route path="/terms" element={
+          <Suspense fallback={<div style={{background:'#080808',minHeight:'100vh'}}/>}>
+            <Terms onBack={() => navigate('/')} />
+          </Suspense>
+        } />
+        <Route path="/privacy" element={
+          <Suspense fallback={<div style={{background:'#080808',minHeight:'100vh'}}/>}>
+            <Privacy onBack={() => navigate('/')} />
+          </Suspense>
+        } />
+        <Route path="/contact" element={
+          <Suspense fallback={<div style={{background:'#080808',minHeight:'100vh'}}/>}>
+            <Contact onBack={() => navigate('/')} />
+          </Suspense>
+        } />
         <Route path="/linkedin-post-generator" element={<LinkedInPostGeneratorPage />} />
         <Route path="/linkedin-profile-audit" element={<LinkedInProfileAuditPage />} />
         <Route path="/linkedin-dm-generator" element={<LinkedInDMGeneratorPage />} />

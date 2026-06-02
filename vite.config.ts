@@ -6,7 +6,22 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      {
+        name: 'defer-css',
+        transformIndexHtml: {
+          order: 'post',
+          handler(html: string) {
+            return html.replace(
+              /<link rel="stylesheet"(?!\s+preload)([^>]*)>/i,
+              '<link rel="preload" as="style" onload="this.rel=\'stylesheet\'"$1><noscript><link rel="stylesheet"$1></noscript>'
+            );
+          }
+        }
+      }
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -17,11 +32,12 @@ export default defineConfig(({mode}) => {
     },
     build: {
       sourcemap: 'hidden',
-      chunkSizeWarningLimit: 700,
+      chunkSizeWarningLimit: 600,
       rollupOptions: {
         output: {
           manualChunks: {
-            'vendor-react': ['react', 'react-dom'],
+            'vendor-react': ['react', 'react-dom', 'react-dom/client'],
+            'router': ['react-router-dom'],
             'vendor-motion': ['motion'],
             'vendor-supabase': ['@supabase/supabase-js'],
             'vendor-lucide': ['lucide-react'],

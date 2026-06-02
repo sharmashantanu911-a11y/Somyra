@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import SomyraFooter from './SomyraFooter';
 import { SEO } from './SEO';
+import { useAnimationInView } from '../hooks/useAnimationInView';
 import {
   FileText,
   UserCircle,
@@ -189,26 +190,23 @@ const faqData = [
    ───────────────────────────────────────────── */
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <motion.p 
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
+  <p 
+    ref={useAnimationInView()}
+    data-animate="fade-in-up"
     className="text-[11px] md:text-[13px] font-black uppercase tracking-[0.3em] text-[#2DD4BF] mb-5 md:mb-7"
   >
     {children}
-  </motion.p>
+  </p>
 );
 
 const SectionHeading = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <motion.h2 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+  <h2 
+    ref={useAnimationInView()}
+    data-animate="fade-in-up"
     className={`w-full text-[28px] md:text-[40px] lg:text-[52px] font-extrabold text-white leading-[1.1] tracking-tight ${className}`}
   >
     {children}
-  </motion.h2>
+  </h2>
 );
 
 const avatarColors = [
@@ -477,17 +475,31 @@ const PricingCard = ({
   cardStyle: string;
   isAnnual: boolean;
   onClick: () => void;
-}) => (
-  <motion.div 
-    variants={fadeInUp}
-    whileHover="hover"
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.dataset.inview = 'true';
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.1 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return (
+  <div 
+    ref={cardRef}
+    data-animate="fade-in-up"
     className={`relative flex flex-col rounded-2xl ds:rounded-3xl p-5 md:p-7 transition-all duration-500 border h-full shadow-premium backdrop-blur-sm ${
       name === 'Pro' ? 'border-2 border-teal-accent bg-[#0A1A19]/40 shadow-[0_0_50px_rgba(45,212,191,0.05)]' : 
       name === 'Max' ? 'border border-red-500/30 bg-red-500/[0.01] hover:border-red-500/50' : 
       'border-white/5 bg-white/[0.02] hover:border-white/10'
     } ${cardStyle}`}
   >
-    <motion.div variants={hoverScale} className="absolute inset-0 pointer-events-none rounded-3xl z-10 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+    <div className="absolute inset-0 pointer-events-none rounded-3xl z-10 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
 
     {badge && (
       <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg z-20">
@@ -547,32 +559,10 @@ const PricingCard = ({
     >
       {buttonLabel}
     </button>
-  </motion.div>
+  </div>
 );
+};
 
-
-/* ─────────────────────────────────────────────
-   ANIMATION VARIANTS
-   ───────────────────────────────────────────── */
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-} as any;
-
-const staggerContainer = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1
-    }
-  }
-} as any;
-
-const hoverScale = {
-  hover: { scale: 1.03, y: -5, transition: { duration: 0.3, ease: 'easeOut' } }
-} as any;
 
 /* ─────────────────────────────────────────────
    COMPONENTS
@@ -625,20 +615,20 @@ const Counter = ({ value, label }: { value: string; label: string }) => {
 
   return (
     <div ref={nodeRef} className="flex flex-col items-center justify-start text-center min-w-[120px] sm:min-w-[140px] md:min-w-[160px] h-full py-4 relative">
-      <motion.p 
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+      <p 
+        ref={useAnimationInView()}
+        data-animate="fade-in-scale"
         className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter tabular-nums mb-2.5"
       >
         {count.toLocaleString()}{suffix}
-      </motion.p>
+      </p>
       <div className="h-[2.5rem] flex items-start justify-center">
         <p className="text-[10px] md:text-[11px] text-[#888] font-bold uppercase tracking-[0.2em] leading-tight max-w-[100px] md:max-w-[130px]">
           {label}
         </p>
       </div>
-    </div>
-  );
+  </div>
+);
 };
 
 /* ─────────────────────────────────────────────
@@ -998,8 +988,8 @@ export function LandingPage({
                 preload="metadata"
                 poster="/Somyra_postwriter_poster.webp"
                 className="w-full block aspect-video"
-                width={860}
-                height={540}
+                width={400}
+                height={250}
                 fetchpriority="high"
               >
                 <source src="/Somyra_postwriter.mp4" type="video/mp4" />
@@ -1049,12 +1039,11 @@ export function LandingPage({
                 body: 'Somyra writes personalized outreach that references each prospect and speaks to what actually matters to them.'
               }
             ].map((card, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                ref={useAnimationInView()}
+                data-animate="fade-in-up"
+                style={{ animationDelay: `${i * 0.1}s` }}
                 className="bg-[#0D0D0D] border border-white/[0.06] hover:border-[#2DD4BF]/20 rounded-[16px] p-5 md:p-7 h-full flex flex-col transition-all duration-300 hover:shadow-[0_0_30px_rgba(45,212,191,0.05)]"
               >
                 <div
@@ -1065,19 +1054,17 @@ export function LandingPage({
                 </div>
                 <h3 className="text-[17px] font-bold text-white mb-2 leading-snug">{card.title}</h3>
                 <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{card.body}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── FEATURES (Value Proofs) ── */}
-      <motion.section 
+      <section 
         id="features"
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+        ref={useAnimationInView()}
+        data-animate="fade-in-up"
         className="w-full px-4 py-8 md:py-[60px] ds:py-[80px] relative z-10"
       >
         <div className="max-w-5xl mx-auto">
@@ -1168,7 +1155,7 @@ export function LandingPage({
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ════════════════════════════════════════
          SECTION: HOW IT WORKS
@@ -1220,12 +1207,11 @@ export function LandingPage({
                   body: 'Posts, DMs, profile rewrites, topic ideas. Everything sounding like you wrote it on your best day.'
                 }
               ].map((step, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                  ref={useAnimationInView()}
+                  data-animate="fade-in-up"
+                  style={{ animationDelay: `${i * 0.1}s` }}
                   className="bg-[#0D0D0D] border border-white/[0.06] hover:border-[#2DD4BF]/15 rounded-[16px] p-5 md:p-7 flex flex-col transition-all duration-300 hover:shadow-[0_0_24px_rgba(45,212,191,0.05)]"
                 >
                   {/* Step number circle */}
@@ -1235,17 +1221,15 @@ export function LandingPage({
                   </div>
                   <h3 className="text-[17px] font-bold text-white leading-snug mb-2">{step.title}</h3>
                   <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{step.body}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
           {/* Video container — Coming Soon */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+          <div
+            ref={useAnimationInView()}
+            data-animate="fade-in-up"
             className="max-w-[860px] mx-auto mt-10 sm:mt-16"
             style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: '16px', overflow: 'hidden', background: '#0D0D0D' }}
           >
@@ -1278,7 +1262,7 @@ export function LandingPage({
                 <p className="text-[#2DD4BF] text-[11px] md:text-[13px] uppercase tracking-[0.1em] mt-1 font-semibold">Coming soon</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -1301,14 +1285,11 @@ export function LandingPage({
           </p>
 
           {/* Table with scroll + entrance animation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="overflow-x-auto no-scrollbar relative"
-            style={{ WebkitOverflowScrolling: 'touch' }}
-          >
+              <div
+                ref={useAnimationInView()}
+                data-animate="fade-in-up"
+                className="w-full max-w-4xl mx-auto text-center mb-4"
+              >
             <div className="min-w-[580px]">
               {/* Table container */}
               <div className="bg-[#0D0D0D] rounded-[16px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
@@ -1397,7 +1378,7 @@ export function LandingPage({
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Mobile scroll hint */}
           <div className="text-right mt-2 ds:hidden">
@@ -1429,12 +1410,10 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION 9: PRICING PREVIEW
          ════════════════════════════════════════ */}
-      <motion.section 
+      <section 
         id="pricing-section"
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+        ref={useAnimationInView()}
+        data-animate="fade-in-up"
         className="w-full px-4 sm:px-6 py-8 md:py-20 ds:py-24 relative z-10 border-t border-white/5"
       >
         <div className="max-w-[1024px] mx-auto">
@@ -1565,16 +1544,14 @@ export function LandingPage({
             Every plan comes with Post Writer, Profile Analysis, Topic Generator, Smart Outreach, and LinkedIn Preview. Move up or down anytime.
           </p>
         </div>
-      </motion.section>
+      </section>
 
       {/* ════════════════════════════════════════
          SECTION 10: TESTIMONIALS
          ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+      <section 
+        ref={useAnimationInView()}
+        data-animate="fade-in-up"
         className="w-full py-8 md:py-16 ds:py-24 relative overflow-hidden border-y border-white/5 bg-[#080808]"
       >
         <style>{`
@@ -1645,7 +1622,7 @@ export function LandingPage({
                         badge: t.badge_text || 'VERIFIED USER'
                       })).concat(hardcodedReviewsRow1) : 
                     hardcodedReviewsRow1
-                  ).slice(0, 10).map((review, idx) => (
+                  ).slice(0, 5).map((review, idx) => (
                     <ReviewCard key={idx} review={review} idx={idx} />
                   ))}
                 </React.Fragment>
@@ -1673,7 +1650,7 @@ export function LandingPage({
                         badge: t.badge_text || 'VERIFIED USER'
                       })).concat(hardcodedReviewsRow2) : 
                     hardcodedReviewsRow2
-                  ).slice(0, 10).map((review, idx) => (
+                  ).slice(0, 5).map((review, idx) => (
                     <ReviewCard key={idx} review={review} idx={idx} />
                   ))}
                 </React.Fragment>
@@ -1690,7 +1667,7 @@ export function LandingPage({
             Leave a Review
           </button>
         </div>
-      </motion.section>
+      </section>
 
       {/* ── SECTION 11: FAQ ── */}
       <section 
@@ -1716,12 +1693,11 @@ export function LandingPage({
               const delay = rowIndex * 80 + colIndex * 40;
 
               return (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.4, ease: "easeOut", delay: delay / 1000 }}
+                  ref={useAnimationInView()}
+                  data-animate="fade-in-up"
+                  style={{ animationDelay: `${delay / 1000}s` }}
                 >
                   <FaqItem
                     q={item.q}
@@ -1729,7 +1705,7 @@ export function LandingPage({
                     isOpen={openFaqIndex === i}
                     onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
                   />
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -1752,11 +1728,9 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION 12: FINAL CTA
          ════════════════════════════════════════ */}
-      <motion.section 
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+      <section 
+        ref={useAnimationInView()}
+        data-animate="fade-in-up"
         className="w-full px-4 sm:px-8 ds:px-0 py-8 md:py-20 ds:py-[120px] text-center relative z-10 border-t border-white/5 overflow-hidden"
         style={{
           background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45,212,191,0.04) 0%, transparent 70%)'
@@ -1764,11 +1738,8 @@ export function LandingPage({
       >
         <div className="max-w-[700px] mx-auto relative z-10">
           {/* Quote pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+          <div
+            data-animate="fade-in-up"
             className="flex justify-center mb-8"
           >
             <div className="inline-flex items-center gap-[10px] px-4 py-2 rounded-[999px] bg-[#141414] border border-white/[0.08] max-w-[calc(100vw-48px)] overflow-hidden">
@@ -1778,39 +1749,33 @@ export function LandingPage({
                 <span className="max-[400px]:hidden">&ldquo;The first tool that actually sounds like me.&rdquo; <span className="text-white font-semibold">&mdash; James O.</span></span>
               </span>
             </div>
-          </motion.div>
+          </div>
 
           {/* Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+          <div
+            data-animate="fade-in-up"
+            style={{ animationDelay: '0.15s' }}
           >
             <h2 className="text-[26px] sm:text-[32px] ds:text-[44px] font-extrabold text-white leading-[1.2] mx-auto" style={{ maxWidth: '640px' }}>
               Every week you stay quiet is a week<br />
               someone else takes your spot.
             </h2>
-          </motion.div>
+          </div>
 
           {/* Subtext */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+          <div
+            data-animate="fade-in-up"
+            style={{ animationDelay: '0.25s' }}
           >
             <p className="text-[#999] text-base mt-4">
               Start free forever. No credit card. Takes 30 seconds.
             </p>
-          </motion.div>
+          </div>
 
           {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.35 }}
+          <div
+            data-animate="fade-in-up"
+            style={{ animationDelay: '0.35s' }}
           >
             <button
               onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
@@ -1818,14 +1783,12 @@ export function LandingPage({
             >
               Start for Free
             </button>
-          </motion.div>
+          </div>
 
           {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+          <div
+            data-animate="fade-in-up"
+            style={{ animationDelay: '0.45s' }}
             className="mt-4"
           >
             <div className="flex flex-row items-center justify-center gap-4 flex-nowrap max-[360px]:gap-[10px]">
@@ -1842,9 +1805,9 @@ export function LandingPage({
                 <span>30 second signup</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       <SomyraFooter />
 
