@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -66,16 +66,17 @@ import { ChangelogModal } from './components/ChangelogModal';
 import { ReviewModal } from './components/ReviewModal';
 import { useUsageLimits, FeatureKey } from './hooks/useUsageLimits';
 
-import { VoiceProfile } from './features/VoiceProfile';
-import { TopicGenerator } from './features/TopicGenerator';
-import { PostWriter } from './features/PostWriter';
-import { BioGenerator } from './features/BioGenerator';
-import { SmartOutreach } from './features/SmartOutreach';
-import { SavedLibrary } from './features/SavedLibrary';
 import { Terms } from './components/Terms';
 import { Privacy } from './components/Privacy';
 import { Contact } from './components/Contact';
-import { LandingPage } from './components/LandingPage';
+
+const VoiceProfile = React.lazy(() => import('./features/VoiceProfile').then(m => ({ default: m.VoiceProfile })));
+const TopicGenerator = React.lazy(() => import('./features/TopicGenerator').then(m => ({ default: m.TopicGenerator })));
+const PostWriter = React.lazy(() => import('./features/PostWriter').then(m => ({ default: m.PostWriter })));
+const BioGenerator = React.lazy(() => import('./features/BioGenerator').then(m => ({ default: m.BioGenerator })));
+const SmartOutreach = React.lazy(() => import('./features/SmartOutreach').then(m => ({ default: m.SmartOutreach })));
+const SavedLibrary = React.lazy(() => import('./features/SavedLibrary').then(m => ({ default: m.SavedLibrary })));
+const LandingPage = React.lazy(() => import('./components/LandingPage').then(m => ({ default: m.LandingPage })));
 import SomyraFooter from './components/SomyraFooter';
 
 const dailyTips = [
@@ -1046,18 +1047,20 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
       {authChecked && !user ? (
-        <LandingPage 
-          setActiveTab={handleTabClick}
-          setShowAuth={setShowAuth}
-          setAuthMode={setAuthMode}
-          setShowPricingModal={setShowPricingModal}
-          onOpenChangelog={openChangelog}
-          testimonials={testimonials}
-          loadingTestimonials={loadingTestimonials}
-          showReviewModal={showReviewModal}
-          setShowReviewModal={setShowReviewModal}
-          user={user}
-        />
+        <Suspense fallback={<div className="min-h-screen bg-[#080808]" />}>
+          <LandingPage 
+            setActiveTab={handleTabClick}
+            setShowAuth={setShowAuth}
+            setAuthMode={setAuthMode}
+            setShowPricingModal={setShowPricingModal}
+            onOpenChangelog={openChangelog}
+            testimonials={testimonials}
+            loadingTestimonials={loadingTestimonials}
+            showReviewModal={showReviewModal}
+            setShowReviewModal={setShowReviewModal}
+            user={user}
+          />
+        </Suspense>
       ) : (
       <>
       <header className="fixed top-0 left-0 right-0 z-[40] border-b border-white/5 bg-[#080808]/80 backdrop-blur-xl">
@@ -1485,21 +1488,23 @@ export default function App() {
 
                 {/* Tab Content: Voice Profile */}
                 {activeTab === 'voice' && (
-                  <VoiceProfile
-                    user={user}
-                    isPro={isPro}
-                    isMax={isMax}
-                    voicePosts={voicePosts}
-                    setVoicePosts={setVoicePosts}
-                    authChecked={authChecked}
-                    setShowAuth={setShowAuth}
-                    onRequireAuth={handleRequireAuth}
-                    setShowPricingModal={setShowPricingModal}
-                    setError={setError}
-                    showToast={showToast}
-                    trackEvent={trackEvent}
-                    usageLimits={usageLimits}
-                  />
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <VoiceProfile
+                      user={user}
+                      isPro={isPro}
+                      isMax={isMax}
+                      voicePosts={voicePosts}
+                      setVoicePosts={setVoicePosts}
+                      authChecked={authChecked}
+                      setShowAuth={setShowAuth}
+                      onRequireAuth={handleRequireAuth}
+                      setShowPricingModal={setShowPricingModal}
+                      setError={setError}
+                      showToast={showToast}
+                      trackEvent={trackEvent}
+                      usageLimits={usageLimits}
+                    />
+                  </Suspense>
                 )}
 
                 {/* Tab Content: Profile Analysis */}
@@ -1536,123 +1541,133 @@ export default function App() {
 
                 {/* Tab Content: Topic Generator */}
                 {activeTab === 'topics' && (
-                  <TopicGenerator
-                    topicForm={topicForm}
-                    setTopicForm={setTopicForm}
-                    results={results}
-                    setResults={setResults}
-                    checkGenerationLimit={checkGenerationLimit}
-                    trackEvent={trackEvent}
-                    voicePosts={voicePosts}
-                    profile={profile}
-                    incrementUsage={usageLimits.incrementUsage}
-                    showToast={showToast}
-                    setToast={setToast}
-                    GenerationCounter={GenerationCounter}
-                    handleSave={handleSave}
-                    handleCopy={handleCopy}
-                    saving={saving}
-                    copied={copied}
-                    setStats={setStats}
-                    usageLimits={usageLimits}
-                    user={user}
-                    onRequireAuth={handleRequireAuth}
-                  />
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <TopicGenerator
+                      topicForm={topicForm}
+                      setTopicForm={setTopicForm}
+                      results={results}
+                      setResults={setResults}
+                      checkGenerationLimit={checkGenerationLimit}
+                      trackEvent={trackEvent}
+                      voicePosts={voicePosts}
+                      profile={profile}
+                      incrementUsage={usageLimits.incrementUsage}
+                      showToast={showToast}
+                      setToast={setToast}
+                      GenerationCounter={GenerationCounter}
+                      handleSave={handleSave}
+                      handleCopy={handleCopy}
+                      saving={saving}
+                      copied={copied}
+                      setStats={setStats}
+                      usageLimits={usageLimits}
+                      user={user}
+                      onRequireAuth={handleRequireAuth}
+                    />
+                  </Suspense>
                 )}
 
                 {/* Tab Content: Post Writer */}
                 {activeTab === 'writer' && (
-                  <PostWriter
-                    writerForm={writerForm}
-                    setWriterForm={setWriterForm}
-                    results={results}
-                    setResults={setResults}
-                    checkGenerationLimit={checkGenerationLimit}
-                    trackEvent={trackEvent}
-                    voicePosts={voicePosts}
-                    profile={profile}
-                    incrementUsage={usageLimits.incrementUsage}
-                    showToast={showToast}
-                    setToast={setToast}
-                    GenerationCounter={GenerationCounter}
-                    handleSave={handleSave}
-                    handleCopy={handleCopy}
-                    saving={saving}
-                    copied={copied}
-                    isDeepMode={isDeepMode}
-                    setIsDeepMode={setIsDeepMode}
-                    user={user}
-                    onRequireAuth={handleRequireAuth}
-                    isPro={isPro}
-                    isMax={isMax}
-                    setError={setError}
-                    setStats={setStats}
-                    usageLimits={usageLimits}
-                  />
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <PostWriter
+                      writerForm={writerForm}
+                      setWriterForm={setWriterForm}
+                      results={results}
+                      setResults={setResults}
+                      checkGenerationLimit={checkGenerationLimit}
+                      trackEvent={trackEvent}
+                      voicePosts={voicePosts}
+                      profile={profile}
+                      incrementUsage={usageLimits.incrementUsage}
+                      showToast={showToast}
+                      setToast={setToast}
+                      GenerationCounter={GenerationCounter}
+                      handleSave={handleSave}
+                      handleCopy={handleCopy}
+                      saving={saving}
+                      copied={copied}
+                      isDeepMode={isDeepMode}
+                      setIsDeepMode={setIsDeepMode}
+                      user={user}
+                      onRequireAuth={handleRequireAuth}
+                      isPro={isPro}
+                      isMax={isMax}
+                      setError={setError}
+                      setStats={setStats}
+                      usageLimits={usageLimits}
+                    />
+                  </Suspense>
                 )}
 
                 {/* Tab Content: Bio & Headline */}
                 {activeTab === 'bio' && (
-                  <BioGenerator
-                    bioForm={bioForm}
-                    setBioForm={setBioForm}
-                    results={results}
-                    setResults={setResults}
-                    checkGenerationLimit={checkGenerationLimit}
-                    trackEvent={trackEvent}
-                    voicePosts={voicePosts}
-                    profile={profile}
-                    incrementUsage={usageLimits.incrementUsage}
-                    showToast={showToast}
-                    setToast={setToast}
-                    GenerationCounter={GenerationCounter}
-                    handleSave={handleSave}
-                    handleCopy={handleCopy}
-                    saving={saving}
-                    copied={copied}
-                    usageLimits={usageLimits}
-                    user={user}
-                    onRequireAuth={handleRequireAuth}
-                  />
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <BioGenerator
+                      bioForm={bioForm}
+                      setBioForm={setBioForm}
+                      results={results}
+                      setResults={setResults}
+                      checkGenerationLimit={checkGenerationLimit}
+                      trackEvent={trackEvent}
+                      voicePosts={voicePosts}
+                      profile={profile}
+                      incrementUsage={usageLimits.incrementUsage}
+                      showToast={showToast}
+                      setToast={setToast}
+                      GenerationCounter={GenerationCounter}
+                      handleSave={handleSave}
+                      handleCopy={handleCopy}
+                      saving={saving}
+                      copied={copied}
+                      usageLimits={usageLimits}
+                      user={user}
+                      onRequireAuth={handleRequireAuth}
+                    />
+                  </Suspense>
                 )}
 
                 {/* Tab Content: DM & Outreach */}
                 {activeTab === 'outreach' && (
-                  <SmartOutreach
-                    checkGenerationLimit={checkGenerationLimit}
-                    trackEvent={trackEvent}
-                    voicePosts={voicePosts}
-                    profile={profile}
-                    incrementUsage={usageLimits.incrementUsage}
-                    showToast={showToast}
-                    setToast={setToast}
-                    GenerationCounter={GenerationCounter}
-                    handleSave={handleSave}
-                    handleCopy={handleCopy}
-                    saving={saving}
-                    copied={copied}
-                    usageLimits={usageLimits}
-                    user={user}
-                    onRequireAuth={handleRequireAuth}
-                  />
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <SmartOutreach
+                      checkGenerationLimit={checkGenerationLimit}
+                      trackEvent={trackEvent}
+                      voicePosts={voicePosts}
+                      profile={profile}
+                      incrementUsage={usageLimits.incrementUsage}
+                      showToast={showToast}
+                      setToast={setToast}
+                      GenerationCounter={GenerationCounter}
+                      handleSave={handleSave}
+                      handleCopy={handleCopy}
+                      saving={saving}
+                      copied={copied}
+                      usageLimits={usageLimits}
+                      user={user}
+                      onRequireAuth={handleRequireAuth}
+                    />
+                  </Suspense>
                 )}
 
                 {/* Tab Content: Saved Library */}
                 {activeTab === 'saved' && (
-                  <SavedLibrary
-                    savedItems={savedItems}
-                    user={user}
-                    isPro={isPro}
-                    isMax={isMax}
-                    setShowAuth={setShowAuth}
-                    setShowPricingModal={setShowPricingModal}
-                    handleCopy={handleCopy}
-                    copied={copied}
-                    handleDeleteSaved={handleDeleteSaved}
-                    handleDeleteAllSaved={handleDeleteAllSaved}
-                    authChecked={authChecked}
-                    usageLimits={usageLimits}
-                  />
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <SavedLibrary
+                      savedItems={savedItems}
+                      user={user}
+                      isPro={isPro}
+                      isMax={isMax}
+                      setShowAuth={setShowAuth}
+                      setShowPricingModal={setShowPricingModal}
+                      handleCopy={handleCopy}
+                      copied={copied}
+                      handleDeleteSaved={handleDeleteSaved}
+                      handleDeleteAllSaved={handleDeleteAllSaved}
+                      authChecked={authChecked}
+                      usageLimits={usageLimits}
+                    />
+                  </Suspense>
                 )}
 
                 {/* Tab Content: Settings */}

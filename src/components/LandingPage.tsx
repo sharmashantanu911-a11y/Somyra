@@ -263,7 +263,7 @@ const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; i
     </div>
     <div className="mt-auto flex items-center gap-3">
       {avatarMap[review.name] ? (
-        <img src={avatarMap[review.name]} alt={review.name} className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0 shadow-[0_0_0_2px_rgba(45,212,191,0.15)]" loading="lazy" />
+        <img src={avatarMap[review.name]} alt={review.name} width={32} height={32} className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0 shadow-[0_0_0_2px_rgba(45,212,191,0.15)]" loading="lazy" />
       ) : (
         <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} flex items-center justify-center text-[11px] md:text-[12px] font-bold text-white shrink-0 shadow-lg`}>
           {getInitials(review.name)}
@@ -908,12 +908,12 @@ export function LandingPage({
           <div className="flex justify-center mb-6 sm:mb-8" style={{ animation: 'none' }}>
             <div className="inline-flex items-center gap-[10px] w-auto max-w-[calc(100vw-48px)] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] rounded-[999px] p-[6px_14px_6px_6px] shadow-[0_0_30px_rgba(45,212,191,0.04)] hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] hover:border-[rgba(255,255,255,0.15)] transition-all duration-300" style={{ animation: 'trustPillDrop 0.6s ease-out 0.2s forwards', opacity: 0 }}>
               <div className="flex flex-row items-center pl-[4px]">
-                <img src="/user-images/Alex.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                <img src="/user-images/Ama.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                <img src="/user-images/Arora.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                <img src="/user-images/Charlie.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                <img src="/user-images/Lisa.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                <img src="/user-images/Mark.webp" alt="" className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Alex.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Ama.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Arora.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Charlie.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Lisa.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                <img src="/user-images/Mark.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
               </div>
               <div className="w-[1px] h-[16px] bg-[rgba(255,255,255,0.1)] shrink-0" />
               <div className="flex flex-col gap-[1px] shrink-0">
@@ -999,9 +999,11 @@ export function LandingPage({
                 loop
                 muted
                 playsInline
-                preload="auto"
-                className="w-full block"
-                style={{ display: 'block' }}
+                preload="none"
+                poster="/Somyra_postwriter_poster.webp"
+                className="w-full block aspect-video"
+                width={860}
+                height={540}
               >
                 <source src="/Somyra_postwriter.mp4" type="video/mp4" />
               </video>

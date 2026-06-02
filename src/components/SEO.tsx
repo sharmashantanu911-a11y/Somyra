@@ -22,7 +22,7 @@ export const SEO: React.FC<SEOProps> = ({
 }) => {
   const finalOgTitle = ogTitle || title;
   const finalOgDescription = ogDescription || description;
-  const finalOgImage = ogImage || 'https://somyra.online/og-image.png';
+  const finalOgImage = ogImage || 'https://somyra.online/og-image.webp';
 
   return (
     <Helmet>
