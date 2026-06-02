@@ -8,7 +8,9 @@ interface SEOProps {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogType?: string;
   schema?: object;
+  noIndex?: boolean;
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -18,7 +20,9 @@ export const SEO: React.FC<SEOProps> = ({
   ogTitle,
   ogDescription,
   ogImage,
+  ogType = 'website',
   schema,
+  noIndex,
 }) => {
   const finalOgTitle = ogTitle || title;
   const finalOgDescription = ogDescription || description;
@@ -26,30 +30,41 @@ export const SEO: React.FC<SEOProps> = ({
 
   return (
     <Helmet>
-      {/* 1. Inject a <title> tag */}
       <title>{title}</title>
-
-      {/* 2. Inject <meta name="description"> */}
       <meta name="description" content={description} />
-
-      {/* 3. Inject <link rel="canonical"> with the canonical URL */}
       <link rel="canonical" href={canonical} />
 
-      {/* 4. Inject Open Graph tags */}
-      <meta property="og:type" content="website" />
+      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+      {/* Open Graph */}
+      <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonical} />
       <meta property="og:title" content={finalOgTitle} />
       <meta property="og:description" content={finalOgDescription} />
       <meta property="og:image" content={finalOgImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={finalOgTitle} />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:site_name" content="Somyra" />
 
-      {/* 5. Inject Twitter card tags */}
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={canonical} />
       <meta name="twitter:title" content={finalOgTitle} />
       <meta name="twitter:description" content={finalOgDescription} />
       <meta name="twitter:image" content={finalOgImage} />
+      <meta name="twitter:image:alt" content={finalOgTitle} />
 
-      {/* 6. If schema prop is provided, inject structured data */}
+      {/* Article-specific meta for blog posts */}
+      {ogType === 'article' && (
+        <>
+          <meta property="article:author" content="Shantanu Sharma" />
+          <meta property="article:publisher" content="https://somyra.online" />
+        </>
+      )}
+
+      {/* JSON-LD Schema */}
       {schema && (
         <script type="application/ld+json">
           {JSON.stringify(schema)}

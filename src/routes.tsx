@@ -14,51 +14,38 @@ const CompareTaplioPage = lazy(() => import('./pages/compare/CompareTaplioPage')
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-// Import blog posts
-import LinkedinPersonalBrandingGuideFounders from './content/posts/linkedin-personal-branding-guide-founders';
-import HowToWriteLinkedinPostsThatGetEngagement from './content/posts/how-to-write-linkedin-posts-that-get-engagement';
-import LinkedinOutreachStrategyThatGetsReplies from './content/posts/linkedin-outreach-strategy-that-gets-replies';
-import LinkedinProfileOptimizationChecklist from './content/posts/linkedin-profile-optimization-checklist';
-import WhyRoboticPosts from './content/posts/why-linkedin-posts-sound-robotic';
-import LinkedinHookFormulasThatStopTheScroll from './content/posts/linkedin-hook-formulas-that-stop-the-scroll';
-import HowToWriteLinkedinAboutSection from './content/posts/how-to-write-linkedin-about-section';
-import LinkedinDmFormulaThatGetsReplies from './content/posts/linkedin-dm-formula-that-gets-replies';
-import WhatToPostOnLinkedinWhenYouHaveNoIdeas from './content/posts/what-to-post-on-linkedin-when-you-have-no-ideas';
-import BestLinkedinPostGenerator2025 from './content/posts/best-linkedin-post-generator-2025';
-import DoesAiLinkedinContentGetPenalized from './content/posts/does-ai-linkedin-content-get-penalized';
-import HowLongShouldLinkedinPostBe from './content/posts/how-long-should-linkedin-post-be';
+const blogComponents: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {
+  'linkedin-personal-branding-guide-founders': lazy(() => import('./content/posts/linkedin-personal-branding-guide-founders')),
+  'how-to-write-linkedin-posts-that-get-engagement': lazy(() => import('./content/posts/how-to-write-linkedin-posts-that-get-engagement')),
+  'linkedin-outreach-strategy-that-gets-replies': lazy(() => import('./content/posts/linkedin-outreach-strategy-that-gets-replies')),
+  'linkedin-profile-optimization-checklist': lazy(() => import('./content/posts/linkedin-profile-optimization-checklist')),
+  'why-linkedin-posts-sound-robotic': lazy(() => import('./content/posts/why-linkedin-posts-sound-robotic')),
+  'linkedin-hook-formulas-that-stop-the-scroll': lazy(() => import('./content/posts/linkedin-hook-formulas-that-stop-the-scroll')),
+  'how-to-write-linkedin-about-section': lazy(() => import('./content/posts/how-to-write-linkedin-about-section')),
+  'linkedin-dm-formula-that-gets-replies': lazy(() => import('./content/posts/linkedin-dm-formula-that-gets-replies')),
+  'what-to-post-on-linkedin-when-you-have-no-ideas': lazy(() => import('./content/posts/what-to-post-on-linkedin-when-you-have-no-ideas')),
+  'best-linkedin-post-generator-2025': lazy(() => import('./content/posts/best-linkedin-post-generator-2025')),
+  'does-ai-linkedin-content-get-penalized': lazy(() => import('./content/posts/does-ai-linkedin-content-get-penalized')),
+  'how-long-should-linkedin-post-be': lazy(() => import('./content/posts/how-long-should-linkedin-post-be')),
+};
 
 const BlogRouter: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const Component = slug ? blogComponents[slug] : undefined;
 
-  switch (slug) {
-    case 'linkedin-personal-branding-guide-founders':
-      return <LinkedinPersonalBrandingGuideFounders />;
-    case 'how-to-write-linkedin-posts-that-get-engagement':
-      return <HowToWriteLinkedinPostsThatGetEngagement />;
-    case 'linkedin-outreach-strategy-that-gets-replies':
-      return <LinkedinOutreachStrategyThatGetsReplies />;
-    case 'linkedin-profile-optimization-checklist':
-      return <LinkedinProfileOptimizationChecklist />;
-    case 'why-linkedin-posts-sound-robotic':
-      return <WhyRoboticPosts />;
-    case 'linkedin-hook-formulas-that-stop-the-scroll':
-      return <LinkedinHookFormulasThatStopTheScroll />;
-    case 'how-to-write-linkedin-about-section':
-      return <HowToWriteLinkedinAboutSection />;
-    case 'linkedin-dm-formula-that-gets-replies':
-      return <LinkedinDmFormulaThatGetsReplies />;
-    case 'what-to-post-on-linkedin-when-you-have-no-ideas':
-      return <WhatToPostOnLinkedinWhenYouHaveNoIdeas />;
-    case 'best-linkedin-post-generator-2025':
-      return <BestLinkedinPostGenerator2025 />;
-    case 'does-ai-linkedin-content-get-penalized':
-      return <DoesAiLinkedinContentGetPenalized />;
-    case 'how-long-should-linkedin-post-be':
-      return <HowLongShouldLinkedinPostBe />;
-    default:
-      return <NotFoundPage />;
+  if (!Component) {
+    return <NotFoundPage />;
   }
+
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#080808] flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-[#2DD4BF] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <Component />
+    </Suspense>
+  );
 };
 
 export const AppRoutes: React.FC = () => {

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, BookOpen, Mail, Send, Sparkles, CheckCircle } from 'lucide-react';
+import { ArrowRight, BookOpen, Mail, CheckCircle, Search, Clock, ChevronRight } from 'lucide-react';
 import { SEOPageLayout } from '../components/seo/SEOPageLayout';
 import { SEO } from '../components/SEO';
 
@@ -41,7 +41,7 @@ const publishedPosts: BlogPost[] = [
   },
   {
     title: "LinkedIn Profile Optimization: The Complete Checklist for 2025",
-    excerpt: "Most LinkedIn profiles are passive. They wait for someone to care. This checklist fixes every section — headline, About, experience, featured — so your profile works while you sleep.",
+    excerpt: "Most LinkedIn profiles are passive. They wait for someone to care. This checklist fixes every section so your profile works while you sleep.",
     category: "Profile",
     slug: "linkedin-profile-optimization-checklist",
     publishedDate: "May 23, 2026",
@@ -49,7 +49,7 @@ const publishedPosts: BlogPost[] = [
   },
   {
     title: "How to Write a LinkedIn About Section That Actually Converts",
-    excerpt: "Most LinkedIn About sections are either blank or a resume summary. Here is the structure that makes the right people reach out — with a formula you can use today.",
+    excerpt: "Most LinkedIn About sections are either blank or a resume summary. Here is the structure that makes the right people reach out.",
     category: "Profile",
     slug: "how-to-write-linkedin-about-section",
     publishedDate: "May 23, 2026",
@@ -73,7 +73,7 @@ const publishedPosts: BlogPost[] = [
   },
   {
     title: "What to Post on LinkedIn When You Have Absolutely No Ideas",
-    excerpt: "Running out of LinkedIn content ideas is not a creativity problem. It is a systems problem. Here are 8 reliable sources of content you already have access to right now.",
+    excerpt: "Running out of LinkedIn content ideas is not a creativity problem. It is a systems problem. Here are 8 reliable sources of content you already have.",
     category: "Content Writing",
     slug: "what-to-post-on-linkedin-when-you-have-no-ideas",
     publishedDate: "May 23, 2026",
@@ -97,7 +97,7 @@ const publishedPosts: BlogPost[] = [
   },
   {
     title: "Does LinkedIn Penalize AI-Generated Content? The Honest Answer",
-    excerpt: "LinkedIn has not announced any AI content penalty. But there is a real engagement penalty and it has nothing to do with the algorithm. Here is what actually matters.",
+    excerpt: "LinkedIn has not announced any AI content penalty. But there is a real engagement penalty and it has nothing to do with the algorithm.",
     category: "Tools",
     slug: "does-ai-linkedin-content-get-penalized",
     publishedDate: "May 23, 2026",
@@ -105,13 +105,15 @@ const publishedPosts: BlogPost[] = [
   },
   {
     title: "How Long Should a LinkedIn Post Be? The Data-Backed Answer",
-    excerpt: "LinkedIn posts have a 3,000 character limit but the optimal length for engagement is much shorter. Here is exactly how long your posts should be for every format and why.",
+    excerpt: "LinkedIn posts have a 3,000 character limit but the optimal length for engagement is much shorter. Here is exactly how long your posts should be.",
     category: "Content Writing",
     slug: "how-long-should-linkedin-post-be",
     publishedDate: "May 23, 2026",
     wordCount: 3200
   }
 ];
+
+const categories = ["All", "Content Writing", "Outreach", "Profile", "Personal Brand", "Tools", "Writing"];
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -122,6 +124,18 @@ const schemaData = {
       "name": "Somyra LinkedIn Growth Blog",
       "url": "https://somyra.online/blog",
       "description": "Practical LinkedIn growth strategy, writing tips, profile auditing guides, and outreach ideas for professionals."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://somyra.online/blog" }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Somyra LinkedIn Growth Blog",
+      "description": "Practical LinkedIn growth strategy, writing tips, profile auditing guides, and outreach ideas for professionals."
     }
   ]
 };
@@ -129,6 +143,27 @@ const schemaData = {
 const BlogPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredPosts = useMemo(() => {
+    let posts = publishedPosts;
+    if (activeCategory !== 'All') {
+      posts = posts.filter(p => p.category === activeCategory);
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      posts = posts.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.excerpt.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+    }
+    return posts;
+  }, [activeCategory, searchQuery]);
+
+  const featuredPost = filteredPosts.length > 0 ? filteredPosts[0] : null;
+  const restPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,7 +184,8 @@ const BlogPage: React.FC = () => {
 
       {/* SECTION 1 — Header */}
       <section className="relative overflow-hidden py-24 sm:py-32 bg-[#080808]">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#2DD4BF]/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#2DD4BF]/5 rounded-full blur-[160px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0D0D0D] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div
@@ -163,64 +199,153 @@ const BlogPage: React.FC = () => {
             </div>
 
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-              LinkedIn Growth, <br />
+              LinkedIn Growth,{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DD4BF] to-teal-400">
                 Straight Talk
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-[#888888] max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl text-[#888888] max-w-2xl mx-auto mb-6 leading-relaxed font-medium">
               No generic "10 tips to grow on LinkedIn" content. Just what actually works for founders and professionals building a real audience.
             </p>
+
+            {/* Search bar */}
+            <div className="max-w-md mx-auto relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555555]" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#141414] border border-white/5 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-[#555555] focus:outline-none focus:border-[#2DD4BF]/30 focus:bg-[#1a1a1a] transition-all"
+              />
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* SECTION 2 — Blog Posts Grid */}
-      <section className="py-20 bg-[#0D0D0D] border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {publishedPosts.map((post, index) => (
-              <Link 
-                key={index}
-                to={`/blog/${post.slug}`} 
-                className="bg-[#141414] border border-white/5 rounded-3xl p-8 flex flex-col justify-between h-full hover:border-[#2DD4BF]/20 transition-all group cursor-pointer block"
+      {/* SECTION 2 — Category Filters */}
+      <section className="bg-[#0D0D0D] border-t border-white/5 sticky top-0 z-30">
+        <div className="max-w-6xl mx-auto px-6 py-4 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 min-w-max">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
+                  activeCategory === cat
+                    ? 'bg-[#2DD4BF] text-black'
+                    : 'bg-[#141414] text-[#888888] border border-white/5 hover:border-[#2DD4BF]/20 hover:text-white'
+                }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/5 px-2.5 py-1 rounded-md">
-                      {post.category}
-                    </span>
-                    <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest bg-[#080808] px-2 py-0.5 rounded-full border border-white/5">
-                      {Math.ceil(post.wordCount / 200)} Min Read
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-white mb-4 leading-snug group-hover:text-[#2DD4BF] transition-colors">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-xs text-[#888888] leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                </div>
-              </Link>
+                {cat}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 3 — Email Capture */}
-      <section className="py-20 bg-[#080808] border-t border-white/5">
+      {/* SECTION 3 — Blog Posts */}
+      <section className="py-12 sm:py-16 bg-[#0D0D0D]">
+        <div className="max-w-6xl mx-auto px-6">
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-[#888888] text-lg">No articles found matching your search.</p>
+              <button
+                onClick={() => { setActiveCategory('All'); setSearchQuery(''); }}
+                className="mt-4 text-[#2DD4BF] font-bold text-sm hover:underline"
+              >
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* Featured Post */}
+              {featuredPost && activeCategory === 'All' && !searchQuery && (
+                <Link
+                  to={`/blog/${featuredPost.slug}`}
+                  className="block bg-gradient-to-br from-[#141414] to-[#0D0D0D] border border-white/5 rounded-3xl p-8 sm:p-10 mb-10 hover:border-[#2DD4BF]/20 transition-all group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#2DD4BF]/[0.03] rounded-full blur-[80px] pointer-events-none" />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-[11px] font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/10 px-2.5 py-1 rounded-md">
+                        {featuredPost.category}
+                      </span>
+                      <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {Math.ceil(featuredPost.wordCount / 200)} MIN READ
+                      </span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 leading-tight group-hover:text-[#2DD4BF] transition-colors">
+                      {featuredPost.title}
+                    </h2>
+                    <p className="text-sm text-[#888888] leading-relaxed max-w-2xl mb-6">
+                      {featuredPost.excerpt}
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-sm font-bold text-[#2DD4BF] group-hover:gap-3 transition-all">
+                      Read Article <ChevronRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </Link>
+              )}
+
+              {/* Post Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {(featuredPost && activeCategory === 'All' && !searchQuery ? restPosts : filteredPosts).map((post) => (
+                  <Link
+                    key={post.slug}
+                    to={`/blog/${post.slug}`}
+                    className="bg-[#141414] border border-white/5 rounded-2xl p-6 flex flex-col justify-between h-full hover:border-[#2DD4BF]/20 hover:-translate-y-1 transition-all group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[10px] font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/5 px-2.5 py-1 rounded-md">
+                          {post.category}
+                        </span>
+                        <span className="text-[10px] font-bold text-[#555555] uppercase tracking-widest flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {Math.ceil(post.wordCount / 200)} MIN
+                        </span>
+                      </div>
+
+                      <h3 className="text-base font-bold text-white mb-3 leading-snug group-hover:text-[#2DD4BF] transition-colors line-clamp-3">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-xs text-[#777777] leading-relaxed line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 pt-4 border-t border-white/5">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#555555] group-hover:text-[#2DD4BF] transition-colors">
+                        Read more <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* SECTION 4 — Email Capture */}
+      <section className="py-16 sm:py-20 bg-[#080808] border-t border-white/5">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-[#0D0D0D] border border-white/5 rounded-3xl p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
+          <div className="bg-gradient-to-br from-[#0D0D0D] to-[#141414] border border-white/5 rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2DD4BF]/[0.03] via-transparent to-transparent pointer-events-none" />
 
             <div className="max-w-xl mx-auto relative z-10">
-              <h2 className="text-3xl font-extrabold text-white mb-4">
+              <div className="w-14 h-14 rounded-2xl bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 flex items-center justify-center mx-auto mb-6">
+                <Mail className="w-6 h-6 text-[#2DD4BF]" />
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
                 Get notified when we publish
               </h2>
-              <p className="text-[#888888] text-sm sm:text-base mb-8 font-medium">
+              <p className="text-sm sm:text-base text-[#888888] mb-8 max-w-md mx-auto leading-relaxed">
                 Subscribe to get organic growth guides and strategic LinkedIn writing breakdowns delivered straight to your inbox.
               </p>
 
@@ -236,10 +361,10 @@ const BlogPage: React.FC = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 text-black font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shrink-0 flex items-center justify-center gap-2"
+                    className="bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 text-black font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all shrink-0 flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
                   >
-                    Notify Me
-                    <ArrowRight className="w-4.5 h-4.5" />
+                    Subscribe
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
               ) : (
