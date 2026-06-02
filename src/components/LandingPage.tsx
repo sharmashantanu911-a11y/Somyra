@@ -988,7 +988,7 @@ export function LandingPage({
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#FFBD2E' }} />
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#28C840' }} />
               </div>
-              <span className="flex-1 text-center text-[12px] text-[#555]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              <span className="flex-1 text-center text-[12px] text-[#555] font-sans">
                 somyra.online
               </span>
               <div className="w-[52px]" />

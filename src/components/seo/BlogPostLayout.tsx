@@ -4,6 +4,17 @@ import { SEO } from '../SEO';
 import { ArrowLeft, Linkedin, Twitter, Link as LinkIcon, ChevronUp, Clock, User, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const proseStyles = `
+  .blog-content p a, .blog-content li a, .blog-content blockquote a {
+    color: #2DD4BF !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+  }
+  .blog-content p a:hover, .blog-content li a:hover, .blog-content blockquote a:hover {
+    text-decoration: underline !important;
+  }
+`;
+
 interface BlogPostLayoutProps {
   children: React.ReactNode;
   title: string;
@@ -163,12 +174,12 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
         </header>
 
         {/* Content */}
-        <div className="prose prose-invert prose-lg max-w-none
+        <style>{proseStyles}</style>
+        <div className="blog-content prose prose-invert prose-lg max-w-none
           prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-white
           prose-h2:text-[clamp(1.35rem,3.5vw,1.75rem)] prose-h2:mt-12 prose-h2:mb-4
           prose-h3:text-[clamp(1.1rem,2.5vw,1.35rem)] prose-h3:mt-8 prose-h3:mb-3
           prose-p:text-[#A0A0A0] prose-p:leading-[1.75] prose-p:text-[15px] sm:prose-p:text-[16px]
-          prose-a:text-[#2DD4BF] prose-a:no-underline hover:prose-a:underline prose-a:font-semibold
           prose-strong:text-white prose-strong:font-bold
           prose-li:text-[#A0A0A0] prose-li:leading-[1.75]
           prose-blockquote:border-l-[#2DD4BF] prose-blockquote:text-[#A0A0A0] prose-blockquote:font-normal prose-blockquote:not-italic

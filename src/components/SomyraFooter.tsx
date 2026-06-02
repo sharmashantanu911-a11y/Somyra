@@ -49,7 +49,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         .somyra-footer {
           background: transparent;
           border-top: 1px solid rgba(255,255,255,0.06);
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Inter', sans-serif;
           position: relative;
           overflow: hidden;
         }
@@ -138,7 +138,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           border-radius: 20px;
           padding: 5px 12px 5px 9px;
           margin-bottom: 28px;
-          font-family: 'DM Mono', monospace;
+          font-family: 'Geist Mono', monospace;
           letter-spacing: 0.01em;
         }
 
@@ -203,7 +203,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin-bottom: 16px;
-          font-family: 'DM Mono', monospace;
+          font-family: 'Geist Mono', monospace;
         }
 
         .nav-list {
@@ -251,7 +251,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           border-radius: 4px;
           margin-left: 6px;
           vertical-align: middle;
-          font-family: 'DM Mono', monospace;
+          font-family: 'Geist Mono', monospace;
         }
 
         /* ─── DIVIDER ─── */
@@ -277,7 +277,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         .footer-copy {
           font-size: 12.5px;
           color: #374151;
-          font-family: 'DM Mono', monospace;
+          font-family: 'Geist Mono', monospace;
           letter-spacing: 0.01em;
         }
 
@@ -297,7 +297,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           text-decoration: none;
           transition: color 0.2s ease;
           padding: 0 8px;
-          font-family: 'DM Mono', monospace;
+          font-family: 'Geist Mono', monospace;
           letter-spacing: 0.01em;
         }
 
@@ -314,7 +314,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         .built-with {
           font-size: 12.5px;
           color: #374151;
-          font-family: 'DM Mono', monospace;
+          font-family: 'Geist Mono', monospace;
           display: flex;
           align-items: center;
           gap: 5px;
@@ -391,13 +391,13 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           .footer-copy {
             font-size: 12px;
             color: #555;
-            font-family: 'DM Mono', monospace;
+            font-family: 'Geist Mono', monospace;
           }
           .built-with {
             display: flex;
             font-size: 12px;
             color: #555;
-            font-family: 'DM Mono', monospace;
+            font-family: 'Geist Mono', monospace;
             align-items: center;
             gap: 5px;
             justify-content: center;

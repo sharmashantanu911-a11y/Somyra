@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import SomyraFooter from '../SomyraFooter';
 
 interface SEOPageLayoutProps {
@@ -9,15 +8,7 @@ interface SEOPageLayoutProps {
 
 export const SEOPageLayout: React.FC<SEOPageLayoutProps> = ({ children }) => {
   return (
-    <div 
-      className="min-h-screen bg-[#080808] text-white flex flex-col justify-between"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
-    >
-      <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </Helmet>
+    <div className="min-h-screen bg-[#080808] text-white flex flex-col justify-between font-sans">
 
       {/* Navigation */}
       <header className="border-b border-white/5 bg-[#0D0D0D]/80 backdrop-blur-md sticky top-0 z-50">
