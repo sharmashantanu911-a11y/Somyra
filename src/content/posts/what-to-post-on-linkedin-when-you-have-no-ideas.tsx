@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,42 +90,9 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://somyra.online"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://somyra.online/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "What to Post on LinkedIn When You Have Absolutely No Ideas",
-        "item": "https://somyra.online/blog/what-to-post-on-linkedin-when-you-have-no-ideas"
-      }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Content Writing"
         title="What to Post on LinkedIn When You Have Absolutely No Ideas"
         wordCount={1600}
@@ -366,7 +332,6 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
 
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

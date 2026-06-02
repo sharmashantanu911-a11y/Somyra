@@ -23,6 +23,7 @@ interface BlogPostLayoutProps {
   publishedDate: string;
   wordCount: number;
   slug: string;
+  faqSchema?: object;
 }
 
 const allPosts = [
@@ -48,6 +49,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
   publishedDate,
   wordCount,
   slug,
+  faqSchema,
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -69,9 +71,32 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const currentIndex = allPosts.findIndex(p => p.slug === slug);
+  const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
   const relatedPosts = allPosts
     .filter(p => p.category === category && p.slug !== slug)
-    .slice(0, 2);
+    .slice(0, 4);
+
+  const latestPosts = allPosts
+    .filter(p => p.slug !== slug && !relatedPosts.some(r => r.slug === p.slug))
+    .slice(0, 3);
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://somyra.online/blog" },
+      { "@type": "ListItem", "position": 3, "name": title, "item": `https://somyra.online/blog/${slug}` }
+    ]
+  };
+
+  const extraSchemas = [breadcrumbSchema];
+  if (faqSchema) {
+    extraSchemas.push(faqSchema);
+  }
 
   const schemaData = {
     "@context": "https://schema.org",
@@ -118,6 +143,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
         ogImage={`https://somyra.online/og-image.webp`}
         ogType="article"
         schema={schemaData}
+        schemas={extraSchemas}
       />
 
       {/* Reading Progress Bar */}
@@ -242,6 +268,57 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
                 </Link>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Latest Articles */}
+        {latestPosts.length > 0 && (
+          <div className="mt-12 pt-8 border-t border-white/5">
+            <p className="text-sm font-bold text-white mb-5">Latest Articles</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {latestPosts.map(post => (
+                <Link
+                  key={post.slug}
+                  to={`/blog/${post.slug}`}
+                  className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group"
+                >
+                  <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">
+                    {post.category}
+                  </span>
+                  <h4 className="text-sm font-bold text-white mt-2 leading-snug group-hover:text-[#2DD4BF] transition-colors">
+                    {post.title}
+                  </h4>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Prev / Next Navigation */}
+        {(prevPost || nextPost) && (
+          <div className="mt-12 pt-8 border-t border-white/5 grid grid-cols-2 gap-4">
+            {prevPost ? (
+              <Link
+                to={`/blog/${prevPost.slug}`}
+                className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group text-left"
+              >
+                <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">Previous</span>
+                <h4 className="text-sm font-bold text-white mt-1 leading-snug group-hover:text-[#2DD4BF] transition-colors">
+                  {prevPost.title}
+                </h4>
+              </Link>
+            ) : <div />}
+            {nextPost ? (
+              <Link
+                to={`/blog/${nextPost.slug}`}
+                className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group text-right"
+              >
+                <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">Next</span>
+                <h4 className="text-sm font-bold text-white mt-1 leading-snug group-hover:text-[#2DD4BF] transition-colors">
+                  {nextPost.title}
+                </h4>
+              </Link>
+            ) : <div />}
           </div>
         )}
 

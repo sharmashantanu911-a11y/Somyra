@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,42 +90,9 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://somyra.online"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://somyra.online/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "7 LinkedIn Hook Formulas That Stop the Scroll",
-        "item": "https://somyra.online/blog/linkedin-hook-formulas-that-stop-the-scroll"
-      }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Content Writing"
         title="7 LinkedIn Hook Formulas That Stop the Scroll (With Real Examples)"
         wordCount={1600}
@@ -515,7 +481,6 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
 
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

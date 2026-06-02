@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,26 +90,9 @@ const WhyRoboticPosts: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Blog", "item": "https://somyra.com/blog" },
-      { "@type": "ListItem", "position": 2, "name": "Why LinkedIn Posts Sound Robotic", "item": "https://somyra.com/blog/why-linkedin-posts-sound-robotic" }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Writing"
         title="Why Most AI LinkedIn Posts Sound Like a Cheerful Robot"
         wordCount={1500}
@@ -307,7 +289,6 @@ const WhyRoboticPosts: React.FC = () => {
           </div>
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

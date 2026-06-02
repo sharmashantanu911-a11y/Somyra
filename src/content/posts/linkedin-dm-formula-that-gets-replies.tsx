@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,42 +90,9 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://somyra.online"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://somyra.online/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "The LinkedIn DM Formula That Gets Replies",
-        "item": "https://somyra.online/blog/linkedin-dm-formula-that-gets-replies"
-      }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Outreach"
         title="The LinkedIn DM Formula That Gets Replies (Without Being Salesy)"
         wordCount={1600}
@@ -416,7 +382,6 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
 
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

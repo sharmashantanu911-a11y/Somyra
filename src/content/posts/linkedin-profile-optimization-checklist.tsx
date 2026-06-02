@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,26 +90,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Blog", "item": "https://somyra.com/blog" },
-      { "@type": "ListItem", "position": 2, "name": "LinkedIn Profile Optimization Checklist", "item": "https://somyra.com/blog/linkedin-profile-optimization-checklist" }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Profile"
         title="LinkedIn Profile Optimization: The Complete Checklist for 2025"
         wordCount={1800}
@@ -469,7 +451,6 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
           </div>
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

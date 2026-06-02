@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,26 +90,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Blog", "item": "https://somyra.com/blog" },
-      { "@type": "ListItem", "position": 2, "name": "How to Write LinkedIn Posts That Get Engagement", "item": "https://somyra.com/blog/how-to-write-linkedin-posts-that-get-engagement" }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Content Writing"
         title="How to Write LinkedIn Posts That Actually Get Engagement"
         wordCount={2000}
@@ -407,7 +389,6 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
           </div>
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

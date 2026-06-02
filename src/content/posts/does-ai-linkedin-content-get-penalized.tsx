@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,42 +90,9 @@ const DoesAiLinkedinContentGetPenalized: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://somyra.online"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://somyra.online/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Does LinkedIn Penalize AI-Generated Content?",
-        "item": "https://somyra.online/blog/does-ai-linkedin-content-get-penalized"
-      }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Tools"
         title="Does LinkedIn Penalize AI-Generated Content? The Honest Answer"
         wordCount={1600}
@@ -462,7 +428,6 @@ Third and most importantly, there are no specific details. No real numbers. No s
 
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

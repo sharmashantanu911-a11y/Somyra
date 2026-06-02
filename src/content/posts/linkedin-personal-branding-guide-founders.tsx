@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,26 +90,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Blog", "item": "https://somyra.com/blog" },
-      { "@type": "ListItem", "position": 2, "name": "LinkedIn Personal Branding Guide for Founders", "item": "https://somyra.com/blog/linkedin-personal-branding-guide-founders" }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Personal Brand"
         title="The No-Nonsense LinkedIn Personal Branding Guide for Founders"
         wordCount={2200}
@@ -435,7 +417,6 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
           </div>
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

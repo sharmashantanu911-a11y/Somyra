@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,26 +90,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Blog", "item": "https://somyra.com/blog" },
-      { "@type": "ListItem", "position": 2, "name": "LinkedIn Outreach Strategy", "item": "https://somyra.com/blog/linkedin-outreach-strategy-that-gets-replies" }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Outreach"
         title="The LinkedIn Outreach Strategy That Actually Gets Replies"
         wordCount={1800}
@@ -396,7 +378,6 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
           </div>
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

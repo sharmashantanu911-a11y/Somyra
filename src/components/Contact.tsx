@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Mail, User, Briefcase, Bug, Linkedin, ExternalLink } from 'lucide-react';
+import { SEO } from './SEO';
 
 interface ContactProps {
   onBack: () => void;
@@ -42,7 +43,13 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
   ];
 
   return (
-    <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth w-full h-full">
+    <>
+      <SEO
+        title="Contact | Somyra"
+        description="Get in touch with the Somyra team. Support, business inquiries, press, or feedback — we typically respond within 24 to 48 hours."
+        canonical="https://somyra.online/contact"
+      />
+      <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth w-full h-full">
       <div className="w-full max-w-[800px] mx-auto px-6 py-20 md:py-32">
         <button 
           onClick={onBack}
@@ -117,5 +124,6 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
         </footer>
       </div>
     </div>
+    </>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { BlogPostLayout } from '../../components/seo/BlogPostLayout';
 
@@ -91,42 +90,9 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
     ]
   };
 
-  const breadcrumbSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://somyra.online"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://somyra.online/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "What Is the Best LinkedIn Post Generator in 2025?",
-        "item": "https://somyra.online/blog/best-linkedin-post-generator-2025"
-      }
-    ]
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchemaData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchemaData)}
-        </script>
-      </Helmet>
       <BlogPostLayout
+        faqSchema={faqSchemaData}
         category="Tools"
         title="What Is the Best LinkedIn Post Generator in 2025?"
         wordCount={1800}
@@ -457,7 +423,6 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
 
         </div>
       </BlogPostLayout>
-    </>
   );
 };
 

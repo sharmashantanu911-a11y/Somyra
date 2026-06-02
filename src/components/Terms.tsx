@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, FileText, CheckCircle2 } from 'lucide-react';
+import { SEO } from './SEO';
 
 interface TermsProps {
   onBack: () => void;
@@ -8,7 +9,13 @@ interface TermsProps {
 
 export const Terms: React.FC<TermsProps> = ({ onBack }) => {
   return (
-    <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth">
+    <>
+      <SEO
+        title="Terms of Service | Somyra"
+        description="Read the Terms of Service for Somyra — the AI-powered LinkedIn copilot for founders and professionals."
+        canonical="https://somyra.online/terms"
+      />
+      <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth">
       <div className="flex flex-col items-center w-full min-h-screen py-20 md:py-32 px-6">
         <div className="w-full max-w-[800px]">
           <button 
@@ -148,5 +155,6 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };

@@ -36,11 +36,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somyra.online/compare/somyra-vs-shield</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://somyra.online/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

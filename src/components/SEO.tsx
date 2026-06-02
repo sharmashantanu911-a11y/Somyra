@@ -10,6 +10,7 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   schema?: object;
+  schemas?: object[];
   noIndex?: boolean;
 }
 
@@ -22,6 +23,7 @@ export const SEO: React.FC<SEOProps> = ({
   ogImage,
   ogType = 'website',
   schema,
+  schemas,
   noIndex,
 }) => {
   const finalOgTitle = ogTitle || title;
@@ -70,6 +72,11 @@ export const SEO: React.FC<SEOProps> = ({
           {JSON.stringify(schema)}
         </script>
       )}
+      {schemas?.map((s, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(s)}
+        </script>
+      ))}
     </Helmet>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import SomyraFooter from './SomyraFooter';
+import { SEO } from './SEO';
 import {
   FileText,
   UserCircle,
@@ -740,7 +741,13 @@ export function LandingPage({
   };
 
   return (
-    <div className="w-full max-w-full overflow-x-hidden">
+    <>
+      <SEO
+        title="Somyra | The LinkedIn Copilot That Sounds Like You"
+        description="Elevate your LinkedIn presence with Somyra. AI-powered strategy, profile audits, and smart outreach designed for founders who take LinkedIn seriously."
+        canonical="https://somyra.online/"
+      />
+      <div className="w-full max-w-full overflow-x-hidden">
       {/* ── NAVBAR ── */}
       <nav className={`landing-nav${scrolled ? ' landing-nav-scrolled' : ''}`}>
         <button onClick={() => { scrollToHero(); setIsMobileMenuOpen(false); }} className="flex items-center gap-2 shrink-0">
@@ -1885,5 +1892,6 @@ export function LandingPage({
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 };
