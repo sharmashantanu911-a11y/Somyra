@@ -1731,72 +1731,98 @@ export function LandingPage({
       {/* ════════════════════════════════════════
          SECTION 12: GET IN TOUCH
          ════════════════════════════════════════ */}
-      <section className="w-full px-4 sm:px-8 py-12 md:py-24 relative z-10 border-t border-white/5">
-        <div className="max-w-[480px] mx-auto">
+      <section className="w-full px-4 sm:px-8 py-12 md:py-24 relative z-10 border-t border-white/5 overflow-hidden">
+        {/* Background glow */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#2DD4BF]/3 blur-[120px]" />
+        </div>
+
+        <div className="max-w-[480px] mx-auto relative">
+          {/* Section label */}
+          <div className="text-center mb-6">
+            <span className="type-overline text-[#2DD4BF] tracking-[0.15em]">CONTACT</span>
+          </div>
+
           {/* Headline */}
           <div className="text-center mb-10">
-            <h2 className="text-[clamp(1.5rem,4vw,2rem)] font-semibold text-white leading-[1.2] mb-3">
-              Have a question? Just reach out.
+            <h2 className="text-[clamp(1.5rem,4vw,2rem)] font-semibold text-white leading-[1.15] tracking-tight mb-4">
+              Have a question?<br />
+              <span className="text-[#2DD4BF]">Just reach out.</span>
             </h2>
-            <p className="text-[#888888] text-base">
-              No support tickets. No bots. You're talking directly to the founder.
+            <p className="text-[#888888] text-[15px] leading-relaxed max-w-[360px] mx-auto">
+              No support tickets. No bots. You&rsquo;re talking directly to the founder.
             </p>
           </div>
 
           {/* Trust pills */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[rgba(255,255,255,0.06)] text-sm text-[#aaa]">
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] text-[13px] text-[#999] backdrop-blur-sm">
               <Users className="w-3.5 h-3.5 text-[#2DD4BF]" />
-              500+ founders helped
+              <span>500+ founders helped</span>
             </div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[rgba(255,255,255,0.06)] text-sm text-[#aaa]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] text-[13px] text-[#999] backdrop-blur-sm">
               <Star className="w-3.5 h-3.5 text-[#2DD4BF]" />
-              4.9★ avg rating
+              <span>4.9&star; avg rating</span>
             </div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[rgba(255,255,255,0.06)] text-sm text-[#aaa]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] text-[13px] text-[#999] backdrop-blur-sm">
               <Zap className="w-3.5 h-3.5 text-[#2DD4BF]" />
-              &lt;4hr response time
+              <span>&lt;4hr response time</span>
             </div>
           </div>
 
           {/* Contact card */}
-          <div className="bg-[#141414] border border-[rgba(255,255,255,0.06)] border-t-2 border-t-[#2DD4BF]/40 rounded-2xl p-10 mx-4 sm:mx-0 text-center">
-            {/* Founder photo */}
-            <img
-              src="/images/founder.png"
-              alt="Shantanu Sharma"
-              className="w-20 h-20 rounded-full object-cover ring-2 ring-[#2DD4BF]/30 mx-auto mb-4"
-            />
+          <div className="relative group mx-4 sm:mx-0">
+            {/* Glow behind card */}
+            <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-[#2DD4BF]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-            {/* Name + title */}
-            <h3 className="text-xl font-semibold text-white">Shantanu</h3>
-            <p className="text-[#888888] text-sm mb-6">Founder, Somyra</p>
+            <div className="relative bg-gradient-to-b from-[#1a1a1a] to-[#141414] border border-white/[0.06] rounded-2xl p-8 sm:p-10 text-center shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)] hover:border-white/[0.10] transition-all duration-300">
+              {/* Subtle top accent */}
+              <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-[#2DD4BF]/40 to-transparent" />
 
-            {/* Primary CTA */}
-            <a
-              href="mailto:somyra@proton.me"
-              className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#2DD4BF] text-[#080808] font-bold rounded-xl hover:brightness-110 hover:scale-[1.02] active:scale-100 transition-all duration-200"
-            >
-              <Mail className="w-4 h-4" />
-              Send a Message
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <p className="text-[11px] text-[#555555] mt-1.5 mb-4">somyra@proton.me</p>
+              {/* Founder photo */}
+              <div className="relative inline-block mb-5">
+                <img
+                  src="/images/founder.png"
+                  alt="Shantanu Sharma"
+                  className="w-20 h-20 rounded-full object-cover"
+                />
+                <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#2DD4BF] flex items-center justify-center shadow-[0_0_12px_rgba(45,212,191,0.3)]">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#080808" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+              </div>
 
-            {/* Secondary CTA */}
-            <a
-              href="#"
-              className="flex items-center justify-center gap-2 w-full py-3.5 border border-[rgba(255,255,255,0.1)] text-white font-bold rounded-xl hover:bg-white/5 transition-all duration-200"
-            >
-              Book a Call
-              <ArrowRight className="w-4 h-4" />
-            </a>
+              {/* Name + title */}
+              <h3 className="text-xl font-semibold text-white mb-0.5">Shantanu</h3>
+              <p className="text-[#888888] text-sm mb-7">Founder, Somyra</p>
 
-            {/* Response time badge */}
-            <p className="text-xs text-[#555555] mt-4 flex items-center justify-center gap-1.5">
-              <Zap className="w-3 h-3" />
-              Usually replies within a few hours
-            </p>
+              {/* Divider */}
+              <div className="w-12 h-[1px] bg-white/[0.06] mx-auto mb-7" />
+
+              {/* Primary CTA */}
+              <a
+                href="mailto:somyra@proton.me"
+                className="group/btn inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#2DD4BF] text-[#080808] font-semibold text-[15px] rounded-xl hover:brightness-110 hover:shadow-[0_0_24px_rgba(45,212,191,0.25)] hover:scale-[1.02] active:scale-100 transition-all duration-200"
+              >
+                <Mail className="w-[18px] h-[18px]" />
+                Send a Message
+                <ArrowRight className="w-[18px] h-[18px] transition-transform duration-200 group-hover/btn:translate-x-0.5" />
+              </a>
+              <div className="mt-2 flex items-center justify-center gap-1.5">
+                <span className="w-1 h-1 rounded-full bg-[#555555]" />
+                <span className="text-[12px] text-[#555555] font-mono">somyra@proton.me</span>
+                <span className="w-1 h-1 rounded-full bg-[#555555]" />
+              </div>
+
+              {/* Response time badge */}
+              <div className="mt-6 pt-5 border-t border-white/[0.04]">
+                <p className="text-[12px] text-[#555555] flex items-center justify-center gap-1.5">
+                  <Zap className="w-3 h-3" />
+                  Usually replies within a few hours
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
