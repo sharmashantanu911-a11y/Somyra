@@ -189,9 +189,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
 
           {/* Author strip */}
           <div className="flex items-center gap-3 mt-8 pt-6 border-t border-white/5">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2DD4BF] to-teal-600 flex items-center justify-center text-black font-bold text-sm">
-              SS
-            </div>
+            <img src="/images/founder.png" alt="Shantanu Sharma" className="w-10 h-10 rounded-full object-cover ring-2 ring-[#2DD4BF]/30" />
             <div>
               <p className="text-sm font-bold text-white">Shantanu Sharma</p>
               <p className="text-xs text-[#555555]">Founder, Somyra</p>
@@ -325,9 +323,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
         {/* Author Bio */}
         <div className="mt-12 p-6 sm:p-8 bg-gradient-to-br from-[#0D0D0D] to-[#141414] border border-white/5 rounded-2xl">
           <div className="flex items-start gap-4">
-            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#2DD4BF] to-teal-600 flex items-center justify-center text-black font-bold text-lg shrink-0">
-              SS
-            </div>
+            <img src="/images/founder.png" alt="Shantanu Sharma" className="w-14 h-14 rounded-full object-cover ring-2 ring-[#2DD4BF]/30 shrink-0" />
             <div>
               <p className="text-base font-bold text-white mb-1">Shantanu Sharma</p>
               <p className="text-sm text-[#888888] leading-relaxed mb-3">

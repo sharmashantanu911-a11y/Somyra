@@ -18,9 +18,12 @@ import {
   X,
   Menu,
   ChevronRight,
+  Star,
   Minus,
   Plus,
-  Star,
+  Mail,
+  Users,
+  Clock,
   Globe,
   Shield,
   Zap,
@@ -1726,21 +1729,89 @@ export function LandingPage({
 
 
       {/* ════════════════════════════════════════
-         SECTION 12: FINAL CTA
+         SECTION 12: GET IN TOUCH
          ════════════════════════════════════════ */}
-      <section 
-        ref={useAnimationInView()}
-        data-animate="fade-in-up"
-        className="w-full px-4 sm:px-8 ds:px-0 py-8 md:py-20 ds:py-[120px] text-center relative z-10 border-t border-white/5 overflow-hidden"
+      <section className="w-full px-4 sm:px-8 py-12 md:py-24 relative z-10 border-t border-white/5">
+        <div className="max-w-[480px] mx-auto">
+          {/* Headline */}
+          <div className="text-center mb-10">
+            <h2 className="text-[clamp(1.5rem,4vw,2rem)] font-semibold text-white leading-[1.2] mb-3">
+              Have a question? Just reach out.
+            </h2>
+            <p className="text-[#888888] text-base">
+              No support tickets. No bots. You're talking directly to the founder.
+            </p>
+          </div>
+
+          {/* Trust pills */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[rgba(255,255,255,0.06)] text-sm text-[#aaa]">
+              <Users className="w-3.5 h-3.5 text-[#2DD4BF]" />
+              500+ founders helped
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[rgba(255,255,255,0.06)] text-sm text-[#aaa]">
+              <Star className="w-3.5 h-3.5 text-[#2DD4BF]" />
+              4.9★ avg rating
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[rgba(255,255,255,0.06)] text-sm text-[#aaa]">
+              <Zap className="w-3.5 h-3.5 text-[#2DD4BF]" />
+              &lt;4hr response time
+            </div>
+          </div>
+
+          {/* Contact card */}
+          <div className="bg-[#141414] border border-[rgba(255,255,255,0.06)] border-t-2 border-t-[#2DD4BF]/40 rounded-2xl p-10 mx-4 sm:mx-0 text-center">
+            {/* Founder photo */}
+            <img
+              src="/images/founder.png"
+              alt="Shantanu Sharma"
+              className="w-20 h-20 rounded-full object-cover ring-2 ring-[#2DD4BF]/30 mx-auto mb-4"
+            />
+
+            {/* Name + title */}
+            <h3 className="text-xl font-semibold text-white">Shantanu</h3>
+            <p className="text-[#888888] text-sm mb-6">Founder, Somyra</p>
+
+            {/* Primary CTA */}
+            <a
+              href="mailto:somyra@proton.me"
+              className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#2DD4BF] text-[#080808] font-bold rounded-xl hover:brightness-110 hover:scale-[1.02] active:scale-100 transition-all duration-200"
+            >
+              <Mail className="w-4 h-4" />
+              Send a Message
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <p className="text-[11px] text-[#555555] mt-1.5 mb-4">somyra@proton.me</p>
+
+            {/* Secondary CTA */}
+            <a
+              href="#"
+              className="flex items-center justify-center gap-2 w-full py-3.5 border border-[rgba(255,255,255,0.1)] text-white font-bold rounded-xl hover:bg-white/5 transition-all duration-200"
+            >
+              Book a Call
+              <ArrowRight className="w-4 h-4" />
+            </a>
+
+            {/* Response time badge */}
+            <p className="text-xs text-[#555555] mt-4 flex items-center justify-center gap-1.5">
+              <Zap className="w-3 h-3" />
+              Usually replies within a few hours
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+         SECTION 13: FINAL CTA
+         ════════════════════════════════════════ */}
+      <section className="w-full px-4 sm:px-8 ds:px-0 py-12 md:py-20 ds:py-[120px] text-center relative z-10 border-t border-white/5"
         style={{
           background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45,212,191,0.04) 0%, transparent 70%)'
         }}
       >
         <div className="max-w-[700px] mx-auto relative z-10">
           {/* Quote pill */}
-          <div
-            data-animate="fade-in-up"
-            className="flex justify-center mb-8"
+          <div className="flex justify-center mb-8"
           >
             <div className="inline-flex items-center gap-[10px] px-4 py-2 rounded-[999px] bg-[#141414] border border-white/[0.08] max-w-[calc(100vw-48px)] overflow-hidden">
               <Star className="w-[14px] h-[14px] text-[#F59E0B] fill-[#F59E0B] shrink-0" />
@@ -1752,10 +1823,7 @@ export function LandingPage({
           </div>
 
           {/* Headline */}
-          <div
-            data-animate="fade-in-up"
-            style={{ animationDelay: '0.15s' }}
-          >
+          <div>
             <h2 className="text-[26px] sm:text-[32px] ds:text-[44px] font-semibold text-white leading-[1.2] mx-auto" style={{ maxWidth: '640px' }}>
               Every week you stay quiet is a week<br />
               someone else takes your spot.
@@ -1763,20 +1831,14 @@ export function LandingPage({
           </div>
 
           {/* Subtext */}
-          <div
-            data-animate="fade-in-up"
-            style={{ animationDelay: '0.25s' }}
-          >
+          <div>
             <p className="text-[#999] text-base mt-4">
               Start free forever. No credit card. Takes 30 seconds.
             </p>
           </div>
 
           {/* CTA Button */}
-          <div
-            data-animate="fade-in-up"
-            style={{ animationDelay: '0.35s' }}
-          >
+          <div>
             <button
               onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
               className="mt-8 px-12 py-4 bg-[#2DD4BF] text-[#080808] font-bold text-[17px] rounded-xl hover:brightness-110 hover:scale-[1.02] active:scale-100 transition-all duration-200 btn-glow w-full sm:w-auto"
@@ -1786,11 +1848,7 @@ export function LandingPage({
           </div>
 
           {/* Trust badges */}
-          <div
-            data-animate="fade-in-up"
-            style={{ animationDelay: '0.45s' }}
-            className="mt-4"
-          >
+          <div className="mt-4">
             <div className="flex flex-row items-center justify-center gap-4 flex-nowrap max-[360px]:gap-[10px]">
               <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#999]">
                 <Lock className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
