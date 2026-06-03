@@ -1,13 +1,17 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import App from './App';
+import { competitorSlugs } from './data/compareData';
 
 const LinkedInPostGeneratorPage = lazy(() => import('./pages/LinkedInPostGeneratorPage'));
 const LinkedInProfileAuditPage = lazy(() => import('./pages/LinkedInProfileAuditPage'));
 const LinkedInDMGeneratorPage = lazy(() => import('./pages/LinkedInDMGeneratorPage'));
 const LinkedInHookGeneratorPage = lazy(() => import('./pages/LinkedInHookGeneratorPage'));
 const LinkedInTopicGeneratorPage = lazy(() => import('./pages/LinkedInTopicGeneratorPage'));
-const CompareTaplioPage = lazy(() => import('./pages/compare/CompareTaplioPage'));
+const CompareIndexPage = lazy(() => import('./pages/compare'));
+const ComparePage = lazy(() => import('./pages/compare/ComparePage'));
+const AlternativesIndexPage = lazy(() => import('./pages/alternatives'));
+const AlternativePage = lazy(() => import('./pages/alternatives/AlternativePage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
@@ -75,7 +79,14 @@ export const AppRoutes: React.FC = () => {
         <Route path="/linkedin-dm-generator" element={<LinkedInDMGeneratorPage />} />
         <Route path="/linkedin-hook-generator" element={<LinkedInHookGeneratorPage />} />
         <Route path="/linkedin-topic-generator" element={<LinkedInTopicGeneratorPage />} />
-        <Route path="/compare/somyra-vs-taplio" element={<CompareTaplioPage />} />
+        <Route path="/compare" element={<CompareIndexPage />} />
+        {competitorSlugs.map(slug => (
+          <Route key={`compare-${slug}`} path={`/compare/somyra-vs-${slug}`} element={<ComparePage competitorId={slug} />} />
+        ))}
+        <Route path="/alternatives" element={<AlternativesIndexPage />} />
+        {competitorSlugs.map(slug => (
+          <Route key={`alt-${slug}`} path={`/alternatives/somyra-vs-${slug}`} element={<AlternativePage competitorId={slug} />} />
+        ))}
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogRouter />} />
         <Route path="*" element={<NotFoundPage />} />
