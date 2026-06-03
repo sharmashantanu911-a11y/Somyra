@@ -499,14 +499,16 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
               </ul>
             </div>
 
-            {/* USE CASES */}
+            {/* COMPARE */}
             <div className="nav-col">
-              <p className="nav-col-title">Use Cases</p>
+              <p className="nav-col-title">Compare</p>
               <ul className="nav-list">
-                <li><FooterLink to="/signup">Founders</FooterLink></li>
-                <li><FooterLink to="/signup">Executives</FooterLink></li>
-                <li><FooterLink to="/signup">Sales Pros</FooterLink></li>
-                <li><FooterLink to="/signup">Consultants</FooterLink></li>
+                <li><FooterLink to="/compare/somyra-vs-taplio">Somyra vs Taplio</FooterLink></li>
+                <li><FooterLink to="/compare/somyra-vs-hootsuite">Somyra vs Hootsuite</FooterLink></li>
+                <li><FooterLink to="/compare/somyra-vs-buffer">Somyra vs Buffer</FooterLink></li>
+                <li><FooterLink to="/compare/somyra-vs-typefully">Somyra vs Typefully</FooterLink></li>
+                <li><FooterLink to="/compare/somyra-vs-supergrow">Somyra vs Supergrow</FooterLink></li>
+                <li style={{ marginTop: 10 }}><FooterLink to="/compare" className="highlight">View All Comparisons →</FooterLink></li>
               </ul>
             </div>
 
