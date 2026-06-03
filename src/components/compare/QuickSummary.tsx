@@ -21,7 +21,7 @@ export const QuickSummary: React.FC<QuickSummaryProps> = ({ summarySomyra, summa
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-[#141414] border border-[#2DD4BF]/20 shadow-[0_0_30px_rgba(45,212,191,0.05)] rounded-3xl p-8 flex flex-col justify-between h-full">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <h3 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2">
                 <SomyraLogo />
                 Somyra
               </h3>
@@ -44,7 +44,7 @@ export const QuickSummary: React.FC<QuickSummaryProps> = ({ summarySomyra, summa
 
           <div className="bg-[#141414] border border-white/5 rounded-3xl p-8 flex flex-col justify-between h-full">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">{competitorName}</h3>
+              <h3 className="text-2xl font-semibold text-white mb-4">{competitorName}</h3>
               <ul className="space-y-4 text-sm mb-8">
                 {summaryCompetitor.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -54,7 +54,7 @@ export const QuickSummary: React.FC<QuickSummaryProps> = ({ summarySomyra, summa
                 ))}
               </ul>
             </div>
-            <div className="text-xs text-center text-[#555555] font-semibold py-3 border border-white/5 rounded-xl uppercase tracking-wider">
+            <div className="type-caption text-center text-[#555555] py-3 border border-white/5 rounded-xl">
               Visit {competitorName}'s Website
             </div>
           </div>

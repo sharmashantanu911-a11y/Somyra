@@ -60,7 +60,7 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
         </button>
 
         <header className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">Contact</h1>
+          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">Contact</h1>
           <div className="text-[#A0A0A0] leading-[1.8] text-lg">
             We typically respond within 24 to 48 hours on business days to all inquiries.
           </div>
@@ -89,7 +89,7 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
                 <div className="space-y-2">
                   <a 
                     href={card.href}
-                    className="text-teal-accent font-black hover:opacity-80 transition-opacity inline-flex items-center gap-2"
+                    className="text-teal-accent font-semibold hover:opacity-80 transition-opacity inline-flex items-center gap-2"
                   >
                     {card.email}
                     <ExternalLink className="w-3 h-3" />

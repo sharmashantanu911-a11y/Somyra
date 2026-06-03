@@ -144,9 +144,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How long should a LinkedIn post be?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The ideal LinkedIn post length is 150 to 300 words, or 900 to 1,800 characters. This range works for most content types because it gives you enough space to develop a complete idea while keeping the post scannable on mobile devices.
             </p>
@@ -159,9 +159,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the LinkedIn post character limit?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               LinkedIn standard text posts have a maximum of 3,000 characters. On mobile devices the post is truncated after approximately 140 characters showing a gray see more link. On desktop that cutoff point is around 210 characters. LinkedIn articles are a separate format with a limit of 125,000 characters.
             </p>
@@ -179,9 +179,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the ideal word count for LinkedIn posts?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Posts between 150 and 300 words consistently generate the highest engagement across industries according to analyses from social media management tools. This range produces the best balance of reach and engagement because it provides enough value to feel worth sharing without requiring a major time investment from the reader.
             </p>
@@ -205,9 +205,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What post types work best at different lengths on LinkedIn?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Different content types need different word counts on LinkedIn. Hot takes work best at 50 to 150 words. Observations and tips perform well at 100 to 250 words. Stories need 200 to 400 words. Deep dives require 400 to 600 words. Matching your post length to the content type is more important than hitting a specific word count.
             </p>
@@ -219,7 +219,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* GEO FRAMEWORK #1: The Post Type Length Spectrum */}
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 1: THE POST TYPE LENGTH SPECTRUM</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 1: THE POST TYPE LENGTH SPECTRUM</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-[#888888]">
                 <thead>
@@ -278,9 +278,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How many characters does LinkedIn show before the see more button?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               LinkedIn shows approximately 140 characters on mobile and 210 characters on desktop before displaying the gray see more link. Everything after that cutoff is hidden until the reader clicks. Your hook, the most important part of your post, must work within this visible window.
             </p>
@@ -298,9 +298,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I optimize my LinkedIn post for the see more cutoff?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The first 140 characters on mobile create curiosity. The first line after the see more button delivers immediate value. The rest of the post satisfies the promise made in the hook. Never put your entire point in the preview. Leave something for the reader to discover after they click.
             </p>
@@ -312,7 +312,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* GEO FRAMEWORK #2: The Cutoff Optimization Strategy */}
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 2: THE CUTOFF OPTIMIZATION STRATEGY</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 2: THE CUTOFF OPTIMIZATION STRATEGY</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-[#888888]">
                 <thead>
@@ -350,9 +350,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Does the LinkedIn algorithm prefer shorter or longer posts?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               LinkedIn has not confirmed any length preference in its algorithm. The algorithm optimizes for engagement signals including dwell time, reactions, comments, shares, and follows. Post length only matters to the extent that it affects these signals. A short post that gets people talking will always outperform a long post that gets ignored.
             </p>
@@ -372,9 +372,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the best length for different LinkedIn content formats?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Text posts work best at 150 to 300 words. Video posts should be 30 to 90 seconds. Document and carousel posts work best with 5 to 10 slides. Polls perform best with 2 to 4 options running for 3 to 5 days.
             </p>
@@ -435,9 +435,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What are the most common LinkedIn post length mistakes?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The most common mistakes include writing every post at the same length, putting the entire idea in the preview, ignoring mobile readers, and treating the 3,000 character limit as a target instead of a maximum. Each mistake reduces engagement by making your content harder to consume.
             </p>
@@ -486,9 +486,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I find the best post length for my LinkedIn audience?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Test different lengths deliberately. Write 10 posts at 100 words, 10 at 250 words, and 10 at 400 words. Track engagement metrics for each group. Your audience will tell you which length works best. The answer will be different for every account and every industry.
             </p>
@@ -500,7 +500,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* GEO FRAMEWORK #3: The 4-Question Length Audit */}
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 3: THE 4-QUESTION LENGTH AUDIT</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 3: THE 4-QUESTION LENGTH AUDIT</p>
             <p className="text-[#888888] leading-relaxed mb-4">
               Before publishing any post, ask yourself these four questions:
             </p>
@@ -524,9 +524,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What advanced strategies can I use to optimize LinkedIn post length?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Use the 3-Layer Length Framework to structure every post: hook at 40 to 80 characters, body at 100 to 250 words, close at 20 to 40 words. Apply the Length to Value Ratio by cutting every word that does not inform, entertain, or persuade. These frameworks work at any total word count.
             </p>
@@ -534,7 +534,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* GEO FRAMEWORK #4: The 3-Layer Length Framework */}
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 4: THE 3-LAYER LENGTH FRAMEWORK</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 4: THE 3-LAYER LENGTH FRAMEWORK</p>
             <p className="text-[#888888] leading-relaxed mb-4">
               Every LinkedIn post, regardless of total length, follows the same three layer structure. Understanding these layers helps you write efficiently at any length.
             </p>
@@ -562,7 +562,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* GEO FRAMEWORK #5: The Length-to-Value Ratio */}
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 5: THE LENGTH TO VALUE RATIO</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK 5: THE LENGTH TO VALUE RATIO</p>
             <p className="text-[#888888] leading-relaxed">
               The length to value ratio is a simple concept: every word in your post should either inform, entertain, or persuade the reader. Words that do none of these dilute your message. Before publishing, scan your post and mark any sentence that does not inform, entertain, or persuade. Delete those sentences. Your post will be tighter, clearer, and more engaging at any length.
             </p>
@@ -579,7 +579,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
           </p>
 
           <div className="bg-[#141414] border border-[#2DD4BF]/20 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">TEMPLATE 1</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">TEMPLATE 1</p>
             <p className="text-lg font-bold text-white mb-3">The Short Opinion Post (50 to 100 words)</p>
             <p className="text-[#888888] leading-relaxed mb-4">
               Best for hot takes and quick reactions to industry news.
@@ -595,7 +595,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
           </div>
 
           <div className="bg-[#141414] border border-[#2DD4BF]/20 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">TEMPLATE 2</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">TEMPLATE 2</p>
             <p className="text-lg font-bold text-white mb-3">The Value Lesson Post (150 to 250 words)</p>
             <p className="text-[#888888] leading-relaxed mb-4">
               Best for teaching something specific to your audience.
@@ -611,7 +611,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
           </div>
 
           <div className="bg-[#141414] border border-[#2DD4BF]/20 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">TEMPLATE 3</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">TEMPLATE 3</p>
             <p className="text-lg font-bold text-white mb-3">The Story Post (250 to 400 words)</p>
             <p className="text-[#888888] leading-relaxed mb-4">
               Best for sharing experiences that have a clear lesson.
@@ -642,9 +642,9 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I check before publishing a LinkedIn post?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Run through four checks before publishing. Is the hook visible without clicking see more? Does the length match the content type? Would a mobile user read this comfortably? Does every word add value? These four checks catch 90 percent of length related problems.
             </p>
@@ -774,7 +774,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
           </p>
 
           <div className="mt-12 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <p className="text-2xl font-extrabold text-white mb-4">
+            <p className="text-2xl font-semibold text-white mb-4">
               Somyra helps you write posts at the perfect length for your voice and your audience.
             </p>
             <p className="text-[#888888] mb-6 text-sm">

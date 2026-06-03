@@ -127,9 +127,9 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I post on LinkedIn when I have no ideas?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Post about something that happened to you this week. A conversation with a customer. A decision you made. A mistake that cost you money. An opinion you formed while reading industry news. Your daily experience is full of content. The problem is not a lack of ideas. It is failing to recognize your own experience as valuable.
             </p>
@@ -138,9 +138,9 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">8 Content Sources You Already Have Access To</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Where can I find ideas for LinkedIn content?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The eight most reliable content sources are your customer conversations, your past experiences, your industry observations, your competitor analysis, your comments and DMs, your team's questions, your reading and learning, and your product or service insights. Each source can generate multiple post ideas without repeating yourself.
             </p>
@@ -203,7 +203,7 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
           </p>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: THE DAILY CONTENT CAPTURE SYSTEM</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: THE DAILY CONTENT CAPTURE SYSTEM</p>
             <div className="space-y-4">
               <div className="bg-[#0D0D0D] rounded-lg p-4">
                 <p className="text-[#2DD4BF] font-bold text-sm mb-1">Step 1: Capture daily</p>
@@ -321,7 +321,7 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
           </p>
 
           <div className="mt-12 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <p className="text-2xl font-extrabold text-white mb-4">
+            <p className="text-2xl font-semibold text-white mb-4">
               Turn your experience into a week of post ideas in 30 seconds.
             </p>
             <p className="text-[#888888] mb-6 text-sm">

@@ -74,8 +74,8 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({ content, user 
             </div>
             <div className="flex-1 min-w-0">
               <h4 className="text-sm font-semibold text-[#000000E6] truncate">{userName}</h4>
-              <p className="text-[12px] text-[#00000099] truncate">Your LinkedIn Headline</p>
-              <div className="flex items-center gap-1 text-[12px] text-[#00000099]">
+              <p className="type-caption text-[#00000099] truncate">Your LinkedIn Headline</p>
+              <div className="flex items-center gap-1 type-caption text-[#00000099]">
                 <span>1st degree</span>
                 <span>•</span>
                 <span>Just now</span>
@@ -121,9 +121,9 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({ content, user 
                   <span className="text-[8px]">💡</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#00000099]">{engagementCount}</span>
+              <span className="type-caption text-[#00000099]">{engagementCount}</span>
             </div>
-            <div className="text-[12px] text-[#00000099]">
+            <div className="type-caption text-[#00000099]">
               12 comments • 8 reposts
             </div>
           </div>
@@ -166,7 +166,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({ content, user 
             <span className="text-xs font-bold text-[#00000099] uppercase tracking-wider">Hashtags detected:</span>
             {hashtags.length > 0 ? (
               hashtags.map((tag, i) => (
-                <span key={i} className="px-2 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-md text-[10px] font-bold text-teal-accent">
+                <span key={i} className="px-2 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-md type-overline font-bold text-teal-accent">
                   {tag}
                 </span>
               ))
@@ -175,7 +175,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({ content, user 
             )}
           </div>
           {hashtags.length > 5 && (
-            <div className="text-[10px] text-orange-500 font-bold uppercase tracking-wider">
+            <div className="type-overline text-orange-500 font-bold">
               ⚠️ Too many hashtags can reduce reach. Keep it under 3
             </div>
           )}
@@ -183,7 +183,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({ content, user 
 
         {/* Footer & Copy Button */}
         <div className="flex flex-col items-center gap-4 pt-2">
-          <p className="text-[11px] text-[#00000099] italic">
+          <p className="type-overline text-[#00000099] italic">
             This is a preview only. Copy your post and paste it on LinkedIn to publish.
           </p>
           <button

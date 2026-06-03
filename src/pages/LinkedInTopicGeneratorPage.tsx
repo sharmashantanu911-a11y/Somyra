@@ -93,7 +93,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
               AI Topic & Idea Generator
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               Never Stare at a Blank <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DD4BF] to-teal-400">
                 Screen Again
@@ -129,7 +129,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#2DD4BF]/5 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-white mb-6">
+              <h2 className="text-3xl font-semibold text-white mb-6">
                 The LinkedIn Consistency Problem Isn't Discipline
               </h2>
               <p className="text-slate-400 text-base leading-relaxed mb-4">
@@ -147,7 +147,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               What Somyra Actually Generates
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -193,7 +193,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-b border-white/5">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -247,7 +247,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
             <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
                 Always Know What to Post Next
               </h2>
               <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">

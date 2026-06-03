@@ -105,7 +105,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
               Next-Gen AI LinkedIn Copilot
             </div>
             
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               Stop Writing LinkedIn Posts <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DD4BF] to-teal-400">
                 From Scratch
@@ -143,7 +143,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
       <section id="problem" className="py-20 border-t border-white/5 bg-[#0D0D0D]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Why Most AI LinkedIn Content Falls Flat
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-base">
@@ -212,7 +212,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
       <section id="how-it-works" className="py-20 bg-[#080808]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               How Somyra Is Different
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-base">
@@ -222,7 +222,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative p-6">
-              <div className="text-5xl font-black text-[#2DD4BF]/20 mb-4">01</div>
+              <div className="text-5xl font-semibold text-[#2DD4BF]/20 mb-4">01</div>
               <h3 className="text-xl font-bold text-white mb-3">Build Your Voice Profile</h3>
               <p className="text-sm text-[#888888] leading-relaxed">
                 Paste 3–5 of your real LinkedIn posts. Somyra parses and analyzes your tone, line spacing, dynamic rhythms, and sentence style.
@@ -230,7 +230,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
             </div>
 
             <div className="relative p-6">
-              <div className="text-5xl font-black text-[#2DD4BF]/20 mb-4">02</div>
+              <div className="text-5xl font-semibold text-[#2DD4BF]/20 mb-4">02</div>
               <h3 className="text-xl font-bold text-white mb-3">Pick a Topic or Hook</h3>
               <p className="text-sm text-[#888888] leading-relaxed">
                 Choose from highly tailored, AI-generated topics tailored to your industry, or write down your own draft thoughts and rough bullet points.
@@ -238,7 +238,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
             </div>
 
             <div className="relative p-6">
-              <div className="text-5xl font-black text-[#2DD4BF]/20 mb-4">03</div>
+              <div className="text-5xl font-semibold text-[#2DD4BF]/20 mb-4">03</div>
               <h3 className="text-xl font-bold text-white mb-3">Generate & Refine</h3>
               <p className="text-sm text-[#888888] leading-relaxed">
                 Get multiple creative post variants matching your voice profile perfectly. Edit seamlessly, review previews, and format instantly.
@@ -252,7 +252,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-b border-white/5">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               What Somyra-Generated Posts Look Like
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-base">
@@ -263,7 +263,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Generic Output */}
             <div className="bg-[#141414]/50 border border-white/5 rounded-2xl p-8 flex flex-col justify-between relative">
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-bold uppercase tracking-wider">
+              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 type-overline font-bold">
                 Generic AI Output
               </div>
               <div className="mt-4">
@@ -275,7 +275,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
 
             {/* Somyra Output */}
             <div className="bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 flex flex-col justify-between relative shadow-[0_0_30px_rgba(45,212,191,0.05)]">
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 text-[#2DD4BF] text-[11px] font-bold uppercase tracking-wider">
+              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 text-[#2DD4BF] type-overline font-bold">
                 Somyra Output
               </div>
               <div className="mt-4">
@@ -304,7 +304,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -358,7 +358,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
             <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
                 Your LinkedIn Voice, Amplified
               </h2>
               <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">

@@ -110,7 +110,7 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
           </p>
 
           <div className="mt-8 bg-[#1a1a1a] border border-[#333] rounded-2xl p-6">
-            <h3 className="text-xl font-extrabold text-white mb-3">The Short Answer</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">The Short Answer</h3>
             <p className="text-[#2DD4BF] font-semibold leading-relaxed">
               Optimize your headline to state who you help and what outcome you create. Write your About section with a problem-first formula. Use the Featured section to pin your best content. Add results-based bullet points to every role. Get five to ten specific recommendations. Everything else is secondary.
             </p>
@@ -124,9 +124,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What makes a good LinkedIn profile photo?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               A high resolution headshot taken within the last year. Face the camera directly. Wear what your clients expect. Use a plain background. Your photo should occupy 60 percent of the frame. Profiles with professional photos get 21 times more views.
             </p>
@@ -145,9 +145,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I put on my LinkedIn banner?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Use the space to reinforce your value proposition. Include a key achievement or your brand. Use the correct size of 1584 by 396 pixels. Keep text minimal and readable. Avoid stock photos. Your banner is prime real estate that most people waste.
             </p>
@@ -166,9 +166,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I write a great LinkedIn headline?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Use the formula: outcome for target audience. 'Helping B2B SaaS founders generate pipeline through LinkedIn content.' Include keywords your audience searches for. Keep it under 220 characters. Update it every six months. Skip buzzwords like strategic and results-driven.
             </p>
@@ -192,9 +192,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I optimize my LinkedIn About section?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Open with the reader's problem. Write in first person. Keep it 200 to 400 words. Include one specific result with a number. End with a clear call to action. Skip the words passionate and seasoned. Every sentence should make the reader want to reach out.
             </p>
@@ -213,9 +213,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How should I write my LinkedIn experience section?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Write three to five bullet points per role. Start each with an action verb. Include a specific number or result in every bullet. Remove bullets that describe basic responsibilities. Each role should tell a story about impact, not a list of duties.
             </p>
@@ -246,9 +246,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I pin in my LinkedIn Featured section?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Pin three to five items that demonstrate your expertise. Your best performing post. A case study. A link to your website. A press mention. Update this monthly. The Featured section is the first thing visitors see after the fold. Do not leave it empty.
             </p>
@@ -267,9 +267,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Which skills should I list on my LinkedIn profile?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               List 10 to 15 skills maximum. Prioritize skills that match your current positioning. Remove outdated or irrelevant skills. Order them by importance. Skills help LinkedIn's algorithm determine who shows up in search results for relevant terms.
             </p>
@@ -288,9 +288,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How many LinkedIn recommendations should I have?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Aim for five to ten. Request them from clients who got results and managers who respect your work. Quality matters more than quantity. A detailed recommendation with specific results is worth more than a generic one. Write the recommendation for them if they are busy.
             </p>
@@ -309,9 +309,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Should I customize my LinkedIn URL?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Yes. A custom URL with your name looks professional and is easier to include on business cards and email signatures. Go to Settings and edit your public profile URL. Add your website and contact info to make it easy for people to take the next step.
             </p>
@@ -326,9 +326,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How should I manage my LinkedIn activity feed?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Post at least three times per week to keep your activity section active. Unlike and delete comments that do not align with your positioning. Your last 10 activity items should all reinforce your expertise. Low quality engagement reflects poorly on your profile.
             </p>
@@ -372,9 +372,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What are common LinkedIn profile mistakes?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Inconsistent branding across sections, outdated information that signals inactivity, and no call to action at the end of your profile. Every section should reinforce the same positioning, be kept current, and tell visitors what to do next.
             </p>
@@ -400,7 +400,7 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Somyra's Deep Strategy audit analyzes your entire profile and tells you exactly what to fix.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Somyra's Deep Strategy audit analyzes your entire profile and tells you exactly what to fix.</h3>
             <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-profile-checklist-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
           </div>
 
@@ -408,9 +408,9 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I measure my LinkedIn profile performance?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Check profile views weekly to see if your headline and photo are working. Review search appearance keywords to ensure your skills match what prospects search for. Track inbound message rate as the ultimate test. If views are high but messages are low, fix your About section.
             </p>
@@ -446,7 +446,7 @@ const LinkedinProfileOptimizationChecklist: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Not sure where to start? Let Somyra audit your profile for free.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Not sure where to start? Let Somyra audit your profile for free.</h3>
             <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-profile-checklist-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Run My Audit</Link>
           </div>
         </div>

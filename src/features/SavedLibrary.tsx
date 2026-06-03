@@ -67,12 +67,12 @@ export function SavedLibrary({
                 <div className="flex items-center gap-2">
                   <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Saved Library</h2>
                   {isMax ? (
-                    <span className="text-[10px] font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20 uppercase tracking-widest">MAX</span>
+                    <span className="type-overline font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20">MAX</span>
                   ) : isPro ? (
-                    <span className="text-[10px] font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20 uppercase tracking-widest">PRO</span>
+                    <span className="type-overline font-bold bg-teal-accent/10 text-teal-accent px-1.5 py-0.5 rounded border border-teal-accent/20">PRO</span>
                   ) : null}
                 </div>
-                <p className="text-[13px] md:text-sm text-muted">
+                <p className="type-sm text-muted">
                   Your collection of generated personal branding assets.
                 </p>
               </div>
@@ -90,7 +90,7 @@ export function SavedLibrary({
               {savedItems.length > 0 && (
                 <button
                   onClick={() => setShowDeleteAllSavedConfirm(true)}
-                  className="inline-flex items-center gap-2 rounded-xl border border-red-400/20 bg-red-400/5 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-red-400 transition-all hover:border-red-400/40 hover:bg-red-400/10"
+                  className="inline-flex items-center gap-2 rounded-xl border border-red-400/20 bg-red-400/5 px-3 py-2 type-overline font-bold text-red-400 transition-all hover:border-red-400/40 hover:bg-red-400/10"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   Delete all
@@ -145,7 +145,7 @@ export function SavedLibrary({
                 >
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${
+                      <span className={`px-2.5 py-1 rounded-lg type-overline font-bold ${
                         item.type === 'Post' ? 'bg-teal-accent/10 text-teal-accent' :
                         item.type === 'Topic' ? 'bg-emerald-500/10 text-emerald-400' :
                         item.type === 'Headline' ? 'bg-teal-accent/10 text-teal-accent' :
@@ -153,7 +153,7 @@ export function SavedLibrary({
                       }`}>
                         {item.type}
                       </span>
-                      <span className="text-[10px] text-muted font-medium">
+                      <span className="type-overline text-muted font-medium">
                         {new Date(item.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     </div>
@@ -172,7 +172,7 @@ export function SavedLibrary({
                       </button>
                     </div>
                   </div>
-                  <p className="text-[13px] md:text-sm text-slate-300 leading-relaxed whitespace-pre-wrap line-clamp-6 group-hover:line-clamp-none transition-all duration-500">
+                  <p className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap line-clamp-6 group-hover:line-clamp-none transition-all duration-500">
                     {item.content}
                   </p>
                 </motion.div>

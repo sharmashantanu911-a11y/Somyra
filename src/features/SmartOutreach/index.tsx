@@ -31,13 +31,13 @@ export function SmartOutreach(props: SmartOutreachProps) {
       <div className="section-heading">
         <div>
           <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Smart Outreach</h2>
-          <p className="text-[13px] md:text-sm text-muted">Generate hyper-personalized DMs and track responses.</p>
+          <p className="type-sm text-muted">Generate hyper-personalized DMs and track responses.</p>
         </div>
         <div className="flex items-start gap-2 sm:gap-4">
           {props.voicePosts.length > 0 && (
             <div className="flex items-center gap-2 px-3.5 py-1.5 sm:py-2 rounded-full bg-teal-accent/10 border border-teal-accent/20 min-h-[30px] sm:min-h-[34px]">
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-teal-accent rounded-full animate-pulse" />
-              <span className="text-xs sm:text-[13px] font-bold text-teal-accent uppercase tracking-wider">Voice Active</span>
+              <span className="type-overline font-bold text-teal-accent">Voice Active</span>
             </div>
           )}
           <props.GenerationCounter feature="smart_outreach" />

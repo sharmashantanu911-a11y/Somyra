@@ -52,8 +52,8 @@ function Section({
   return (
     <section className="rounded-[28px] border border-white/8 bg-[#101010] p-5 sm:p-7">
       <div className="mb-5 space-y-2">
-        {eyebrow && <p className="text-[11px] font-black uppercase tracking-[0.22em] text-teal-accent/80">{eyebrow}</p>}
-        <h3 className="text-2xl font-black text-white sm:text-[30px]">{title}</h3>
+        {eyebrow && <p className="type-overline font-semibold text-teal-accent/80">{eyebrow}</p>}
+        <h3 className="text-2xl font-semibold text-white sm:text-[30px]">{title}</h3>
       </div>
       {children}
     </section>
@@ -94,11 +94,11 @@ function RewriteCard({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-teal-accent">{title}</p>
+              <p className="type-overline font-semibold text-teal-accent">{title}</p>
               {isLocked && canRegenerate && (
                 <div className="group relative">
                   <Lock className="h-3 w-3 text-[#555555]" />
-                  <div className="absolute left-1/2 bottom-full mb-2 -translate-x-1/2 scale-0 rounded-lg bg-black px-2 py-1 text-[10px] font-bold text-white transition-transform group-hover:scale-100 whitespace-nowrap z-10 border border-white/10 shadow-xl">
+                  <div className="absolute left-1/2 bottom-full mb-2 -translate-x-1/2 scale-0 rounded-lg bg-black px-2 py-1 type-overline font-bold text-white transition-transform group-hover:scale-100 whitespace-nowrap z-10 border border-white/10 shadow-xl">
                     Upgrade to Pro to unlock unlimited regenerations.
                   </div>
                 </div>
@@ -145,7 +145,7 @@ function RewriteCard({
             className="absolute inset-0 bg-[#0d1514]/80 backdrop-blur-[2px] flex flex-col items-center justify-center z-20"
           >
             <Loader2 className="h-6 w-6 animate-spin text-teal-accent mb-2" />
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-accent">Regenerating {title}...</p>
+            <p className="type-overline font-semibold text-teal-accent">Regenerating {title}...</p>
           </motion.div>
         )}
         <p className="whitespace-pre-wrap text-base leading-8 text-white">{body}</p>
@@ -349,12 +349,12 @@ export function ProfileAnalysisResults(props: {
             <ArrowLeft className="h-4 w-4" />
             Start over
           </button>
-          <span className={`inline-flex rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] ${statusTone}`}>
+          <span className={`inline-flex rounded-full border px-4 py-2 type-overline font-semibold ${statusTone}`}>
             {statusLabel}
           </span>
           {scoreDelta !== null && (
             <span
-              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] ${
+              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 type-overline font-semibold ${
                 scoreDelta >= 0
                   ? 'border-green-500/20 bg-green-500/10 text-green-400'
                   : 'border-red-500/20 bg-red-500/10 text-red-400'
@@ -389,22 +389,22 @@ export function ProfileAnalysisResults(props: {
       <section className="panel-fluid rounded-[32px] border border-teal-accent/12 bg-[radial-gradient(circle_at_top_right,rgba(45,212,191,0.14),transparent_30%),linear-gradient(180deg,#121212_0%,#0b0b0b_100%)] p-6 sm:p-8 lg:p-10">
         <div className="flex flex-col gap-8">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#8f8f8f]">
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 type-overline font-semibold text-[#8f8f8f]">
               Profile diagnosis
             </span>
-            <span className="rounded-full border border-teal-accent/20 bg-teal-accent/10 px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-teal-accent">
+            <span className="rounded-full border border-teal-accent/20 bg-teal-accent/10 px-3 py-2 type-overline font-semibold text-teal-accent">
               Built for {roleLabel}
             </span>
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 type-overline font-semibold text-white">
               Score {profile.overallScore || 0}/100
             </span>
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#b9b9b9]">
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 type-overline font-semibold text-[#b9b9b9]">
               {isStrategic ? 'Deep Strategy' : 'Quick Audit'}
             </span>
           </div>
 
           <div className="min-w-0 space-y-5">
-            <h2 className="wrap-safe max-w-5xl text-4xl font-black leading-[1.08] text-white sm:text-5xl">
+            <h2 className="wrap-safe max-w-5xl text-4xl font-semibold leading-[1.08] text-white sm:text-5xl">
               {profile.verdict || 'Your profile has clear room to improve.'}
             </h2>
             <p className="wrap-safe max-w-3xl text-base leading-8 text-[#b9b9b9]">
@@ -424,13 +424,13 @@ export function ProfileAnalysisResults(props: {
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-[24px] border border-red-500/14 bg-red-500/[0.05] p-5 sm:p-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-red-400">What it says now</p>
+              <p className="type-overline font-semibold text-red-400">What it says now</p>
               <p className="wrap-safe mt-4 text-base leading-8 text-white">
                 {profile.communicates || 'The current positioning is unclear.'}
               </p>
             </div>
             <div className="rounded-[24px] border border-teal-accent/14 bg-teal-accent/[0.05] p-5 sm:p-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-teal-accent">What to do next</p>
+              <p className="type-overline font-semibold text-teal-accent">What to do next</p>
               <p className="wrap-safe mt-4 text-base leading-8 text-[#effffb]">
                 {profile.nextStep?.description ||
                   'Tighten your positioning, then rebuild the headline and about section around a clearer result.'}
@@ -443,14 +443,14 @@ export function ProfileAnalysisResults(props: {
       <Section title="About your profile" eyebrow="Read this before editing anything">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)]">
           <div className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-6 sm:p-7">
-            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-teal-accent">Current story</p>
+            <p className="type-overline font-semibold text-teal-accent">Current story</p>
             <p className="mt-5 text-lg leading-9 text-white">
               {profile.communicates || profile.verdict || 'Your profile currently communicates an unclear value proposition.'}
             </p>
 
             {hasText(profile.nextStep?.action) && (
               <div className="mt-6 rounded-[20px] border border-teal-accent/14 bg-teal-accent/[0.05] p-5">
-                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-teal-accent">Most important move</p>
+                <p className="type-overline font-semibold text-teal-accent">Most important move</p>
                 <p className="mt-3 text-lg font-bold text-white">{profile.nextStep.action}</p>
                 {hasText(profile.nextStep?.description) && (
                   <p className="mt-3 text-base leading-8 text-[#e8fffb]">{profile.nextStep.description}</p>
@@ -461,8 +461,8 @@ export function ProfileAnalysisResults(props: {
 
           <div className="grid gap-4">
             <div className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8a8a8a]">Status</p>
-              <p className="mt-3 text-3xl font-black text-white">{statusLabel}</p>
+              <p className="type-overline font-semibold text-[#8a8a8a]">Status</p>
+              <p className="mt-3 text-3xl font-semibold text-white">{statusLabel}</p>
               <p className="mt-3 text-base leading-8 text-[#bdbdbd]">
                 {profile.overallScore >= 85
                   ? 'Your profile already reads as highly credible. The main job now is sharpening conversion.'
@@ -475,7 +475,7 @@ export function ProfileAnalysisResults(props: {
             </div>
 
             <div className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8a8a8a]">Best next use</p>
+              <p className="type-overline font-semibold text-[#8a8a8a]">Best next use</p>
               <p className="mt-3 text-base leading-8 text-[#e5e5e5]">
                 Update your headline and about section first. Those are the two blocks that decide whether someone
                 understands you and keeps reading.
@@ -517,7 +517,7 @@ export function ProfileAnalysisResults(props: {
                 <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
                   <div className="min-w-0">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-red-500/10 text-sm font-black text-red-400">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-red-500/10 text-sm font-semibold text-red-400">
                         {index + 1}
                       </div>
                       <div className="min-w-0">
@@ -527,7 +527,7 @@ export function ProfileAnalysisResults(props: {
                     </div>
                   </div>
                   <div className="rounded-[20px] border border-teal-accent/14 bg-teal-accent/[0.06] p-5">
-                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-teal-accent">Fix</p>
+                    <p className="type-overline font-semibold text-teal-accent">Fix</p>
                     <p className="mt-3 text-base leading-8 text-[#effffb]">{problem.fix}</p>
                   </div>
                 </div>
@@ -546,7 +546,7 @@ export function ProfileAnalysisResults(props: {
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-accent/10">
                     <entry.icon className="h-4 w-4 text-teal-accent" />
                   </div>
-                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#808080]">{entry.label}</p>
+                  <p className="type-overline font-semibold text-[#808080]">{entry.label}</p>
                 </div>
                 <p className="mt-4 text-base leading-8 text-[#e4e4e4]">{entry.value}</p>
               </div>
@@ -561,8 +561,8 @@ export function ProfileAnalysisResults(props: {
             {lensEntries.map(([key, lens]: [string, any]) => (
               <div key={key} className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#808080]">{formatLabel(key)}</p>
-                  <p className="text-sm font-black text-white">{lens?.score ?? 0}/100</p>
+                  <p className="type-overline font-semibold text-[#808080]">{formatLabel(key)}</p>
+                  <p className="text-sm font-semibold text-white">{lens?.score ?? 0}/100</p>
                 </div>
                 <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/6">
                   <div
@@ -583,8 +583,8 @@ export function ProfileAnalysisResults(props: {
             {scoreEntries.map(([key, value]: [string, any]) => (
               <div key={key} className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#a8a8a8]">{formatLabel(key)}</p>
-                  <p className="text-sm font-black text-white">{value}%</p>
+                  <p className="type-overline font-semibold text-[#a8a8a8]">{formatLabel(key)}</p>
+                  <p className="text-sm font-semibold text-white">{value}%</p>
                 </div>
                 <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/8">
                   <div className="h-full rounded-full bg-teal-accent" style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
@@ -602,7 +602,7 @@ export function ProfileAnalysisResults(props: {
               <div key={`${rewrite.section}-${index}`} className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-6">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="min-w-0">
-                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-teal-accent">{rewrite.section}</p>
+                    <p className="type-overline font-semibold text-teal-accent">{rewrite.section}</p>
                     {hasText(rewrite.strategy) && <p className="mt-2 text-base leading-8 text-[#999999]">{rewrite.strategy}</p>}
                   </div>
                   <button
@@ -617,11 +617,11 @@ export function ProfileAnalysisResults(props: {
 
                 <div className="mt-5 grid gap-4 lg:grid-cols-2">
                   <div className="rounded-[20px] border border-red-500/10 bg-red-500/[0.03] p-4">
-                    <p className="text-[11px] font-black uppercase tracking-[0.16em] text-red-400">Before</p>
+                    <p className="type-overline font-semibold text-red-400">Before</p>
                     <p className="mt-3 text-base leading-8 text-[#a5a5a5]">{rewrite.original || 'No original content provided.'}</p>
                   </div>
                   <div className="rounded-[20px] border border-teal-accent/12 bg-teal-accent/[0.05] p-4">
-                    <p className="text-[11px] font-black uppercase tracking-[0.16em] text-teal-accent">After</p>
+                    <p className="type-overline font-semibold text-teal-accent">After</p>
                     <p className="mt-3 whitespace-pre-wrap text-base leading-8 text-white">{rewrite.suggested}</p>
                   </div>
                 </div>
@@ -653,14 +653,14 @@ export function ProfileAnalysisResults(props: {
             {profile.actionPlan.map((step: any, index: number) => (
               <div key={`${step.title}-${index}`} className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-6">
                 <div className="flex flex-col gap-4 md:flex-row md:items-start">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-accent text-sm font-black text-black">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-accent text-sm font-semibold text-black">
                     {index + 1}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                       <p className="text-xl font-bold text-white">{step.title}</p>
                       {hasText(step.effort) && (
-                        <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#bcbcbc]">
+                        <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 type-overline font-semibold text-[#bcbcbc]">
                           {step.effort} effort
                         </span>
                       )}
@@ -717,7 +717,7 @@ export function ProfileAnalysisResults(props: {
           <div className="rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5">
             <div className="flex items-center gap-3">
               <Eye className="h-5 w-5 text-teal-accent" />
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-teal-accent">Insight</p>
+              <p className="type-overline font-semibold text-teal-accent">Insight</p>
             </div>
             <p className="mt-3 text-base leading-8 text-white">{randomInsight}</p>
           </div>

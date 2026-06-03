@@ -166,20 +166,20 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
         {/* Header */}
         <header className="mb-12">
           <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="text-[11px] font-extrabold text-[#2DD4BF] uppercase tracking-[0.12em] bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 px-3 py-1.5 rounded-lg">
+            <span className="type-overline text-[#2DD4BF] bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 px-3 py-1.5 rounded-lg">
               {category}
             </span>
-            <span className="text-[11px] font-bold text-[#555555] uppercase tracking-[0.1em] flex items-center gap-1.5">
+            <span className="type-overline font-bold text-[#555555] flex items-center gap-1.5">
               <Clock className="w-3 h-3" />
               {publishedDate}
             </span>
-            <span className="text-[11px] font-bold text-[#555555] uppercase tracking-[0.1em] flex items-center gap-1.5">
+            <span className="type-overline font-bold text-[#555555] flex items-center gap-1.5">
               <BookOpen className="w-3 h-3" />
               {readTime} MIN READ
             </span>
           </div>
 
-          <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-extrabold tracking-tight text-white leading-[1.12] mb-6">
+          <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-semibold tracking-tight text-white leading-[1.12] mb-6">
             {title}
           </h1>
 
@@ -202,10 +202,10 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
         {/* Content */}
         <style>{proseStyles}</style>
         <div className="blog-content prose prose-invert prose-lg max-w-none
-          prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-white
+          prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-white
           prose-h2:text-[clamp(1.35rem,3.5vw,1.75rem)] prose-h2:mt-12 prose-h2:mb-4
           prose-h3:text-[clamp(1.1rem,2.5vw,1.35rem)] prose-h3:mt-8 prose-h3:mb-3
-          prose-p:text-[#A0A0A0] prose-p:leading-[1.75] prose-p:text-[15px] sm:prose-p:text-[16px]
+          prose-p:text-[#A0A0A0] prose-p:leading-[1.75] prose-p:text-[16px]
           prose-strong:text-white prose-strong:font-bold
           prose-li:text-[#A0A0A0] prose-li:leading-[1.75]
           prose-blockquote:border-l-[#2DD4BF] prose-blockquote:text-[#A0A0A0] prose-blockquote:font-normal prose-blockquote:not-italic
@@ -259,7 +259,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
                   to={`/blog/${post.slug}`}
                   className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group"
                 >
-                  <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">
+                  <span className="type-caption text-[#555555]">
                     {post.category}
                   </span>
                   <h4 className="text-sm font-bold text-white mt-2 leading-snug group-hover:text-[#2DD4BF] transition-colors">
@@ -282,7 +282,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
                   to={`/blog/${post.slug}`}
                   className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group"
                 >
-                  <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">
+                  <span className="type-caption text-[#555555]">
                     {post.category}
                   </span>
                   <h4 className="text-sm font-bold text-white mt-2 leading-snug group-hover:text-[#2DD4BF] transition-colors">
@@ -302,7 +302,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
                 to={`/blog/${prevPost.slug}`}
                 className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group text-left"
               >
-                <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">Previous</span>
+                <span className="type-caption text-[#555555]">Previous</span>
                 <h4 className="text-sm font-bold text-white mt-1 leading-snug group-hover:text-[#2DD4BF] transition-colors">
                   {prevPost.title}
                 </h4>
@@ -313,7 +313,7 @@ export const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({
                 to={`/blog/${nextPost.slug}`}
                 className="bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-all group text-right"
               >
-                <span className="text-[10px] font-extrabold text-[#555555] uppercase tracking-widest">Next</span>
+                <span className="type-caption text-[#555555]">Next</span>
                 <h4 className="text-sm font-bold text-white mt-1 leading-snug group-hover:text-[#2DD4BF] transition-colors">
                   {nextPost.title}
                 </h4>

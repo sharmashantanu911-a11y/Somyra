@@ -89,7 +89,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
               Scroll-Stopping Hook Generator
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               Your First Line Is Killing <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-[#2DD4BF]">
                 Your LinkedIn Posts
@@ -123,12 +123,12 @@ const LinkedInHookGeneratorPage: React.FC = () => {
           <div className="bg-[#141414] border border-white/5 rounded-3xl p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-8 shadow-2xl">
             {/* HSL Teal stat circle */}
             <div className="flex flex-col items-center justify-center shrink-0 w-32 h-32 rounded-full border border-[#2DD4BF]/20 bg-[#2DD4BF]/5 text-center">
-              <span className="text-4xl font-extrabold text-[#2DD4BF]">95%</span>
-              <span className="text-[10px] text-[#888888] font-bold uppercase tracking-wider">Bounce</span>
+              <span className="text-4xl font-semibold text-[#2DD4BF]">95%</span>
+              <span className="type-overline text-[#888888] font-bold">Bounce</span>
             </div>
 
             <div>
-              <h2 className="text-2xl font-extrabold text-white mb-4">
+              <h2 className="text-2xl font-semibold text-white mb-4">
                 The first 3 lines of your LinkedIn post determine whether 95% of your audience sees anything else.
               </h2>
               <p className="text-slate-400 text-sm leading-relaxed">
@@ -143,7 +143,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               8 Hook Formulas That Work on LinkedIn
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -154,7 +154,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">01. The Contrarian</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">01. The Contrarian</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Challenges a common industry belief or standard best practice.
                 </p>
@@ -166,7 +166,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">02. The Number Hook</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">02. The Number Hook</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Brings specific, highly credible metrics or statistics to support authority.
                 </p>
@@ -178,7 +178,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">03. The Story Opening</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">03. The Story Opening</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Instantly drops the reader right into a high-stakes, narrative moment.
                 </p>
@@ -190,7 +190,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">04. The Bold Claim</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">04. The Bold Claim</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Asserts an uncompromising opinion or statement worth debating.
                 </p>
@@ -202,7 +202,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">05. The Question</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">05. The Question</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Generates an immediate psychological curiosity or knowledge gap.
                 </p>
@@ -214,7 +214,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">06. Relatable Struggle</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">06. Relatable Struggle</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Instantly names a universal pain point that your audience struggles with daily.
                 </p>
@@ -226,7 +226,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">07. Value Promise</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">07. Value Promise</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Sets clear expectations and tells the reader exactly what they will gain.
                 </p>
@@ -238,7 +238,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
 
             <div className="bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
-                <div className="text-[11px] font-bold text-[#2DD4BF] uppercase tracking-widest mb-2">08. The Observation</div>
+                <div className="type-overline font-bold text-[#2DD4BF] mb-2">08. The Observation</div>
                 <p className="text-xs text-[#888888] mb-4 leading-relaxed">
                   Points out a compelling behavioral pattern or industry shift.
                 </p>
@@ -255,7 +255,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-b border-white/5">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -309,7 +309,7 @@ const LinkedInHookGeneratorPage: React.FC = () => {
             <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
                 Write Hooks That Make People Stop Scrolling
               </h2>
               <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">

@@ -29,15 +29,15 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
           <header className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-accent/10 border border-teal-accent/20 mb-6">
               <FileText className="w-3.5 h-3.5 text-teal-accent" />
-              <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest">Legal Document</span>
+              <span className="type-overline text-teal-accent">Legal Document</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Terms of Service</h1>
+            <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 tracking-tight">Terms of Service</h1>
             <p className="text-muted font-medium">Last updated: April 3, 2026</p>
           </header>
 
           <div className="space-y-12 text-[#A0A0A0] leading-[1.8] text-[15px] md:text-base">
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">01.</span> Introduction
               </h2>
               <div className="space-y-4">
@@ -50,14 +50,14 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">02.</span> Communications
               </h2>
               <p>By creating an account on our Service, you agree to receive product updates, feature announcements, and occasional promotional materials. You may opt out of non-essential communications at any time by following the unsubscribe link in any email or by contacting us at <a href="mailto:somyra@proton.me" className="text-teal-accent font-bold hover:underline">support@somyra.in</a>.</p>
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">03.</span> Purchases
               </h2>
               <div className="space-y-4">
@@ -69,7 +69,7 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">04.</span> Subscriptions
               </h2>
               <div className="space-y-4">
@@ -82,14 +82,14 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">05.</span> Fee Changes
               </h2>
               <p>We reserve the right to modify subscription fees at any time. Any fee changes will take effect at the start of the next billing cycle following reasonable prior notice to you via email. Your continued use of the Service after a fee change constitutes your agreement to the updated pricing.</p>
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">06.</span> Refunds and Cancellations
               </h2>
               <div className="space-y-4">
@@ -100,14 +100,14 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">07.</span> Free Tier
               </h2>
               <p>We offer a free tier with limited usage that does not require a payment method. We reserve the right to modify, limit, or discontinue the free tier at any time without prior notice. Free tier usage is subject to these Terms in the same manner as paid subscriptions.</p>
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">08.</span> Content
               </h2>
               <div className="space-y-4">
@@ -120,7 +120,7 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">09.</span> Prohibited Uses
               </h2>
               <div className="space-y-4">
@@ -138,7 +138,7 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">10.</span> Analytics
               </h2>
               <p>We use Google Analytics to monitor and analyze usage of our Service. Google Analytics collects data such as pages visited, time spent, and device information to help us improve the Service.</p>
@@ -146,9 +146,9 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
 
             <section className="pb-20">
               <div className="p-8 rounded-[32px] bg-white/5 border border-white/10 text-center">
-                <h3 className="text-white font-black mb-4 uppercase tracking-widest text-sm">Have Questions?</h3>
+                <h3 className="type-caption text-white font-semibold mb-4">Have Questions?</h3>
                 <p className="text-muted mb-6">If you have any questions about these Terms, please contact us.</p>
-                <a href="mailto:somyra@proton.me" className="text-teal-accent font-black hover:opacity-80 transition-opacity">support@somyra.in</a>
+                <a href="mailto:somyra@proton.me" className="text-teal-accent font-semibold hover:opacity-80 transition-opacity">support@somyra.in</a>
               </div>
             </section>
           </div>

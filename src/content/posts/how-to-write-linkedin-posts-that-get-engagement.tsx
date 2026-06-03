@@ -110,7 +110,7 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
           </p>
 
           <div className="mt-8 bg-[#1a1a1a] border border-[#333] rounded-2xl p-6">
-            <h3 className="text-xl font-extrabold text-white mb-3">The Short Answer</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">The Short Answer</h3>
             <p className="text-[#2DD4BF] font-semibold leading-relaxed">
               Open with a hook that names a specific problem. Include tension by stating a contrarian opinion or naming what is broken. Keep paragraphs under three sentences. End with a question. Reply to every comment within 24 hours. Do this three to five times per week and your engagement will grow consistently.
             </p>
@@ -124,9 +124,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the formula for LinkedIn engagement?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Hook plus tension plus specificity equals reaction. The hook makes them stop scrolling. The tension makes them want to know more. The specificity makes the post credible. The reaction is the comment, share, or message. If any element is missing, engagement drops.
             </p>
@@ -152,9 +152,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I create tension in a LinkedIn post?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Name a common belief and challenge it. Name a common frustration and explain why the obvious solution fails. Create a gap between what the reader believes and what you are about to tell them. The reader needs to read the rest of the post to close that gap.
             </p>
@@ -178,9 +178,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How should I structure a LinkedIn post for maximum engagement?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Line 1 to 2 is the hook that names a problem. Line 3 to 5 creates tension by explaining what is broken. Line 6 to 10 delivers the insight with a specific example. Line 11 to 12 ends with a question that invites the reader to share their experience.
             </p>
@@ -214,9 +214,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Why does specificity matter in LinkedIn posts?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Specific details create credibility. Generality creates skepticism. Replace adjectives with numbers. Replace 'many clients' with a specific count. Replace 'significantly' with a percentage. The more specific your post, the more believable and useful it becomes.
             </p>
@@ -246,9 +246,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I write LinkedIn comments that drive engagement?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Acknowledge something specific from the post. Add your own perspective or experience. End with a question. Never write 'great post' or 'totally agree.' A thoughtful comment on one post per day is worth more than ten generic comments.
             </p>
@@ -272,9 +272,9 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I do after publishing a LinkedIn post?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Share the post with relevant groups and connections in the first 15 minutes. Reply to every comment within the first hour. Check periodically for new comments over the next 24 hours. Review weekly to identify which topics and formats performed best.
             </p>
@@ -357,7 +357,7 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Somyra writes engaging LinkedIn posts in your voice in seconds.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Somyra writes engaging LinkedIn posts in your voice in seconds.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-engagement-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
@@ -384,7 +384,7 @@ const HowToWriteLinkedinPostsThatGetEngagement: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Stop guessing what works. Start posting content that gets results.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Stop guessing what works. Start posting content that gets results.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-engagement-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Get Started Free</Link>
           </div>
         </div>

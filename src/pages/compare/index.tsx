@@ -16,7 +16,7 @@ const CompareIndexPage: React.FC = () => {
       <section className="relative overflow-hidden py-24 sm:py-32 bg-[#080808]">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#2DD4BF]/5 rounded-full blur-[140px] pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
             Somyra vs The Competition
           </h1>
           <p className="text-lg sm:text-xl text-[#888888] max-w-2xl mx-auto leading-relaxed font-medium">

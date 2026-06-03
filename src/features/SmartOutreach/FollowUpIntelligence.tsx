@@ -134,7 +134,7 @@ export function FollowUpIntelligence({
         {draft && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3 pt-6 border-t border-white/5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <h3 className="text-[11px] md:text-sm font-semibold text-muted uppercase tracking-widest">Follow-Up Draft</h3>
+              <h3 className="type-overline font-semibold text-muted">Follow-Up Draft</h3>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => handleSave('Outreach', draft, 'save-fup')}
@@ -155,7 +155,7 @@ export function FollowUpIntelligence({
               </div>
             </div>
             <div className="bg-bg-secondary border border-border-card p-5 md:p-6 rounded-2xl hover:border-teal-accent/30 transition-colors duration-300">
-              <p className="text-[13px] md:text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{draft}</p>
+              <p className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{draft}</p>
             </div>
           </motion.div>
         )}

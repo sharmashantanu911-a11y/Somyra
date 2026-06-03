@@ -29,15 +29,15 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
           <header className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-accent/10 border border-teal-accent/20 mb-6">
               <ShieldCheck className="w-3.5 h-3.5 text-teal-accent" />
-              <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest">Privacy Policy</span>
+              <span className="type-overline text-teal-accent">Privacy Policy</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Privacy Policy</h1>
+            <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 tracking-tight">Privacy Policy</h1>
             <p className="text-muted font-medium">Last updated: April 3, 2026</p>
           </header>
 
           <div className="space-y-12 text-[#A0A0A0] leading-[1.8] text-[15px] md:text-base">
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">01.</span> Introduction
               </h2>
               <div className="space-y-4">
@@ -49,7 +49,7 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">02.</span> Information We Collect
               </h2>
               <div className="space-y-4">
@@ -69,14 +69,14 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">03.</span> Tracking and Cookies
               </h2>
               <p>We use cookies and similar tracking technologies to monitor activity on the Service and store certain information. You can instruct your browser to refuse all cookies, however, some parts of the Service may not function properly if cookies are disabled.</p>
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">04.</span> How We Use Your Data
               </h2>
               <ul className="list-disc ml-6 space-y-2">
@@ -90,14 +90,14 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">05.</span> Data Retention
               </h2>
               <p>We retain your personal data only for as long as necessary to fulfill the purposes described in this Privacy Policy. If you delete your account, we will delete or anonymize your personal data within 30 days, except where retention is required by law.</p>
             </section>
 
             <section>
-              <h2 className="text-white text-xl font-black mb-6 flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-teal-accent/40">06.</span> Security of Data
               </h2>
               <p>We take the security of your data seriously and implement commercially reasonable technical and organizational measures to protect it. However, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security of your data.</p>
@@ -106,9 +106,9 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
             <section className="pb-20">
               <div className="p-8 rounded-[32px] bg-white/5 border border-white/10 text-center">
                 <Lock className="w-8 h-8 text-teal-accent mx-auto mb-4" />
-                <h3 className="text-white font-black mb-4 uppercase tracking-widest text-sm">Your Data, Your Control</h3>
+                <h3 className="type-caption text-white font-semibold mb-4">Your Data, Your Control</h3>
                 <p className="text-muted mb-6 px-10">You have the right to access, correct, or delete your personal data at any time. Simply contact us to exercise these rights.</p>
-                <a href="mailto:somyra@proton.me" className="text-teal-accent font-black hover:opacity-80 transition-opacity">support@somyra.in</a>
+                <a href="mailto:somyra@proton.me" className="text-teal-accent font-semibold hover:opacity-80 transition-opacity">support@somyra.in</a>
               </div>
             </section>
           </div>

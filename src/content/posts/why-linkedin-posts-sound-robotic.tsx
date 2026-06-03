@@ -110,7 +110,7 @@ const WhyRoboticPosts: React.FC = () => {
           </p>
 
           <div className="mt-8 bg-[#1a1a1a] border border-[#333] rounded-2xl p-6">
-            <h3 className="text-xl font-extrabold text-white mb-3">The Short Answer</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">The Short Answer</h3>
             <p className="text-[#2DD4BF] font-semibold leading-relaxed">
               AI produces robotic LinkedIn content because it is trained to be polite, helpful, and inoffensive. This training eliminates the specific opinions, rough edges, and varied sentence structures that make human writing interesting. The fix is to train the AI on your actual writing and edit every output before posting.
             </p>
@@ -128,9 +128,9 @@ const WhyRoboticPosts: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Why does AI produce robotic LinkedIn content?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               AI models are trained to be helpful, harmless, and polite through RLHF or reinforcement learning from human feedback. This training eliminates the specific opinions, rough edges, and varied sentence structures that make human writing interesting. The model defaults to corporate speak.
             </p>
@@ -152,9 +152,9 @@ const WhyRoboticPosts: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How can I tell if a LinkedIn post was written by AI?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Look for the same rhythm in every sentence, a relentlessly positive tone, generic observations without specifics, overuse of transition words like moreover and furthermore, and no clear point of view. Real humans have range in tone, structure, and opinion.
             </p>
@@ -189,9 +189,9 @@ const WhyRoboticPosts: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Does robotic LinkedIn content hurt my brand?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Yes. When readers recognize AI content, they question your effort and credibility. The algorithm also penalizes low engagement. Generic AI posts get fewer comments and shares. This creates a cycle of decreasing reach. Human written content with real opinions consistently outperforms AI generated posts.
             </p>
@@ -265,7 +265,7 @@ const WhyRoboticPosts: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Somyra learns your voice so your posts never sound robotic.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Somyra learns your voice so your posts never sound robotic.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-robotic-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
@@ -284,7 +284,7 @@ const WhyRoboticPosts: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Write posts that sound like you. Get started free.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Write posts that sound like you. Get started free.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-robotic-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Get Started</Link>
           </div>
         </div>

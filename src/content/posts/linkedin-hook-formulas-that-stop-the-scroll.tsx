@@ -127,9 +127,9 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is a hook in a LinkedIn post?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               A hook is the first one or two lines of a LinkedIn post, visible before the see more cutoff. Its only job is to make the reader click. A strong hook creates curiosity, names a specific problem, or makes a claim worth engaging with. If the hook fails, the rest of the post is invisible.
             </p>
@@ -138,9 +138,9 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Why Your Hook Matters More Than Your Post</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Why is the hook the most important part of a LinkedIn post?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Because the hook is the only part most people see. LinkedIn shows approximately 140 characters on mobile before the see more button. If your hook does not create curiosity in those 140 characters, the rest of your post does not exist to the reader. The hook determines whether your post gets read or scrolled past.
             </p>
@@ -167,9 +167,9 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The 7 Hook Formulas</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What are the most effective LinkedIn hook formulas?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The seven most effective hook formulas are the problem hook, the contrarian hook, the result hook, the question hook, the story hook, the data hook, and the direct address hook. Each creates curiosity through a different mechanism. The best formula depends on your topic and audience.
             </p>
@@ -301,9 +301,9 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">How to Choose the Right Hook Formula</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I choose the right hook for my LinkedIn post?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Match the hook to your objective. Use the problem hook for educational content. Use the contrarian hook for opinion pieces. Use the result hook for case studies. Use the question hook to spark discussion. Use the story hook for personal narratives. Use the data hook for research. Use the direct address hook for actionable advice.
             </p>
@@ -314,7 +314,7 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
           </p>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: HOOK SELECTION MATRIX</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: HOOK SELECTION MATRIX</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-[#888888]">
                 <thead>
@@ -470,7 +470,7 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
           </p>
 
           <div className="mt-12 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <p className="text-2xl font-extrabold text-white mb-4">
+            <p className="text-2xl font-semibold text-white mb-4">
               Somyra generates hook variants for your posts in your own voice.
             </p>
             <p className="text-[#888888] mb-6 text-sm">

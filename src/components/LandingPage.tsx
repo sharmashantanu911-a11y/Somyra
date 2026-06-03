@@ -193,7 +193,7 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   <p 
     ref={useAnimationInView()}
     data-animate="fade-in-up"
-    className="text-[11px] md:text-[13px] font-black uppercase tracking-[0.3em] text-[#2DD4BF] mb-5 md:mb-7"
+    className="type-overline text-[#2DD4BF] mb-5 md:mb-7"
   >
     {children}
   </p>
@@ -203,7 +203,7 @@ const SectionHeading = ({ children, className = '' }: { children: React.ReactNod
   <h2 
     ref={useAnimationInView()}
     data-animate="fade-in-up"
-    className={`w-full text-[28px] md:text-[40px] lg:text-[52px] font-extrabold text-white leading-[1.1] tracking-tight ${className}`}
+    className={`type-display text-white ${className}`}
   >
     {children}
   </h2>
@@ -274,7 +274,7 @@ const ReviewCard = ({ review, idx }: { review: typeof hardcodedReviewsRow1[0]; i
       </div>
     </div>
     <div className="mt-3 md:mt-4">
-      <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 text-[10px] md:text-[11px] font-semibold tracking-[0.05em] uppercase">
+      <span className="inline-block px-[10px] py-[4px] rounded-[20px] bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 type-overline">
         {review.badge}
       </span>
     </div>
@@ -502,7 +502,7 @@ const PricingCard = ({
     <div className="absolute inset-0 pointer-events-none rounded-3xl z-10 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
 
     {badge && (
-      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg z-20">
+      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-1 type-overline shadow-lg z-20">
         <div className={`rounded-full px-3 py-0.5 ${
           name === 'Max' ? 'bg-gradient-to-r from-red-400 to-red-600 text-white shadow-red-500/20' : 
           'bg-teal-accent text-black shadow-teal-accent/20'
@@ -513,12 +513,12 @@ const PricingCard = ({
     )}
     
     <div className="mb-6 text-left">
-      <span className={`text-[10px] font-bold tracking-[2px] uppercase ${
+      <span className={`type-overline ${
         name === 'Pro' ? 'text-teal-accent' : 
         name === 'Max' ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]' : 'text-[#888888]'
       }`}>{name === 'Free' ? 'FREE' : name === 'Pro' ? 'PRO' : 'MAX'}</span>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className={`text-[32px] ds:text-[44px] font-black text-white leading-none ${name === 'Max' ? 'text-red-500' : ''}`}>{isAnnual ? annualPrice : monthlyPrice}</span>
+        <span className={`text-[32px] ds:text-[44px] font-semibold text-white leading-none ${name === 'Max' ? 'text-red-500' : ''}`}>{isAnnual ? annualPrice : monthlyPrice}</span>
         <span className="text-[13px] text-[#888888]">/mo</span>
       </div>
       {isAnnual && annualBilling && (
@@ -530,7 +530,7 @@ const PricingCard = ({
     </div>
 
     <div className="space-y-4 mb-8 flex-grow">
-      {name === 'Free' && <p className="text-[10px] font-bold text-[#888888] tracking-[2px] uppercase">INCLUDES</p>}
+      {name === 'Free' && <p className="type-overline text-[#888888]">INCLUDES</p>}
       <ul className="space-y-3 mt-4">
         {features.map((f, i) => (
           <li key={i} className="flex items-start gap-3 text-[13px] leading-snug text-white/90">
@@ -551,7 +551,7 @@ const PricingCard = ({
 
     <button 
       onClick={onClick}
-      className={`w-full py-4 rounded-2xl text-[14px] font-black transition-all shadow-xl ${
+      className={`w-full py-4 rounded-2xl text-[14px] font-bold transition-all shadow-xl ${
         name === 'Pro' ? 'bg-teal-accent text-black hover:shadow-teal-accent/40 shadow-teal-accent/20' : 
         name === 'Max' ? 'bg-red-500 text-white hover:shadow-red-500/40 shadow-red-500/20' : 
         'border border-white/10 text-white hover:bg-white/[0.03]'
@@ -618,12 +618,12 @@ const Counter = ({ value, label }: { value: string; label: string }) => {
       <p 
         ref={useAnimationInView()}
         data-animate="fade-in-scale"
-        className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter tabular-nums mb-2.5"
+        className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white tracking-tighter tabular-nums mb-2.5"
       >
         {count.toLocaleString()}{suffix}
       </p>
       <div className="h-[2.5rem] flex items-start justify-center">
-        <p className="text-[10px] md:text-[11px] text-[#888] font-bold uppercase tracking-[0.2em] leading-tight max-w-[100px] md:max-w-[130px]">
+        <p className="type-overline text-[#888] leading-tight max-w-[100px] md:max-w-[130px]">
           {label}
         </p>
       </div>
@@ -734,7 +734,7 @@ export function LandingPage({
               <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
             </svg>
           </div>
-          <span className="font-[family-name:var(--font-display)] font-bold text-[17px] text-white tracking-tight -mb-0.5">Somyra</span>
+          <span className="font-semibold text-[17px] text-white tracking-tight -mb-0.5">Somyra</span>
         </button>
         <div className="hidden md:flex items-center gap-5">
           <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
@@ -829,7 +829,7 @@ export function LandingPage({
                 Explore
               </button>
               <div className="px-4 py-3">
-                <p className="text-[10px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-3">Features</p>
+                <p className="type-overline text-[#888] mb-3">Features</p>
                 <div className="flex flex-col gap-0.5">
                   <Link to="/linkedin-post-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
                     <PenTool className="w-4 h-4 text-[#2DD4BF] shrink-0" />
@@ -910,7 +910,7 @@ export function LandingPage({
           </div>
 
           {/* Headline */}
-          <h1 className="font-[family-name:var(--font-display)] text-[clamp(30px,5vw,56px)] font-extrabold leading-[1.15] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
+          <h1 className="text-[clamp(36px,6vw,60px)] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
             Your LinkedIn sounds like everyone else.
             <br />
             Somyra makes it sound like{' '}
@@ -1004,13 +1004,13 @@ export function LandingPage({
         <div className="max-w-[896px] mx-auto">
           {/* Label */}
           <div className="text-center mb-6 sm:mb-8 ds:mb-10">
-            <span className="text-[#2DD4BF] uppercase text-[12px] font-semibold tracking-[0.2em]">
+            <span className="type-overline text-[#2DD4BF]">
               WHAT YOU GET
             </span>
           </div>
 
           {/* Headline */}
-          <h2 className="text-[28px] ds:text-[40px] font-bold text-white leading-[1.2] ds:leading-[1.15] tracking-tight text-center mb-5 sm:mb-6">
+          <h2 className="text-[28px] ds:text-[40px] font-semibold text-white leading-[1.2] ds:leading-[1.15] tracking-tight text-center mb-5 sm:mb-6">
             Go from invisible to someone people<br />
             actually notice on LinkedIn.
           </h2>
@@ -1052,7 +1052,7 @@ export function LandingPage({
                 >
                   <card.icon className="w-[18px] h-[18px] ds:w-5 ds:h-5 text-[#2DD4BF]" />
                 </div>
-                <h3 className="text-[17px] font-bold text-white mb-2 leading-snug">{card.title}</h3>
+                <h3 className="font-semibold text-[17px] text-white mb-2 leading-snug">{card.title}</h3>
                 <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{card.body}</p>
               </div>
             ))}
@@ -1070,13 +1070,13 @@ export function LandingPage({
         <div className="max-w-5xl mx-auto">
           {/* Section label */}
           <div className="text-center mb-5 sm:mb-6">
-            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+            <span className="text-[#2DD4BF] uppercase type-overline">
               EVERYTHING YOU NEED
             </span>
           </div>
 
           {/* Headline */}
-          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
+          <h2 className="font-semibold text-[30px] ds:text-[42px] text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
             Six tools that all write<br />
             in your voice.
           </h2>
@@ -1139,8 +1139,8 @@ export function LandingPage({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2, ease: "ease" }}
                 >
-                  <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em] mb-3 block">{activeFeature.tag}</span>
-                  <h3 className="text-[18px] md:text-2xl font-bold text-white mb-4 leading-tight">{activeFeature.title}</h3>
+                  <span className="text-[#2DD4BF] uppercase type-overline mb-3 block">{activeFeature.tag}</span>
+                  <h3 className="font-semibold text-[18px] md:text-2xl text-white mb-4 leading-tight">{activeFeature.title}</h3>
                   <p className="text-[#A0A0A0] text-[14px] md:text-[15px] leading-[1.7] mb-6 max-w-full">{activeFeature.body}</p>
                   <div className="space-y-3">
                     {activeFeature.dots.map((dot, i) => (
@@ -1167,13 +1167,13 @@ export function LandingPage({
         <div className="max-w-[1060px] mx-auto relative z-10">
           {/* Label */}
           <div className="text-center mb-5">
-            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+            <span className="text-[#2DD4BF] uppercase type-overline">
               THE PROCESS
             </span>
           </div>
 
           {/* Headline */}
-          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
+          <h2 className="font-semibold text-[30px] ds:text-[42px] text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
             From signup to your first post.<br />
             Takes less than five minutes.
           </h2>
@@ -1219,7 +1219,7 @@ export function LandingPage({
                     style={{ backgroundColor: 'rgba(45,212,191,0.08)', border: '1px solid rgba(45,212,191,0.2)' }}>
                     {step.num}
                   </div>
-                  <h3 className="text-[17px] font-bold text-white leading-snug mb-2">{step.title}</h3>
+                  <h3 className="font-semibold text-[17px] text-white leading-snug mb-2">{step.title}</h3>
                   <p className="text-[#888] text-[14px] leading-[1.7] flex-grow">{step.body}</p>
                 </div>
               ))}
@@ -1259,7 +1259,7 @@ export function LandingPage({
 
               <div className="text-center">
                 <p className="text-white text-[14px] md:text-base font-medium">Full product walkthrough</p>
-                <p className="text-[#2DD4BF] text-[11px] md:text-[13px] uppercase tracking-[0.1em] mt-1 font-semibold">Coming soon</p>
+                <p className="type-overline text-[#2DD4BF] mt-1">Coming soon</p>
               </div>
             </div>
           </div>
@@ -1270,12 +1270,12 @@ export function LandingPage({
       <section className="w-full px-4 py-8 md:py-[60px] ds:py-[80px] bg-[#0D0D0D] relative z-10 border-t border-white/5">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-6 sm:mb-8 ds:mb-10">
-            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+            <span className="text-[#2DD4BF] uppercase type-overline">
               WHY SOMYRA
             </span>
           </div>
 
-          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
+          <h2 className="font-semibold text-[30px] ds:text-[42px] text-white leading-[1.15] tracking-tight text-center mb-4 sm:mb-5">
             Other tools cost more and<br />
             none of them write like you.
           </h2>
@@ -1297,7 +1297,7 @@ export function LandingPage({
                 <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] bg-[#141414] text-[13px] font-semibold" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                   <div className="p-[16px_20px] text-white">Features</div>
                   <div className="p-[16px_20px] text-center relative" style={{ background: 'rgba(45,212,191,0.06)', borderLeft: '1px solid rgba(45,212,191,0.15)', borderRight: '1px solid rgba(45,212,191,0.15)' }}>
-                    <span className="px-[10px] py-[3px] rounded-full bg-[#2DD4BF] text-[#080808] text-[10px] font-bold uppercase tracking-[0.08em] mb-1.5 inline-block">
+                    <span className="px-[10px] py-[3px] rounded-full bg-[#2DD4BF] text-[#080808] type-overline mb-1.5 inline-block">
                       BEST VALUE
                     </span>
                     <div className="text-white">Somyra</div>
@@ -1392,9 +1392,9 @@ export function LandingPage({
           {/* Bottom CTA */}
           <div className="mt-10 sm:mt-16 text-center">
             <div className="text-center mb-5">
-              <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">THE BOTTOM LINE</span>
+              <span className="text-[#2DD4BF] uppercase type-overline">THE BOTTOM LINE</span>
             </div>
-            <h3 className="text-[24px] ds:text-[32px] font-bold text-white mb-5 leading-tight">
+            <h3 className="font-semibold text-[24px] ds:text-[32px] text-white mb-5 leading-tight">
               More features. Lower price.<br />No risk to your account.
             </h3>
             <button
@@ -1430,7 +1430,7 @@ export function LandingPage({
               <div className="inline-flex items-center gap-1.5 sm:gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1">
                 <button
                   onClick={() => setIsAnnual(false)}
-                  className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-bold transition-all whitespace-nowrap ${
+                  className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full type-caption font-semibold transition-all whitespace-nowrap ${
                     !isAnnual ? 'bg-white/10 text-white shadow-xl' : 'text-[#888] hover:text-white'
                   }`}
                 >
@@ -1438,14 +1438,14 @@ export function LandingPage({
                 </button>
                 <button
                   onClick={() => setIsAnnual(true)}
-                  className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-bold transition-all flex items-center gap-1 sm:gap-2 whitespace-nowrap ${
+                  className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full type-caption font-semibold transition-all flex items-center gap-1 sm:gap-2 whitespace-nowrap ${
                     isAnnual ? 'bg-teal-accent/10 text-teal-accent border border-teal-accent/20' : 'text-[#888] hover:text-white'
                   }`}
                 >
                   Annual
                 </button>
                 {isAnnual && (
-                  <span className="text-[9px] sm:text-[10px] text-teal-accent font-bold mr-1 sm:mr-2 animate-pulse whitespace-nowrap">Save up to 35%</span>
+                  <span className="type-overline text-teal-accent font-semibold mr-1 sm:mr-2 animate-pulse whitespace-nowrap">Save up to 35%</span>
                 )}
               </div>
             </div>
@@ -1676,12 +1676,12 @@ export function LandingPage({
       >
         <div className="max-w-[896px] mx-auto">
           <div className="text-center mb-5 sm:mb-6 ds:mb-8">
-            <span className="text-[#2DD4BF] uppercase text-[11px] font-semibold tracking-[0.12em]">
+            <span className="text-[#2DD4BF] uppercase type-overline">
               QUESTIONS
             </span>
           </div>
 
-          <h2 className="text-[30px] ds:text-[42px] font-bold text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
+          <h2 className="font-semibold text-[30px] ds:text-[42px] text-white leading-[1.15] tracking-tight text-center mb-8 sm:mb-10 ds:mb-12">
             Stuff people ask<br />
             before signing up.
           </h2>
@@ -1756,7 +1756,7 @@ export function LandingPage({
             data-animate="fade-in-up"
             style={{ animationDelay: '0.15s' }}
           >
-            <h2 className="text-[26px] sm:text-[32px] ds:text-[44px] font-extrabold text-white leading-[1.2] mx-auto" style={{ maxWidth: '640px' }}>
+            <h2 className="text-[26px] sm:text-[32px] ds:text-[44px] font-semibold text-white leading-[1.2] mx-auto" style={{ maxWidth: '640px' }}>
               Every week you stay quiet is a week<br />
               someone else takes your spot.
             </h2>

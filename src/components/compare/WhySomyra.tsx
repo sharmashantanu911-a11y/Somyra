@@ -10,7 +10,7 @@ export const WhySomyra: React.FC<WhySomyraProps> = ({ features }) => {
     <section className="py-20 bg-[#080808]">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
             Why Somyra?
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -26,7 +26,7 @@ export const WhySomyra: React.FC<WhySomyraProps> = ({ features }) => {
                   <Check className="w-4 h-4 text-[#2DD4BF]" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-base mb-2">{item.feature}</h3>
+                  <h3 className="text-white font-semibold text-base mb-2">{item.feature}</h3>
                   <p className="text-sm text-[#888888] leading-relaxed">{item.description}</p>
                 </div>
               </div>

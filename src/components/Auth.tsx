@@ -205,7 +205,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Email */}
                     <div className="space-y-1.5">
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] ml-1">
+                      <label className="block type-overline font-bold text-[#888888] ml-1">
                         Email Address
                       </label>
                       <div className="relative">
@@ -226,7 +226,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                     {/* Password */}
                     {mode !== 'forgot' && (
                       <div className="space-y-1.5">
-                        <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] ml-1">
+                        <label className="block type-overline font-bold text-[#888888] ml-1">
                           Password
                         </label>
                         <div className="relative">
@@ -259,7 +259,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                         <button
                           type="button"
                           onClick={() => switchMode('forgot')}
-                          className="text-[11px] text-[#888888] hover:text-teal-accent transition-colors font-semibold"
+                          className="type-overline text-[#888888] hover:text-teal-accent transition-colors font-semibold"
                         >
                           Forgot password?
                         </button>
@@ -319,7 +319,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                     {mode === 'forgot' && (
                       <button
                         onClick={() => switchMode('login')}
-                        className="text-[12px] font-bold text-[#888888] transition-colors hover:text-white uppercase tracking-wider"
+                        className="type-overline font-bold text-[#888888] transition-colors hover:text-white"
                       >
                         ← Back to Sign In
                       </button>
@@ -332,7 +332,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
           
           {/* Footer note */}
           <div className="mt-8 text-center border-t border-white/[0.06] pt-6">
-            <p className="text-[11px] text-[#666666] font-medium">
+            <p className="type-overline text-[#666666] font-medium">
               Free forever plan available. Upgrade only if you want more.
             </p>
           </div>

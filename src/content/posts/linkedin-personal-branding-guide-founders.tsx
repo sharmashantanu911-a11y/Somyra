@@ -110,7 +110,7 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
           </p>
 
           <div className="mt-8 bg-[#1a1a1a] border border-[#333] rounded-2xl p-6">
-            <h3 className="text-xl font-extrabold text-white mb-3">The Short Answer</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">The Short Answer</h3>
             <p className="text-[#2DD4BF] font-semibold leading-relaxed">
               Post three to four times per week about your decision making process, not your company milestones. Engage with your target audience's content daily. Ignore vanity metrics. Track inbound messages and pipeline attribution. Use your personal profile, not your company page.
             </p>
@@ -124,9 +124,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How is founder branding different from company branding?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Company branding is polished and approved by committee. Founder branding is raw and opinionated. People trust people more than logos. A founder who shares real decisions creates trust that no company blog post can match. Your personal brand feeds your company brand.
             </p>
@@ -156,9 +156,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should founders post about on LinkedIn?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Document your decisions. Explain why you chose a specific approach over an alternative. Share failures as well as wins. Write up frameworks you use internally. Share observations about industry patterns. Give behind the scenes access to real decisions you made this week.
             </p>
@@ -197,9 +197,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How often should founders post on LinkedIn?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Three to four times per week is ideal. Monday post a decision or framework. Wednesday post an industry observation. Friday post a behind the scenes or culture piece. Consistency over months outperforms viral posts followed by silence.
             </p>
@@ -232,9 +232,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do founders grow their LinkedIn audience?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Engage with target audience content for 15 minutes daily. Write about niche topics that your ideal customers care about. Turn thoughtful comments into connection requests. Cross promote with founders in adjacent spaces. Focus on quality over followers.
             </p>
@@ -268,9 +268,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What metrics should founders track for LinkedIn branding?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Track inbound messages from prospects, profile views from target accounts, and direct pipeline attribution. Ignore likes, comments, and follower count as vanity metrics. Engagement from the wrong audience is noise.
             </p>
@@ -309,9 +309,9 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What mistakes do founders make with LinkedIn branding?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Posting like a company page with press release language. Being too safe with generic content. Posting inconsistently. Ignoring engagement by not replying to comments. Publishing content without a clear point of view that differentiates them.
             </p>
@@ -346,7 +346,7 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Somyra helps founders write on brand posts in seconds.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Somyra helps founders write on brand posts in seconds.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-branding-founders-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
@@ -412,7 +412,7 @@ const LinkedinPersonalBrandingGuideFounders: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Not sure your current brand is working? Run a free profile audit.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Not sure your current brand is working? Run a free profile audit.</h3>
             <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-branding-founders-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
           </div>
         </div>

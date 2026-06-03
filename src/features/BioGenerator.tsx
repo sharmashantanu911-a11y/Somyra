@@ -83,7 +83,7 @@ export function BioGenerator({
       <div className="section-heading">
         <div>
           <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Bio & Headline</h2>
-          <p className="text-[13px] md:text-sm text-muted">Optimize your profile to convert visitors into connections.</p>
+          <p className="type-sm text-muted">Optimize your profile to convert visitors into connections.</p>
         </div>
         <div className="flex items-start gap-2 sm:gap-4">
           {voicePosts.length > 0 && (
@@ -197,19 +197,19 @@ export function BioGenerator({
 
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <h3 className="text-[11px] md:text-sm font-semibold text-muted uppercase tracking-widest">About Section</h3>
+                <h3 className="type-overline font-semibold text-muted">About Section</h3>
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                   <button 
                     onClick={() => handleSave('About', results.bio!.about, 'save-about')}
                     disabled={saving === 'save-about'}
-                    className="flex items-center gap-2 text-[11px] md:text-xs font-medium text-teal-accent hover:opacity-80 transition-colors disabled:opacity-50"
+                    className="flex items-center gap-2 type-overline font-medium text-teal-accent hover:opacity-80 transition-colors disabled:opacity-50"
                   >
                     {saving === 'save-about' ? <Loader2 className="w-3 h-3 animate-spin" /> : (copied === 'save-about' ? <Check className="w-3 h-3" /> : <Bookmark className="w-3 h-3" />)}
                     {copied === 'save-about' ? 'Saved!' : 'Save About'}
                   </button>
                   <button 
                     onClick={() => handleCopy(results.bio!.about, 'about')}
-                    className="flex items-center gap-2 text-[11px] md:text-xs font-medium text-teal-accent hover:opacity-80 transition-colors"
+                    className="flex items-center gap-2 type-overline font-medium text-teal-accent hover:opacity-80 transition-colors"
                   >
                     {copied === 'about' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                     {copied === 'about' ? 'Copied!' : 'Copy'}
@@ -217,7 +217,7 @@ export function BioGenerator({
                 </div>
               </div>
               <div className="bg-bg-secondary border border-border-card p-5 md:p-6 rounded-2xl hover:border-teal-accent/30 transition-colors duration-300">
-                <p className="text-[13px] md:text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
+                <p className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
                   {results.bio.about}
                 </p>
               </div>

@@ -23,7 +23,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
     <section className="py-20 bg-[#080808]">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
             {title}
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -41,7 +41,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
               >
-                <span className="font-bold text-white text-base sm:text-lg">{item.question}</span>
+                <span className="font-semibold text-white text-base sm:text-lg">{item.question}</span>
                 {activeFAQ === index ? (
                   <ChevronUp className="w-5 h-5 text-[#2DD4BF] shrink-0 ml-4" />
                 ) : (

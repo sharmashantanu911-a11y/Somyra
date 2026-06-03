@@ -96,7 +96,7 @@ export const PostWriterLoading: React.FC<PostWriterLoadingProps> = ({
       {isDeepMode && (
         <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-1.5 md:gap-2 px-1.5 py-0.5 min-[375px]:px-2 min-[375px]:py-0.5 md:px-3 md:py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full">
           <Zap className="w-[10px] h-[10px] md:w-3 md:h-3 text-teal-accent fill-teal-accent" />
-          <span className="text-[9px] min-[375px]:text-[10px] md:text-[10px] font-bold text-teal-accent uppercase tracking-widest">Deep Mode Active</span>
+          <span className="type-overline font-bold text-teal-accent">Deep Mode Active</span>
         </div>
       )}
 
@@ -146,11 +146,11 @@ export const PostWriterLoading: React.FC<PostWriterLoadingProps> = ({
 
           <div className="mt-8 text-center">
             {voiceProfileWordCount > 0 ? (
-              <p className="text-sm font-medium text-muted sm:text-[15px]">
+              <p className="type-sm font-medium text-muted">
                 Analyzing <span className="font-bold text-teal-accent">{wordCount}</span> words from your voice profile...
               </p>
             ) : (
-              <p className="text-sm font-medium text-muted sm:text-[15px]">Crafting your post...</p>
+              <p className="type-sm font-medium text-muted">Crafting your post...</p>
             )}
           </div>
         </div>
@@ -167,8 +167,8 @@ export const PostWriterLoading: React.FC<PostWriterLoadingProps> = ({
               <div className="flex items-start gap-3">
                 <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-teal-accent" />
                 <div className="min-w-0">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-teal-accent/80">Pro tip</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-300 sm:text-[15px]">
+                  <p className="type-overline font-bold text-teal-accent/80">Pro tip</p>
+                  <p className="mt-2 type-sm leading-7 text-slate-300">
                     {insights[insightIndex]}
                   </p>
                 </div>
@@ -177,12 +177,12 @@ export const PostWriterLoading: React.FC<PostWriterLoadingProps> = ({
           </AnimatePresence>
 
           <div className="rounded-2xl border border-white/10 bg-[#101010] p-5">
-            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-muted">
+            <div className="flex items-center gap-2 type-overline font-bold text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-teal-accent animate-pulse" />
               Time elapsed
             </div>
-            <p className="mt-3 text-3xl font-black text-white">{elapsedTime}s</p>
-            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-teal-accent/70">
+            <p className="mt-3 text-3xl font-semibold text-white">{elapsedTime}s</p>
+            <p className="mt-3 type-overline font-bold text-teal-accent/70">
               {getStatusMessage(elapsedTime)}
             </p>
           </div>
@@ -191,7 +191,7 @@ export const PostWriterLoading: React.FC<PostWriterLoadingProps> = ({
         <div className="mt-6 flex justify-center lg:justify-end">
           <button
             onClick={onCancel}
-            className="inline-flex min-h-[46px] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-[12px] font-bold text-muted transition-all hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 group"
+            className="inline-flex min-h-[46px] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 type-caption font-bold text-muted transition-all hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 group"
           >
             <X className="h-3.5 w-3.5 transition-transform group-hover:rotate-90" />
             Cancel generation

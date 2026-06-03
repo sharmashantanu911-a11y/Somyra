@@ -23,11 +23,11 @@ import { DODO_PRODUCT_IDS } from '../constants/pricing';
    HELPER COMPONENTS
    ───────────────────────────────────────────── */
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[11px] md:text-[13px] font-black uppercase tracking-[0.3em] text-teal-accent mb-5 md:mb-7">{children}</p>
+  <p className="type-overline text-teal-accent mb-5 md:mb-7">{children}</p>
 );
 
 const SectionHeading = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <h2 className={`w-full text-[24px] md:text-[32px] lg:text-[40px] font-black text-white leading-tight tracking-tight ${className}`}>
+  <h2 className={`w-full text-[24px] md:text-[32px] lg:text-[40px] font-semibold text-white leading-tight tracking-tight ${className}`}>
     {children}
   </h2>
 );
@@ -353,14 +353,14 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           <div className="flex flex-col items-center text-center mb-6 md:mb-10 w-full">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-accent/40 bg-teal-accent/5 backdrop-blur-sm mb-3">
               <div className="w-1.5 h-1.5 bg-teal-accent rounded-full animate-pulse" />
-              <span className="text-[10px] font-bold text-teal-accent uppercase tracking-widest">AI-POWERED LINKEDIN COPILOT</span>
+              <span className="type-overline font-bold text-teal-accent">AI-POWERED LINKEDIN COPILOT</span>
             </div>
             
             <SectionHeading className="mb-2 w-full max-w-[672px] mx-auto">
               Simple, transparent pricing.
             </SectionHeading>
             <div className="w-full max-w-[512px] mx-auto">
-              <p className="text-[13px] md:text-sm text-[#888888] mb-6 leading-relaxed px-4">
+              <p className="type-sm text-[#888888] mb-6 leading-relaxed px-4">
                 Start free. Upgrade when you are ready to scale your LinkedIn presence globally.
               </p>
             </div>
@@ -369,17 +369,17 @@ export const PricingModal: React.FC<PricingModalProps> = ({
             <div className="inline-flex items-center gap-3 bg-[#141414] border border-[#1f1f1f] rounded-full p-1.5 mb-2">
               <button
                 onClick={() => setIsAnnual(false)}
-                className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all ${!isAnnual ? 'bg-white/10 text-white' : 'text-[#888] hover:text-white'}`}
+                className={`px-5 py-2 rounded-full type-overline font-bold transition-all ${!isAnnual ? 'bg-white/10 text-white' : 'text-[#888] hover:text-white'}`}
               >
                 Monthly
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={`px-5 py-2 rounded-full text-[11px] font-bold transition-all ${isAnnual ? 'bg-teal-accent/10 text-teal-accent border border-teal-accent/20' : 'text-[#888] hover:text-white'}`}
+                className={`px-5 py-2 rounded-full type-overline font-bold transition-all ${isAnnual ? 'bg-teal-accent/10 text-teal-accent border border-teal-accent/20' : 'text-[#888] hover:text-white'}`}
               >
                 Annual
               </button>
-              {isAnnual && <span className="text-[10px] text-teal-accent font-bold mr-2">Save up to 35%</span>}
+              {isAnnual && <span className="type-overline text-teal-accent font-bold mr-2">Save up to 35%</span>}
             </div>
           </div>
 
@@ -388,16 +388,16 @@ export const PricingModal: React.FC<PricingModalProps> = ({
             {/* Free Card */}
             <div className="flex min-w-0 flex-1 flex-col rounded-3xl border border-white/5 bg-white/[0.02] p-5 md:p-7 hover:border-white/10 transition-colors">
               <div className="mb-6">
-                <span className="text-[10px] font-bold text-[#888888] tracking-[2px] uppercase">FREE</span>
+                <span className="type-overline font-bold text-[#888888]">FREE</span>
                 <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-[32px] md:text-[44px] font-black text-white">$0</span>
+                  <span className="text-[32px] md:text-[44px] font-bold text-white">$0</span>
                   <span className="text-[13px] text-[#888888]">/mo</span>
                 </div>
-                <p className="text-[13px] text-[#888888] mt-2">Forever free — start building your brand without compromise.</p>
+                <p className="type-sm text-[#888888] mt-2">Forever free — start building your brand without compromise.</p>
               </div>
 
               <div className="space-y-4 mb-8">
-                <p className="text-[10px] font-bold text-[#888888] tracking-[2px] uppercase">INCLUDES</p>
+                <p className="type-overline font-bold text-[#888888]">INCLUDES</p>
                 <ul className="space-y-3">
                   {[
                     "Profile Audit: 5 per month",
@@ -407,7 +407,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     "Voice Profile: up to 5 sample posts",
                     "Saved Library: up to 10 saves"
                   ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[12px] text-[#A0A0A0] leading-snug">
+                    <li key={i} className="flex items-start gap-3 type-caption text-[#A0A0A0] leading-snug">
                       <Check className="w-3.5 h-3.5 text-teal-accent mt-0.5 shrink-0" />
                       {f}
                     </li>
@@ -420,7 +420,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     "Early access to new features",
                     "Direct founder access"
                   ].map((f, i) => (
-                    <li key={`not-${i}`} className="flex items-start gap-3 text-[12px] text-[#888888] leading-snug line-through opacity-70">
+                    <li key={`not-${i}`} className="flex items-start gap-3 type-caption text-[#888888] leading-snug line-through opacity-70">
                       <X className="w-3.5 h-3.5 text-[#888888] mt-0.5 shrink-0" />
                       {f}
                     </li>
@@ -438,18 +438,18 @@ export const PricingModal: React.FC<PricingModalProps> = ({
 
             {/* Pro Card */}
             <div className="relative flex min-w-0 flex-1 flex-col rounded-3xl border-2 border-teal-accent bg-[#0A1A19]/40 p-5 md:p-7 shadow-[0_0_50px_rgba(45,212,191,0.05)]">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-teal-accent px-4 py-1 text-[10px] font-black uppercase tracking-wider text-black shadow-lg shadow-teal-accent/20">
+              <div className="type-overline absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-teal-accent px-4 py-1 text-black shadow-lg shadow-teal-accent/20">
                 Most Popular
               </div>
 
               <div className="mb-6">
-                <span className="text-[10px] font-bold text-teal-accent tracking-[2px] uppercase">PRO</span>
+                <span className="type-overline font-bold text-teal-accent">PRO</span>
                 <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-[32px] md:text-[44px] font-black text-white">${isAnnual ? '13' : '19'}</span>
+                  <span className="text-[32px] md:text-[44px] font-bold text-white">${isAnnual ? '13' : '19'}</span>
                   <span className="text-[13px] text-[#888888]">/mo</span>
                 </div>
-                {isAnnual && <p className="text-[11px] text-teal-accent font-bold">Billed $156/year (Save $72)</p>}
-                <p className="text-[13px] text-[#A0A0A0] mt-2">Everything in Free plus:</p>
+                {isAnnual && <p className="type-overline text-teal-accent font-bold">Billed $156/year (Save $72)</p>}
+                <p className="type-sm text-[#A0A0A0] mt-2">Everything in Free plus:</p>
               </div>
 
               <div className="space-y-4 mb-8">
@@ -467,7 +467,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     "Priority AI responses",
                     "Early access to new features"
                   ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[12px] text-white leading-snug">
+                    <li key={i} className="flex items-start gap-3 type-caption text-white leading-snug">
                       <div className="w-4 h-4 rounded-full bg-teal-accent/20 flex items-center justify-center shrink-0 mt-0.5">
                         <Check className="w-3 h-3 text-teal-accent" />
                       </div>
@@ -480,7 +480,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               <button 
                 onClick={() => handleCheckout('pro')}
                 disabled={isCheckingOut !== null}
-                className="mt-auto w-full py-4 bg-teal-accent text-black rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
+                className="mt-auto w-full py-4 bg-teal-accent text-black rounded-2xl text-[14px] font-bold hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
               >
                 {isCheckingOut === 'pro' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get Pro Access'}
               </button>
@@ -488,18 +488,18 @@ export const PricingModal: React.FC<PricingModalProps> = ({
 
             {/* Max Card */}
             <div className="relative flex min-w-0 flex-1 flex-col rounded-3xl border border-red-500/30 bg-red-500/[0.01] p-5 md:p-7 hover:border-red-500/50 transition-colors">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-400 to-red-600 px-4 py-1 text-[10px] font-black uppercase tracking-wider text-black shadow-lg shadow-red-500/20 text-white">
+              <div className="type-overline absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-400 to-red-600 px-4 py-1 text-black shadow-lg shadow-red-500/20 text-white">
                 For Power Users
               </div>
 
               <div className="mb-6">
-                <span className="text-[10px] font-bold text-red-400 tracking-[2px] uppercase">MAX</span>
+                <span className="type-overline font-bold text-red-400">MAX</span>
                 <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-[32px] md:text-[44px] font-black text-white">${isAnnual ? '29' : '39'}</span>
+                  <span className="text-[32px] md:text-[44px] font-bold text-white">${isAnnual ? '29' : '39'}</span>
                   <span className="text-[13px] text-[#888888]">/mo</span>
                 </div>
-                {isAnnual && <p className="text-[11px] text-red-400 font-bold">Billed $348/year (Save $120)</p>}
-                <p className="text-[13px] text-[#A0A0A0] mt-2">Everything in Pro plus:</p>
+                {isAnnual && <p className="type-overline text-red-400 font-bold">Billed $348/year (Save $120)</p>}
+                <p className="type-sm text-[#A0A0A0] mt-2">Everything in Pro plus:</p>
               </div>
 
               <div className="space-y-4 mb-8">
@@ -518,7 +518,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     "Early access before Pro users",
                     "Direct founder access for feedback"
                   ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[12px] text-white leading-snug">
+                    <li key={i} className="flex items-start gap-3 type-caption text-white leading-snug">
                       <div className="w-4 h-4 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
                         <Check className="w-3 h-3 text-red-400" />
                       </div>
@@ -531,7 +531,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               <button 
                 onClick={() => handleCheckout('max')}
                 disabled={isCheckingOut !== null}
-                className="mt-auto w-full py-4 bg-gradient-to-r from-red-400 to-red-600 text-white rounded-2xl text-[14px] font-black hover:shadow-[0_0_30px_rgba(239,68,68,0.3)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
+                className="mt-auto w-full py-4 bg-gradient-to-r from-red-400 to-red-600 text-white rounded-2xl text-[14px] font-bold hover:shadow-[0_0_30px_rgba(239,68,68,0.3)] transition-all transform hover:scale-[1.02] active:scale-100 flex items-center justify-center gap-2"
               >
                 {isCheckingOut === 'max' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get Max Access'}
               </button>
@@ -558,7 +558,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     <Plus className={`h-4 w-4 shrink-0 text-teal-accent transition-transform duration-300 ${expandedFaq === i ? 'rotate-45' : ''}`} />
                   </button>
                   <div className={`min-w-0 overflow-hidden transition-all duration-300 ${expandedFaq === i ? 'mt-3 max-h-48' : 'max-h-0'}`}>
-                    <p className="wrap-safe min-w-0 pr-6 text-[13px] leading-7 text-[#888888] md:text-[14px]">
+                    <p className="wrap-safe min-w-0 pr-6 type-sm leading-7 text-[#888888]">
                       {faq.a}
                     </p>
                   </div>
@@ -576,14 +576,14 @@ export const PricingModal: React.FC<PricingModalProps> = ({
             ].map((s, i) => (
               <div key={i} className="panel-fluid flex min-w-0 flex-col items-center text-center">
                 <s.icon className="w-5 h-5 text-teal-accent mb-2" />
-                <h4 className="text-[11px] md:text-[12px] font-bold text-white mb-1">{s.title}</h4>
-                <p className="wrap-safe text-[11px] text-[#888888]">{s.sub}</p>
+                <h4 className="type-overline md:type-caption font-bold text-white mb-1">{s.title}</h4>
+                <p className="wrap-safe type-overline text-[#888888]">{s.sub}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-6 text-center">
-            <p className="text-[11px] text-[#888888] italic">Made with ❤️ in India for professionals worldwide.</p>
+            <p className="type-overline text-[#888888] italic">Made with ❤️ in India for professionals worldwide.</p>
           </div>
           
           {/* Sticky Fade Gradient */}
@@ -700,7 +700,7 @@ export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, on
 
         <div className="dialog-header">
           {!user && (
-            <div className="inline-flex items-center px-3 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full text-[10px] font-bold text-teal-accent uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center px-3 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full type-overline font-bold text-teal-accent mb-4">
               Free forever
             </div>
           )}
@@ -713,7 +713,7 @@ export const LimitReachedModal: React.FC<LimitReachedModalProps> = ({ isOpen, on
         {/* Reset date indicator — only show for monthly features of logged-in users */}
         {user && !isCumulativeCap && (
           <div className="dialog-section mt-6 bg-[#141414] border border-[#1f1f1f] rounded-xl p-4">
-            <div className="text-[10px] text-[#888888] uppercase tracking-widest mb-1">Monthly Reset</div>
+            <div className="type-overline text-[#888888] mb-1">Monthly Reset</div>
             <div className="text-lg font-bold text-white">
               {resetDateStr}
             </div>
@@ -790,7 +790,7 @@ export const SuccessModal: React.FC<{
               />
             </div>
 
-            <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Welcome to {isMax ? 'Somyra Max' : 'Somyra Pro'}!</h2>
+            <h2 className="text-2xl font-semibold text-white mb-2 tracking-tight">Welcome to {isMax ? 'Somyra Max' : 'Somyra Pro'}!</h2>
             <p className="text-[#888888] text-sm leading-relaxed mb-8">
               Your account has been upgraded successfully. All premium features are now unlocked. We are excited to see what you build!
             </p>

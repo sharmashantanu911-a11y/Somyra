@@ -41,7 +41,7 @@ export function OutreachTemplates({ handleCopy, copied }: { handleCopy: (text: s
          </div>
          <div>
             <h3 className="text-white font-bold text-base mb-1.5">Human-Verified Templates</h3>
-            <p className="text-[13px] md:text-sm text-muted leading-relaxed max-w-2xl">
+            <p className="type-sm text-muted leading-relaxed max-w-2xl">
               Before doing automated generation, sometimes you just need inspiration. Here are high-converting text blueprints. Customize the brackets and fire away.
             </p>
          </div>
@@ -52,7 +52,7 @@ export function OutreachTemplates({ handleCopy, copied }: { handleCopy: (text: s
           <div key={t.id} className="bg-bg-secondary border border-border-card p-6 rounded-2xl flex flex-col justify-between hover:border-teal-accent/30 transition-all duration-300">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-teal-accent bg-teal-accent/10 px-2.5 py-1 rounded-full">
+                <span className="type-overline font-bold text-teal-accent bg-teal-accent/10 px-2.5 py-1 rounded-full">
                   {t.category}
                 </span>
                 <button 
@@ -64,9 +64,9 @@ export function OutreachTemplates({ handleCopy, copied }: { handleCopy: (text: s
                 </button>
               </div>
               <h4 className="text-white font-bold text-sm mb-1">{t.title}</h4>
-              <p className="text-[11px] text-muted mb-4">{t.scenario}</p>
+              <p className="type-overline text-muted mb-4">{t.scenario}</p>
               <div className="bg-white/5 p-4 rounded-xl">
-                <p className="text-[13px] text-slate-300 leading-relaxed whitespace-pre-wrap">{t.content}</p>
+                <p className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{t.content}</p>
               </div>
             </div>
           </div>

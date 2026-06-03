@@ -107,7 +107,7 @@ export const GoalCard = ({ icon: Icon, title, description, selected, onClick }: 
       </div>
       <div className="flex-1">
         <h4 className="text-sm font-bold text-white leading-tight">{title}</h4>
-        <p className="text-[11px] sm:text-xs text-[#888888] mt-1 leading-relaxed">{description}</p>
+        <p className="type-overline text-[#888888] mt-1 leading-relaxed">{description}</p>
       </div>
       <AnimatePresence>
         {selected && (
@@ -181,7 +181,7 @@ export const LoadingScanner = () => {
             {statuses[statusIndex]}
           </motion.p>
         </AnimatePresence>
-        <p className="mx-auto mt-4 max-w-[460px] text-sm leading-7 text-[#6b6b6b] sm:text-[15px]">
+        <p className="mx-auto mt-4 max-w-[460px] type-body leading-7 text-[#6b6b6b]">
           We&apos;re reviewing your positioning, authority signals, and clarity so the final report feels sharp and usable.
         </p>
       </div>
@@ -264,7 +264,7 @@ export const SmartSelector = ({
   return (
     <div className="space-y-3 relative" ref={selectorRef}>
       <div className="flex items-center justify-between">
-        <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">
+        <label className="type-overline font-bold text-[#888888] ml-1">
           {label} {optional && <span className="text-[9px] opacity-60 ml-1">(OPTIONAL)</span>}
         </label>
       </div>
@@ -282,7 +282,7 @@ export const SmartSelector = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setTimeout(() => setIsFocused(false), 200)}
           placeholder={placeholder}
-          className="w-full bg-[#141414] border border-[#1f1f1f] rounded-[12px] pl-11 pr-4 py-3 text-[14px] text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-4 focus:ring-teal-accent/5 group-hover:border-[#333333]"
+          className="w-full bg-[#141414] border border-[#1f1f1f] rounded-[12px] pl-11 pr-4 py-3 type-sm text-white outline-none transition-all focus:border-teal-accent/40 focus:ring-4 focus:ring-teal-accent/5 group-hover:border-[#333333]"
         />
         {Array.isArray(value) && value.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
@@ -298,7 +298,7 @@ export const SmartSelector = ({
         )}
         {!allowMultiple && value && !Array.isArray(value) && !search && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
-            <span className="text-[14px] text-teal-accent font-bold">{value}</span>
+            <span className="type-sm text-teal-accent font-bold">{value}</span>
             <button type="button" onClick={() => onChange('')} className="text-[#888888] hover:text-white transition-colors">
               <X className="w-4 h-4" />
             </button>
@@ -318,7 +318,7 @@ export const SmartSelector = ({
               <button
                 type="button"
                 onClick={() => handleSelect(search)}
-                className="w-full flex items-center gap-3 px-4 py-3 text-[13px] text-teal-accent bg-teal-accent/5 border-b border-[#1f1f1f] hover:bg-teal-accent/10 transition-colors"
+                className="w-full flex items-center gap-3 px-4 py-3 type-sm text-teal-accent bg-teal-accent/5 border-b border-[#1f1f1f] hover:bg-teal-accent/10 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Use &quot;{search}&quot;
@@ -329,7 +329,7 @@ export const SmartSelector = ({
                 key={opt}
                 type="button"
                 onClick={() => handleSelect(opt)}
-                className={`w-full text-left px-4 py-3 text-[13px] transition-colors hover:bg-[#1a1a1a] ${
+                className={`w-full text-left px-4 py-3 type-sm transition-colors hover:bg-[#1a1a1a] ${
                   (allowMultiple ? Array.isArray(value) && value.includes(opt) : value === opt)
                     ? 'text-teal-accent bg-teal-accent/5'
                     : 'text-[#CCCCCC]'
@@ -341,7 +341,7 @@ export const SmartSelector = ({
             <button
               type="button"
               onClick={() => setIsAddingCustom(true)}
-              className="w-full flex items-center gap-3 px-4 py-3 text-[13px] text-[#888888] hover:bg-[#1a1a1a] transition-colors border-t border-[#1f1f1f]"
+              className="w-full flex items-center gap-3 px-4 py-3 type-sm text-[#888888] hover:bg-[#1a1a1a] transition-colors border-t border-[#1f1f1f]"
             >
               <Plus className="w-4 h-4" />
               Add your own...
@@ -360,7 +360,7 @@ export const SmartSelector = ({
               onChange={(e) => setCustomValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddCustom()}
               placeholder="Type and press Enter..."
-              className="flex-1 bg-[#0D0D0D] border border-teal-accent/30 rounded-[12px] px-4 py-2 text-[13px] text-white outline-none focus:ring-4 focus:ring-teal-accent/5"
+              className="flex-1 bg-[#0D0D0D] border border-teal-accent/30 rounded-[12px] px-4 py-2 type-sm text-white outline-none focus:ring-4 focus:ring-teal-accent/5"
             />
             <button type="button" onClick={handleAddCustom} className="p-2 bg-teal-accent text-black rounded-[12px] hover:bg-teal-accent/80 transition-colors">
               <Check className="w-5 h-5" />

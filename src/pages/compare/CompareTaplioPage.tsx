@@ -75,7 +75,7 @@ const CompareTaplioPage: React.FC = () => {
               Honest Competitor Comparison
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               Somyra vs Taplio: <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DD4BF] to-teal-400">
                 An Honest Comparison
@@ -188,7 +188,7 @@ const CompareTaplioPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Side-by-Side Comparison
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -356,7 +356,7 @@ const CompareTaplioPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -410,7 +410,7 @@ const CompareTaplioPage: React.FC = () => {
             <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
                 Try Somyra Free — No Card Needed
               </h2>
               <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">

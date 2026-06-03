@@ -198,7 +198,7 @@ const BlogPage: React.FC = () => {
               Somyra Blog
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               LinkedIn Growth,{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DD4BF] to-teal-400">
                 Straight Talk
@@ -269,15 +269,15 @@ const BlogPage: React.FC = () => {
                   <div className="absolute top-0 right-0 w-64 h-64 bg-[#2DD4BF]/[0.03] rounded-full blur-[80px] pointer-events-none" />
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-[11px] font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/10 px-2.5 py-1 rounded-md">
+                      <span className="type-overline font-semibold text-[#2DD4BF] bg-[#2DD4BF]/10 px-2.5 py-1 rounded-md">
                         {featuredPost.category}
                       </span>
-                      <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest flex items-center gap-1">
+                      <span className="type-overline font-bold text-[#888888] flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {Math.ceil(featuredPost.wordCount / 200)} MIN READ
                       </span>
                     </div>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 leading-tight group-hover:text-[#2DD4BF] transition-colors">
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-[#2DD4BF] transition-colors">
                       {featuredPost.title}
                     </h2>
                     <p className="text-sm text-[#888888] leading-relaxed max-w-2xl mb-6">
@@ -300,10 +300,10 @@ const BlogPage: React.FC = () => {
                   >
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-[10px] font-extrabold text-[#2DD4BF] uppercase tracking-widest bg-[#2DD4BF]/5 px-2.5 py-1 rounded-md">
+                        <span className="type-overline font-semibold text-[#2DD4BF] bg-[#2DD4BF]/5 px-2.5 py-1 rounded-md">
                           {post.category}
                         </span>
-                        <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest flex items-center gap-1">
+                        <span className="type-overline font-bold text-[#888888] flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {Math.ceil(post.wordCount / 200)} MIN
                         </span>
@@ -342,7 +342,7 @@ const BlogPage: React.FC = () => {
                 <Mail className="w-6 h-6 text-[#2DD4BF]" />
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-3">
                 Get notified when we publish
               </h2>
               <p className="text-sm sm:text-base text-[#888888] mb-8 max-w-md mx-auto leading-relaxed">

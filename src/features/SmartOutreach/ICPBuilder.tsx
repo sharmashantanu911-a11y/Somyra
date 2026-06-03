@@ -65,7 +65,7 @@ export function ICPBuilder({
          </div>
          <div>
             <h3 className="text-white font-bold text-base mb-1.5">Stop Targeting Everyone</h3>
-            <p className="text-[13px] md:text-sm text-muted leading-relaxed max-w-2xl">
+            <p className="type-sm text-muted leading-relaxed max-w-2xl">
               If your outreach applies to 1,000 people, it will resonate with no one. Answer these 3 questions using your own words, and we'll crystalize exactly who you should be dropping DMs to.
             </p>
          </div>
@@ -125,7 +125,7 @@ export function ICPBuilder({
         {draft && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3 pt-6 border-t border-white/5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <h3 className="text-[11px] md:text-sm font-semibold text-muted uppercase tracking-widest">Your True ICP</h3>
+              <h3 className="type-overline font-semibold text-muted">Your True ICP</h3>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => handleSave('ICP', draft, 'save-icp')}
@@ -147,7 +147,7 @@ export function ICPBuilder({
             </div>
             <div className="bg-bg-secondary border border-border-card p-5 md:p-6 rounded-2xl hover:border-teal-accent/30 transition-colors duration-300">
                {/* The markdown response has formatting, so let's preserve the style */}
-              <div className="text-[13px] md:text-sm text-slate-300 leading-relaxed whitespace-pre-wrap prose prose-invert max-w-none">
+              <div className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap prose prose-invert max-w-none">
                 {draft}
               </div>
             </div>

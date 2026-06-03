@@ -97,7 +97,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
               100% Free Profile Grader
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               Your LinkedIn Profile Is <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-[#2DD4BF]">
                 Losing You Opportunities
@@ -129,7 +129,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-white/5">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               What Somyra Actually Analyzes
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -225,7 +225,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Quick Audit vs Deep Strategy
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -272,7 +272,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
 
             {/* Deep Strategy */}
             <div className="bg-[#0D0D0D] border border-[#2DD4BF]/20 shadow-[0_0_30px_rgba(45,212,191,0.05)] rounded-3xl p-8 flex flex-col justify-between h-full relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-[#2DD4BF] text-black font-bold text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">
+              <div className="absolute top-0 right-0 bg-[#2DD4BF] text-black font-bold type-overline px-4 py-1.5 rounded-bl-xl">
                 Pro Feature
               </div>
 
@@ -321,7 +321,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-b border-white/5">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -375,7 +375,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
             <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
                 Know Exactly What Your Profile Is Missing
               </h2>
               <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">

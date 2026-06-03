@@ -107,8 +107,8 @@ export function MessageBuilder({
     
     return (
       <div className="flex flex-col items-center p-3 bg-bg-secondary rounded-xl border border-border-card">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">{label}</span>
-        <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${colorClass}`}>
+        <span className="type-overline font-semibold text-muted mb-2">{label}</span>
+        <div className={`px-3 py-1 rounded-full type-overline font-bold ${colorClass}`}>
           {value}
         </div>
       </div>
@@ -144,7 +144,7 @@ export function MessageBuilder({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-xs font-semibold uppercase tracking-wider text-muted">Prospect Research Context</label>
-            <span className="text-[10px] text-muted font-medium bg-white/5 px-2 py-0.5 rounded">Crucial</span>
+            <span className="type-overline text-muted font-medium bg-white/5 px-2 py-0.5 rounded">Crucial</span>
           </div>
           <textarea 
             required
@@ -170,7 +170,7 @@ export function MessageBuilder({
                 }`}
               >
                 <h4 className={`text-sm font-bold mb-1 ${form.relationship === rel.id ? 'text-teal-accent' : 'text-slate-300'}`}>{rel.label}</h4>
-                <p className="text-[10px] text-muted leading-relaxed hidden sm:block">{rel.desc}</p>
+                <p className="type-overline text-muted leading-relaxed hidden sm:block">{rel.desc}</p>
               </div>
             ))}
           </div>
@@ -224,7 +224,7 @@ export function MessageBuilder({
 
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <h3 className="text-[11px] md:text-sm font-semibold text-muted uppercase tracking-widest">Final Draft</h3>
+                <h3 className="type-overline font-semibold text-muted">Final Draft</h3>
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={() => handleSave('Outreach', draft, 'save-smartoutreach')}
@@ -245,7 +245,7 @@ export function MessageBuilder({
                 </div>
               </div>
               <div className="bg-bg-secondary border border-border-card p-5 md:p-6 rounded-2xl hover:border-teal-accent/30 transition-colors duration-300">
-                <p className="text-[13px] md:text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
+                <p className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
                   {draft}
                 </p>
               </div>

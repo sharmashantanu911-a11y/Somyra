@@ -49,7 +49,6 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         .somyra-footer {
           background: transparent;
           border-top: 1px solid rgba(255,255,255,0.06);
-          font-family: 'Inter', sans-serif;
           position: relative;
           overflow: hidden;
         }
@@ -111,18 +110,18 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .brand-name {
-          font-size: 18px;
+          font-size: var(--text-h3);
           font-weight: 600;
           color: #F0F0F0;
-          letter-spacing: -0.02em;
+          letter-spacing: var(--tracking-h3);
         }
 
         .brand-tagline {
-          font-size: 13px;
+          font-size: var(--text-sm);
           color: #888888;
-          line-height: 1.6;
+          line-height: var(--leading-body);
           margin-bottom: 20px;
-          font-weight: 400;
+          font-weight: 500;
           max-width: 220px;
         }
 
@@ -131,15 +130,14 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          font-size: 12px;
+          font-size: var(--text-caption);
           color: #888888;
           background: #141414;
           border: 1px solid rgba(255,255,255,0.06);
           border-radius: 20px;
           padding: 5px 12px 5px 9px;
           margin-bottom: 28px;
-          font-family: 'Geist Mono', monospace;
-          letter-spacing: 0.01em;
+          font-weight: 500;
         }
 
         .status-dot {
@@ -210,13 +208,12 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .nav-col-title {
-          font-size: 11px;
+          font-size: var(--text-overline);
           font-weight: 600;
           color: #6B7280;
-          letter-spacing: 0.12em;
+          letter-spacing: var(--tracking-overline);
           text-transform: uppercase;
           margin-bottom: 16px;
-          font-family: 'Geist Mono', monospace;
         }
 
         .nav-list {
@@ -229,10 +226,10 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .footer-link {
-          font-size: 13.5px;
+          font-size: var(--text-sm);
           color: #888888;
           text-decoration: none;
-          font-weight: 400;
+          font-weight: 500;
           transition: color 0.2s ease;
           display: inline-block;
         }
@@ -257,14 +254,13 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           background: rgba(45, 212, 191, 0.12);
           border: 1px solid rgba(45,212,191,0.2);
           color: #2DD4BF;
-          font-size: 10px;
+          font-size: var(--text-overline);
           font-weight: 600;
-          letter-spacing: 0.06em;
+          letter-spacing: var(--tracking-overline);
           padding: 1px 6px;
           border-radius: 4px;
           margin-left: 6px;
           vertical-align: middle;
-          font-family: 'Geist Mono', monospace;
         }
 
         /* ─── DIVIDER ─── */
@@ -288,10 +284,10 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .footer-copy {
-          font-size: 12.5px;
+          font-size: var(--text-caption);
           color: #6B7280;
-          font-family: 'Geist Mono', monospace;
-          letter-spacing: 0.01em;
+          font-weight: 500;
+          letter-spacing: var(--tracking-caption);
         }
 
         .footer-copy span {
@@ -305,13 +301,13 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .legal-link {
-          font-size: 12.5px;
+          font-size: var(--text-caption);
           color: #6B7280;
           text-decoration: none;
           transition: color 0.2s ease;
           padding: 0 8px;
-          font-family: 'Geist Mono', monospace;
-          letter-spacing: 0.01em;
+          font-weight: 500;
+          letter-spacing: var(--tracking-caption);
         }
 
         .legal-link:hover {
@@ -325,9 +321,9 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
         }
 
         .built-with {
-          font-size: 12.5px;
+          font-size: var(--text-caption);
           color: #6B7280;
-          font-family: 'Geist Mono', monospace;
+          font-weight: 500;
           display: flex;
           align-items: center;
           gap: 5px;
@@ -364,13 +360,11 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             gap: 32px 24px;
           }
           .nav-col-title {
-            font-size: 10px;
             color: #2DD4BF;
-            letter-spacing: 0.1em;
             margin-bottom: 12px;
           }
           .footer-link {
-            font-size: 14px;
+            font-size: var(--text-sm);
             line-height: 2;
           }
         }
@@ -385,12 +379,10 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
           }
           .nav-col-title {
             color: #2DD4BF;
-            font-size: 10px;
-            letter-spacing: 0.1em;
             margin-bottom: 12px;
           }
           .footer-link {
-            font-size: 14px;
+            font-size: var(--text-sm);
             line-height: 2;
             color: #6B7280;
           }
@@ -402,15 +394,10 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
             text-align: center;
           }
           .footer-copy {
-            font-size: 12px;
             color: #6B7280;
-            font-family: 'Geist Mono', monospace;
           }
           .built-with {
             display: flex;
-            font-size: 12px;
-            color: #6B7280;
-            font-family: 'Geist Mono', monospace;
             align-items: center;
             gap: 5px;
             justify-content: center;
@@ -491,7 +478,7 @@ const SomyraFooter: React.FC<SomyraFooterProps> = ({ onStartFree }) => {
                 <li><FooterLink to="/blog">Blog</FooterLink></li>
                 <li>
                   {onStartFree ? (
-                    <button type="button" onClick={onStartFree} className="highlight" style={{background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', fontSize: '13px', fontWeight: 500}}>Start Free</button>
+                    <button type="button" onClick={onStartFree} className="highlight" style={{background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer'}}>Start Free</button>
                   ) : (
                     <FooterLink to="/signup" className="highlight">Start Free</FooterLink>
                   )}

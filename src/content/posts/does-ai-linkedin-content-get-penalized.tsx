@@ -127,9 +127,9 @@ const DoesAiLinkedinContentGetPenalized: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Does LinkedIn penalize AI-generated content?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               No. LinkedIn does not detect, flag, or penalize content based on whether AI helped create it. There is no AI content policy, no AI detection system, and no shadowban for AI users. The risk is not algorithmic. It is human. Readers scroll past generic content regardless of whether a human or an AI wrote it.
             </p>
@@ -138,9 +138,9 @@ const DoesAiLinkedinContentGetPenalized: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">LinkedIn's Official Position on AI Content</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Will LinkedIn ban you for using AI to write posts?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               No. LinkedIn's terms of service do not prohibit AI-assisted content creation. The platform has not announced any plans to restrict or label AI content. Using tools like ChatGPT, Claude, or dedicated LinkedIn AI tools is fully permitted and will not result in any account action.
             </p>
@@ -157,9 +157,9 @@ const DoesAiLinkedinContentGetPenalized: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Real Penalty: Human Readers, Not Algorithms</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the LinkedIn engagement penalty for AI content?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The engagement penalty is the real cost of publishing generic AI content. When readers see text that sounds robotic, they scroll past without engaging. Lower engagement means less distribution by the algorithm. This penalty is not applied by LinkedIn. It is applied by every person who reads your post and decides it is not worth their time.
             </p>
@@ -206,16 +206,16 @@ Third and most importantly, there are no specific details. No real numbers. No s
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Voice vs Generic Framework</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do you tell if content was written by AI or a human?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The best test is the voice test. If you can read the content and immediately tell who wrote it based on vocabulary, sentence rhythm, specific details, and opinion, it passes. If the content reads like a textbook or encyclopedia entry with no personality, it fails regardless of whether a human or AI created it.
             </p>
           </div>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: VOICE VS GENERIC MATRIX</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: VOICE VS GENERIC MATRIX</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-[#888888]">
                 <thead>
@@ -267,9 +267,9 @@ Third and most importantly, there are no specific details. No real numbers. No s
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">How to Use AI Without the Engagement Penalty</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Can I use AI for LinkedIn without losing engagement?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Yes. Use AI as a drafting tool, not a replacement for your voice. Provide specific examples from your experience. Edit every output heavily. Read it out loud. If it does not sound like something you would say in conversation, rewrite it until it does.
             </p>
@@ -280,7 +280,7 @@ Third and most importantly, there are no specific details. No real numbers. No s
           </p>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: THE 3 RULES OF AI CONTENT THAT WORKS</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: THE 3 RULES OF AI CONTENT THAT WORKS</p>
             <div className="space-y-4">
               <div className="bg-[#0D0D0D] rounded-lg p-4">
                 <p className="text-[#2DD4BF] font-bold text-sm mb-1">Rule 1: Train the tool on your writing first</p>
@@ -310,9 +310,9 @@ Third and most importantly, there are no specific details. No real numbers. No s
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Common Mistakes People Make With AI Content</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What are the biggest mistakes people make when using AI for LinkedIn content?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The four most common mistakes are: publishing AI output without editing, using generic vocabulary and sentence structures, avoiding personal opinions and controversial takes, and failing to include specific details from real experience. Each mistake makes content sound generic and reduces engagement regardless of quality.
             </p>
@@ -417,7 +417,7 @@ Third and most importantly, there are no specific details. No real numbers. No s
           </p>
 
           <div className="mt-12 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <p className="text-2xl font-extrabold text-white mb-4">
+            <p className="text-2xl font-semibold text-white mb-4">
               Somyra learns your voice before writing a single word.
             </p>
             <p className="text-[#888888] mb-6 text-sm">

@@ -123,9 +123,9 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the best LinkedIn post generator in 2025?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The best LinkedIn post generator depends on your specific needs. Somyra is best for individual founders and professionals who want voice learning and a free plan. Taplio is best for enterprise teams that need analytics and scheduling. ChatGPT is best for users who want maximum flexibility and are willing to invest time in prompting and editing.
             </p>
@@ -134,9 +134,9 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">What to Look for in a LinkedIn Post Generator</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I look for in a LinkedIn post generator?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The most important feature is voice learning. A tool that analyzes your existing content and matches your style will produce better results than a generic generator. Also look for customization options, content type templates, and the ability to edit and refine outputs.
             </p>
@@ -169,7 +169,7 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Comparison Table</h2>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">TOOL COMPARISON MATRIX</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">TOOL COMPARISON MATRIX</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-[#888888]">
                 <thead>
@@ -229,9 +229,9 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Main Options Reviewed</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What are the best LinkedIn post generators in 2025?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The main options fall into three categories. Somyra learns your writing voice and produces on brand content. Taplio offers strong scheduling and analytics. ChatGPT requires extensive prompt engineering but offers flexibility. Each tool serves a different use case and budget.
             </p>
@@ -264,9 +264,9 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Why Voice Learning Is the Key Differentiator</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Why does voice learning matter for LinkedIn content?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Generic AI content is easy to spot and damages your credibility. Voice learning tools analyze your sentence structure, vocabulary, and tone to produce content that sounds like you. Readers engage more with content that feels authentic, even when they know AI helped create it.
             </p>
@@ -291,16 +291,16 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">How to Choose the Right Tool for You</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Which LinkedIn post generator should I choose?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Choose based on your needs. If you want content that matches your voice, pick a tool with voice learning. If you need scheduling and analytics, pick an all in one platform. If you are on a tight budget, learn prompt engineering with a general AI tool and edit heavily.
             </p>
           </div>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: TOOL SELECTION GUIDE</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">FRAMEWORK: TOOL SELECTION GUIDE</p>
             <div className="space-y-4">
               <div className="bg-[#0D0D0D] rounded-lg p-4">
                 <p className="text-[#2DD4BF] font-bold text-sm mb-1">Choose Somyra if</p>
@@ -412,7 +412,7 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
           </p>
 
           <div className="mt-12 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <p className="text-2xl font-extrabold text-white mb-4">
+            <p className="text-2xl font-semibold text-white mb-4">
               Somyra's generator learns your voice before writing a single word.
             </p>
             <p className="text-[#888888] mb-6 text-sm">

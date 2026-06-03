@@ -73,7 +73,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, user,
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-2xl font-black text-white tracking-tight">Leave a Review</h2>
+              <h2 className="text-2xl font-semibold text-white tracking-tight">Leave a Review</h2>
               <p className="text-muted text-sm mt-1">Share your Somyra experience with the world.</p>
             </div>
             <button
@@ -165,7 +165,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, user,
                 <button
                   type="submit"
                   disabled={submitting || !content || !title}
-                  className="w-full h-14 bg-teal-accent disabled:opacity-50 disabled:grayscale text-black font-black rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 overflow-hidden group shadow-[0_0_30px_rgba(45,212,191,0.2)]"
+                  className="w-full h-14 bg-teal-accent disabled:opacity-50 disabled:grayscale text-black font-bold rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 overflow-hidden group shadow-[0_0_30px_rgba(45,212,191,0.2)]"
                 >
                   {submitting ? (
                     <Loader2 className="w-5 h-5 animate-spin" />

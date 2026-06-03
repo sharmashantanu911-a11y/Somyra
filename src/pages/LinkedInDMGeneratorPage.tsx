@@ -93,7 +93,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
               AI Outreach Assistant
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight">
               LinkedIn DMs That <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DD4BF] to-teal-400">
                 Don't Get Ignored
@@ -125,7 +125,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-white/5">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Why Most LinkedIn Outreach Fails
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -177,7 +177,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Relevance-First Outreach
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -187,7 +187,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative p-6">
-              <div className="text-5xl font-black text-[#2DD4BF]/20 mb-4">01</div>
+              <div className="text-5xl font-semibold text-[#2DD4BF]/20 mb-4">01</div>
               <h3 className="text-xl font-bold text-white mb-3">Enter Recipient Context</h3>
               <p className="text-sm text-[#888888] leading-relaxed">
                 Add their role, company, target industry, or a snippet of a recent post or achievement that caught your attention.
@@ -195,7 +195,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
             </div>
 
             <div className="relative p-6">
-              <div className="text-5xl font-black text-[#2DD4BF]/20 mb-4">02</div>
+              <div className="text-5xl font-semibold text-[#2DD4BF]/20 mb-4">02</div>
               <h3 className="text-xl font-bold text-white mb-3">Set Your Outreach Goal</h3>
               <p className="text-sm text-[#888888] leading-relaxed">
                 Define the outcome you want: sending a connection note, starting a friendly industry discussion, proposing mutual collaborations, or booking sales meetings.
@@ -203,7 +203,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
             </div>
 
             <div className="relative p-6">
-              <div className="text-5xl font-black text-[#2DD4BF]/20 mb-4">03</div>
+              <div className="text-5xl font-semibold text-[#2DD4BF]/20 mb-4">03</div>
               <h3 className="text-xl font-bold text-white mb-3">Get Custom DMs</h3>
               <p className="text-sm text-[#888888] leading-relaxed">
                 Receive personalized message suggestions starting with a powerful relevance hook, clear low-friction ask, and follow-up templates.
@@ -217,7 +217,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#0D0D0D] border-t border-b border-white/5">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               What Smart Outreach Includes
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -297,7 +297,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
       <section className="py-20 bg-[#080808]">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -351,7 +351,7 @@ const LinkedInDMGeneratorPage: React.FC = () => {
             <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
                 Stop Sending DMs That Get Ignored
               </h2>
               <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">

@@ -15,7 +15,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ slug, pageType }) => {
           <div className="absolute inset-0 bg-radial-at-t from-[#2DD4BF]/5 via-transparent to-transparent pointer-events-none" />
 
           <div className="relative z-10">
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-5xl font-semibold text-white mb-4">
               Try Somyra Free — No Card Needed
             </h2>
             <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-medium">
@@ -30,7 +30,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ slug, pageType }) => {
               <ArrowRight className="w-4 h-4" />
             </Link>
 
-            <p className="text-xs text-[#555555] font-semibold uppercase tracking-wider">
+            <p className="type-caption text-[#555555]">
               Cancel or downgrade any time.
             </p>
           </div>

@@ -151,7 +151,7 @@ const HeaderSection = ({
   return (
     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2">
       <div className="space-y-1">
-        <p className="text-[13px] text-[#A0A0A0]">
+        <p className="type-sm text-[#A0A0A0]">
           {new Date().getHours() < 12 ? 'Good morning' : new Date().getHours() < 18 ? 'Good afternoon' : 'Good evening'}
         </p>
         
@@ -180,17 +180,17 @@ const HeaderSection = ({
 
         <div className="flex items-center gap-2 pt-1">
           {tier === 'MAX' ? (
-            <div className="bg-[rgba(45,212,191,0.08)] border border-[rgba(45,212,191,0.3)] text-teal-accent px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-[0.06em] flex items-center gap-1.5 shadow-[0_0_12px_rgba(45,212,191,0.15)]">
+            <div className="type-overline bg-[rgba(45,212,191,0.08)] border border-[rgba(45,212,191,0.3)] text-teal-accent px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1.5 shadow-[0_0_12px_rgba(45,212,191,0.15)]">
               <Crown className="w-3 h-3 filter drop-shadow-[0_0_3px_rgba(45,212,191,0.5)]" />
               MAX
             </div>
           ) : tier === 'PRO' ? (
-            <div className="bg-[rgba(45,212,191,0.1)] border border-[rgba(45,212,191,0.25)] text-teal-accent px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-[0.06em] flex items-center gap-1.5">
+            <div className="type-overline bg-[rgba(45,212,191,0.1)] border border-[rgba(45,212,191,0.25)] text-teal-accent px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1.5">
               <Crown className="w-3 h-3" />
               PRO
             </div>
           ) : (
-            <div className="bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-[#A0A0A0] px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-[0.06em]">
+            <div className="type-overline bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-[#A0A0A0] px-2.5 py-0.5 rounded-full font-bold">
               FREE PLAN
             </div>
           )}
@@ -198,21 +198,21 @@ const HeaderSection = ({
           {tier !== 'FREE' && (
             <button 
               onClick={() => setActiveTab('settings')}
-              className="text-[13px] text-[#A0A0A0] hover:text-teal-accent transition-colors"
+              className="type-sm text-[#A0A0A0] hover:text-teal-accent transition-colors"
             >
               Manage plan →
             </button>
           )}
 
           {streakCount > 1 && (
-            <div className="bg-[rgba(45,212,191,0.1)] border border-[rgba(45,212,191,0.2)] text-teal-accent px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-[0.06em]">
+            <div className="type-overline bg-[rgba(45,212,191,0.1)] border border-[rgba(45,212,191,0.2)] text-teal-accent px-2.5 py-0.5 rounded-full font-bold">
               🔥 {streakCount} day streak
             </div>
           )}
         </div>
       </div>
 
-      <div className="hidden md:block text-[13px] text-[#A0A0A0]">
+      <div className="hidden md:block type-sm text-[#A0A0A0]">
         Member since {memberSince}
       </div>
     </div>
@@ -223,11 +223,11 @@ const UpgradeNudge = ({ onUpgrade }: { onUpgrade: () => void }) => (
   <div className="bg-[#141414] border border-[rgba(45,212,191,0.15)] rounded-[14px] p-4 flex items-center justify-between gap-4">
     <div className="flex items-center gap-3">
       <Crown className="w-[18px] h-[18px] text-teal-accent" />
-      <span className="text-[14px] text-[#A0A0A0]">Unlock Pro — 500 DMs, 60 posts and 30 audits every month</span>
+      <span className="type-sm text-[#A0A0A0]">Unlock Pro — 500 DMs, 60 posts and 30 audits every month</span>
     </div>
     <button 
       onClick={onUpgrade}
-      className="text-[14px] font-bold text-teal-accent whitespace-nowrap hover:opacity-80 transition-opacity"
+      className="type-sm font-bold text-teal-accent whitespace-nowrap hover:opacity-80 transition-opacity"
     >
       Get Pro →
     </button>
@@ -291,28 +291,28 @@ const QuickActions = ({ tier, usageLimits, setActiveTab, isMax, voicePostsCount,
 
   return (
     <div className="space-y-4">
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#A0A0A0]">
+      <h2 className="type-overline font-bold text-[#A0A0A0]">
         {tier === 'FREE' ? 'TOOLS' : tier === 'PRO' ? 'YOUR PRO TOOLS' : 'YOUR MAX TOOLS'}
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {tools.map(tool => {
           let badge = null;
           if (tool.status === 'Unlimited') {
-            badge = <span className="text-[11px] font-bold text-teal-accent">Unlimited</span>;
+            badge = <span className="type-overline font-bold text-teal-accent">Unlimited</span>;
           } else if (tool.status === 'voice') {
-            if (tool.used === 0) badge = <span className="text-[11px] font-bold text-amber-500">Not set up</span>;
-            else badge = <span className="text-[11px] text-[#A0A0A0]">{tool.used} of {tool.limit_ref} posts</span>;
+            if (tool.used === 0) badge = <span className="type-overline font-bold text-amber-500">Not set up</span>;
+            else badge = <span className="type-overline text-[#A0A0A0]">{tool.used} of {tool.limit_ref} posts</span>;
           } else if (tool.status === 'saved') {
-            badge = <span className="text-[11px] text-[#A0A0A0]">{tool.used} of {tool.limit_ref} saved</span>;
+            badge = <span className="type-overline text-[#A0A0A0]">{tool.used} of {tool.limit_ref} saved</span>;
           } else if (tool.limit_ref === 'unlimited') {
-            badge = <span className="text-[11px] font-bold text-teal-accent">Unlimited</span>;
+            badge = <span className="type-overline font-bold text-teal-accent">Unlimited</span>;
           } else {
             const used = tool.status?.used || 0;
             const limit = tool.limit_ref;
             if (used >= limit) {
               badge = <div className="bg-red-500/10 text-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Limit reached</div>;
             } else {
-              badge = <span className="text-[11px] text-[#A0A0A0]">{limit - used} {tool.id === 'topics' ? 'topics ' : ''}left</span>;
+              badge = <span className="type-overline text-[#A0A0A0]">{limit - used} {tool.id === 'topics' ? 'topics ' : ''}left</span>;
             }
           }
 
@@ -323,8 +323,8 @@ const QuickActions = ({ tier, usageLimits, setActiveTab, isMax, voicePostsCount,
                 {badge}
               </div>
               <div className="mt-4">
-                <h3 className="text-[15px] font-bold text-white">{tool.name}</h3>
-                <p className="text-[13px] text-[#A0A0A0] leading-tight mt-0.5">{tool.desc}</p>
+                <h3 className="type-body font-bold text-white">{tool.name}</h3>
+                <p className="type-sm text-[#A0A0A0] leading-tight mt-0.5">{tool.desc}</p>
               </div>
             </InteractiveCard>
           );
@@ -348,12 +348,12 @@ const UsageOverview = ({ tier, status, onUpgrade, isMax }: any) => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#A0A0A0]">THIS MONTH</h2>
+      <h2 className="type-overline font-bold text-[#A0A0A0]">THIS MONTH</h2>
       <div className={`
         ${isMax ? 'bg-[#111111] border-[rgba(45,212,191,0.12)]' : 'bg-[#141414] border-[rgba(255,255,255,0.06)]'}
         border rounded-[14px] p-5 space-y-6
       `}>
-        <div className="flex justify-between items-center text-[13px] text-[#A0A0A0]">
+        <div className="flex justify-between items-center type-sm text-[#A0A0A0]">
           <span>Usage</span>
           <span>Resets {resetText}</span>
         </div>
@@ -366,14 +366,14 @@ const UsageOverview = ({ tier, status, onUpgrade, isMax }: any) => {
 
             return (
               <div key={i} className="space-y-1.5">
-                <div className="flex justify-between text-[14px]">
+                <div className="flex justify-between type-sm">
                   <span className="text-white">{row.label}</span>
                   <span className={isUnlimited ? 'text-teal-accent font-bold' : 'text-[#A0A0A0]'}>
                     {isUnlimited ? 'Unlimited' : `${row.used} of ${row.limit}`}
                   </span>
                 </div>
                 <ProgressBar percentage={pct} color={color} />
-                {row.sub && <p className="text-[11px] text-[#A0A0A0]">{row.sub}</p>}
+                {row.sub && <p className="type-overline text-[#A0A0A0]">{row.sub}</p>}
               </div>
             );
           })}
@@ -381,14 +381,14 @@ const UsageOverview = ({ tier, status, onUpgrade, isMax }: any) => {
 
         {tier === 'PRO' && (
           <div className="pt-4 text-center">
-            <p className="text-[12px] text-[#A0A0A0]">
+            <p className="type-caption text-[#A0A0A0]">
               Need more? <button onClick={onUpgrade} className="text-teal-accent hover:underline">Upgrade to Max</button> for unlimited posts and 1000 DMs.
             </p>
           </div>
         )}
 
         {tier === 'MAX' && (
-          <p className="text-[12px] text-teal-accent text-center pt-4">
+          <p className="type-caption text-teal-accent text-center pt-4">
             You have full access. No limits on what you can build.
           </p>
         )}
@@ -419,7 +419,7 @@ const StatsRow = ({ isMax, stats, voicePostsCount, savedItemsCount }: any) => {
         >
           <item.icon className="w-[18px] h-[18px] text-teal-accent" />
           <span className="text-[28px] font-bold text-white leading-none mt-2">{item.val}</span>
-          <span className={`text-[11px] font-bold uppercase tracking-[0.1em] ${item.label === 'Not Set Up' ? 'text-amber-500' : 'text-[#A0A0A0]'}`}>
+          <span className={`type-overline font-bold ${item.label === 'Not Set Up' ? 'text-amber-500' : 'text-[#A0A0A0]'}`}>
             {item.label}
           </span>
         </div>
@@ -437,8 +437,8 @@ const VoiceProfilePrompt = ({ isMax, voicePostsCount, setActiveTab }: any) => {
     `}>
       <Mic className="w-8 h-8 text-teal-accent shrink-0" />
       <div className="flex-grow">
-        <h3 className="text-[15px] font-bold text-white">Set up Voice Profile</h3>
-        <p className="text-[13px] text-[#A0A0A0]">
+        <h3 className="type-body font-bold text-white">Set up Voice Profile</h3>
+        <p className="type-sm text-[#A0A0A0]">
           {isMax 
             ? 'Add up to 20 posts so every generation sounds unmistakably like you. This is your most powerful Max feature.'
             : 'Add up to 10 posts so every generation sounds like you.'}
@@ -446,7 +446,7 @@ const VoiceProfilePrompt = ({ isMax, voicePostsCount, setActiveTab }: any) => {
       </div>
       <button 
         onClick={() => setActiveTab('voice')}
-        className="text-[14px] font-bold text-teal-accent whitespace-nowrap px-4 py-2 border border-teal-accent/20 rounded-lg hover:bg-teal-accent/5 transition-colors"
+        className="type-sm font-bold text-teal-accent whitespace-nowrap px-4 py-2 border border-teal-accent/20 rounded-lg hover:bg-teal-accent/5 transition-colors"
       >
         {isMax ? 'Set Up Now →' : 'Set Up →'}
       </button>
@@ -456,9 +456,9 @@ const VoiceProfilePrompt = ({ isMax, voicePostsCount, setActiveTab }: any) => {
 
 const ComingSoonSection = () => (
   <div className="space-y-4">
-    <h2 className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#A0A0A0]">COMING SOON FOR YOU</h2>
+    <h2 className="type-overline font-bold text-[#A0A0A0]">COMING SOON FOR YOU</h2>
     <div className="bg-[#111111] border border-[rgba(45,212,191,0.12)] rounded-[16px] p-5 space-y-6">
-      <p className="text-[13px] text-[#A0A0A0]">As a Max member you get first access to every new feature before anyone else.</p>
+      <p className="type-sm text-[#A0A0A0]">As a Max member you get first access to every new feature before anyone else.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           { icon: Calendar, name: 'Content Calendar', body: 'Plan your entire month of LinkedIn content in one view.' },
@@ -468,15 +468,15 @@ const ComingSoonSection = () => (
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <feat.icon className="w-4 h-4 text-teal-accent" />
-                <span className="text-[15px] font-bold text-white">{feat.name}</span>
+                <span className="type-body font-bold text-white">{feat.name}</span>
               </div>
-              <div className="bg-amber-500/10 border border-amber-500/20 text-amber-500 px-2 py-0.5 rounded-full text-[11px] font-bold tracking-[0.06em]">COMING SOON</div>
+              <div className="type-overline bg-amber-500/10 border border-amber-500/20 text-amber-500 px-2 py-0.5 rounded-full font-bold">COMING SOON</div>
             </div>
-            <p className="text-[13px] text-[#A0A0A0]">{feat.body}</p>
+            <p className="type-sm text-[#A0A0A0]">{feat.body}</p>
           </div>
         ))}
       </div>
-      <div className="pt-2 text-[13px] text-[#A0A0A0]">
+      <div className="pt-2 type-sm text-[#A0A0A0]">
         Have a feature request? <a href="mailto:somyra@proton.me?subject=Feature Request - Max Member" className="text-teal-accent hover:underline">Send feedback →</a>
       </div>
     </div>
@@ -653,9 +653,9 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
           <Lightbulb className="w-8 h-8 text-teal-accent" />
         </div>
         <div>
-          <div className="text-[11px] font-bold text-teal-accent uppercase tracking-[0.3em] mb-2">DAILY INSIGHT</div>
+          <div className="type-overline font-bold text-teal-accent mb-2">DAILY INSIGHT</div>
           <h3 className="text-xl font-bold text-white mb-2">Pro Tip of the Day</h3>
-          <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{currentDayTip}</p>
+          <p className="type-body text-[#A0A0A0] leading-relaxed">{currentDayTip}</p>
         </div>
       </div>
 

@@ -28,11 +28,11 @@ const NotFoundPage: React.FC = () => {
               <Compass className="w-8 h-8 animate-pulse" />
             </div>
 
-            <h1 className="text-7xl sm:text-9xl font-black tracking-tight text-[#2DD4BF] mb-4">
+            <h1 className="text-7xl sm:text-9xl font-semibold tracking-tight text-[#2DD4BF] mb-4">
               404
             </h1>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-3">
               This page doesn't exist
             </h2>
 

@@ -539,13 +539,13 @@ export default function App() {
           <Bolt className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${iconColor}`} />
           <motion.span 
             animate={isAnimating ? { scale: 1.3 } : { scale: 1 }}
-            className={`text-xs sm:text-[13px] font-bold ${stateColor}`}
+            className={`type-overline font-bold ${stateColor}`}
           >
             {remaining} of {limit} {getFeatureName()} <span className="hidden sm:inline">left this month</span><span className="sm:hidden">left</span>
           </motion.span>
         </div>
         {feature === 'smart_outreach' && (isPro || isMax) && (limit === 500 || limit === 1000) && (
-          <span className="text-[10px] text-[#555555] font-medium mr-2">that is {limit === 500 ? 25 : 50} per working day</span>
+          <span className="type-overline text-[#555555] font-medium mr-2">that is {limit === 500 ? 25 : 50} per working day</span>
         )}
       </div>
     );
@@ -1076,12 +1076,12 @@ export default function App() {
             </div>
             <div className="flex flex-col">
               <h1 className="text-xl font-bold tracking-tight text-white leading-none">Somyra</h1>
-              <p className="text-[10px] text-muted font-bold tracking-widest mt-1">LINKEDIN ELEVATED</p>
+              <p className="type-overline text-muted font-bold mt-1">LINKEDIN ELEVATED</p>
             </div>
           </div>
           
           <div className="hidden lg:flex items-center gap-6">
-            <nav className="flex items-center gap-6 text-[15px] font-semibold text-slate-400">
+            <nav className="flex items-center gap-6 type-body font-semibold text-slate-400">
               <span onClick={() => scrollToSection('how-it-works')} className="cursor-pointer transition-colors hover:text-white">How it Works</span>
               
               <div 
@@ -1255,7 +1255,7 @@ export default function App() {
                 {sidebarGroups.map((group, groupIdx) => (
                   <div key={groupIdx} className="flex flex-col">
                     {group.label && (
-                      <p className="text-[10px] font-bold text-muted uppercase tracking-[0.2em] mb-2 mt-4 ml-4">{group.label}</p>
+                      <p className="type-overline font-bold text-muted mb-2 mt-4 ml-4">{group.label}</p>
                     )}
                     <div className="flex flex-col gap-1">
                       {group.items.map((itemId) => {
@@ -1323,7 +1323,7 @@ export default function App() {
                 {user && (
                   <div className="px-4 space-y-4">
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-muted font-medium uppercase tracking-wider mb-1">Logged in as</span>
+                      <span className="type-overline text-muted font-medium mb-1">Logged in as</span>
                       <span className="text-xs text-slate-300 font-medium truncate">{user.email}</span>
                     </div>
                     <button 
@@ -1340,7 +1340,7 @@ export default function App() {
                     <Lightbulb className="w-3.5 h-3.5 text-teal-accent" />
                     <h3 className="text-xs font-bold text-white uppercase tracking-wider">Pro Tip</h3>
                   </div>
-                  <p className="text-[10px] text-muted leading-relaxed">
+                  <p className="type-overline text-muted leading-relaxed">
                     Analyze your profile first to get personalized content suggestions.
                   </p>
                 </div>
@@ -1359,7 +1359,7 @@ export default function App() {
                 <div className="absolute inset-0 border-4 border-t-teal-accent rounded-full animate-spin" />
                 <Zap className="absolute inset-0 m-auto w-10 h-10 text-teal-accent animate-pulse" />
               </div>
-              <h2 className="text-2xl font-black text-white mb-2 tracking-tight">Activating your account...</h2>
+              <h2 className="text-2xl font-semibold text-white mb-2 tracking-tight">Activating your account...</h2>
               <p className="text-[#888888] text-sm max-w-sm mx-auto leading-relaxed">
                 We've received your payment! We're now syncing your account with Dodo Payments. This usually takes just a few seconds.
               </p>
@@ -1424,7 +1424,7 @@ export default function App() {
                 {sidebarGroups.map((group, groupIdx) => (
                   <div key={groupIdx} className="flex flex-col">
                     {group.label && (
-                      <p className="text-[10px] font-bold text-muted uppercase tracking-[0.2em] mb-2 mt-4 ml-4">{group.label}</p>
+                      <p className="type-overline font-bold text-muted mb-2 mt-4 ml-4">{group.label}</p>
                     )}
                     <div className="flex flex-col gap-1">
                       {group.items.map((itemId) => {
@@ -1688,7 +1688,7 @@ export default function App() {
                   ) : (
                   <div className="w-full max-w-4xl mx-auto space-y-10 pb-20 px-4 sm:px-0">
                     <div className="flex flex-col gap-2">
-                      <h2 className="text-3xl font-black text-white tracking-tight">Account Settings</h2>
+                      <h2 className="text-3xl font-semibold text-white tracking-tight">Account Settings</h2>
                       <p className="text-muted text-sm font-medium">Manage your global preferences, subscription, and usage limits.</p>
                     </div>
 
@@ -1697,9 +1697,9 @@ export default function App() {
                       <div className="space-y-6">
                         <div className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
                           <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-white font-bold uppercase tracking-widest text-[10px]">Your Profile</h3>
+                            <h3 className="type-overline text-white font-bold">Your Profile</h3>
                             <div className="px-3 py-1 rounded-full bg-teal-accent/10 border border-teal-accent/20">
-                              <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest">
+                              <span className="type-overline text-teal-accent">
                                 {isMax ? 'MAX PLAN' : isPro ? 'PRO PLAN' : 'FREE PLAN'}
                               </span>
                             </div>
@@ -1720,7 +1720,7 @@ export default function App() {
                           <div className="p-8 rounded-[32px] bg-red-500/[0.03] border border-red-500/10 hover:border-red-500/20 transition-colors">
                             <div className="flex items-center gap-2 mb-6">
                               <AlertCircle className="w-4 h-4 text-red-400" />
-                              <h3 className="text-red-400 font-bold uppercase tracking-widest text-[10px]">Manage Subscription</h3>
+                              <h3 className="type-overline text-red-400 font-bold">Manage Subscription</h3>
                             </div>
                             
                             <div className="space-y-4">
@@ -1752,7 +1752,7 @@ export default function App() {
                           >
                             <div className="flex items-center justify-between">
                               <div className="space-y-1">
-                                <h3 className="text-white font-black text-lg group-hover:text-teal-accent transition-colors">Upgrade your reach</h3>
+                                <h3 className="text-white font-semibold text-lg group-hover:text-teal-accent transition-colors">Upgrade your reach</h3>
                                 <p className="text-muted text-sm">Unlock unlimited topics and deep strategy audits.</p>
                               </div>
                               <ChevronRight className="w-5 h-5 text-teal-accent group-hover:translate-x-1 transition-transform" />
@@ -1764,8 +1764,8 @@ export default function App() {
                       {/* Usage & Limits Sidebar */}
                       <div className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5 space-y-8">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-white font-bold uppercase tracking-widest text-[10px]">Usage & Limits</h3>
-                          <span className="text-[10px] text-muted font-bold uppercase">{usageLimits.getResetDate()}</span>
+                          <h3 className="type-overline text-white font-bold">Usage & Limits</h3>
+                          <span className="type-overline text-muted font-bold">{usageLimits.getResetDate()}</span>
                         </div>
 
                         <div className="space-y-8">
@@ -1784,7 +1784,7 @@ export default function App() {
                                     <feature.icon className="w-3.5 h-3.5 text-teal-accent/60" />
                                     <span className="text-xs font-bold text-white">{feature.label}</span>
                                   </div>
-                                  <span className="text-[11px] text-muted font-black tabular-nums">
+                                  <span className="type-caption text-muted tabular-nums">
                                     {status.used} / <span className="text-white">{status.limit === 'unlimited' ? '∞' : status.limit}</span>
                                   </span>
                                 </div>
@@ -1803,7 +1803,7 @@ export default function App() {
                         <div className="pt-4 border-t border-white/5">
                           <div className="flex items-center gap-3 p-4 rounded-2xl bg-teal-accent/5 border border-teal-accent/10">
                             <Zap className="w-4 h-4 text-teal-accent shrink-0" />
-                            <p className="text-[11px] text-[#A0A0A0] leading-relaxed">
+                            <p className="type-overline text-[#A0A0A0] leading-relaxed">
                               Limits are refreshed on the 1st of every month. {isMax ? 'You are on the highest tier.' : 'Upgrade to increase your monthly capacity.'}
                             </p>
                           </div>
@@ -1829,7 +1829,7 @@ export default function App() {
                             className="relative w-full max-w-md bg-[#0F0F0F] border border-[#1f1f1f] rounded-[32px] p-8 shadow-2xl overflow-hidden"
                           >
                             <div className="absolute -top-24 -left-24 w-48 h-48 bg-red-500/10 blur-[80px] rounded-full pointer-events-none" />
-                            <h2 className="text-xl font-black text-white mb-4 tracking-tight">Are you sure?</h2>
+                            <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Are you sure?</h2>
                              <p className="text-[#888888] text-sm leading-relaxed mb-8">
                                Your {isMax ? 'Max' : 'Pro'} access will remain active until the end of your current billing period. 
                                Your subscription will be cancelled immediately with Dodo Payments.
@@ -1915,7 +1915,7 @@ export default function App() {
                   <Target className="w-4 h-4 sm:w-6 sm:h-6 text-teal-accent" />
                 </div>
                 <div className="text-center sm:text-left">
-                  <p className="text-[8px] sm:text-[10px] text-muted font-bold uppercase tracking-widest mb-0.5 sm:mb-1">Used This Month</p>
+                  <p className="type-overline text-muted font-bold mb-0.5 sm:mb-1">Used This Month</p>
                   <p className="text-sm sm:text-xl font-bold text-white">{usageLimits.getStatus('profile_audit').used + usageLimits.getStatus('post_writer').used + usageLimits.getStatus('topic_generator').used}</p>
                 </div>
               </div>
@@ -1924,7 +1924,7 @@ export default function App() {
                   <Rocket className="w-4 h-4 sm:w-6 sm:h-6 text-teal-accent" />
                 </div>
                 <div className="text-center sm:text-left">
-                  <p className="text-[8px] sm:text-[10px] text-muted font-bold uppercase tracking-widest mb-0.5 sm:mb-1">Posts Written</p>
+                  <p className="type-overline text-muted font-bold mb-0.5 sm:mb-1">Posts Written</p>
                   <p className="text-sm sm:text-xl font-bold text-white">{stats.posts}</p>
                 </div>
               </div>
@@ -1933,7 +1933,7 @@ export default function App() {
                   <MessageSquare className="w-4 h-4 sm:w-6 sm:h-6 text-teal-accent" />
                 </div>
                 <div className="text-center sm:text-left">
-                  <p className="text-[8px] sm:text-[10px] text-muted font-bold uppercase tracking-widest mb-0.5 sm:mb-1">Topics Created</p>
+                  <p className="type-overline text-muted font-bold mb-0.5 sm:mb-1">Topics Created</p>
                   <p className="text-sm sm:text-xl font-bold text-white">{stats.topics}</p>
                 </div>
               </div>

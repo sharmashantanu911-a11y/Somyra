@@ -189,7 +189,7 @@ export function PostWriter({
           <div className="section-heading">
             <div>
               <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Post Writer</h2>
-              <p className="text-[13px] md:text-sm text-muted">Turn a simple idea into a high-engagement LinkedIn post.</p>
+              <p className="type-sm text-muted">Turn a simple idea into a high-engagement LinkedIn post.</p>
             </div>
             <div className="flex items-start gap-2 sm:gap-4">
               {voicePosts.length > 0 && (
@@ -222,7 +222,7 @@ export function PostWriter({
                     key={style}
                     type="button"
                     onClick={() => setWriterForm({...writerForm, style})}
-                    className={`px-2 py-1 min-[375px]:px-[10px] min-[375px]:py-[6px] md:px-4 md:py-2 rounded-full md:rounded-xl text-[10px] min-[375px]:text-[11px] md:text-xs font-medium border transition-all duration-300 ${
+                    className={`px-2 py-1 min-[375px]:px-[10px] min-[375px]:py-[6px] md:px-4 md:py-2 rounded-full md:rounded-xl type-overline font-medium border transition-all duration-300 ${
                       writerForm.style === style 
                       ? 'bg-teal-accent text-black border-transparent shadow-[0_0_15px_rgba(45,212,191,0.2)]' 
                       : 'bg-bg-secondary border-border-card text-muted hover:border-teal-accent/50'
@@ -246,7 +246,7 @@ export function PostWriter({
                 )}
                 <div className="relative group">
                   <Info className="w-3.5 h-3.5 text-teal-accent/60 cursor-help group-hover:text-teal-accent transition-colors" />
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-[10px] text-muted leading-relaxed opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-20 shadow-xl">
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-white/10 rounded-lg type-caption text-muted leading-relaxed opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-20 shadow-xl">
                     Deep Mode adds an extra AI review pass to ensure maximum authenticity and human-like rhythm. Takes ~15s longer.
                   </div>
                 </div>
@@ -297,12 +297,12 @@ export function PostWriter({
                 className="space-y-4 pt-6 border-t border-white/5"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <h3 className="text-[11px] md:text-sm font-semibold text-muted uppercase tracking-widest">Draft</h3>
+                  <h3 className="type-overline font-semibold text-muted">Draft</h3>
                   <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                     <button 
                       onClick={handleAnalyzeTone}
                       disabled={analyzingTone}
-                      className="flex items-center gap-2 text-[11px] md:text-xs font-medium text-teal-accent hover:opacity-80 transition-colors disabled:opacity-50"
+                      className="flex items-center gap-2 type-overline font-medium text-teal-accent hover:opacity-80 transition-colors disabled:opacity-50"
                     >
                       {analyzingTone ? <Loader2 className="w-3 h-3 animate-spin" /> : <BarChart3 className="w-3 h-3" />}
                       Analyze Tone
@@ -310,14 +310,14 @@ export function PostWriter({
                     <button 
                       onClick={() => handleSave('Post', results.post!, 'save-post')}
                       disabled={saving === 'save-post'}
-                      className="flex items-center gap-2 text-[11px] md:text-xs font-medium text-teal-accent hover:opacity-80 transition-colors disabled:opacity-50"
+                      className="flex items-center gap-2 type-overline font-medium text-teal-accent hover:opacity-80 transition-colors disabled:opacity-50"
                     >
                       {saving === 'save-post' ? <Loader2 className="w-3 h-3 animate-spin" /> : (copied === 'save-post' ? <Check className="w-3 h-3" /> : <Bookmark className="w-3 h-3" />)}
                       {copied === 'save-post' ? 'Saved!' : 'Save Post'}
                     </button>
                     <button 
                       onClick={() => handleCopy(results.post!, 'post')}
-                      className="flex items-center gap-2 text-[11px] md:text-xs font-medium text-teal-accent hover:opacity-80 transition-colors"
+                      className="flex items-center gap-2 type-overline font-medium text-teal-accent hover:opacity-80 transition-colors"
                     >
                       {copied === 'post' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                       {copied === 'post' ? 'Copied!' : 'Copy'}
@@ -325,7 +325,7 @@ export function PostWriter({
                   </div>
                 </div>
                 <div className="bg-bg-secondary border border-border-card p-5 md:p-6 rounded-2xl hover:border-teal-accent/30 transition-colors duration-300">
-                  <p className="text-[13px] md:text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
+                  <p className="type-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
                     {results.post}
                   </p>
                 </div>
@@ -364,7 +364,7 @@ export function PostWriter({
                         <BarChart3 className="w-4 h-4 text-teal-accent" />
                         <h4 className="text-sm font-bold text-white">Tone Analysis</h4>
                       </div>
-                      <span className="px-3 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full text-[10px] font-bold text-teal-accent uppercase tracking-wider">
+                      <span className="px-3 py-1 bg-teal-accent/10 border border-teal-accent/20 rounded-full type-overline font-bold text-teal-accent">
                         {results.toneAnalysis.tone}
                       </span>
                     </div>

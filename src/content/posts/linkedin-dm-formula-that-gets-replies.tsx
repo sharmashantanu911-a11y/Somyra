@@ -127,9 +127,9 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is a good LinkedIn DM opening line?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               A good LinkedIn DM opening line references something specific about the recipient. A post they wrote. A milestone at their company. A problem they are working through. Generic openers like I came across your profile signal that you did not pay attention. Specificity is the only thing that separates a message that gets a reply from one that gets ignored.
             </p>
@@ -138,9 +138,9 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Why Most LinkedIn DMs Get Ignored</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">Why do most LinkedIn DMs fail?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Most DMs fail because they are too long, too self focused, or too pushy. They start with a pitch instead of context. They ask for something before giving anything. They sound like templates. A DM that references something specific about the recipient and offers value first will get replies.
             </p>
@@ -168,9 +168,9 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The 4-Line DM Formula</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the best formula for a LinkedIn DM?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The 4-Line DM Formula is: Line 1 references something specific from their profile or content. Line 2 states why you are reaching out. Line 3 offers something valuable with no strings attached. Line 4 ends with a soft ask that is easy to say yes to.
             </p>
@@ -235,7 +235,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           </p>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">SALES OUTREACH EXAMPLE</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">SALES OUTREACH EXAMPLE</p>
             <div className="bg-[#0D0D0D] rounded-lg p-4">
               <p className="text-[#888888] text-sm italic">
                 "I saw your post about the difficulty of scaling offshore design teams and it resonated heavily. My team has built the exact infrastructure to solve this for three other agencies in your market. Are you currently exploring alternative staffing models for the upcoming quarter? No worries if the timing is not right just wanted to start the conversation."
@@ -244,7 +244,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           </div>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">NETWORKING OUTREACH EXAMPLE</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">NETWORKING OUTREACH EXAMPLE</p>
             <div className="bg-[#0D0D0D] rounded-lg p-4">
               <p className="text-[#888888] text-sm italic">
                 "Your breakdown of the recent Google algorithm update was the most tactical analysis I have seen all week. I run an SEO consultancy focused on ecommerce and am trying to connect with other technical marketers. Are you open to a quick connection? Totally understand if you are focused on other things right now."
@@ -253,7 +253,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           </div>
 
           <div className="bg-[#141414] border border-white/10 rounded-xl p-6 my-8">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-3">COLLABORATION OUTREACH EXAMPLE</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-3">COLLABORATION OUTREACH EXAMPLE</p>
             <div className="bg-[#0D0D0D] rounded-lg p-4">
               <p className="text-[#888888] text-sm italic">
                 "I loved your recent podcast episode discussing retention strategies for enterprise software. I am hosting a digital summit on that exact topic next month and would love to have you on a panel. Do you have capacity for a quick discussion about it next week? No pressure at all if your schedule is packed."
@@ -264,9 +264,9 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Follow-Up That Works</h2>
 
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I follow up on a LinkedIn DM?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Wait 3 to 5 days after your first message. Keep the follow up shorter than the original. Reference your previous message and add one new piece of value. Do not ask why they did not reply. If they still do not respond after one follow up, let it go.
             </p>
@@ -371,7 +371,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
           </p>
 
           <div className="mt-12 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <p className="text-2xl font-extrabold text-white mb-4">
+            <p className="text-2xl font-semibold text-white mb-4">
               Stop sending DMs that get ignored. Start getting replies.
             </p>
             <p className="text-[#888888] mb-6 text-sm">

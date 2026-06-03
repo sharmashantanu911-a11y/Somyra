@@ -431,24 +431,24 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
           )}
           
           <div className="flex animate-in fade-in slide-in-from-left-2 duration-500 flex-wrap tab:flex-nowrap gap-[6px]">
-            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 text-[10px] ds:text-[11px] text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
+            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 type-overline text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
               <Mic className="w-3 h-3" />
               <span className="truncate max-w-[60px] ml:max-w-[80px]">{toneOptions.find(o => o.id === controls.tone)?.id || controls.tone}</span>
             </div>
-            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 text-[10px] ds:text-[11px] text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
+            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 type-overline text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
               <AlignLeft className="w-3 h-3" />
               <span>{controls.length}</span>
             </div>
-            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 text-[10px] ds:text-[11px] text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
+            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 type-overline text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
               <Layout className="w-3 h-3" />
               <span>{controls.format}</span>
             </div>
-            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 text-[10px] ds:text-[11px] text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
+            <div className={`bg-[#141414] border border-[#1f1f1f] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 type-overline text-[#888888] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
               <ArrowRight className="w-3 h-3" />
               <span>{controls.cta}</span>
             </div>
             {isVoiceProfileActive && (
-              <div className={`bg-[rgba(45,212,191,0.08)] border border-[rgba(45,212,191,0.2)] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 text-[10px] ds:text-[11px] text-[#2DD4BF] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
+              <div className={`bg-[rgba(45,212,191,0.08)] border border-[rgba(45,212,191,0.2)] rounded-full px-[8px] py-[3px] ds:px-2.5 ds:py-1 type-overline text-[#2DD4BF] flex items-center gap-1.5 whitespace-nowrap ${isLoading ? 'animate-pulse opacity-60' : ''}`}>
                 <div className="w-[6px] h-[6px] bg-[#2DD4BF] rounded-full"></div>
                 <span className="hidden ml:inline">Voice Active</span>
               </div>
@@ -458,7 +458,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
           <div className="flex flex-col tab:flex-row gap-[8px] tab:gap-2 w-full tab:w-auto">
             <button 
               onClick={toggleCustomize}
-              className="w-full tab:w-auto bg-transparent border border-[#1f1f1f] text-[#888888] ds:hover:border-[#2DD4BF] ds:hover:text-[#2DD4BF] rounded-lg px-4 tab:px-[14px] ds:px-4 py-2.5 tab:py-[8px] ds:py-2.5 text-[13px] ds:text-sm flex items-center justify-center gap-2 transition-all min-h-[44px] tab:min-h-0"
+              className="w-full tab:w-auto bg-transparent border border-[#1f1f1f] text-[#888888] ds:hover:border-[#2DD4BF] ds:hover:text-[#2DD4BF] rounded-lg px-4 tab:px-[14px] ds:px-4 py-2.5 tab:py-[8px] ds:py-2.5 type-sm flex items-center justify-center gap-2 transition-all min-h-[44px] tab:min-h-0"
             >
               <Settings className="w-3.5 h-3.5" />
               Customize
@@ -487,14 +487,14 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
           >
             {showSuggestion && suggestion && (
               <div className="bg-[#141414] border border-[#2DD4BF]/20 rounded-xl p-3 ml:p-[12px] ds:p-[12px_16px] mb-3 flex flex-col ml:flex-col tab:flex-row items-start tab:items-center justify-between gap-3 relative">
-                <div className="flex items-center gap-2 text-[#2DD4BF] text-[11px] ds:text-xs pr-8 ml:pr-0">
+                <div className="flex items-center gap-2 text-[#2DD4BF] type-overline pr-8 ml:pr-0">
                   <Sparkles className="w-3.5 h-3.5 shrink-0" />
                   <span>Based on your last {history.length} posts you usually prefer {suggestion.tone}, {suggestion.length}, {suggestion.format}.</span>
                 </div>
                 <div className="flex items-center gap-3 w-full tab:w-auto">
                   <button 
                     onClick={applySuggestion}
-                    className="w-full tab:w-auto text-center tab:text-left text-[#2DD4BF] text-[11px] ds:text-xs font-bold ds:underline ds:hover:text-[#2DD4BF]/80 border border-[#2DD4BF]/30 tab:border-0 rounded-lg tab:rounded-none py-2 tab:py-0"
+                    className="w-full tab:w-auto text-center tab:text-left text-[#2DD4BF] type-overline font-bold ds:underline ds:hover:text-[#2DD4BF]/80 border border-[#2DD4BF]/30 tab:border-0 rounded-lg tab:rounded-none py-2 tab:py-0"
                   >
                     Apply my usual?
                   </button>
@@ -516,7 +516,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* Tone Selector */}
                 <div className="ds:col-span-2">
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Voice and Tone</span>
+                    <span className="type-caption font-semibold text-[#888888]">Voice and Tone</span>
                     <div className="group relative">
                       <Info className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
@@ -539,7 +539,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                           key={option.id}
                           type="button"
                           onClick={() => updateControl('tone', option.id)}
-                          className={`flex items-center justify-center gap-2 px-[12px] ds:px-4 py-2 rounded-full text-[11px] ds:text-xs transition-all min-h-[40px] ds:min-h-[36px] whitespace-nowrap ${
+                          className={`flex items-center justify-center gap-2 px-[12px] ds:px-4 py-2 rounded-full type-overline transition-all min-h-[40px] ds:min-h-[36px] whitespace-nowrap ${
                             controls.tone === option.id 
                               ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                               : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] ds:hover:border-[#333333] ds:hover:text-[#CCCCCC]'
@@ -552,7 +552,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                     })}
                   </div>
                   {isVoiceProfileActive && (
-                    <p className="mt-2 text-[11px] text-[#888888]">
+                    <p className="mt-2 type-overline text-[#888888]">
                       Your Voice Profile is guiding the tone. You can override it here for this post.
                     </p>
                   )}
@@ -561,7 +561,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* Length Selector */}
                 <div>
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Post Length</span>
+                    <span className="type-caption font-semibold text-[#888888]">Post Length</span>
                     <div className="group relative">
                       <Ruler className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
@@ -584,7 +584,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                             if (option.pro && !isPro) return;
                             updateControl('length', option.id);
                           }}
-                          className={`group relative flex items-center justify-center gap-2 px-[12px] ds:px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all min-h-[44px] ml:min-h-[40px] ds:min-h-[36px] w-full tab:flex-1 ${
+                          className={`group relative flex items-center justify-center gap-2 px-[12px] ds:px-3.5 py-2 rounded-full type-overline transition-all min-h-[44px] ml:min-h-[40px] ds:min-h-[36px] w-full tab:flex-1 ${
                             controls.length === option.id 
                               ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                               : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] ds:hover:border-[#333333] ds:hover:text-[#CCCCCC]'
@@ -604,7 +604,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* Format Selector */}
                 <div>
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Post Format</span>
+                    <span className="type-caption font-semibold text-[#888888]">Post Format</span>
                     <div className="group relative">
                       <Layout className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
@@ -625,7 +625,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                         <button
                           key={option.id}
                           onClick={() => updateControl('format', option.id)}
-                          className={`flex items-center justify-center ml:justify-start gap-2 px-[12px] ds:px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all min-h-[44px] ml:min-h-[40px] ds:min-h-[36px] w-full ml:w-auto ${
+                          className={`flex items-center justify-center ml:justify-start gap-2 px-[12px] ds:px-3.5 py-2 rounded-full type-overline transition-all min-h-[44px] ml:min-h-[40px] ds:min-h-[36px] w-full ml:w-auto ${
                             controls.format === option.id 
                               ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                               : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] ds:hover:border-[#333333] ds:hover:text-[#CCCCCC]'
@@ -643,7 +643,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 {/* CTA Style */}
                 <div className="ds:col-span-2">
                   <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">How should it end</span>
+                    <span className="type-caption font-semibold text-[#888888]">How should it end</span>
                     <div className="group relative">
                       <Flag className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
@@ -668,7 +668,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                             if (option.pro && !isPro) return;
                             updateControl('cta', option.id);
                           }}
-                          className={`group relative flex items-center justify-center gap-2 px-[12px] ds:px-4 py-2 rounded-full text-[11px] ds:text-xs transition-all min-h-[40px] ds:min-h-[36px] whitespace-nowrap ${
+                          className={`group relative flex items-center justify-center gap-2 px-[12px] ds:px-4 py-2 rounded-full type-overline transition-all min-h-[40px] ds:min-h-[36px] whitespace-nowrap ${
                             controls.cta === option.id 
                               ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                               : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] ds:hover:border-[#333333] ds:hover:text-[#CCCCCC]'
@@ -693,7 +693,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                 <div className="flex flex-col ml:flex-row ml:items-center justify-between gap-2 mb-[8px] ds:mb-[10px]">
                   <div className="flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                    <span className="text-[9px] ms:text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">What is the real story or moment behind this?</span>
+                    <span className="type-caption font-semibold text-[#888888]">What is the real story or moment behind this?</span>
                     <div className="group relative">
                       <Info className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                       <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
@@ -701,7 +701,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       </div>
                     </div>
                   </div>
-                  <span className="text-[11px] text-[#444444] self-end ml:self-auto">{substanceDraft.length} characters</span>
+                  <span className="type-overline text-[#444444] self-end ml:self-auto">{substanceDraft.length} characters</span>
                 </div>
                 <textarea
                   value={substanceDraft}
@@ -714,7 +714,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                   placeholder="What actually happened? What did you notice? What changed your mind? Even one sentence makes your post 10x more specific and human."
                   className="w-full bg-[#141414] border border-[#1f1f1f] rounded-xl p-4 text-white text-[13px] ds:text-sm h-[120px] ml:h-[120px] ds:h-[100px] resize-none focus:border-[#2DD4BF] focus:ring-4 focus:ring-[#2DD4BF]/5 transition-all outline-none"
                 />
-                <div className="flex items-center gap-1.5 mt-2 text-[#2DD4BF]/70 text-[11px]">
+                <div className="flex items-center gap-1.5 mt-2 type-overline text-[#2DD4BF]/70">
                   <Sparkles className="w-3 h-3" />
                   <span>Posts with a real moment perform 3x better on LinkedIn.</span>
                 </div>
@@ -731,7 +731,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                     <button 
                       type="button"
                       onClick={() => setIsPostWriterOptionsCollapsed(!isPostWriterOptionsCollapsed)}
-                      className="text-[#2DD4BF] text-[11px] font-medium hover:underline"
+                      className="text-[#2DD4BF] type-overline font-medium hover:underline"
                     >
                       {isPostWriterOptionsCollapsed ? 'Expand' : 'Collapse'}
                     </button>
@@ -757,7 +757,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                           </div>
                           <div className="flex items-center gap-2 mb-3">
                             <Sparkles className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                            <span className="text-[10px] font-bold text-[#2DD4BF] uppercase tracking-wider">Voice Profile Intelligence</span>
+                            <span className="type-overline font-bold text-[#2DD4BF]">Voice Profile Intelligence</span>
                           </div>
                           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                             <div className="text-[11px]">
@@ -784,7 +784,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Hook Style */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Hook Style</span>
+                          <span className="type-caption font-semibold text-[#888888]">Hook Style</span>
                           <div className="group relative">
                             <HelpCircle className="w-[11px] ds:w-[12px] h-[11px] ds:h-[12px] text-[#888888] cursor-help" />
                             <div className="hidden ds:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[12px] text-[#CCCCCC] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-xl">
@@ -798,7 +798,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                               key={option.id}
                               type="button"
                               onClick={() => updateControl('hookStyle', option.id)}
-                              className={`px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all ${
+                              className={`px-3.5 py-2 rounded-full type-overline transition-all ${
                                 controls.hookStyle === option.id 
                                   ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                                   : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] hover:border-[#333333] hover:text-[#CCCCCC]'
@@ -813,7 +813,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Content Structure */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Content Structure</span>
+                          <span className="type-caption font-semibold text-[#888888]">Content Structure</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {contentStructureOptions.map(option => (
@@ -821,7 +821,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                               key={option.id}
                               type="button"
                               onClick={() => updateControl('contentStructure', option.id)}
-                              className={`px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all ${
+                              className={`px-3.5 py-2 rounded-full type-overline transition-all ${
                                 controls.contentStructure === option.id 
                                   ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                                   : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] hover:border-[#333333] hover:text-[#CCCCCC]'
@@ -836,7 +836,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Proof and Credibility */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Proof and Credibility</span>
+                          <span className="type-caption font-semibold text-[#888888]">Proof and Credibility</span>
                         </div>
                         <div className="space-y-3">
                           {proofOptions.map(option => (
@@ -858,7 +858,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                                   )}
                                 </div>
                               </div>
-                              <span className={`text-[13px] transition-colors ${
+                              <span className={`type-sm transition-colors ${
                                 controls.proofElements?.includes(option.id) ? 'text-white' : 'text-[#888888] group-hover:text-[#CCCCCC]'
                               }`}>
                                 {option.label}
@@ -871,7 +871,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Engagement Elements */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Engagement Elements</span>
+                          <span className="type-caption font-semibold text-[#888888]">Engagement Elements</span>
                         </div>
                         <div className="space-y-3">
                           {engagementOptions.map(option => (
@@ -893,7 +893,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                                   )}
                                 </div>
                               </div>
-                              <span className={`text-[13px] transition-colors ${
+                              <span className={`type-sm transition-colors ${
                                 controls.engagementElements?.includes(option.id) ? 'text-white' : 'text-[#888888] group-hover:text-[#CCCCCC]'
                               }`}>
                                 {option.label}
@@ -906,7 +906,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Hashtag Strategy */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Hashtag Strategy</span>
+                          <span className="type-caption font-semibold text-[#888888]">Hashtag Strategy</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {hashtagOptions.map(option => (
@@ -914,7 +914,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                               key={option.id}
                               type="button"
                               onClick={() => updateControl('hashtagStrategy', option.id)}
-                              className={`px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all ${
+                              className={`px-3.5 py-2 rounded-full type-overline transition-all ${
                                 controls.hashtagStrategy === option.id 
                                   ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                                   : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] hover:border-[#333333] hover:text-[#CCCCCC]'
@@ -929,7 +929,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Writing Perspective */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Writing Perspective</span>
+                          <span className="type-caption font-semibold text-[#888888]">Writing Perspective</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {perspectiveOptions.map(option => (
@@ -937,7 +937,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                               key={option.id}
                               type="button"
                               onClick={() => updateControl('writingPerspective', option.id)}
-                              className={`px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all ${
+                              className={`px-3.5 py-2 rounded-full type-overline transition-all ${
                                 controls.writingPerspective === option.id 
                                   ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                                   : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] hover:border-[#333333] hover:text-[#CCCCCC]'
@@ -952,7 +952,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Emotional Core */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Emotional Core</span>
+                          <span className="type-caption font-semibold text-[#888888]">Emotional Core</span>
                         </div>
                         <div className="flex flex-wrap gap-[6px] ds:gap-[8px]">
                           {emotionOptions.map(option => (
@@ -960,7 +960,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                               key={option.id}
                               type="button"
                               onClick={() => updateControl('emotionalCore', option.id)}
-                              className={`px-3.5 py-2 rounded-full text-[11px] ds:text-xs transition-all ${
+                              className={`px-3.5 py-2 rounded-full type-overline transition-all ${
                                 controls.emotionalCore === option.id 
                                   ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF] text-[#2DD4BF] font-semibold' 
                                   : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] hover:border-[#333333] hover:text-[#CCCCCC]'
@@ -975,7 +975,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Industry Context */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Industry Context</span>
+                          <span className="type-caption font-semibold text-[#888888]">Industry Context</span>
                         </div>
                         <input 
                           type="text"
@@ -989,7 +989,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                       {/* Audience Definition */}
                       <div>
                         <div className="flex items-center gap-1.5 mb-[8px] ds:mb-[10px]">
-                          <span className="text-[9px] ds:text-[10px] uppercase tracking-[1.5px] ds:tracking-[2px] font-semibold text-[#888888]">Audience Definition</span>
+                          <span className="type-caption font-semibold text-[#888888]">Audience Definition</span>
                         </div>
                         <input 
                           type="text"
@@ -1007,8 +1007,8 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
               {/* Save Preferences Row */}
               <div className="flex items-center justify-between gap-4 mt-8 bg-[#141414]/50 p-4 rounded-xl border border-[#1f1f1f]">
                 <div className="flex flex-col">
-                  <span className="text-white text-[13px] font-medium">Set as Defaults</span>
-                  <span className="text-[#888888] text-[11px]">Quick Generate will use these settings.</span>
+                  <span className="text-white type-sm font-medium">Set as Defaults</span>
+                  <span className="type-overline text-[#888888]">Quick Generate will use these settings.</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <AnimatePresence>
@@ -1017,7 +1017,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0 }}
-                        className="text-[#2DD4BF] text-[11px] font-medium"
+                        className="text-[#2DD4BF] type-overline font-medium"
                       >
                         Saved
                       </motion.span>
@@ -1053,7 +1053,7 @@ export const UniversalControls: React.FC<UniversalControlsProps> = ({
                   {isLoading ? 'Generating your post...' : 'Generate Post'}
                 </button>
                 
-                <div className="hidden ds:block text-center mt-2 text-[11px] text-[#888888]">
+                <div className="hidden ds:block text-center mt-2 type-overline text-[#888888]">
                   Cmd Enter to Quick Generate
                 </div>
 

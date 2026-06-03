@@ -108,7 +108,7 @@ export function TopicGenerator({
       <div className="section-heading">
         <div>
           <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Topic Generator</h2>
-          <p className="text-[13px] md:text-sm text-muted">Find your next viral post idea based on your expertise.</p>
+          <p className="type-sm text-muted">Find your next viral post idea based on your expertise.</p>
         </div>
         <div className="flex items-start gap-2 sm:gap-4">
           {voicePosts.length > 0 && (

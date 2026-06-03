@@ -642,7 +642,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             animate={{ opacity: 1, y: 0 }}
             className="bg-[#141414] border border-[#1f1f1f] rounded-xl p-4 mt-6"
           >
-            <p className="text-[10px] font-bold text-teal-accent uppercase tracking-widest mb-2">Direction Preview</p>
+            <p className="type-overline font-bold text-teal-accent mb-2">Direction Preview</p>
             <p className="text-xs text-[#777777] leading-relaxed">
               "You appear as <span className="text-white font-medium">{quickForm.whoAreYou.split(' ').slice(0, 5).join(' ')}...</span> working towards <span className="text-white font-medium">{goalText}</span>."
             </p>
@@ -657,7 +657,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             animate={{ opacity: 1, y: 0 }}
             className="bg-[#141414] border border-[#1f1f1f] rounded-xl p-4 mt-6"
           >
-            <p className="text-[10px] font-bold text-teal-accent uppercase tracking-widest mb-2">Direction Preview</p>
+            <p className="type-overline font-bold text-teal-accent mb-2">Direction Preview</p>
             <p className="text-xs text-[#777777] leading-relaxed">
               "You appear as <span className="text-white font-medium">{deepForm.role}</span> {deepForm.specificFocus ? `specializing in ${deepForm.specificFocus}` : ''} helping <span className="text-white font-medium">{deepForm.audience.length > 0 ? deepForm.audience[0] : 'your audience'}</span> achieve <span className="text-white font-medium">{deepForm.primaryGoal}</span>."
             </p>
@@ -889,7 +889,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               Start Over
             </button>
             {scoreDelta !== null && (
-              <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${scoreDelta > 0 ? 'bg-green-500/10 border-green-500/20 text-green-500' : 'bg-red-500/10 border-red-500/20 text-red-500'}`}>
+              <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full type-overline font-semibold border ${scoreDelta > 0 ? 'bg-green-500/10 border-green-500/20 text-green-500' : 'bg-red-500/10 border-red-500/20 text-red-500'}`}>
                 {scoreDelta > 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                 {scoreDelta > 0 ? `+${scoreDelta}` : scoreDelta} Improvement
               </div>
@@ -952,7 +952,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">{safeProfile.overallScore}</span>
+                  <span className="text-5xl md:text-6xl font-semibold text-white tracking-tighter">{safeProfile.overallScore}</span>
                   <span className="text-[11px] font-bold text-[#888888] uppercase tracking-widest mt-1">/ 100</span>
                 </div>
               </div>
@@ -960,11 +960,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
             <div className="flex-1 space-y-6 text-center lg:text-left w-full">
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                <span className={`px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest border shrink-0 ${status.color}`}>
+                <span className={`px-4 py-1.5 rounded-full type-overline font-semibold border shrink-0 ${status.color}`}>
                   {status.text}
                 </span>
                 <div className="hidden sm:block h-px w-8 bg-white/10" />
-                <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest shrink-0">The Diagnosis</span>
+                <span className="type-overline font-bold text-[#888888] shrink-0">The Diagnosis</span>
               </div>
               
               <div className="space-y-3">
@@ -974,7 +974,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <p className="text-sm text-[#888888] font-medium max-w-2xl mx-auto lg:mx-0">Based on real LinkedIn growth patterns and authority signals.</p>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-accent/5 border border-teal-accent/10">
                   <Sparkles className="w-3 h-3 text-teal-accent" />
-                  <p className="text-[10px] text-teal-accent/80 font-bold uppercase tracking-widest">
+                  <p className="type-overline text-teal-accent/80 font-bold">
                     You’re 1 step closer to a high-converting profile
                   </p>
                 </div>
@@ -987,7 +987,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <AlertCircle className="w-5 h-5 text-red-400" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[9px] font-black text-red-400 uppercase tracking-widest block">The Hard Truth</span>
+                  <span className="text-[9px] font-semibold text-red-400 uppercase tracking-widest block">The Hard Truth</span>
                   <p className="text-sm text-[#AAAAAA] leading-relaxed italic">
                     "{safeProfile.communicates}"
                   </p>
@@ -1004,10 +1004,10 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div key={key} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 space-y-4 relative overflow-hidden group hover:border-teal-accent/30 transition-all">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-teal-accent/5 blur-2xl -mr-12 -mt-12 group-hover:bg-teal-accent/10 transition-colors" />
                 <div className="flex items-center justify-between relative z-10">
-                  <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest">{key} Lens</span>
+                  <span className="type-overline font-semibold text-[#888888]">{key} Lens</span>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-teal-accent animate-pulse" />
-                    <span className="text-xs font-black text-teal-accent">{lens.score}/100</span>
+                    <span className="text-xs font-semibold text-teal-accent">{lens.score}/100</span>
                   </div>
                 </div>
                 <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden relative z-10">
@@ -1033,7 +1033,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="w-8 h-8 rounded-lg bg-teal-accent/10 flex items-center justify-center">
                     <Search className="w-4 h-4" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Recruiter View</span>
+                  <span className="type-overline font-bold">Recruiter View</span>
                 </div>
                 <p className="text-sm text-[#AAAAAA] leading-relaxed italic relative z-10">"{safeProfile.firstImpression?.recruiter || 'Analyzing perception...'}"</p>
               </div>
@@ -1043,7 +1043,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="w-8 h-8 rounded-lg bg-teal-accent/10 flex items-center justify-center">
                     <Briefcase className="w-4 h-4" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Client View</span>
+                  <span className="type-overline font-bold">Client View</span>
                 </div>
                 <p className="text-sm text-[#AAAAAA] leading-relaxed italic relative z-10">"{safeProfile.firstImpression?.client || 'Analyzing perception...'}"</p>
               </div>
@@ -1053,7 +1053,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="w-8 h-8 rounded-lg bg-teal-accent/10 flex items-center justify-center">
                     <Users className="w-4 h-4" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Peer View</span>
+                  <span className="type-overline font-bold">Peer View</span>
                 </div>
                 <p className="text-sm text-[#AAAAAA] leading-relaxed italic relative z-10">"{safeProfile.firstImpression?.peer || 'Analyzing perception...'}"</p>
               </div>
@@ -1069,7 +1069,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <div key={idx} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row gap-6 group hover:border-red-500/20 transition-all">
                   <div className="flex-1 space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 font-black text-sm shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 font-semibold text-sm shrink-0">
                         {idx + 1}
                       </div>
                       <h4 className="text-lg font-bold text-white leading-tight">{problem.title}</h4>
@@ -1084,7 +1084,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     <div className="space-y-3 w-full">
                       <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-teal-accent" />
-                        <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest">The Fix</span>
+                        <span className="type-overline font-semibold text-teal-accent">The Fix</span>
                       </div>
                       <p className="text-sm text-teal-accent leading-relaxed font-medium">
                         {problem.fix}
@@ -1106,14 +1106,14 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-[#888888]" />
-                      <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">The Who</span>
+                      <span className="type-overline font-semibold text-[#888888] block">The Who</span>
                     </div>
                     <p className="text-xl font-bold text-white leading-tight">{safeProfile.messagingClarity.who}</p>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <Target className="w-4 h-4 text-teal-accent" />
-                      <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest block">The Result</span>
+                      <span className="type-overline font-semibold text-teal-accent block">The Result</span>
                     </div>
                     <p className="text-xl font-bold text-teal-accent leading-tight">{safeProfile.messagingClarity.result}</p>
                   </div>
@@ -1122,14 +1122,14 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <PenTool className="w-4 h-4 text-[#888888]" />
-                      <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">The How</span>
+                      <span className="type-overline font-semibold text-[#888888] block">The How</span>
                     </div>
                     <p className="text-sm text-[#AAAAAA] leading-relaxed">{safeProfile.messagingClarity.how}</p>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-[#888888]" />
-                      <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">The Why</span>
+                      <span className="type-overline font-semibold text-[#888888] block">The Why</span>
                     </div>
                     <p className="text-sm text-[#AAAAAA] leading-relaxed">{safeProfile.messagingClarity.why}</p>
                   </div>
@@ -1146,7 +1146,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
                 {Object.entries(safeProfile.authorityBreakdown).map(([key, val]: [string, any]) => (
                   <div key={key} className="space-y-4 text-center group">
-                    <span className="text-[9px] font-black text-[#888888] group-hover:text-teal-accent uppercase tracking-widest block transition-colors">{key}</span>
+                    <span className="text-[9px] font-semibold text-[#888888] group-hover:text-teal-accent uppercase tracking-widest block transition-colors">{key}</span>
                     <div className="relative w-20 h-20 mx-auto">
                       <svg className="w-full h-full transform -rotate-90">
                         <circle cx="40" cy="40" r="36" fill="transparent" stroke="rgba(255,255,255,0.03)" strokeWidth="6" />
@@ -1161,7 +1161,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         />
                       </svg>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-sm font-black text-white">{val}%</span>
+                        <span className="text-sm font-semibold text-white">{val}%</span>
                       </div>
                     </div>
                   </div>
@@ -1180,7 +1180,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
                     <Trophy className="w-5 h-5 text-green-500" />
                   </div>
-                  <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">What's Working</span>
+                  <span className="type-overline font-semibold text-green-500">What's Working</span>
                 </div>
                 <div className="space-y-4">
                   {safeProfile.theGood?.map((item: string, i: number) => (
@@ -1196,7 +1196,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
                     <AlertTriangle className="w-5 h-5 text-red-500" />
                   </div>
-                  <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">What's Failing</span>
+                  <span className="type-overline font-semibold text-red-500">What's Failing</span>
                 </div>
                 <div className="space-y-4">
                   {safeProfile.theBad?.map((item: string, i: number) => (
@@ -1219,17 +1219,17 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
                  <div className="space-y-8">
                    <div className="space-y-3">
-                     <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">Category Ownership</span>
+                     <span className="type-overline font-semibold text-[#888888] block">Category Ownership</span>
                      <p className="text-xl font-bold text-white leading-tight">{safeProfile.positioning.category}</p>
                    </div>
                    <div className="space-y-3">
-                     <span className="text-[10px] font-black text-[#888888] uppercase tracking-widest block">Unfair Advantage</span>
+                     <span className="type-overline font-semibold text-[#888888] block">Unfair Advantage</span>
                      <p className="text-sm text-[#AAAAAA] leading-relaxed">{safeProfile.positioning.unfairAdvantage}</p>
                    </div>
                  </div>
                  <div className={`space-y-6 bg-white/[0.02] border rounded-2xl p-6 md:p-8 transition-all duration-1000 ${showGlow ? 'border-teal-accent/40 shadow-[0_0_30px_rgba(45,212,191,0.1)]' : 'border-white/5'}`}>
                    <div className="flex items-center justify-between">
-                     <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest block">New Identity</span>
+                     <span className="type-overline font-semibold text-teal-accent block">New Identity</span>
                      {identityConfirmed ? (
                        <div className="flex items-center gap-1 text-[9px] font-bold text-teal-accent uppercase tracking-widest">
                          <CheckCircle2 className="w-3 h-3" />
@@ -1251,7 +1251,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                    <p className="text-xl font-bold text-white leading-tight">{safeProfile.positioning.newIdentity}</p>
                    <div className="h-px bg-white/5 w-full" />
                    <div className="space-y-2">
-                     <span className="text-[10px] font-black text-red-400 uppercase tracking-widest block">Perceived Problem</span>
+                     <span className="type-overline font-semibold text-red-400 block">Perceived Problem</span>
                      <p className="text-sm text-[#888888] italic leading-relaxed">"{safeProfile.positioning.perceivedProblem}"</p>
                    </div>
                  </div>
@@ -1270,7 +1270,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
-                    <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest">Current Positioning (Before)</span>
+                    <span className="type-overline font-bold text-[#888888]">Current Positioning (Before)</span>
                   </div>
                   <p className="text-sm text-[#888888] italic leading-relaxed relative z-10">
                     "{safeProfile.transformation.before}"
@@ -1282,7 +1282,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-teal-accent" />
-                    <span className="text-[10px] font-bold text-teal-accent uppercase tracking-widest">Strategic Positioning (After)</span>
+                    <span className="type-overline font-bold text-teal-accent">Strategic Positioning (After)</span>
                   </div>
                   <p className="text-sm text-white font-medium leading-relaxed relative z-10">
                     "{safeProfile.transformation.after}"
@@ -1311,7 +1311,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                           <Sparkles className="w-4 h-4 text-teal-accent" />
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-black text-white uppercase tracking-widest">{rewrite.section} Rewrite</span>
+                          <span className="type-overline font-semibold text-white">{rewrite.section} Rewrite</span>
                           <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-teal-accent/10 text-[8px] font-bold text-teal-accent uppercase tracking-widest">Deep Strategy</span>
                         </div>
                       </div>
@@ -1327,7 +1327,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                       <div className="flex items-start gap-3 bg-teal-accent/5 rounded-xl p-4 border border-teal-accent/10">
                         <Info className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
                         <div className="space-y-1">
-                          <span className="text-[9px] font-black text-teal-accent uppercase tracking-widest block">The Strategy</span>
+                          <span className="text-[9px] font-semibold text-teal-accent uppercase tracking-widest block">The Strategy</span>
                           <p className="text-xs text-teal-accent/80 leading-relaxed italic">"{rewrite.strategy}"</p>
                         </div>
                       </div>
@@ -1359,7 +1359,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         </div>
                         <div>
                           <h4 className="text-base font-bold text-white">Improved Headline</h4>
-                          <p className="text-[10px] text-[#888888] font-bold uppercase tracking-widest">The Conversion Hook</p>
+                          <p className="type-overline text-[#888888] font-bold">The Conversion Hook</p>
                         </div>
                       </div>
                       <button
@@ -1393,7 +1393,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         </div>
                         <div>
                           <h4 className="text-base font-bold text-white">Improved About Section</h4>
-                          <p className="text-[10px] text-[#888888] font-bold uppercase tracking-widest">The Authority Narrative</p>
+                          <p className="type-overline text-[#888888] font-bold">The Authority Narrative</p>
                         </div>
                       </div>
                       <button
@@ -1428,7 +1428,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="divide-y divide-[#1f1f1f]">
                 {safeProfile.actionPlan.map((step: any, idx: number) => (
                   <div key={idx} className="p-6 md:p-8 flex flex-col sm:flex-row gap-6 group hover:bg-white/[0.02] transition-all">
-                    <div className="w-12 h-12 rounded-2xl bg-[#1a1a1a] border border-[#222222] flex items-center justify-center shrink-0 text-sm font-black text-[#888888] group-hover:bg-teal-accent group-hover:text-black group-hover:border-teal-accent transition-all duration-300 shadow-lg">
+                    <div className="w-12 h-12 rounded-2xl bg-[#1a1a1a] border border-[#222222] flex items-center justify-center shrink-0 text-sm font-semibold text-[#888888] group-hover:bg-teal-accent group-hover:text-black group-hover:border-teal-accent transition-all duration-300 shadow-lg">
                       {idx + 1}
                     </div>
                     <div className="flex-1 space-y-4">
@@ -1436,7 +1436,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         <h4 className="text-lg font-bold text-white group-hover:text-teal-accent transition-colors">{step.title}</h4>
                         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
                           <div className={`w-1.5 h-1.5 rounded-full ${step.effort === 'Low' ? 'bg-green-500' : step.effort === 'Medium' ? 'bg-amber-500' : 'bg-red-500'}`} />
-                          <span className="text-[9px] font-black text-[#888888] uppercase tracking-widest">
+                          <span className="text-[9px] font-semibold text-[#888888] uppercase tracking-widest">
                             Effort: {step.effort}
                           </span>
                         </div>
@@ -1460,7 +1460,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     <div className="w-10 h-10 rounded-xl bg-teal-accent/10 flex items-center justify-center group-hover:bg-teal-accent group-hover:text-black transition-all">
                       <Target className="w-5 h-5 text-teal-accent group-hover:text-black" />
                     </div>
-                    <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest block">Content Pillars</span>
+                    <span className="type-overline font-semibold text-teal-accent block">Content Pillars</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {safeProfile.contentEngine.pillars?.map((pillar: string, i: number) => (
@@ -1475,7 +1475,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     <div className="w-10 h-10 rounded-xl bg-teal-accent/10 flex items-center justify-center group-hover:bg-teal-accent group-hover:text-black transition-all">
                       <Zap className="w-5 h-5 text-teal-accent group-hover:text-black" />
                     </div>
-                    <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest block">Strategic Angles</span>
+                    <span className="type-overline font-semibold text-teal-accent block">Strategic Angles</span>
                   </div>
                   <div className="space-y-3">
                     {safeProfile.contentEngine.angles?.map((angle: string, i: number) => (
@@ -1491,7 +1491,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <ShieldCheck className="w-20 h-20 text-teal-accent" />
                 </div>
-                <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest block mb-3 relative z-10">Authority Plan</span>
+                <span className="type-overline font-semibold text-teal-accent block mb-3 relative z-10">Authority Plan</span>
                 <p className="text-sm text-white leading-relaxed italic relative z-10">"{safeProfile.contentEngine.authorityPlan}"</p>
               </div>
             </div>
@@ -1507,12 +1507,12 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               </div>
               <div className="flex-1 space-y-6 text-center lg:text-left">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest">The High-Ticket Offer</span>
-                  <h4 className="text-2xl font-black text-white leading-tight">{safeProfile.monetization.bestOffer}</h4>
+                  <span className="type-overline font-semibold text-teal-accent">The High-Ticket Offer</span>
+                  <h4 className="text-2xl font-semibold text-white leading-tight">{safeProfile.monetization.bestOffer}</h4>
                 </div>
                 <p className="text-sm text-[#888888] leading-relaxed max-w-2xl mx-auto lg:mx-0 italic">"{safeProfile.monetization.whyItFits}"</p>
                 <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest hover:border-teal-accent/30 transition-all">
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 type-overline font-bold text-white hover:border-teal-accent/30 transition-all">
                     <Zap className="w-3.5 h-3.5 text-teal-accent" />
                     Pricing Angle: {safeProfile.monetization.pricingAngle}
                   </div>
@@ -1548,8 +1548,8 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 return (
                   <div key={key} className="bg-[#141414] border border-[#1f1f1f] rounded-2xl p-6 md:p-8 space-y-6 group hover:border-teal-accent/20 transition-all">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black text-white uppercase tracking-widest group-hover:text-teal-accent transition-colors">{key}</span>
-                      <span className={`text-sm font-black ${score >= 80 ? 'text-green-400' : score >= 60 ? 'text-teal-accent' : 'text-amber-400'}`}>
+                      <span className="type-overline font-semibold text-white group-hover:text-teal-accent transition-colors">{key}</span>
+                      <span className={`text-sm font-semibold ${score >= 80 ? 'text-green-400' : score >= 60 ? 'text-teal-accent' : 'text-amber-400'}`}>
                         {score}%
                       </span>
                     </div>
@@ -1581,10 +1581,10 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <span className="text-sm font-black text-white uppercase tracking-tighter">Overall Profile Completeness</span>
+                  <span className="text-sm font-semibold text-white uppercase tracking-tighter">Overall Profile Completeness</span>
                   <p className="text-xs text-[#888888] font-medium">Based on Somyra's 50-point surgical analysis</p>
                 </div>
-                <span className="text-2xl font-black text-teal-accent">{safeProfile.completeness || 0}%</span>
+                <span className="text-2xl font-semibold text-teal-accent">{safeProfile.completeness || 0}%</span>
               </div>
               <div className="h-4 w-full bg-white/5 rounded-full overflow-hidden p-1 shadow-inner">
                 <motion.div
@@ -1605,12 +1605,12 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <Rocket className="w-8 h-8 text-black" />
                 </div>
                 <div className="flex-1 text-center lg:text-left space-y-3 relative z-10">
-                  <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest block">The One Thing</span>
-                  <h4 className="text-xl font-black text-white leading-tight">{safeProfile.nextStep.action}</h4>
+                  <span className="type-overline font-semibold text-teal-accent block">The One Thing</span>
+                  <h4 className="text-xl font-semibold text-white leading-tight">{safeProfile.nextStep.action}</h4>
                   <p className="text-sm text-[#888888] leading-relaxed max-w-2xl mx-auto lg:mx-0">{safeProfile.nextStep.description}</p>
                 </div>
                 <div className="shrink-0 relative z-10">
-                  <div className="px-5 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black text-white uppercase tracking-widest group-hover:border-teal-accent/30 transition-all">
+                  <div className="px-5 py-2 rounded-xl bg-white/5 border border-white/10 type-overline font-semibold text-white group-hover:border-teal-accent/30 transition-all">
                     Effort: {safeProfile.nextStep.effort}
                   </div>
                 </div>
@@ -1623,7 +1623,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
         {safeProfile.mode === 'quick' && (
           <motion.div variants={itemVariants} className="bg-gradient-to-br from-teal-accent/10 to-transparent border border-teal-accent/20 rounded-2xl p-10 text-center space-y-6">
             <div className="max-w-2xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-accent/20 border border-teal-accent/30 text-[10px] font-bold text-teal-accent uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-accent/20 border border-teal-accent/30 type-overline font-bold text-teal-accent">
                 <Crown className="w-3 h-3" /> Deep Strategy Available
               </div>
               <h3 className="text-2xl font-bold text-white">Ready for the full transformation?</h3>
@@ -1697,7 +1697,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <Sparkles className="w-16 h-16" />
               </div>
               <div className="space-y-4">
-                <span className="text-[10px] font-black text-teal-accent uppercase tracking-widest">Daily Insight</span>
+                <span className="type-overline font-semibold text-teal-accent">Daily Insight</span>
                 <p className="text-sm text-white font-medium leading-relaxed italic">
                   "{randomInsight}"
                 </p>
@@ -1711,7 +1711,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
           </div>
 
           <div className="text-center py-10">
-            <p className="text-[10px] text-[#333333] uppercase tracking-[0.3em] font-black">
+            <p className="type-overline text-[#333333] font-semibold">
               End of Analysis • Somyra Intelligence
             </p>
           </div>
@@ -1745,7 +1745,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     triggerAnalyze();
                   }
                 }}
-                className="bg-teal-accent text-black px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-teal-accent/90 transition-all"
+                className="bg-teal-accent text-black px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-teal-accent/90 transition-all"
               >
                 {safeProfile.mode === 'quick' ? 'Upgrade Now' : 'Reanalyze'}
               </button>
@@ -1847,12 +1847,12 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="flex items-center gap-2">
                 <UserCircle className="w-4 h-4 text-teal-accent" />
                 <label className="text-xs font-bold uppercase tracking-widest text-white">WHO ARE YOU</label>
-                <span className="ml-2 text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Required</span>
+                <span className="ml-2 type-overline bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold">Required</span>
               </div>
               <button 
                 type="button"
                 onClick={() => toggleExample('whoAreYou')}
-                className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent uppercase tracking-widest transition-colors"
+                className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors"
               >
                 {showExamples['whoAreYou'] ? 'Hide Example' : 'Show Example'}
               </button>
@@ -1925,7 +1925,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex items-center gap-2 mb-3">
               <PenTool className="w-4 h-4 text-teal-accent" />
               <label className="text-xs font-bold uppercase tracking-widest text-white">YOUR CURRENT HEADLINE</label>
-              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
+              <span className="ml-2 type-overline bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold">Optional</span>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-2 mb-3">
@@ -2022,7 +2022,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex items-center gap-2 mb-3">
               <FileText className="w-4 h-4 text-teal-accent" />
               <label className="text-xs font-bold uppercase tracking-widest text-white">YOUR ABOUT SECTION</label>
-              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
+              <span className="ml-2 type-overline bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold">Optional</span>
             </div>
             <p className="text-xs text-[#888888] mb-3 leading-relaxed">
               This is the summary section on your LinkedIn profile — below your photo. It is the most important section after your headline.
@@ -2143,7 +2143,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             <div className="flex items-center gap-2 mb-1">
               <Target className="w-4 h-4 text-teal-accent" />
               <label className="text-xs font-bold uppercase tracking-widest text-white">WHAT DO YOU WANT FROM LINKEDIN</label>
-              <span className="ml-2 text-[10px] bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">Optional</span>
+              <span className="ml-2 type-overline bg-[#141414] border border-[#1f1f1f] text-[#888888] rounded-full px-2 py-0.5 font-bold">Optional</span>
             </div>
             <p className="text-xs text-[#888888] mb-4 mt-1 leading-relaxed">
               Select all that apply. The more specific you are the sharper and more personalized your analysis will be.
@@ -2201,7 +2201,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     className="absolute top-full left-0 right-0 mt-2 bg-[#141414] border border-[#1f1f1f] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] z-50 overflow-hidden"
                   >
                     <div className="px-4 py-3 border-b border-[#1f1f1f] flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#888888]">Select all that apply</span>
+                      <span className="type-overline font-bold text-[#888888]">Select all that apply</span>
                       {quickForm.goals.length > 0 && (
                         <button
                           type="button"
@@ -2369,7 +2369,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <Users className="w-4 h-4 text-teal-accent" />
                 <label className="text-xs font-bold uppercase tracking-widest text-white">TARGET AUDIENCE</label>
                 <div className="flex items-center gap-1.5 ml-2">
-                  <span className="text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide">AI Recommended</span>
+                  <span className="type-overline bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold">AI Recommended</span>
                 </div>
               </div>
               <button
@@ -2385,7 +2385,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Primary Audience</label>
+                <label className="type-overline font-bold text-[#888888] ml-1">Primary Audience</label>
                 <input
                   type="text"
                   value={quickForm.primaryAudience}
@@ -2395,7 +2395,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Secondary Audience</label>
+                <label className="type-overline font-bold text-[#888888] ml-1">Secondary Audience</label>
                 <input
                   type="text"
                   value={quickForm.secondaryAudience}
@@ -2499,7 +2499,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
           </AnimatePresence>
           <div className="flex justify-between items-end mb-3">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-teal-accent uppercase tracking-widest">Step {deepStep} of {TOTAL_DEEP_STEPS}</span>
+              <span className="type-overline font-bold text-teal-accent">Step {deepStep} of {TOTAL_DEEP_STEPS}</span>
               <h3 className="text-lg font-bold text-white">{steps[deepStep - 1].title}</h3>
             </div>
             <span className="text-xs font-bold text-teal-accent">{progress}%</span>
@@ -2533,7 +2533,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   }`}>
                     {deepStep > step.id ? <Check className="w-3 h-3 sm:w-5 sm:h-5" /> : <step.icon className="w-3 h-3 sm:w-5 sm:h-5" />}
                   </div>
-                  <span className="text-[7px] sm:text-[10px] font-bold uppercase tracking-widest">{step.title}</span>
+                  <span className="type-overline font-bold">{step.title}</span>
                 </div>
                 {i < steps.length - 1 && (
                   <div className={`flex-1 h-[1px] mx-1 sm:mx-2 transition-all duration-500 min-w-[10px] sm:min-w-[20px] ${
@@ -2557,11 +2557,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             {deepStep === 1 && (
               <div className="space-y-[24px] md:space-y-[32px]">
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Your Role & Industry</label>
+                  <label className="type-overline font-bold text-[#888888] ml-1">Your Role & Industry</label>
                   <button 
                     type="button"
                     onClick={() => toggleExample('role')}
-                    className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent uppercase tracking-widest transition-colors"
+                    className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors"
                   >
                     {showExamples['role'] ? 'Hide Example' : 'Show Example'}
                   </button>
@@ -2600,7 +2600,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 </div>
 
                 <div className="space-y-[16px] md:space-y-[20px]">
-                  <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Experience Level</label>
+                  <label className="type-overline font-bold text-[#888888] ml-1">Experience Level</label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[12px] md:gap-[16px]">
                     {['Junior', 'Mid-Level', 'Senior', 'Executive'].map((level) => (
                       <button
@@ -2643,7 +2643,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                           <Users className="w-4 h-4 text-teal-accent" />
                           <label className="text-xs font-bold uppercase tracking-widest text-white">TARGET AUDIENCE</label>
                         </div>
-                        <span className="text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide whitespace-nowrap">AI Powered</span>
+                        <span className="type-overline bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold whitespace-nowrap">AI Powered</span>
                       </div>
                       <button
                         type="button"
@@ -2658,7 +2658,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Primary Audience</label>
+                        <label className="type-overline font-bold text-[#888888] ml-1">Primary Audience</label>
                         <input
                           type="text"
                           value={quickForm.primaryAudience}
@@ -2668,7 +2668,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Secondary Audience</label>
+                        <label className="type-overline font-bold text-[#888888] ml-1">Secondary Audience</label>
                         <input
                           type="text"
                           value={quickForm.secondaryAudience}
@@ -2687,11 +2687,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="space-y-[24px] md:space-y-[32px]">
                 <div className="space-y-[12px] md:space-y-[16px]">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Current Headline</label>
+                    <label className="type-overline font-bold text-[#888888] ml-1">Current Headline</label>
                     <button 
                       type="button"
                       onClick={() => toggleExample('headline')}
-                      className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent uppercase tracking-widest transition-colors"
+                      className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors"
                     >
                       {showExamples['headline'] ? 'Hide Example' : 'Show Example'}
                     </button>
@@ -2781,11 +2781,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="space-y-[24px] md:space-y-[32px]">
                 <div className="space-y-[12px] md:space-y-[16px]">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">About Section</label>
+                    <label className="type-overline font-bold text-[#888888] ml-1">About Section</label>
                     <button 
                       type="button"
                       onClick={() => toggleExample('about')}
-                      className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent uppercase tracking-widest transition-colors"
+                      className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors"
                     >
                       {showExamples['about'] ? 'Hide Example' : 'Show Example'}
                     </button>
@@ -2866,13 +2866,13 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <div className="space-y-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Experience Section</label>
-                      <span className="text-[10px] bg-[#1f1f1f] text-[#888888] px-2 py-0.5 rounded-full font-bold">OPTIONAL</span>
+                      <label className="type-overline font-bold text-[#888888] ml-1">Experience Section</label>
+                      <span className="type-overline bg-[#1f1f1f] text-[#888888] px-2 py-0.5 rounded-full font-bold">OPTIONAL</span>
                     </div>
                     <button 
                       type="button"
                       onClick={() => toggleExample('experience')}
-                      className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent uppercase tracking-widest transition-colors"
+                      className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors"
                     >
                       {showExamples['experience'] ? 'Hide Example' : 'Show Example'}
                     </button>
@@ -2918,11 +2918,11 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
-                      <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Primary Goals</label>
+                      <label className="type-overline font-bold text-[#888888] ml-1">Primary Goals</label>
                       <p className="text-xs text-[#888888] ml-1">What's the #1 thing you want from LinkedIn?</p>
                     </div>
                     {deepForm.primaryGoal.split(', ').filter(Boolean).length > 0 && (
-                      <span className="text-[10px] text-teal-accent font-bold px-2 py-1 bg-teal-accent/10 rounded-lg">
+                      <span className="type-overline text-teal-accent font-bold px-2 py-1 bg-teal-accent/10 rounded-lg">
                         {deepForm.primaryGoal.split(', ').filter(Boolean).length} SELECTED
                       </span>
                     )}
@@ -2954,7 +2954,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                         <Users className="w-4 h-4 text-teal-accent" />
                         <label className="text-xs font-bold uppercase tracking-widest text-white">TARGET AUDIENCE</label>
                       </div>
-                      <span className="text-[10px] bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold uppercase tracking-wide whitespace-nowrap">AI Powered</span>
+                      <span className="type-overline bg-teal-accent/10 border border-teal-accent/20 text-teal-accent rounded-full px-2 py-0.5 font-bold whitespace-nowrap">AI Powered</span>
                     </div>
                     <button
                       type="button"
@@ -2974,13 +2974,13 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Primary Audience</label>
+                        <label className="type-overline font-bold text-[#888888] ml-1">Primary Audience</label>
                         {deepForm.primaryAudience && (
                           <button
                             type="button"
                             onClick={() => handleGenerateAudience('primary')}
                             disabled={isGeneratingAudience}
-                            className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent transition-colors flex items-center gap-1"
+                            className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors flex items-center gap-1"
                           >
                             <RefreshCw className={`w-2.5 h-2.5 ${isGeneratingAudience ? 'animate-spin' : ''}`} />
                             REGENERATE
@@ -2997,13 +2997,13 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <label className="text-[10px] font-bold text-[#888888] uppercase tracking-widest ml-1">Secondary Audience</label>
+                        <label className="type-overline font-bold text-[#888888] ml-1">Secondary Audience</label>
                         {deepForm.secondaryAudience && (
                           <button
                             type="button"
                             onClick={() => handleGenerateAudience('secondary')}
                             disabled={isGeneratingAudience}
-                            className="text-[10px] font-bold text-teal-accent/60 hover:text-teal-accent transition-colors flex items-center gap-1"
+                            className="type-overline font-bold text-teal-accent/60 hover:text-teal-accent transition-colors flex items-center gap-1"
                           >
                             <RefreshCw className={`w-2.5 h-2.5 ${isGeneratingAudience ? 'animate-spin' : ''}`} />
                             REGENERATE
@@ -3022,7 +3022,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                 </div>
 
                 <div className="space-y-6">
-                  <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888888] ml-1">Biggest Struggle</label>
+                  <label className="type-overline font-bold text-[#888888] ml-1">Biggest Struggle</label>
                   <div className="flex flex-wrap gap-2.5 md:gap-3">
                     {struggleOptions.map((struggle) => (
                       <button
@@ -3035,7 +3035,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                             setDeepForm({...deepForm, struggles: [...current, struggle]});
                           }
                         }}
-                        className={`px-[12px] py-[8px] sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-xs font-medium border transition-all duration-300 flex items-center gap-2 max-w-full truncate ${
+                        className={`px-[12px] py-[8px] sm:px-4 sm:py-2 rounded-full type-sm sm:text-xs font-medium border transition-all duration-300 flex items-center gap-2 max-w-full truncate ${
                           deepForm.struggles.includes(struggle)
                             ? 'bg-teal-accent/10 border-teal-accent text-teal-accent shadow-[0_0_15px_rgba(45,212,191,0.1)]'
                             : 'bg-[#080808] border-[#1f1f1f] text-[#888888] hover:border-[#333333]'
@@ -3053,7 +3053,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                           setCustomStruggles(customStruggles.filter(s => s !== struggle));
                           setDeepForm(prev => ({ ...prev, struggles: prev.struggles.filter(s => s !== struggle) }));
                         }}
-                        className="px-[12px] py-[8px] sm:px-4 sm:py-2 rounded-full text-[13px] sm:text-xs font-medium border bg-teal-accent/10 border-teal-accent text-teal-accent flex items-center gap-2 max-w-full truncate"
+                        className="px-[12px] py-[8px] sm:px-4 sm:py-2 rounded-full type-sm sm:text-xs font-medium border bg-teal-accent/10 border-teal-accent text-teal-accent flex items-center gap-2 max-w-full truncate"
                       >
                         <Check className="w-3 h-3" />
                         {struggle}
@@ -3095,8 +3095,8 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="space-y-8">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888]">Featured Section</label>
-                    <span className="text-[10px] bg-[#1f1f1f] text-[#888888] px-2 py-0.5 rounded-full font-bold">OPTIONAL</span>
+                    <label className="type-overline font-bold text-[#888888]">Featured Section</label>
+                    <span className="type-overline bg-[#1f1f1f] text-[#888888] px-2 py-0.5 rounded-full font-bold">OPTIONAL</span>
                   </div>
                   <p className="text-xs text-[#888888]">List links or descriptions of items in your Featured section.</p>
                   <FloatingLabelInput
@@ -3110,8 +3110,8 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888]">Recent Posts</label>
-                    <span className="text-[10px] bg-[#1f1f1f] text-[#888888] px-2 py-0.5 rounded-full font-bold">OPTIONAL</span>
+                    <label className="type-overline font-bold text-[#888888]">Recent Posts</label>
+                    <span className="type-overline bg-[#1f1f1f] text-[#888888] px-2 py-0.5 rounded-full font-bold">OPTIONAL</span>
                   </div>
                   <p className="text-xs text-[#888888]">Paste 2-3 of your most recent or best-performing posts for tone analysis.</p>
                   <FloatingLabelInput
@@ -3181,7 +3181,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative">
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Profile Audit & Strategy</h2>
-            <p className="text-[13px] md:text-sm text-muted">Get a surgical analysis of your LinkedIn presence and an exact roadmap to fix it.</p>
+            <p className="type-sm md:text-sm text-muted">Get a surgical analysis of your LinkedIn presence and an exact roadmap to fix it.</p>
           </div>
           <div className="flex items-start gap-2 sm:gap-4">
             <GenerationCounter feature="profile_audit" />
@@ -3193,7 +3193,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
       {!profile && !loading && (
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
           <div className="w-full lg:w-auto">
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">Analyze Your Profile</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-white tracking-tight">Analyze Your Profile</h2>
             <div className="text-sm sm:text-base text-[#666666] mt-1.5 leading-relaxed flex flex-col sm:flex-row sm:items-center sm:gap-0 gap-1">
               <span>Quick Audit <span className="mx-1 opacity-30">→</span> fast clarity</span>
               <span className="hidden sm:inline mx-4 opacity-10">|</span>
@@ -3228,7 +3228,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
             >
               {!isPro && <Lock className="w-3 h-3" />}
               Deep Strategy
-              {!isPro && <span className="bg-teal-accent text-black text-[9px] px-1.5 py-0.5 rounded font-black ml-1">PRO</span>}
+              {!isPro && <span className="bg-teal-accent text-black text-[9px] px-1.5 py-0.5 rounded font-semibold ml-1">PRO</span>}
             </button>
           </div>
         </div>
@@ -3279,7 +3279,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
                   className="absolute right-0 mt-2 w-64 bg-[#141414] border border-[#1f1f1f] rounded-2xl shadow-2xl z-50 overflow-hidden"
                 >
                   <div className="p-3 border-b border-[#1f1f1f]">
-                    <p className="text-[10px] font-bold text-[#888888] uppercase tracking-widest">Your Last 3 Audits</p>
+                    <p className="type-overline font-bold text-[#888888]">Your Last 3 Audits</p>
                   </div>
                   <div className="divide-y divide-[#1f1f1f]">
                     {recentScans.map((scan) => (
@@ -3369,7 +3369,7 @@ export const ProfileAnalysis: React.FC<ProfileAnalysisProps> = ({
               <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="text-center space-y-4">
                   <div className="p-4 bg-teal-accent/5 border border-teal-accent/10 rounded-2xl backdrop-blur-sm">
-                    <p className="text-[10px] font-bold text-teal-accent uppercase tracking-[0.3em]">Awaiting Analysis</p>
+                    <p className="type-overline font-bold text-teal-accent">Awaiting Analysis</p>
                   </div>
                   <p className="text-xs text-[#888888] font-medium">Your results dashboard will appear here.</p>
                 </div>

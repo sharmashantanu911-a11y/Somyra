@@ -185,20 +185,20 @@ export function CRMTracker() {
             <h3 className="text-white font-bold mb-4">{editingId ? 'Edit Prospect' : 'New Prospect'}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Name *</label>
+                <label className="type-overline font-semibold text-muted">Name *</label>
                 <input required value={form.name} onChange={e => setForm({...form, name: e.target.value})} placeholder="Full name" className="input-field py-2.5" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Role</label>
+                <label className="type-overline font-semibold text-muted">Role</label>
                 <input value={form.role} onChange={e => setForm({...form, role: e.target.value})} placeholder="Job title" className="input-field py-2.5" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Company</label>
+                <label className="type-overline font-semibold text-muted">Company</label>
                 <input value={form.company} onChange={e => setForm({...form, company: e.target.value})} placeholder="Company name" className="input-field py-2.5" />
               </div>
               
               <div className="space-y-1">
-                <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Status</label>
+                <label className="type-overline font-semibold text-muted">Status</label>
                 <select value={form.status} onChange={e => setForm({...form, status: e.target.value as any})} className="input-field py-2.5">
                   <option value="Identified" className="bg-[#0D0D0D]">Identified</option>
                   <option value="Messaged" className="bg-[#0D0D0D]">Messaged</option>
@@ -210,14 +210,14 @@ export function CRMTracker() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Last Message Date</label>
+                <label className="type-overline font-semibold text-muted">Last Message Date</label>
                 <div className="relative">
                   <Calendar className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input type="date" value={form.lastMessageDate} onChange={e => setForm({...form, lastMessageDate: e.target.value})} className="input-field py-2.5 pl-9" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Next Follow-Up</label>
+                <label className="type-overline font-semibold text-muted">Next Follow-Up</label>
                 <div className="relative">
                   <MessageSquare className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input type="date" value={form.nextFollowUpDate} onChange={e => setForm({...form, nextFollowUpDate: e.target.value})} className="input-field py-2.5 pl-9" />
@@ -227,7 +227,7 @@ export function CRMTracker() {
 
             {/* Notes — visible on all screens now */}
             <div className="space-y-1 mb-4">
-              <label className="text-[10px] font-semibold uppercase tracking-wider text-muted">Notes</label>
+              <label className="type-overline font-semibold text-muted">Notes</label>
               <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} placeholder="Quick notes about the interaction..." rows={2} className="input-field resize-none" />
             </div>
 
@@ -284,7 +284,7 @@ export function CRMTracker() {
                     {p.notes?.trim() && <div className="text-xs text-muted/60 mt-1 max-w-[200px] truncate italic">"{p.notes}"</div>}
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${getStatusColor(p.status)}`}>
+                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full type-overline font-bold border ${getStatusColor(p.status)}`}>
                       {p.status}
                     </span>
                   </td>

@@ -110,7 +110,7 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
           </p>
 
           <div className="mt-8 bg-[#1a1a1a] border border-[#333] rounded-2xl p-6">
-            <h3 className="text-xl font-extrabold text-white mb-3">The Short Answer</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">The Short Answer</h3>
             <p className="text-[#2DD4BF] font-semibold leading-relaxed">
               Open with your reader's problem, name who you help and the outcome you create, prove it with one specific result, and end with a clear call to action. Write in first person. Use short paragraphs. Skip the buzzwords.
             </p>
@@ -124,9 +124,9 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What are the most common mistakes in LinkedIn About sections?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               The five most common mistakes are opening with meaningless labels, writing your resume in paragraph form, making claims without proof, forgetting the call to action, and trying to appeal to everyone. Each mistake makes your About section less effective at converting readers into leads.
             </p>
@@ -165,9 +165,9 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What is the best formula for a LinkedIn About section?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Line 1 to 2 names the reader's specific problem. Line 3 to 5 identifies who you help and the outcome. Line 6 to 7 injects proof with a specific result. Line 8 to 9 adds a social proof signal. Line 10 ends with a clear call to action.
             </p>
@@ -206,9 +206,9 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What does a good LinkedIn About section look like compared to a bad one?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               A bad About section opens with generic phrases like 'passionate professional' and focuses on responsibilities. A good About section opens with the reader's problem, states who you help and how, includes a measurable result, and ends with a clear next step.
             </p>
@@ -242,9 +242,9 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I start my LinkedIn About section?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Use one of three approaches. Name a specific audience problem to create recognition. Make a contrarian statement to create curiosity. Lead with a specific result to build authority immediately. Avoid starting with 'I am a' followed by your job title.
             </p>
@@ -277,9 +277,9 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I know if my LinkedIn About section is working?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Track how many inbound messages you receive each week and your profile to connection conversion rate. If views are high but messages are low, the problem is in your About section or headline. If views are low, the problem is in your content strategy.
             </p>
@@ -327,7 +327,7 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
           </div>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Somyra's Deep Strategy audit rewrites your About section for you.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Somyra's Deep Strategy audit rewrites your About section for you.</h3>
             <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-about-section-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
           </div>
 
@@ -342,7 +342,7 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Not sure if your profile is converting? Run a free audit.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Not sure if your profile is converting? Run a free audit.</h3>
             <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-about-section-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
           </div>
         </div>

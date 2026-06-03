@@ -333,28 +333,28 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
             <header className="flex-shrink-0 bg-[#0D0D0D] border-bottom border-[#1a1a1a] p-7 md:px-7 md:py-6 flex justify-between items-start z-10">
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 px-3 py-1 bg-[#2DD4BF]/8 border border-[#2DD4BF]/20 rounded-full w-fit">
-                  <span className="text-[10px] font-bold text-[#2DD4BF] tracking-[2px] uppercase flex items-center gap-1.5">
+                  <span className="type-overline font-bold text-[#2DD4BF] flex items-center gap-1.5">
                     <Rocket className="w-3 h-3" />
                     Changelog
                   </span>
                 </div>
-                <h2 className="text-white text-[22px] font-extrabold mt-2 leading-tight">What's New in Somyra</h2>
-                <p className="text-[#888888] text-[13px] mt-1">Updates, improvements and what's coming next.</p>
+                <h2 className="text-white text-[22px] font-semibold mt-2 leading-tight">What's New in Somyra</h2>
+                <p className="type-sm text-[#888888] mt-1">Updates, improvements and what's coming next.</p>
                 
                 <div className="flex items-center gap-2 mt-2">
                   <div className="flex items-center gap-1">
-                    <span className="text-[#2DD4BF] text-[12px] font-bold">{totalUpdates}</span>
-                    <span className="text-[#888888] text-[12px]">total updates</span>
+                    <span className="type-caption text-[#2DD4BF] font-bold">{totalUpdates}</span>
+                    <span className="type-caption text-[#888888]">total updates</span>
                   </div>
                   <span className="text-[#333333]">•</span>
                   <div className="flex items-center gap-1">
-                    <span className="text-[#2DD4BF] text-[12px] font-bold">{featuresShipped}</span>
-                    <span className="text-[#888888] text-[12px]">features shipped</span>
+                    <span className="type-caption text-[#2DD4BF] font-bold">{featuresShipped}</span>
+                    <span className="type-caption text-[#888888]">features shipped</span>
                   </div>
                   <span className="text-[#333333]">•</span>
                   <div className="flex items-center gap-1">
-                    <span className="text-[#2DD4BF] text-[12px] font-bold">{comingSoonCount}</span>
-                    <span className="text-[#888888] text-[12px]">coming soon</span>
+                    <span className="type-caption text-[#2DD4BF] font-bold">{comingSoonCount}</span>
+                    <span className="type-caption text-[#888888]">coming soon</span>
                   </div>
                 </div>
               </div>
@@ -373,7 +373,7 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                 <button
                   key={filter}
                   onClick={() => handleFilterChange(filter)}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-medium transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full type-caption font-medium transition-all whitespace-nowrap ${
                     activeFilter === filter 
                       ? 'bg-[#2DD4BF]/10 border border-[#2DD4BF]/30 text-[#2DD4BF]' 
                       : 'bg-[#141414] border border-[#1f1f1f] text-[#888888] hover:text-white'
@@ -408,16 +408,16 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                         <div key={version.version} className="border-bottom border-[#141414] p-7 md:px-7">
                           <div className="flex justify-between items-center mb-4">
                             <div className="flex items-center gap-2">
-                              <span className="bg-[#141414] border border-[#1f1f1f] rounded-full px-3 py-0.5 text-[11px] text-white font-bold">
+                              <span className="bg-[#141414] border border-[#1f1f1f] rounded-full px-3 py-0.5 type-overline text-white font-bold">
                                 {version.version}
                               </span>
                               {vIdx === 0 && (
-                                <span className="bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 rounded-full px-2 py-0.5 text-[10px] font-bold">
+                                <span className="bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/30 rounded-full px-2 py-0.5 type-overline font-bold">
                                   LATEST
                                 </span>
                               )}
                             </div>
-                            <span className="text-[#888888] text-[12px]">{version.date}</span>
+                            <span className="type-caption text-[#888888]">{version.date}</span>
                           </div>
                           
                           <div className="flex flex-col">
@@ -429,12 +429,12 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                                 key={`${version.version}-${iIdx}`}
                                 className={`flex items-start gap-3 py-2.5 border-bottom border-[#0f0f0f] last:border-0`}
                               >
-                                <span className={`w-[90px] text-center flex-shrink-0 mt-0.5 rounded-[6px] px-2 py-0.5 text-[10px] font-bold uppercase border ${getBadgeColor(item.badge)}`}>
+                                <span className={`w-[90px] text-center flex-shrink-0 mt-0.5 rounded-[6px] px-2 py-0.5 type-overline font-bold uppercase border ${getBadgeColor(item.badge)}`}>
                                   {item.badge}
                                 </span>
                               <div className="min-w-0 flex flex-col">
-                                <h4 className="text-white text-[14px] font-semibold">{item.title}</h4>
-                                <p className="text-safe text-[#888888] text-[13px] leading-relaxed mt-0.5">{item.description}</p>
+<h4 className="type-sm text-white font-semibold">{item.title}</h4>
+                <p className="type-sm text-safe text-[#888888] leading-relaxed mt-0.5">{item.description}</p>
                               </div>
                               </motion.div>
                             ))}
@@ -447,7 +447,7 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                     {(activeFilter === 'All' || activeFilter === 'Coming Soon') && (
                       <div className="p-7 md:px-7 pb-10">
                         <div className="flex items-center gap-2 mb-4">
-                          <span className="bg-[#FCD34D]/10 text-[#FCD34D] border border-[#FCD34D]/30 rounded-full px-3 py-0.5 text-[10px] font-bold flex items-center gap-1.5">
+                          <span className="bg-[#FCD34D]/10 text-[#FCD34D] border border-[#FCD34D]/30 rounded-full px-3 py-0.5 type-overline font-bold flex items-center gap-1.5">
                             🚀 COMING SOON
                           </span>
                         </div>
@@ -461,12 +461,12 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                               key={`soon-${idx}`}
                               className="flex items-start gap-3 py-2.5 border-bottom border-[#0f0f0f] last:border-0 opacity-80"
                             >
-                              <span className={`w-[90px] text-center flex-shrink-0 mt-0.5 rounded-[6px] px-2 py-0.5 text-[10px] font-bold uppercase border ${getBadgeColor(item.badge)}`}>
+                              <span className={`w-[90px] text-center flex-shrink-0 mt-0.5 rounded-[6px] px-2 py-0.5 type-overline font-bold uppercase border ${getBadgeColor(item.badge)}`}>
                                 {item.badge}
                               </span>
                               <div className="min-w-0 flex flex-col">
-                                <h4 className="text-white text-[14px] font-semibold">{item.title}</h4>
-                                <p className="text-safe text-[#666666] text-[13px] leading-relaxed mt-0.5">{item.description}</p>
+<h4 className="type-sm text-white font-semibold">{item.title}</h4>
+                              <p className="type-sm text-safe text-[#666666] leading-relaxed mt-0.5">{item.description}</p>
                               </div>
                             </motion.div>
                           ))}
@@ -480,7 +480,7 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                       <div className="flex flex-col items-center justify-center py-20 px-7 text-center">
                         <AlertCircle className="w-10 h-10 text-[#333333] mb-4" />
                         <h3 className="text-white text-[16px] font-bold">No updates in this category yet</h3>
-                        <p className="text-[#888888] text-[13px] mt-1">Check back soon for new improvements.</p>
+                        <p className="type-sm text-[#888888] mt-1">Check back soon for new improvements.</p>
                       </div>
                     )}
                   </motion.div>
@@ -490,7 +490,7 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
 
             {/* Footer */}
             <footer className="flex-shrink-0 bg-[#0D0D0D] border-top border-[#1a1a1a] p-7 md:px-7 md:py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-[#888888] text-[12px]">
+              <p className="type-caption text-[#888888]">
                 Have a feature request?{' '}
                 <a 
                   href="mailto:shantanu@somyra.in" 
@@ -518,7 +518,7 @@ export const ChangelogModal: React.FC<ChangelogModalProps> = ({ isOpen, onClose 
                     });
                   }
                 }}
-                className="flex items-center gap-2 px-4 py-1.5 bg-[#2DD4BF]/8 border border-[#2DD4BF]/20 rounded-full text-[12px] font-bold text-[#2DD4BF] hover:bg-[#2DD4BF]/15 transition-all"
+                className="flex items-center gap-2 px-4 py-1.5 bg-[#2DD4BF]/8 border border-[#2DD4BF]/20 rounded-full type-caption font-bold text-[#2DD4BF] hover:bg-[#2DD4BF]/15 transition-all"
               >
                 <Linkedin className="w-3 h-3" />
                 Follow updates

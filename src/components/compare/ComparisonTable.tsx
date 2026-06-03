@@ -26,7 +26,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ features, comp
     <section className="py-20 bg-[#080808]">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
             Side-by-Side Comparison
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -38,15 +38,15 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ features, comp
           <table className="w-full text-left border-collapse text-sm min-w-[600px]">
             <thead>
               <tr className="border-b border-white/5 bg-[#141414]">
-                <th className="p-4 sm:p-5 font-bold text-white uppercase tracking-wider">Feature</th>
-                <th className="p-4 sm:p-5 font-bold text-[#2DD4BF] uppercase tracking-wider">Somyra</th>
-                <th className="p-4 sm:p-5 font-bold text-[#888888] uppercase tracking-wider">{competitorName}</th>
+                <th className="p-4 sm:p-5 font-semibold text-white uppercase tracking-wider">Feature</th>
+                <th className="p-4 sm:p-5 font-semibold text-[#2DD4BF] uppercase tracking-wider">Somyra</th>
+                <th className="p-4 sm:p-5 font-semibold text-[#888888] uppercase tracking-wider">{competitorName}</th>
               </tr>
             </thead>
             <tbody>
               {features.map((row, i) => (
                 <tr key={i} className={`border-b border-white/5 hover:bg-white/5 transition-colors ${i % 2 === 1 ? 'bg-[#141414]/20' : ''}`}>
-                  <td className="p-4 sm:p-5 font-bold text-white">{row.feature}</td>
+                  <td className="p-4 sm:p-5 font-semibold text-white">{row.feature}</td>
                   <td className="p-4 sm:p-5">{renderValue(row.somyra, row.winner, 'somyra')}</td>
                   <td className="p-4 sm:p-5">{renderValue(row.competitor, row.winner, 'competitor')}</td>
                 </tr>

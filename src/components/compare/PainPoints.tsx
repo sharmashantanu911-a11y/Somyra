@@ -12,7 +12,7 @@ export const PainPoints: React.FC<PainPointsProps> = ({ painPoints, competitorNa
     <section className="py-20 bg-[#0D0D0D] border-t border-b border-white/5">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
             Why Users Are Switching from {competitorName}
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base">
@@ -28,7 +28,7 @@ export const PainPoints: React.FC<PainPointsProps> = ({ painPoints, competitorNa
                   <AlertTriangle className="w-5 h-5 text-red-400" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-white font-bold text-base sm:text-lg mb-3">
+                  <h3 className="text-white font-semibold text-base sm:text-lg mb-3">
                     {item.pain}
                   </h3>
                   <div className="flex items-start gap-3">

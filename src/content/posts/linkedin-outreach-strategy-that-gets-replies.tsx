@@ -110,7 +110,7 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
           </p>
 
           <div className="mt-8 bg-[#1a1a1a] border border-[#333] rounded-2xl p-6">
-            <h3 className="text-xl font-extrabold text-white mb-3">The Short Answer</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">The Short Answer</h3>
             <p className="text-[#2DD4BF] font-semibold leading-relaxed">
               Target 15 to 20 high-fit prospects per day. Warm them up by engaging their content for one week. Send a connection request with a specific, non-promotional note. After they connect, wait 48 hours. Send one value-first message. If no reply in five days, move to email. Track your response rate and cut anyone below 20 percent.
             </p>
@@ -124,9 +124,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I find the right prospects for LinkedIn outreach?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Define three attributes: job title, company size, and a trigger event. Build a list of 100 prospects. Work through them in groups of 20 per day. Do not send requests to everyone at once. Test and iterate on your targeting as you learn what works.
             </p>
@@ -158,9 +158,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I warm up a prospect before reaching out on LinkedIn?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Engage with their content for one week before sending a connection request. Leave thoughtful comments that add value. Share their content with your network. Let your name become familiar before you ask for their attention. This doubles your acceptance rate.
             </p>
@@ -189,9 +189,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I write in a LinkedIn connection request note?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Two sentences maximum. Reference something specific about their work. Say why you want to connect. Do not pitch anything. The goal is context, not conversion. 'I have been following your posts about X. Would love to connect and follow your work.'
             </p>
@@ -215,9 +215,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I say in my first message after connecting?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Wait 48 hours. Reference something from their profile or content. Offer something valuable with no strings attached. End with a soft ask. Never pitch in the first message. Give value first and earn the right to ask for something later.
             </p>
@@ -241,9 +241,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">How do I follow up on LinkedIn without being annoying?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Send one LinkedIn follow up after 3 days of no reply. If no response, move to email after 7 days. Send one final email at day 14. Then stop and add them to a nurture list. Three touches is the maximum before you damage your brand.
             </p>
@@ -326,9 +326,9 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
 
           {/* AEO BLOCK */}
           <div className="bg-[#0D0D0D] border-l-4 border-[#2DD4BF] rounded-r-xl p-6 my-6">
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">QUESTION:</p>
             <p className="text-lg font-bold text-white mb-3">What should I avoid in LinkedIn outreach?</p>
-            <p className="text-xs font-extrabold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
+            <p className="text-xs font-semibold text-[#2DD4BF] uppercase tracking-widest mb-1">ANSWER:</p>
             <p className="text-[#888888] leading-relaxed">
               Do not use automation tools. Do not pitch in the connection request. Do not send the same message to everyone. Manual, personalized outreach that focuses on building context before asking for anything consistently outperforms automated approaches.
             </p>
@@ -358,7 +358,7 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Somyra writes your LinkedIn outreach messages in your voice.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Somyra writes your LinkedIn outreach messages in your voice.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-outreach-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
@@ -373,7 +373,7 @@ const LinkedinOutreachStrategyThatGetsReplies: React.FC = () => {
           </p>
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-extrabold text-white mb-4">Ready to scale your outreach? Generate on-brand messages in seconds.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Ready to scale your outreach? Generate on-brand messages in seconds.</h3>
             <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-outreach-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Get Started</Link>
           </div>
         </div>
