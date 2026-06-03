@@ -1428,6 +1428,685 @@ export const competitors: Competitor[] = [
         ]
       }
     }
+  },
+  {
+    id: 'magicpost',
+    name: 'MagicPost',
+    nameLower: 'magicpost',
+    website: 'https://magicpost.ai',
+    comparison: {
+      tagline: 'Somyra vs MagicPost: Which LinkedIn Tool Is Better?',
+      description: 'MagicPost helps schedule LinkedIn content. Somyra goes further with AI voice cloning, profile audits, and smart outreach. Compare the difference.',
+      summarySomyra: [
+        { label: 'Best for', value: 'Authentic LinkedIn personal branding with AI' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Profile Audit', value: 'Yes — AI-powered grader' },
+        { label: 'Smart Outreach', value: 'Yes — personalized DM generator' },
+        { label: 'Content Generation', value: 'AI post, hook, and topic generator' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'LinkedIn post scheduling' },
+        { label: 'Starting price', value: '~$19/month' },
+        { label: 'Voice learning', value: 'Not available' },
+        { label: 'Profile Audit', value: 'No' },
+        { label: 'Smart Outreach', value: 'No' },
+        { label: 'Content Generation', value: 'Basic scheduling only' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep voice learning', competitor: 'Not available', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'AI-powered', competitor: 'Manual only', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Post Scheduling', somyra: 'Basic', competitor: 'Advanced', winner: 'competitor' },
+        { feature: 'Topic Generator', somyra: 'Yes (Unlimited Pro)', competitor: 'No', winner: 'somyra' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$19/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'You want AI that creates content in your authentic voice.',
+        'Profile optimization and outreach tools matter for your growth.',
+        'You want a complete LinkedIn toolkit, not just a scheduler.',
+        'A free plan with real features is important to you.',
+      ],
+      chooseCompetitor: [
+        'Post scheduling is the only LinkedIn feature you need.',
+        'You already have AI content creation tools elsewhere.',
+        'You prefer a minimal tool focused on one task.',
+      ],
+      faqs: [
+        { question: 'Does MagicPost have AI content generation?', answer: 'MagicPost focuses on scheduling. Somyra provides AI voice cloning, post generation, topic discovery, and hook writing.' },
+        { question: 'Which tool is more affordable?', answer: 'Somyra starts at free with Pro at $19/month. MagicPost has similar pricing but lacks voice cloning, audits, and outreach.' },
+        { question: 'Can I use MagicPost and Somyra together?', answer: 'Yes — use MagicPost for scheduling and Somyra for AI content creation, profile optimization, and outreach.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-magicpost#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Does MagicPost have AI content generation?", "acceptedAnswer": { "@type": "Answer", "text": "MagicPost focuses on scheduling. Somyra provides AI voice cloning, post generation, topic discovery, and hook writing." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-magicpost#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to MagicPost for LinkedIn Growth',
+      description: 'MagicPost schedules posts — Somyra creates them. With AI voice cloning, profile audits, and outreach, Somyra is the complete LinkedIn growth platform.',
+      painPoints: [
+        { pain: 'MagicPost only schedules posts — no AI content creation', somyraSolution: 'Somyra generates complete LinkedIn posts, hooks, and topics with AI that learns your voice.' },
+        { pain: 'No voice cloning or personal style learning', somyraSolution: 'Somyra\'s Voice Profile learns your writing style and produces authentic-sounding content.' },
+        { pain: 'No LinkedIn profile optimization or auditing', somyraSolution: 'Somyra\'s AI Profile Auditor analyzes your profile and gives actionable recommendations.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'AI Content Creation', description: 'Generate posts, hooks, and topics without starting from scratch.' },
+        { feature: 'Voice Profile Learning', description: 'Posts sound authentically like you — building genuine personal brand.' },
+        { feature: 'Complete LinkedIn Suite', description: 'Creation, auditing, outreach, and topics — all in one platform.' },
+      ],
+      faqs: [
+        { question: 'Is Somyra a good MagicPost replacement?', answer: 'For content creation and growth, yes. Somyra generates what MagicPost only schedules. For scheduling specifically, you might use both.' },
+        { question: 'What LinkedIn features does Somyra have that MagicPost lacks?', answer: 'Voice cloning, AI post generation, profile auditing, topic discovery, and smart outreach.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-magicpost#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Somyra a good MagicPost replacement?", "acceptedAnswer": { "@type": "Answer", "text": "For content creation and growth, yes." } },
+        ]
+      }
+    }
+  },
+  {
+    id: 'easygen',
+    name: 'EasyGen',
+    nameLower: 'easygen',
+    website: 'https://easygen.ai',
+    comparison: {
+      tagline: 'Somyra vs EasyGen: LinkedIn AI Tool Comparison',
+      description: 'EasyGen generates LinkedIn posts with AI. Somyra combines voice cloning, profile audits, and outreach — going beyond basic post generation.',
+      summarySomyra: [
+        { label: 'Best for', value: 'Complete LinkedIn growth with authentic voice' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Profile Audit', value: 'Yes — AI grader' },
+        { label: 'Smart Outreach', value: 'Yes — DM generator' },
+        { label: 'Post Generation', value: 'AI-powered with voice cloning' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'Basic LinkedIn post generation' },
+        { label: 'Starting price', value: '~$15/month' },
+        { label: 'Voice learning', value: 'No' },
+        { label: 'Profile Audit', value: 'No' },
+        { label: 'Smart Outreach', value: 'No' },
+        { label: 'Post Generation', value: 'Basic AI generation' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep voice learning', competitor: 'Not available', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'Voice-driven', competitor: 'Template-based', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Topic Generator', somyra: 'Yes (Unlimited Pro)', competitor: 'No', winner: 'somyra' },
+        { feature: 'Hook Generator', somyra: 'Yes', competitor: 'Limited', winner: 'somyra' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$15/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'You want AI that writes in your actual voice, not templates.',
+        'Profile optimization and outreach are part of your LinkedIn strategy.',
+        'Topic and hook generation matter for consistent content flow.',
+        'You want a free plan with meaningful features.',
+      ],
+      chooseCompetitor: [
+        'Simple post generation is all you need.',
+        'You don\'t need profile audits or outreach tools.',
+        'Budget is the only factor and EasyGen is slightly cheaper.',
+      ],
+      faqs: [
+        { question: 'Is EasyGen good for LinkedIn?', answer: 'EasyGen generates basic LinkedIn posts but lacks voice cloning, profile audits, and outreach that Somyra offers.' },
+        { question: 'What does Somyra offer that EasyGen doesn\'t?', answer: 'Voice cloning, profile auditing, smart outreach, topic generation, and hook writing.' },
+        { question: 'Which tool is better for personal branding?', answer: 'Somyra — because it helps you build an authentic voice and optimize your entire LinkedIn presence.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-easygen#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Is EasyGen good for LinkedIn?", "acceptedAnswer": { "@type": "Answer", "text": "EasyGen generates basic LinkedIn posts but lacks voice cloning, profile audits, and outreach that Somyra offers." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-easygen#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to EasyGen for Complete LinkedIn Growth',
+      description: 'EasyGen generates posts — Somyra builds your brand. With voice cloning, profile audits, and outreach, get the complete LinkedIn growth toolkit.',
+      painPoints: [
+        { pain: 'EasyGen gives you template-based posts — no authentic voice', somyraSolution: 'Somyra\'s Voice Profile learns your writing style for posts that sound genuinely like you.' },
+        { pain: 'No profile auditing or optimization features', somyraSolution: 'Somyra\'s AI Profile Auditor analyzes your LinkedIn presence and recommends improvements.' },
+        { pain: 'Limited to post generation — no outreach or topic tools', somyraSolution: 'Somyra includes smart outreach, topic discovery, and hook writing alongside content creation.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'Voice-Driven AI', description: 'Posts that sound like you — building an authentic personal brand, not generic content.' },
+        { feature: 'Profile Optimization', description: 'Your LinkedIn profile is optimized to make a strong first impression.' },
+        { feature: 'Complete Growth Stack', description: 'Creation, auditing, outreach, and topics — all in one platform.' },
+      ],
+      faqs: [
+        { question: 'Is Somyra a better EasyGen alternative?', answer: 'Yes — Somyra offers voice cloning, profile audits, and outreach that EasyGen doesn\'t, at a similar price point.' },
+        { question: 'How much does Somyra cost vs EasyGen?', answer: 'Somyra starts free with Pro at $19/month. EasyGen starts at ~$15/month but lacks most LinkedIn growth features.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-easygen#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Somyra a better EasyGen alternative?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Somyra offers voice cloning, profile audits, and outreach that EasyGen doesn't." } },
+        ]
+      }
+    }
+  },
+  {
+    id: 'kleo',
+    name: 'Kleo',
+    nameLower: 'kleo',
+    website: 'https://kleo.io',
+    comparison: {
+      tagline: 'Somyra vs Kleo: LinkedIn Growth Tool Comparison',
+      description: 'Kleo provides LinkedIn analytics and insights. Somyra helps you take action with AI content creation, voice cloning, profile audits, and smart outreach.',
+      summarySomyra: [
+        { label: 'Best for', value: 'Actionable LinkedIn growth with AI' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Content Creation', value: 'AI-powered post, hook, topic generation' },
+        { label: 'Profile Audit', value: 'Yes — AI grader' },
+        { label: 'Smart Outreach', value: 'Yes — DM generator' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'LinkedIn analytics and benchmarking' },
+        { label: 'Starting price', value: '~$29/month' },
+        { label: 'Voice learning', value: 'No' },
+        { label: 'Content Creation', value: 'No AI generation' },
+        { label: 'Profile Audit', value: 'Basic analytics' },
+        { label: 'Smart Outreach', value: 'No' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep voice learning', competitor: 'Not available', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'AI-powered', competitor: 'No', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Detailed AI grader', competitor: 'Basic analytics', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Analytics & Benchmarking', somyra: 'Growth Tracker', competitor: 'Yes', winner: 'competitor' },
+        { feature: 'Topic Generator', somyra: 'Yes (Unlimited Pro)', competitor: 'No', winner: 'somyra' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$29/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'You want to take action on LinkedIn, not just measure it.',
+        'AI content generation in your voice is a priority.',
+        'Profile optimization and outreach tools matter for growth.',
+        'You want a free plan with real LinkedIn features.',
+      ],
+      chooseCompetitor: [
+        'Advanced LinkedIn analytics and benchmarking are your focus.',
+        'Content creation and outreach are handled elsewhere.',
+        'You prefer measuring performance over creating content.',
+      ],
+      faqs: [
+        { question: 'Is Kleo good for LinkedIn content creation?', answer: 'Kleo focuses on analytics, not content creation. Somyra provides AI-powered content generation, voice cloning, and profile optimization.' },
+        { question: 'What does Somyra offer that Kleo doesn\'t?', answer: 'AI voice cloning, post generation, profile auditing, topic discovery, and smart outreach.' },
+        { question: 'Can I use Kleo and Somyra together?', answer: 'Yes — use Kleo for analytics and Somyra for content creation, profile optimization, and outreach.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-kleo#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Is Kleo good for LinkedIn content creation?", "acceptedAnswer": { "@type": "Answer", "text": "Kleo focuses on analytics, not content creation. Somyra provides AI-powered content generation, voice cloning, and profile optimization." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-kleo#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to Kleo for Actionable LinkedIn Growth',
+      description: 'Kleo shows you metrics — Somyra helps you grow. With AI content creation, voice cloning, and smart outreach, get a complete LinkedIn growth platform.',
+      painPoints: [
+        { pain: 'Kleo tells you what\'s happening but doesn\'t help you improve', somyraSolution: 'Somyra takes action — generating content, auditing your profile, and powering outreach.' },
+        { pain: 'No content creation or voice cloning features', somyraSolution: 'Somyra generates posts in your voice with its Voice Profile system.' },
+        { pain: 'No LinkedIn profile optimization or auditing capabilities', somyraSolution: 'Somyra\'s AI Profile Auditor gives specific recommendations to improve your presence.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'Action-Oriented Growth', description: 'Don\'t just measure — create, optimize, and connect with tools designed for action.' },
+        { feature: 'Voice Profile AI', description: 'Posts that sound like you build authentic personal brand and attract opportunities.' },
+        { feature: 'Complete LinkedIn Toolkit', description: 'Content, audits, outreach, and topics — everything you need in one platform.' },
+      ],
+      faqs: [
+        { question: 'Is Somyra a complete Kleo replacement?', answer: 'For growth-focused users, yes. Somyra helps you act on insights while Kleo only shows them. For pure analytics, you might use both.' },
+        { question: 'What LinkedIn growth features does Somyra offer?', answer: 'Voice cloning, AI post generation, profile auditing, topic discovery, smart outreach, and growth tracking.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-kleo#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Somyra a complete Kleo replacement?", "acceptedAnswer": { "@type": "Answer", "text": "For growth-focused users, yes. For pure analytics, you might use both." } },
+        ]
+      }
+    }
+  },
+  {
+    id: 'contentin-io',
+    name: 'Contentin.io',
+    nameLower: 'contentin.io',
+    website: 'https://contentin.io',
+    comparison: {
+      tagline: 'Somyra vs Contentin.io: LinkedIn Content Tool Comparison',
+      description: 'Contentin.io helps with LinkedIn content strategy. Somyra combines AI content creation, voice cloning, profile audits, and outreach in one platform.',
+      summarySomyra: [
+        { label: 'Best for', value: 'Complete LinkedIn growth with AI' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Content Generation', value: 'AI post, hook, topic generator' },
+        { label: 'Profile Audit', value: 'Yes — AI grader' },
+        { label: 'Smart Outreach', value: 'Yes — DM generator' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'LinkedIn content strategy and planning' },
+        { label: 'Starting price', value: '~$25/month' },
+        { label: 'Voice learning', value: 'No' },
+        { label: 'Content Generation', value: 'Limited AI' },
+        { label: 'Profile Audit', value: 'No' },
+        { label: 'Smart Outreach', value: 'No' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep voice learning', competitor: 'Not available', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'Voice-driven', competitor: 'Limited AI', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Content Strategy', somyra: 'Topic generation', competitor: 'Strategy tools', winner: 'tie' },
+        { feature: 'Topic Generator', somyra: 'Yes (Unlimited Pro)', competitor: 'Yes', winner: 'tie' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$25/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'AI content generation in your voice is important.',
+        'Profile optimization and outreach are part of your strategy.',
+        'You want a complete LinkedIn platform, not just a strategy tool.',
+        'A free plan with real features matters to you.',
+      ],
+      chooseCompetitor: [
+        'Content strategy and planning are your primary needs.',
+        'You already have content creation tools elsewhere.',
+        'You want specialized strategy tools for LinkedIn content.',
+      ],
+      faqs: [
+        { question: 'Does Contentin.io have AI content generation?', answer: 'Contentin.io has limited AI features. Somyra offers full AI voice cloning, post generation, and topic discovery.' },
+        { question: 'Which tool is better for LinkedIn growth?', answer: 'Somyra — it covers creation, optimization, and outreach, while Contentin.io focuses more on strategy and planning.' },
+        { question: 'Can I use both tools together?', answer: 'Yes — use Contentin.io for strategy and Somyra for content creation, profile optimization, and outreach.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-contentin-io#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Does Contentin.io have AI content generation?", "acceptedAnswer": { "@type": "Answer", "text": "Contentin.io has limited AI features. Somyra offers full AI voice cloning, post generation, and topic discovery." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-contentin-io#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to Contentin.io for LinkedIn Growth',
+      description: 'Contentin.io plans your content — Somyra creates it. With AI voice cloning, profile audits, and outreach, get a complete LinkedIn growth solution.',
+      painPoints: [
+        { pain: 'Contentin.io focuses on strategy — limited content creation', somyraSolution: 'Somyra generates complete LinkedIn posts, hooks, and topics with AI that learns your voice.' },
+        { pain: 'No voice cloning or personal style learning', somyraSolution: 'Somyra\'s Voice Profile learns your writing style and produces authentic content.' },
+        { pain: 'No LinkedIn profile optimization or outreach tools', somyraSolution: 'Somyra includes AI profile auditing and smart outreach generation.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'AI-Powered Creation', description: 'Generate posts, hooks, and topics without starting from scratch.' },
+        { feature: 'Voice Profile Technology', description: 'Posts sound authentically like you — building a genuine personal brand.' },
+        { feature: 'All-in-One Platform', description: 'Creation, auditing, outreach, and topics — everything for LinkedIn growth.' },
+      ],
+      faqs: [
+        { question: 'Is Somyra a complete Contentin.io replacement?', answer: 'For content creation and growth, yes. Somyra generates what Contentin.io only plans. For strategy alone, you might use both.' },
+        { question: 'What makes Somyra different from Contentin.io?', answer: 'Somyra offers voice cloning, AI post generation, profile auditing, and outreach — a complete growth platform vs a strategy tool.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-contentin-io#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Somyra a complete Contentin.io replacement?", "acceptedAnswer": { "@type": "Answer", "text": "For content creation and growth, yes." } },
+        ]
+      }
+    }
+  },
+  {
+    id: 'jasper',
+    name: 'Jasper',
+    nameLower: 'jasper',
+    website: 'https://jasper.ai',
+    comparison: {
+      tagline: 'Somyra vs Jasper: Which AI Writing Tool Is Better for LinkedIn?',
+      description: 'Jasper is a general AI writing assistant. Somyra is purpose-built for LinkedIn with voice cloning, profile audits, and outreach. Compare their LinkedIn capabilities.',
+      summarySomyra: [
+        { label: 'Best for', value: 'LinkedIn-specific AI growth platform' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Platform Focus', value: '100% LinkedIn' },
+        { label: 'Profile Audit', value: 'Yes — AI grader' },
+        { label: 'Smart Outreach', value: 'Yes — DM generator' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'General AI content writing' },
+        { label: 'Starting price', value: '~$39/month' },
+        { label: 'Voice learning', value: 'Basic brand voice settings' },
+        { label: 'Platform Focus', value: 'General content (blogs, ads, emails)' },
+        { label: 'Profile Audit', value: 'No' },
+        { label: 'Smart Outreach', value: 'No' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep LinkedIn voice learning', competitor: 'General brand voice', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'Purpose-built for LinkedIn', competitor: 'Generic AI', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'General Content Writing', somyra: 'LinkedIn only', competitor: 'Blogs, ads, emails, etc.', winner: 'competitor' },
+        { feature: 'Topic Generator', somyra: 'LinkedIn topics (Unlimited)', competitor: 'General topics', winner: 'somyra' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$39/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'LinkedIn is your primary platform for professional branding.',
+        'You want AI that specializes in LinkedIn content, not general writing.',
+        'Profile optimization and outreach tools are important.',
+        'You want a free plan with real LinkedIn features.',
+      ],
+      chooseCompetitor: [
+        'You need a general AI writing tool for blogs, emails, and ads.',
+        'LinkedIn is just one of many content channels for you.',
+        'You need long-form content creation beyond social posts.',
+      ],
+      faqs: [
+        { question: 'Is Jasper good for LinkedIn content?', answer: 'Jasper can write general content but lacks LinkedIn-specific optimization, voice cloning, profile audits, and outreach tools that Somyra offers.' },
+        { question: 'Which tool is more affordable for LinkedIn?', answer: 'Somyra — free plan available, Pro at $19/month. Jasper starts at $39/month with no free plan.' },
+        { question: 'Can I use Jasper for other content and Somyra for LinkedIn?', answer: 'Yes — many users leverage Jasper for blogs and ads, and Somyra for dedicated LinkedIn growth and content.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-jasper#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Is Jasper good for LinkedIn content?", "acceptedAnswer": { "@type": "Answer", "text": "Jasper can write general content but lacks LinkedIn-specific optimization, voice cloning, profile audits, and outreach tools that Somyra offers." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-jasper#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to Jasper for LinkedIn Content',
+      description: 'Jasper is great for general writing — but for LinkedIn-specific growth with voice cloning and outreach, Somyra is the dedicated alternative.',
+      painPoints: [
+        { pain: 'Jasper is a general AI tool — not optimized for LinkedIn', somyraSolution: 'Somyra is 100% focused on LinkedIn with features designed for the platform\'s format and audience.' },
+        { pain: 'No LinkedIn profile auditing or optimization', somyraSolution: 'Somyra\'s AI Profile Auditor analyzes your LinkedIn presence and recommends specific improvements.' },
+        { pain: 'No LinkedIn-specific outreach or DM generation', somyraSolution: 'Somyra\'s Smart Outreach creates personalized DMs for better networking results.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'LinkedIn-First AI', description: 'Every feature is designed specifically for LinkedIn content, format, and best practices.' },
+        { feature: 'Voice Profile System', description: 'Posts sound authentically you — building genuine personal brand on LinkedIn.' },
+        { feature: 'Complete LinkedIn Suite', description: 'Content, audits, outreach, and topics — all in one LinkedIn-focused platform.' },
+      ],
+      faqs: [
+        { question: 'Can Somyra replace Jasper for LinkedIn content?', answer: 'For LinkedIn-specific content, yes. Somyra is purpose-built for the platform. For general writing, Jasper is still valuable.' },
+        { question: 'Is Somyra more expensive than Jasper?', answer: 'No — Somyra starts free with Pro at $19/month. Jasper starts at $39/month with no free plan.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-jasper#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can Somyra replace Jasper for LinkedIn content?", "acceptedAnswer": { "@type": "Answer", "text": "For LinkedIn-specific content, yes. For general writing, Jasper is still valuable." } },
+        ]
+      }
+    }
+  },
+  {
+    id: 'copy-ai',
+    name: 'Copy.ai',
+    nameLower: 'copy.ai',
+    website: 'https://copy.ai',
+    comparison: {
+      tagline: 'Somyra vs Copy.ai: LinkedIn AI Tool Comparison',
+      description: 'Copy.ai is a general AI copywriting tool. Somyra is built specifically for LinkedIn with voice cloning, profile audits, and outreach. See how they compare.',
+      summarySomyra: [
+        { label: 'Best for', value: 'LinkedIn-specific AI growth platform' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Platform Focus', value: '100% LinkedIn' },
+        { label: 'Profile Audit', value: 'Yes — AI grader' },
+        { label: 'Smart Outreach', value: 'Yes — DM generator' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'General AI copywriting' },
+        { label: 'Starting price', value: '~$36/month' },
+        { label: 'Voice learning', value: 'Basic brand voice' },
+        { label: 'Platform Focus', value: 'General copy (ads, emails, website)' },
+        { label: 'Profile Audit', value: 'No' },
+        { label: 'Smart Outreach', value: 'No' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'Limited', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep LinkedIn voice learning', competitor: 'General brand voice', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'Purpose-built for LinkedIn', competitor: 'Generic copy', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'General Copywriting', somyra: 'LinkedIn only', competitor: 'Ads, emails, websites, etc.', winner: 'competitor' },
+        { feature: 'Topic Generator', somyra: 'LinkedIn topics (Unlimited)', competitor: 'No', winner: 'somyra' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$36/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'LinkedIn is your primary platform for professional growth.',
+        'You want AI that specializes in LinkedIn content and optimization.',
+        'Profile audits and outreach tools matter to your strategy.',
+        'A generous free plan is important to you.',
+      ],
+      chooseCompetitor: [
+        'You need general copywriting for ads, emails, and websites.',
+        'LinkedIn is just one of many marketing channels.',
+        'You want a tool that handles various copy formats.',
+      ],
+      faqs: [
+        { question: 'Is Copy.ai good for LinkedIn?', answer: 'Copy.ai can generate general copy but lacks LinkedIn-specific features like voice cloning, profile audits, and outreach that Somyra offers.' },
+        { question: 'Which tool is better for LinkedIn personal branding?', answer: 'Somyra — it\'s purpose-built for LinkedIn with voice cloning, auditing, and outreach. Copy.ai is a general tool.' },
+        { question: 'Can I use Copy.ai and Somyra together?', answer: 'Yes — use Copy.ai for ads and landing pages, and Somyra for dedicated LinkedIn content and growth.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-copy-ai#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Is Copy.ai good for LinkedIn?", "acceptedAnswer": { "@type": "Answer", "text": "Copy.ai can generate general copy but lacks LinkedIn-specific features like voice cloning, profile audits, and outreach that Somyra offers." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-copy-ai#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to Copy.ai for LinkedIn Content',
+      description: 'Copy.ai writes copy — Somyra grows your LinkedIn presence. With voice cloning, profile audits, and outreach, get a platform built for LinkedIn success.',
+      painPoints: [
+        { pain: 'Copy.ai is a general tool — not optimized for LinkedIn\'s format', somyraSolution: 'Somyra generates content designed specifically for LinkedIn\'s algorithm and professional audience.' },
+        { pain: 'No LinkedIn profile auditing or optimization', somyraSolution: 'Somyra\'s AI Profile Auditor analyzes your profile and recommends specific improvements.' },
+        { pain: 'No LinkedIn outreach or networking tools', somyraSolution: 'Somyra\'s Smart Outreach generates personalized DMs for better networking results.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'LinkedIn-Optimized AI', description: 'Content specifically designed for LinkedIn\'s format, audience, and best practices.' },
+        { feature: 'Voice Profile Learning', description: 'Posts that sound like you — building an authentic personal brand.' },
+        { feature: 'Complete LinkedIn Platform', description: 'Creation, audits, outreach, and topics — everything for LinkedIn growth.' },
+      ],
+      faqs: [
+        { question: 'Is Somyra a good Copy.ai alternative for LinkedIn?', answer: 'Yes — Somyra offers LinkedIn-specific features that Copy.ai doesn\'t, including voice cloning, profile audits, and smart outreach.' },
+        { question: 'Which tool is more affordable?', answer: 'Somyra\'s free plan includes real LinkedIn features and Pro is $19/month. Copy.ai starts at $36/month.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-copy-ai#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Somyra a good Copy.ai alternative for LinkedIn?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Somyra offers LinkedIn-specific features that Copy.ai doesn't." } },
+        ]
+      }
+    }
+  },
+  {
+    id: 'typegrow',
+    name: 'Typegrow',
+    nameLower: 'typegrow',
+    website: 'https://typegrow.com',
+    comparison: {
+      tagline: 'Somyra vs Typegrow: LinkedIn Tool Comparison',
+      description: 'Typegrow helps with LinkedIn content and scheduling. Somyra combines AI voice cloning, profile audits, and outreach for complete LinkedIn growth.',
+      summarySomyra: [
+        { label: 'Best for', value: 'Complete LinkedIn growth with AI' },
+        { label: 'Starting price', value: 'Free forever (Pro $19/mo)' },
+        { label: 'Voice learning', value: 'Yes — Voice Profile system' },
+        { label: 'Content Generation', value: 'AI post, hook, and topic generator' },
+        { label: 'Profile Audit', value: 'Yes — AI grader' },
+        { label: 'Smart Outreach', value: 'Yes — DM generator' },
+      ],
+      summaryCompetitor: [
+        { label: 'Best for', value: 'LinkedIn content creation and scheduling' },
+        { label: 'Starting price', value: '~$15/month' },
+        { label: 'Voice learning', value: 'No' },
+        { label: 'Content Generation', value: 'Basic template-based' },
+        { label: 'Profile Audit', value: 'No' },
+        { label: 'Smart Outreach', value: 'No' },
+      ],
+      features: [
+        { feature: 'Free Plan', somyra: 'Yes', competitor: 'Limited', winner: 'somyra' },
+        { feature: 'AI Voice Cloning', somyra: 'Deep voice learning', competitor: 'Not available', winner: 'somyra' },
+        { feature: 'LinkedIn Post Generation', somyra: 'Voice-driven AI', competitor: 'Template-based', winner: 'somyra' },
+        { feature: 'Profile Audit', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Outreach / DM Tools', somyra: 'Yes', competitor: 'No', winner: 'somyra' },
+        { feature: 'Topic Generator', somyra: 'Yes (Unlimited Pro)', competitor: 'No', winner: 'somyra' },
+        { feature: 'Post Scheduling', somyra: 'Basic', competitor: 'Yes', winner: 'competitor' },
+        { feature: 'Starting Price', somyra: 'Free forever', competitor: '~$15/month', winner: 'somyra' },
+      ],
+      chooseSomyra: [
+        'You want AI that writes in your authentic voice.',
+        'Profile optimization and outreach are part of your strategy.',
+        'Topic discovery and hook writing matter for content consistency.',
+        'You want a free plan with real LinkedIn features.',
+      ],
+      chooseCompetitor: [
+        'Basic LinkedIn content scheduling is all you need.',
+        'AI voice cloning and profile audits aren\'t important to you.',
+        'You want the cheapest option for LinkedIn posting.',
+      ],
+      faqs: [
+        { question: 'Does Typegrow have AI voice cloning?', answer: 'No — Typegrow offers template-based content. Somyra provides deep voice cloning that learns your writing style.' },
+        { question: 'What does Somyra offer that Typegrow doesn\'t?', answer: 'Voice cloning, AI post generation, profile auditing, topic discovery, and smart outreach.' },
+        { question: 'Which tool is better for LinkedIn personal branding?', answer: 'Somyra — it helps you build an authentic voice and optimize your entire LinkedIn presence.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FAQPage",
+            "@id": "https://somyra.online/compare/somyra-vs-typegrow#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "Does Typegrow have AI voice cloning?", "acceptedAnswer": { "@type": "Answer", "text": "No — Typegrow offers template-based content. Somyra provides deep voice cloning that learns your writing style." } },
+            ]
+          },
+          {
+            "@type": "Product",
+            "@id": "https://somyra.online/compare/somyra-vs-typegrow#product",
+            "name": "Somyra",
+            "description": "AI-powered LinkedIn growth platform for individuals",
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    },
+    alternative: {
+      tagline: 'The Best Alternative to Typegrow for LinkedIn Growth',
+      description: 'Typegrow helps you post — Somyra helps you grow. With AI voice cloning, profile audits, and outreach, get the complete LinkedIn advantage.',
+      painPoints: [
+        { pain: 'Typegrow offers template-based content — no authentic voice', somyraSolution: 'Somyra\'s Voice Profile learns your writing style for genuine, authentic-sounding posts.' },
+        { pain: 'No LinkedIn profile auditing or optimization', somyraSolution: 'Somyra\'s AI Profile Auditor analyzes your profile and provides actionable improvements.' },
+        { pain: 'No outreach or DM generation for networking', somyraSolution: 'Somyra generates personalized DMs that start real conversations.' },
+      ],
+      whySomyraFeatures: [
+        { feature: 'Voice-Driven AI', description: 'Generate LinkedIn posts that sound authentically like you.' },
+        { feature: 'Profile Optimization', description: 'Optimize your LinkedIn profile with AI-powered recommendations.' },
+        { feature: 'Complete Growth Suite', description: 'Creation, auditing, outreach, and topics — all in one platform.' },
+      ],
+      faqs: [
+        { question: 'Is Somyra a better Typegrow alternative?', answer: 'Yes — Somyra offers voice cloning, audits, and outreach that Typegrow doesn\'t, at a competitive price.' },
+        { question: 'How much does Somyra cost vs Typegrow?', answer: 'Somyra starts free with Pro at $19/month. Typegrow starts at ~$15/month but lacks most LinkedIn growth features.' },
+      ],
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://somyra.online/alternatives/somyra-vs-typegrow#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Somyra a better Typegrow alternative?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Somyra offers voice cloning, audits, and outreach that Typegrow doesn't." } },
+        ]
+      }
+    }
   }
 ];
 
