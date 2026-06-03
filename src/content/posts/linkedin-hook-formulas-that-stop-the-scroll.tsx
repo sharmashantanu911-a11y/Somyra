@@ -121,7 +121,7 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-intro-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Hook Generator</Link> creates multiple hook variants for your content in your voice. No generic openers. Just hooks that work.
             </p>
-            <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
@@ -392,7 +392,7 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               The <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Hook Generator</Link> creates multiple variants for any topic in your voice. Also check out the <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Topic Generator</Link> if you need content ideas.
             </p>
-            <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Frequently Asked Questions</h2>
@@ -476,7 +476,7 @@ const LinkedinHookFormulasThatStopTheScroll: React.FC = () => {
             <p className="text-[#888888] mb-6 text-sm">
               No generic openers. No robotic templates. Just hooks that sound like you and stop the scroll. Try the <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Hook Generator</Link> and <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> free.
             </p>
-            <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-hooks-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
         </div>

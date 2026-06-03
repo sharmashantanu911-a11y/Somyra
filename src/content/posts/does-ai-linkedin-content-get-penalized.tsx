@@ -121,7 +121,7 @@ const DoesAiLinkedinContentGetPenalized: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-intro-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> learns your voice before writing a single word. No generic templates. No robotic language.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
@@ -423,7 +423,7 @@ Third and most importantly, there are no specific details. No real numbers. No s
             <p className="text-[#888888] mb-6 text-sm">
               Our AI studies your writing style and generates content that sounds like you. No generic templates. No robotic language. Just posts that sound like a human wrote them because a human's voice trained the model. Try the <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> and <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Profile Audit</Link> free.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ai-penalty-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
         </div>

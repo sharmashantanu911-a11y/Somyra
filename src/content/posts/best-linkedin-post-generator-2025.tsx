@@ -117,7 +117,7 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-intro-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> analyzes your writing style and produces content that sounds like you. Free to start.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
@@ -334,7 +334,7 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra learns how you write and generates posts that sound like you. Try the <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> free.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Frequently Asked Questions</h2>
@@ -418,7 +418,7 @@ const BestLinkedinPostGenerator2025: React.FC = () => {
             <p className="text-[#888888] mb-6 text-sm">
               No generic templates. No robotic language. Just content that sounds like you because it learned from you. Try the <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> free.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-generator-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
         </div>

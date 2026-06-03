@@ -107,7 +107,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
             <div className="mb-12">
               <Link
                 to="/?utm_source=seo&utm_medium=organic&utm_campaign=topic-generator"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
               >
                 Generate Topics Free
                 <ArrowRight className="w-4 h-4" />
@@ -256,7 +256,7 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
               
               <Link
                 to="/?utm_source=seo&utm_medium=organic&utm_campaign=topic-generator"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
               >
                 Get My Content Ideas
                 <ArrowRight className="w-4 h-4" />

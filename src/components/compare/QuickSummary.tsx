@@ -36,7 +36,7 @@ export const QuickSummary: React.FC<QuickSummaryProps> = ({ summarySomyra, summa
             </div>
             <Link
               to="/?utm_source=seo&utm_medium=organic&utm_campaign=compare"
-              className="block w-full py-3.5 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] hover:bg-[#2DD4BF]/90 text-center transition-all text-sm"
+              className="block w-full py-3.5 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] hover:bg-[#2DD4BF]/90 text-center transition-all text-sm"
             >
               Try Somyra Free
             </Link>

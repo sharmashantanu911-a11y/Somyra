@@ -42,7 +42,7 @@ const NotFoundPage: React.FC = () => {
 
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
             >
               Go Back to Somyra
               <ArrowRight className="w-4.5 h-4.5" />

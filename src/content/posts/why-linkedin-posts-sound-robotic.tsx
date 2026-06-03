@@ -266,7 +266,7 @@ const WhyRoboticPosts: React.FC = () => {
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
             <h3 className="text-2xl font-semibold text-white mb-4">Somyra learns your voice so your posts never sound robotic.</h3>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-robotic-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-robotic-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Bottom Line</h2>
@@ -285,7 +285,7 @@ const WhyRoboticPosts: React.FC = () => {
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
             <h3 className="text-2xl font-semibold text-white mb-4">Write posts that sound like you. Get started free.</h3>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-robotic-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Get Started</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-robotic-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Get Started</Link>
           </div>
         </div>
       </BlogPostLayout>

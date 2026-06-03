@@ -111,7 +111,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
             <div className="mb-12">
               <Link
                 to="/?utm_source=seo&utm_medium=organic&utm_campaign=profile-audit"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
               >
                 Audit My Profile Free
                 <ArrowRight className="w-4 h-4" />
@@ -307,7 +307,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
               <div className="mt-8">
                 <Link
                   to="/"
-                  className="block w-full py-3 bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 text-center text-black font-extrabold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all text-sm"
+                  className="block w-full py-3 bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 text-center text-black font-semibold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all text-sm"
                 >
                   Unlock Deep Strategy
                 </Link>
@@ -384,7 +384,7 @@ const LinkedInProfileAuditPage: React.FC = () => {
               
               <Link
                 to="/?utm_source=seo&utm_medium=organic&utm_campaign=profile-audit"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] hover:bg-[#2DD4BF]/90 transition-all text-base"
               >
                 Get My Free Audit
                 <ArrowRight className="w-4 h-4" />

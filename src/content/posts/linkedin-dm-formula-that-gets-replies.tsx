@@ -121,7 +121,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-intro-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn DM Generator</Link> creates personalized messages based on the recipient's profile in your voice.
             </p>
-            <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
@@ -293,7 +293,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn DM Generator</Link> creates tailored messages based on each recipient's profile. Also check out the <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> to create content that makes people want to connect with you.
             </p>
-            <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Frequently Asked Questions</h2>
@@ -377,7 +377,7 @@ const LinkedinDmFormulaThatGetsReplies: React.FC = () => {
             <p className="text-[#888888] mb-6 text-sm">
               Somyra's <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn DM Generator</Link> writes personalized messages based on each recipient's profile. Try it free.
             </p>
-            <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-dm-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-dm-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
         </div>

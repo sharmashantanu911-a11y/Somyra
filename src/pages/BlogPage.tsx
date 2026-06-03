@@ -361,7 +361,7 @@ const BlogPage: React.FC = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 text-black font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all shrink-0 flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
+                    className="bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 text-black font-semibold text-sm px-6 py-3.5 rounded-xl transition-all shrink-0 flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
                   >
                     Subscribe
                     <ArrowRight className="w-4 h-4" />

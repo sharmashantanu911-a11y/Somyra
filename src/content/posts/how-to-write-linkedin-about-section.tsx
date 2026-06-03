@@ -328,7 +328,7 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
             <h3 className="text-2xl font-semibold text-white mb-4">Somyra's Deep Strategy audit rewrites your About section for you.</h3>
-            <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-about-section-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
+            <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-about-section-mid-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Conclusion</h2>
@@ -343,7 +343,7 @@ const HowToWriteLinkedinAboutSection: React.FC = () => {
 
           <div className="mt-10 bg-[#141414] border border-[#2DD4BF]/20 rounded-2xl p-8 text-center shadow-2xl">
             <h3 className="text-2xl font-semibold text-white mb-4">Not sure if your profile is converting? Run a free audit.</h3>
-            <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-about-section-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
+            <Link to="/linkedin-profile-audit?utm_source=seo&utm_medium=organic&utm_campaign=blog-about-section-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Audit My Profile</Link>
           </div>
         </div>
       </BlogPostLayout>

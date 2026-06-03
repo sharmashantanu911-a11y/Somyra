@@ -121,7 +121,7 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-intro-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Topic Generator</Link> creates specific post ideas based on your niche and audience. No generic suggestions. Just ideas you can actually use.
             </p>
-            <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
@@ -243,7 +243,7 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">Topic Generator</Link> and <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">Post Generator</Link> work together to turn your niche into a consistent stream of content that sounds like you.
             </p>
-            <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Frequently Asked Questions</h2>
@@ -327,7 +327,7 @@ const WhatToPostOnLinkedinWhenYouHaveNoIdeas: React.FC = () => {
             <p className="text-[#888888] mb-6 text-sm">
               Somyra's <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Topic Generator</Link> creates specific post ideas based on your niche. Pair it with the <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> to go from idea to published post in minutes.
             </p>
-            <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-ideas-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
         </div>

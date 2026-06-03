@@ -1388,7 +1388,7 @@ export default function App() {
               </div>
               <button 
                 onClick={() => setShowPricingModal(true)}
-                className="px-8 py-3.5 bg-amber-500 text-black font-black rounded-xl hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all transform hover:scale-[1.02] active:scale-100 text-sm whitespace-nowrap"
+                className="px-8 py-3.5 bg-amber-500 text-black font-semibold rounded-xl hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all transform hover:scale-[1.02] active:scale-100 text-sm whitespace-nowrap"
               >
                 Renew Subscription
               </button>

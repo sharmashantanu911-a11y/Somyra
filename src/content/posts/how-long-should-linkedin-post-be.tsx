@@ -137,7 +137,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-intro-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> learns your voice and helps you structure content at the optimal length for your audience.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-intro-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">The Direct Answer</h2>
@@ -635,7 +635,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
             <p className="text-[#888888] mb-4 text-sm">
               Somyra's <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-middle-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link> uses your voice profile to write content that sounds like you at the optimal length for each post type. Get started free.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-extrabold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-middle-cta" className="inline-block px-6 py-3 bg-[#2DD4BF] text-black font-semibold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Pre-Publish Length Checklist</h2>
@@ -780,7 +780,7 @@ const HowLongShouldLinkedinPostBe: React.FC = () => {
             <p className="text-[#888888] mb-6 text-sm">
               Our AI learns how you write and generates content that sounds like you. No generic templates. No robotic language (see <Link to="/blog/why-linkedin-posts-sound-robotic" className="text-[#2DD4BF] font-semibold hover:underline">why most AI LinkedIn posts sound robotic</Link>). Just posts at the right length with the right tone. Try the <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">LinkedIn Post Generator</Link>, <Link to="/linkedin-hook-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">Hook Generator</Link>, and <Link to="/linkedin-topic-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-final-cta" className="text-[#2DD4BF] font-semibold hover:underline">Topic Generator</Link> free.
             </p>
-            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-extrabold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
+            <Link to="/linkedin-post-generator?utm_source=seo&utm_medium=organic&utm_campaign=blog-length-final-cta" className="inline-block px-8 py-4 bg-[#2DD4BF] text-black font-semibold rounded-xl hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all">Try Somyra Free</Link>
           </div>
 
         </div>
