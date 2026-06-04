@@ -1046,7 +1046,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-teal-accent/30">
-      {authChecked && !user ? (
+      {!authChecked ? (
+        <div className="min-h-screen bg-[#080808]" />
+      ) : !user ? (
         <Suspense fallback={<div className="min-h-screen bg-[#080808]" />}>
           <LandingPage 
             setActiveTab={handleTabClick}

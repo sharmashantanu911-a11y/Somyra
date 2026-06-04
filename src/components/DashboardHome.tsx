@@ -32,7 +32,6 @@ import {
   Pencil
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import { LandingPage } from './LandingPage';
 import { updateDisplayName } from '../services/userService';
 
 interface Testimonial {
@@ -577,23 +576,6 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
     "Posting 3 times per week consistently beats one viral post once a month."
   ];
   const currentDayTip = dailyTips[new Date().getDay()];
-
-  if (!user) {
-    return (
-      <div className="w-full min-w-0">
-        <LandingPage
-          setActiveTab={setActiveTab}
-          setShowAuth={setShowAuth}
-          setShowPricingModal={onUpgrade}
-          testimonials={testimonials}
-          loadingTestimonials={false}
-          showReviewModal={false}
-          setShowReviewModal={setShowReviewModal}
-          user={user}
-        />
-      </div>
-    );
-  }
 
   if (loadingProfile || usageLimits.isLoading) {
     return <DashboardSkeleton isPro={isPro} isMax={isMax} />;
