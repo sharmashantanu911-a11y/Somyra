@@ -223,7 +223,7 @@ export function LandingPage({
           scrolled ? 'bg-[#0D0D0D]/80 backdrop-blur-md border-b border-white/[0.06]' : 'bg-transparent'
         }`}
       >
-        <nav className="landing-nav max-w-6xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex items-center justify-between">
+        <nav className={`landing-nav${scrolled ? ' landing-nav-scrolled' : ''}`}>
           <button onClick={() => { scrollToHero(); setIsMobileMenuOpen(false); }} className="flex items-center gap-2 shrink-0">
             <div className="flex items-center justify-center shrink-0">
               <svg className="w-5 h-5 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -233,10 +233,13 @@ export function LandingPage({
             <span className="font-semibold text-[17px] text-white tracking-tight -mb-0.5">Somyra</span>
           </button>
           <div className="hidden md:flex items-center gap-5">
-            <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">Explore</button>
+            <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="landing-nav-link">
+              Explore
+            </button>
             <div className="relative group/tools">
               <button className="landing-nav-link flex items-center gap-1">
-                Features<ChevronDown className="w-3 h-3" />
+                Features
+                <ChevronDown className="w-3 h-3" />
               </button>
               <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[280px] rounded-xl border border-white/[0.08] bg-[#0D0D0D] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.4)] opacity-0 invisible group-hover/tools:opacity-100 group-hover/tools:visible transition-all duration-200 z-50">
                 <Link to="/linkedin-post-generator" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#141414] transition-all text-left">
@@ -276,43 +279,102 @@ export function LandingPage({
                 </Link>
               </div>
             </div>
-            <button onClick={() => { setShowPricingModal(true); }} className="landing-nav-link">Pricing</button>
-            <button onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); }} className="landing-nav-link">FAQ</button>
+            <button onClick={() => { setShowPricingModal(true); }} className="landing-nav-link">
+              Pricing
+            </button>
+            <button onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); }} className="landing-nav-link">
+              FAQ
+            </button>
           </div>
           <div className="flex items-center gap-1 sm:gap-2">
             <button
               type="button"
               onClick={() => { setAuthMode('login'); setShowAuth(true); }}
-              className="hidden sm:inline-flex landing-nav-link text-[14px] font-medium px-3 py-1.5"
+              className="landing-nav-signin hidden sm:block"
             >
               Log in
             </button>
             <button
               type="button"
               onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-              className="px-3.5 sm:px-5 py-2 sm:py-2.5 bg-[#2DD4BF] text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] hover:bg-[#2DD4BF]/90 transition-all text-[13px] sm:text-sm"
+              className="landing-nav-cta"
             >
               Start for Free
             </button>
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-1.5 text-white/80 hover:text-white"
+              className="landing-hamburger"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </nav>
+
+        {/* ΓöÇΓöÇ MOBILE MENU ΓöÇΓöÇ */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-white/[0.06] bg-[#0D0D0D]/95 backdrop-blur-md">
-            <div className="px-4 py-3 flex flex-col gap-1">
-              <button onClick={() => { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }} className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-white hover:bg-white/[0.04] transition-all">Explore</button>
-              <button onClick={() => { setShowPricingModal(true); setIsMobileMenuOpen(false); }} className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-white hover:bg-white/[0.04] transition-all">Pricing</button>
-              <button onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }} className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-white hover:bg-white/[0.04] transition-all">FAQ</button>
-              <hr className="border-white/[0.06] my-2" />
-              <button onClick={() => { setAuthMode('login'); setShowAuth(true); setIsMobileMenuOpen(false); }} className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-white hover:bg-white/[0.04] transition-all">Log in</button>
-              <button onClick={() => { setAuthMode('signup'); setShowAuth(true); setIsMobileMenuOpen(false); }} className="w-full text-center px-4 py-3.5 rounded-xl bg-[#2DD4BF] text-black font-semibold text-[15px] hover:shadow-[0_0_24px_rgba(45,212,191,0.3)] transition-all">Start for Free</button>
+          <div className="fixed inset-0 z-[99] pt-20 px-4 md:hidden">
+            <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+            <div className="relative bg-[#0D0D0D]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 shadow-[0_32px_64px_rgba(0,0,0,0.6)]" style={{ animation: 'fadeInDownMobile 0.25s ease forwards' }}>
+              <div className="flex flex-col gap-1">
+                <button
+                  onClick={() => { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }}
+                  className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all"
+                >
+                  Explore
+                </button>
+                <div className="px-4 py-3">
+                  <p className="type-overline text-[#888] mb-3">Features</p>
+                  <div className="flex flex-col gap-0.5">
+                    <Link to="/linkedin-post-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                      <PenTool className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                      <span>Post Generator</span>
+                    </Link>
+                    <Link to="/linkedin-profile-audit" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                      <UserCircle className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                      <span>Profile Audit</span>
+                    </Link>
+                    <Link to="/linkedin-dm-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                      <Send className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                      <span>DM Generator</span>
+                    </Link>
+                    <Link to="/linkedin-hook-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                      <Sparkles className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                      <span>Hook Generator</span>
+                    </Link>
+                    <Link to="/linkedin-topic-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all">
+                      <FileText className="w-4 h-4 text-[#2DD4BF] shrink-0" />
+                      <span>Topic Generator</span>
+                    </Link>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setShowPricingModal(true); setIsMobileMenuOpen(false); }}
+                  className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all"
+                >
+                  Pricing
+                </button>
+                <button
+                  onClick={() => { document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }}
+                  className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all"
+                >
+                  FAQ
+                </button>
+                <hr className="border-white/[0.06] my-2" />
+                <button
+                  onClick={() => { setAuthMode('login'); setShowAuth(true); setIsMobileMenuOpen(false); }}
+                  className="w-full text-left px-4 py-3 rounded-xl text-[15px] font-medium text-white hover:bg-white/[0.04] transition-all"
+                >
+                  Log in
+                </button>
+                <button
+                  onClick={() => { setAuthMode('signup'); setShowAuth(true); setIsMobileMenuOpen(false); }}
+                  className="w-full text-center px-4 py-3.5 rounded-xl bg-[#2DD4BF] text-black font-semibold text-[15px] hover:shadow-[0_0_24px_rgba(45,212,191,0.3)] transition-all"
+                >
+                  Start for Free
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -328,54 +390,86 @@ export function LandingPage({
                   <img src="/user-images/Alex.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
                   <img src="/user-images/Ama.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
                   <img src="/user-images/Arora.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                  <img src="/user-images/Charlie.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                  <img src="/user-images/Lisa.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
+                  <img src="/user-images/Mark.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
                 </div>
-                <span className="text-[12px] sm:text-[13px] text-white/90 whitespace-nowrap">Trusted by 500+ founders and executives</span>
+                <div className="w-[1px] h-[16px] bg-[rgba(255,255,255,0.1)] shrink-0" />
+                <div className="flex flex-col gap-[1px] shrink-0">
+                  <span className="text-white text-[13px] max-[360px]:text-[12px] font-bold leading-[1.3] whitespace-nowrap">2,400+ founders</span>
+                  <span className="text-[#999] text-[11px] max-[360px]:text-[10px] font-normal whitespace-nowrap">building their brand on LinkedIn</span>
+                </div>
               </div>
             </div>
 
-            <h1 className="text-[32px] sm:text-[42px] md:text-[52px] ds:text-[58px] font-semibold text-white leading-[1.1] tracking-tight mb-4 sm:mb-5">
-              Your LinkedIn,<br className="sm:hidden" /> finally working for you.
+            <h1 className="text-[clamp(36px,6vw,60px)] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-5">
+              Your LinkedIn sounds like everyone else.
+              <br />
+              Somyra makes it sound like{' '}
+              <span className="text-teal-accent relative">you.
+                <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-teal-accent/45 rounded-full origin-left scale-x-0 animate-[scale-in-x_0.5s_1s_ease_forwards]" />
+              </span>
             </h1>
-            <p className="text-[15px] sm:text-[17px] text-[#888] leading-[1.6] mb-7 sm:mb-8 mx-auto px-2" style={{ maxWidth: '520px' }}>
-              Somyra writes posts in your voice, audits your profile, and sends DMs that get replies. Built for founders who would rather build than write.
+
+            <p className="text-[16px] md:text-[18px] text-[#999] max-w-[480px] mx-auto mb-10 opacity-0 animate-[fadeUp_0.7s_0.5s_ease_forwards]">
+              Most AI tools strip your personality. Somyra learns your voice and writes like you on your best day.
             </p>
 
-            <div className="flex flex-col items-center gap-4">
-              <button
-                id="hero-start-free"
-                type="button"
-                onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
-                className="px-7 py-[14px] bg-[#2DD4BF] text-black font-bold rounded-xl text-[15px] sm:text-base hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] hover:brightness-110 transition-all transform hover:scale-[1.02] flex items-center gap-2"
-              >
-                Start for Free
-                <ChevronRight className="w-4 h-4" />
-              </button>
-              <span className="text-[12px] sm:text-[13px] text-[#666]">No credit card. Forever free.</span>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-10 sm:mt-14 max-w-[460px] mx-auto" style={{ animation: 'countersFade 0.8s ease-out 0.4s forwards', opacity: 0 }}>
-              <Counter value="500+" label="Founders" />
-              <Counter value="4.9" label="Avg Rating" />
-              <Counter value="5min" label="To First Post" />
-            </div>
-
-            <div className="mt-10 sm:mt-14 max-w-[640px] mx-auto" ref={useAnimationInView()} data-animate="fade-in-up">
-              <div className="rounded-[16px] overflow-hidden border border-white/[0.08] bg-[#0D0D0D] shadow-[0_0_60px_rgba(45,212,191,0.06)]" style={{ position: 'relative' }}>
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  poster="/Somyra_postwriter_poster.webp"
-                  className="w-full block aspect-video"
-                  width={400}
-                  height={250}
-                  fetchpriority="high"
+            <div className="flex flex-col items-center gap-4 mb-5 opacity-0 animate-[fadeUp_0.7s_0.65s_ease_forwards]">
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <button
+                  id="hero-start-free"
+                  type="button"
+                  onClick={() => { setAuthMode('signup'); setShowAuth(true); }}
+                  className="inline-flex items-center justify-center gap-2 bg-teal-accent text-[#080808] font-bold text-[15px] px-7 py-3.5 rounded-xl transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(45,212,191,0.3)] hover:opacity-90 active:translate-y-0 w-full sm:w-auto"
                 >
-                  <source src="/Somyra_postwriter.mp4" type="video/mp4" />
-                </video>
+                  Start for Free
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center justify-center gap-2 bg-transparent text-white/80 font-medium text-[15px] px-7 py-3.5 rounded-xl border border-white/[0.07] transition-all hover:border-white/20 hover:bg-white/[0.04] hover:text-white w-full sm:w-auto"
+                >
+                  Watch it in action
+                </button>
               </div>
+              <div className="flex flex-row items-center justify-center gap-[6px] flex-nowrap text-[12px] text-[#999] whitespace-nowrap">
+                <span className="inline-flex items-center gap-[4px]">No credit card</span>
+                <span className="text-[#444] text-[10px]">·</span>
+                <span className="inline-flex items-center gap-[4px] font-medium">Free forever</span>
+                <span className="text-[#444] text-[10px]">·</span>
+                <span className="inline-flex items-center gap-[4px]">Takes 30 seconds</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Product Demo Video */}
+          <div
+            className="mt-10 sm:mt-[60px] relative z-10 w-full max-w-[860px] mx-auto opacity-0"
+            style={{ animation: 'fadeUpVideo 0.7s 0.2s ease-out forwards' }}
+          >
+            <div
+              className="w-full rounded-xl overflow-hidden bg-[#0D0D0D]"
+              style={{
+                border: '1px solid rgba(45,212,191,0.15)',
+                boxShadow: '0 0 80px rgba(45,212,191,0.07), 0 0 160px rgba(45,212,191,0.03)'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster="/Somyra_postwriter_poster.webp"
+                className="w-full block aspect-video"
+                width={400}
+                height={250}
+                fetchpriority="high"
+              >
+                <source src="/Somyra_postwriter.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </section>
