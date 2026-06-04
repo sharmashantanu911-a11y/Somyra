@@ -16,26 +16,16 @@
     <link rel="preconnect" href="https://kzbkjilqfpzkknacodtn.supabase.co">
     <link rel="preload" as="image" href="/Somyra_postwriter_poster.webp" fetchpriority="high" imagesrcset="/Somyra_postwriter_poster.webp" imagesizes="100vw">
     <script>
-      (function() {
-        var loaded = false;
-        function loadGTM() {
-          if (loaded) return;
-          loaded = true;
-          var s = document.createElement('script');
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GW7S5DDBB3';
-          s.async = true;
-          document.head.appendChild(s);
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-GW7S5DDBB3');
-        }
-        var events = ['click', 'touchstart', 'keydown'];
-        for (var i = 0; i < events.length; i++) {
-          window.addEventListener(events[i], loadGTM, { once: true, passive: true });
-        }
-        setTimeout(loadGTM, 5000);
-      })();
+      window.addEventListener('load', function() {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GW7S5DDBB3';
+        s.async = true;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GW7S5DDBB3');
+      });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
