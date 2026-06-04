@@ -385,7 +385,7 @@ export const LandingBelow: React.FC<LandingBelowProps> = ({
             <div className="relative bg-gradient-to-b from-[#1a1a1a] to-[#141414] border border-white/[0.06] rounded-2xl p-8 sm:p-10 text-center shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)] hover:border-white/[0.10] transition-all duration-300">
               <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-[#2DD4BF]/40 to-transparent" />
               <div className="relative inline-block mb-5">
-                <img src="/images/founder.png" alt="Shantanu Sharma" className="w-20 h-20 rounded-full object-cover" />
+                <img src="/images/founder.webp" alt="Shantanu Sharma" width={80} height={80} className="w-20 h-20 rounded-full object-cover" loading="lazy" />
                 <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#2DD4BF] flex items-center justify-center shadow-[0_0_12px_rgba(45,212,191,0.3)]">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#080808" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12" />
