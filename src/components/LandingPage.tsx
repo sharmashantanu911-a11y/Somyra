@@ -681,7 +681,11 @@ export function LandingPage({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [bottomBarDismissed, setBottomBarDismissed] = useState(() => {
-    return localStorage.getItem('somyra_bottom_bar_dismissed') === 'true';
+    try {
+      return localStorage.getItem('somyra_bottom_bar_dismissed') === 'true';
+    } catch {
+      return false;
+    }
   });
 
   useEffect(() => {
@@ -1050,7 +1054,7 @@ export function LandingPage({
                 className="w-full block aspect-video"
                 width={400}
                 height={250}
-                fetchpriority="high"
+                fetchPriority="high"
               >
                 <source src="/Somyra_postwriter.mp4" type="video/mp4" />
               </video>

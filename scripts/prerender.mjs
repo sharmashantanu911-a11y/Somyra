@@ -1,97 +1,124 @@
+/**
+ * Prerender script.
+ * Uses react-dom/server to render the landing page to static HTML,
+ * and injects route-specific metadata into copies of dist/index.html for other routes.
+ *
+ * Why react-dom/server instead of puppeteer:
+ *   - Puppeteer needs Chrome installed, which is not available on Vercel by default
+ *   - react-dom/server is fast, deterministic, and works in any Node.js environment
+ */
 import { execSync } from 'child_process';
-import { createServer } from 'http';
-import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'fs';
-import { join, extname, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import puppeteer from 'puppeteer-core';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { build as viteBuild } from 'vite';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const DIST = join(ROOT, 'dist');
-const PORT = 8765;
-function getChromePath() {
-  if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
-  if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH;
+const SSR_OUT = join(ROOT, '.ssr');
+const BASE_URL = 'https://somyra.online';
 
-  if (process.platform === 'win32') {
-    const candidates = [
-      'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-      ...(process.env.LOCALAPPDATA ? [join(process.env.LOCALAPPDATA, 'Google\\Chrome\\Application\\chrome.exe')] : []),
-    ];
-    for (const p of candidates) {
-      if (existsSync(p)) return p;
-    }
-  }
+const COMPETITOR_SLUGS = [
+  'taplio','vista-social','hootsuite','buffer','typefully','supergrow','brandled','authoredup',
+  'authoritymax','later','publer','planable','zopto','dux-soup','magicpost','easygen','kleo',
+  'contentin-io','jasper','copy-ai','typegrow'
+];
 
-  if (process.platform === 'darwin') {
-    const candidates = [
-      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-      '/Applications/Chromium.app/Contents/MacOS/Chromium',
-    ];
-    for (const p of candidates) {
-      if (existsSync(p)) return p;
-    }
-  }
-
-  if (process.platform === 'linux') {
-    const candidates = [
-      '/usr/bin/chromium-browser',
-      '/usr/bin/chromium',
-      '/usr/bin/google-chrome',
-      '/usr/bin/google-chrome-stable',
-      '/snap/bin/chromium',
-    ];
-    for (const p of candidates) {
-      if (existsSync(p)) return p;
-    }
-  }
-
-  return null;
-}
+const BLOG_SLUGS = [
+  'linkedin-personal-branding-guide-founders',
+  'how-to-write-linkedin-posts-that-get-engagement',
+  'linkedin-outreach-strategy-that-gets-replies',
+  'linkedin-profile-optimization-checklist',
+  'why-linkedin-posts-sound-robotic',
+  'linkedin-hook-formulas-that-stop-the-scroll',
+  'how-to-write-linkedin-about-section',
+  'linkedin-dm-formula-that-gets-replies',
+  'what-to-post-on-linkedin-when-you-have-no-ideas',
+  'best-linkedin-post-generator-2025',
+  'does-ai-linkedin-content-get-penalized',
+  'how-long-should-linkedin-post-be',
+];
 
 const ROUTES = [
   '/',
   '/blog',
-  '/blog/linkedin-personal-branding-guide-founders',
-  '/blog/how-to-write-linkedin-posts-that-get-engagement',
-  '/blog/linkedin-outreach-strategy-that-gets-replies',
-  '/blog/linkedin-profile-optimization-checklist',
-  '/blog/why-linkedin-posts-sound-robotic',
-  '/blog/linkedin-hook-formulas-that-stop-the-scroll',
-  '/blog/how-to-write-linkedin-about-section',
-  '/blog/linkedin-dm-formula-that-gets-replies',
-  '/blog/what-to-post-on-linkedin-when-you-have-no-ideas',
-  '/blog/best-linkedin-post-generator-2025',
-  '/blog/does-ai-linkedin-content-get-penalized',
-  '/blog/how-long-should-linkedin-post-be',
+  ...BLOG_SLUGS.map(s => `/blog/${s}`),
   '/linkedin-post-generator',
   '/linkedin-profile-audit',
   '/linkedin-dm-generator',
   '/linkedin-hook-generator',
   '/linkedin-topic-generator',
   '/compare',
-  ...['taplio','vista-social','hootsuite','buffer','typefully','supergrow','brandled','authoredup','authoritymax','later','publer','planable','zopto','dux-soup','magicpost','easygen','kleo','contentin-io','jasper','copy-ai','typegrow'].map(s => `/compare/somyra-vs-${s}`),
+  ...COMPETITOR_SLUGS.map(s => `/compare/somyra-vs-${s}`),
   '/alternatives',
-  ...['taplio','vista-social','hootsuite','buffer','typefully','supergrow','brandled','authoredup','authoritymax','later','publer','planable','zopto','dux-soup','magicpost','easygen','kleo','contentin-io','jasper','copy-ai','typegrow'].map(s => `/alternatives/somyra-vs-${s}`),
+  ...COMPETITOR_SLUGS.map(s => `/alternatives/somyra-vs-${s}`),
   '/terms',
   '/privacy',
   '/contact',
 ];
 
-const MIME_TYPES = {
-  '.html': 'text/html',
-  '.js': 'application/javascript',
-  '.css': 'text/css',
-  '.png': 'image/png',
-  '.webp': 'image/webp',
-  '.svg': 'image/svg+xml',
-  '.json': 'application/json',
-  '.woff2': 'font/woff2',
-  '.woff': 'font/woff',
-  '.ttf': 'font/ttf',
-  '.ico': 'image/x-icon',
-  '.mp4': 'video/mp4',
+/**
+ * Route-specific metadata for static prerender of non-homepage routes.
+ * For the homepage, the actual React tree (LandingPage) supplies the metadata
+ * via Helmet rendering, so we don't need a hardcoded copy.
+ */
+const ROUTE_META = {
+  '/blog': {
+    title: 'LinkedIn Growth Blog: Strategy, Tips and Insights | Somyra',
+    description: 'Practical LinkedIn growth strategy for founders and professionals. No generic tips, real tactics for building an audience, writing better content, and running smarter outreach.',
+    ogType: 'website',
+  },
+  '/terms': {
+    title: 'Terms of Service | Somyra',
+    description: 'Somyra terms of service. Read our user agreement, acceptable use policy, and service terms before using the Somyra platform.',
+    ogType: 'website',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | Somyra',
+    description: 'How Somyra collects, uses, and protects your data. Our commitment to privacy and your rights as a user of the Somyra platform.',
+    ogType: 'website',
+  },
+  '/contact': {
+    title: 'Contact Somyra | Get in Touch',
+    description: 'Have a question or feedback? Reach out to the Somyra team. We are here to help founders and professionals grow on LinkedIn.',
+    ogType: 'website',
+  },
+  '/linkedin-post-generator': {
+    title: 'LinkedIn Post Generator: Write Posts in Your Voice | Somyra',
+    description: 'Generate LinkedIn posts that match your voice and resonate with your audience. AI trained on real high-performing LinkedIn content.',
+    ogType: 'website',
+  },
+  '/linkedin-profile-audit': {
+    title: 'LinkedIn Profile Audit: Free AI Analysis | Somyra',
+    description: 'Get a free AI-powered audit of your LinkedIn profile. Discover what is hurting your reach and how to fix it in minutes.',
+    ogType: 'website',
+  },
+  '/linkedin-dm-generator': {
+    title: 'LinkedIn DM Generator: Outreach That Gets Replies | Somyra',
+    description: 'Write LinkedIn direct messages that sound human and get replies. Stop being ignored with our AI outreach tool.',
+    ogType: 'website',
+  },
+  '/linkedin-hook-generator': {
+    title: 'LinkedIn Hook Generator: Stop-the-Scroll Openers | Somyra',
+    description: 'Generate scroll-stopping LinkedIn post hooks. The first line is everything, make yours count with AI-powered hook ideas.',
+    ogType: 'website',
+  },
+  '/linkedin-topic-generator': {
+    title: 'LinkedIn Topic Generator: Never Run Out of Ideas | Somyra',
+    description: 'Find LinkedIn post ideas tailored to your niche and audience. AI topic generator for founders and professionals.',
+    ogType: 'website',
+  },
+  '/compare': {
+    title: 'Compare Somyra to Other LinkedIn Tools | Somyra',
+    description: 'See how Somyra stacks up against Taplio, Hootsuite, Buffer, and other LinkedIn content tools. Detailed feature and pricing comparisons.',
+    ogType: 'website',
+  },
+  '/alternatives': {
+    title: 'Best Somyra Alternatives for LinkedIn Growth | Somyra',
+    description: 'Looking for a Somyra alternative? Compare the top LinkedIn content and growth tools side by side to find the best fit for your needs.',
+    ogType: 'website',
+  },
 };
 
 function build() {
@@ -99,130 +126,220 @@ function build() {
   execSync('npx vite build', { cwd: ROOT, stdio: 'inherit' });
 }
 
-function startServer() {
-  return new Promise((resolve) => {
-    const server = createServer((req, res) => {
-      const urlPath = new URL(req.url, `http://localhost:${PORT}`).pathname;
-      let filePath = join(DIST, urlPath === '/' ? 'index.html' : urlPath);
-
-      if (existsSync(filePath) && !statSync(filePath).isDirectory()) {
-        serveFile(filePath, res);
-        return;
-      }
-
-      const indexPath = join(filePath, 'index.html');
-      if (existsSync(indexPath)) {
-        serveFile(indexPath, res);
-        return;
-      }
-
-      const assetPath = join(DIST, urlPath);
-      if (existsSync(assetPath) && !statSync(assetPath).isDirectory()) {
-        serveFile(assetPath, res);
-        return;
-      }
-
-      serveFile(join(DIST, 'index.html'), res);
-    });
-
-    server.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}\n`);
-      resolve(server);
-    });
+async function buildSSR() {
+  console.log('\n=== Building SSR bundle ===\n');
+  await viteBuild({
+    configFile: join(ROOT, 'vite.ssr.config.ts'),
   });
 }
 
-function serveFile(filePath, res) {
-  try {
-    const content = readFileSync(filePath);
-    const ext = extname(filePath);
-    res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' });
-    res.end(content);
-  } catch {
-    res.writeHead(404);
-    res.end('Not found');
-  }
+function buildBreadcrumbLd(name, path) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name, item: `${BASE_URL}${path}` },
+    ],
+  };
 }
 
-async function prerender(server) {
-  console.log('=== Starting prerender ===\n');
+function buildCompareLd(slug) {
+  const name = slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' ');
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemPage',
+    name: `Somyra vs ${name} | Somyra`,
+    description: `Detailed comparison of Somyra and ${name}. Features, pricing, pros and cons, and which tool is right for your LinkedIn strategy.`,
+    url: `${BASE_URL}/compare/somyra-vs-${slug}`,
+  };
+}
 
-  const browserPath = getChromePath();
-  if (!browserPath) {
-    console.log('Chrome not found — skipping prerender. For Vercel, set CHROME_PATH env or install puppeteer (full).\n');
-    return;
+function buildAlternativeLd(slug) {
+  const name = slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' ');
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemPage',
+    name: `${name} Alternative | Somyra`,
+    description: `Looking for a ${name} alternative? See why founders and professionals choose Somyra for LinkedIn content and growth.`,
+    url: `${BASE_URL}/alternatives/somyra-vs-${slug}`,
+  };
+}
+
+function buildBlogLd(slug) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' '),
+    author: { '@type': 'Person', name: 'Shantanu Sharma' },
+    publisher: { '@type': 'Organization', name: 'Somyra', url: BASE_URL },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/blog/${slug}` },
+  };
+}
+
+function getMetaForRoute(route) {
+  if (ROUTE_META[route]) {
+    return { ...ROUTE_META[route], canonical: `${BASE_URL}${route}` };
   }
 
-  const browser = await puppeteer.launch({
-    executablePath: browserPath,
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-  });
+  // Compare pages
+  if (route.startsWith('/compare/somyra-vs-')) {
+    const slug = route.replace('/compare/somyra-vs-', '');
+    const name = slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' ');
+    return {
+      title: `Somyra vs ${name}: Honest Comparison (2026) | Somyra`,
+      description: `Somyra vs ${name} compared head-to-head. Pricing, features, voice quality, and which is the better LinkedIn tool for founders and creators.`,
+      ogType: 'article',
+      canonical: `${BASE_URL}${route}`,
+      schemas: [buildCompareLd(slug), buildBreadcrumbLd(`Compare: Somyra vs ${name}`, route)],
+    };
+  }
 
-  for (const route of ROUTES) {
-    const url = `http://localhost:${PORT}${route}`;
-    process.stdout.write(`Rendering: ${route} ... `);
+  // Alternative pages
+  if (route.startsWith('/alternatives/somyra-vs-')) {
+    const slug = route.replace('/alternatives/somyra-vs-', '');
+    const name = slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' ');
+    return {
+      title: `Best ${name} Alternative for LinkedIn Growth (2026) | Somyra`,
+      description: `Looking for a ${name} alternative? See why Somyra is the top pick for founders who want LinkedIn content that actually sounds human.`,
+      ogType: 'article',
+      canonical: `${BASE_URL}${route}`,
+      schemas: [buildAlternativeLd(slug), buildBreadcrumbLd(`Alternative to ${name}`, route)],
+    };
+  }
 
-    const page = await browser.newPage();
+  // Blog posts
+  if (route.startsWith('/blog/') && route !== '/blog') {
+    const slug = route.replace('/blog/', '');
+    const title = slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' ');
+    return {
+      title: `${title} | Somyra Blog`,
+      description: `${title}. Practical LinkedIn strategy from the Somyra team. No fluff, just tactics that work for founders and creators.`,
+      ogType: 'article',
+      canonical: `${BASE_URL}${route}`,
+      schemas: [buildBlogLd(slug), buildBreadcrumbLd(title, route)],
+    };
+  }
 
-    await page.setRequestInterception(true);
-    page.on('request', (req) => {
-      const type = req.resourceType();
-      if (type === 'image' || type === 'font' || type === 'media') {
-        req.abort();
-      } else {
-        req.continue();
-      }
-    });
+  // Fallback
+  return {
+    title: 'Somyra',
+    description: 'AI LinkedIn copilot for founders and executives.',
+    ogType: 'website',
+    canonical: `${BASE_URL}${route}`,
+  };
+}
 
-    page.on('console', (msg) => {
-      if (msg.type() === 'error') {
-        process.stdout.write(`\n  [console.error] ${msg.text()}\n`);
-      }
-    });
+/**
+ * Split the rendered HTML into a head section (title, meta, link, JSON-LD script)
+ * and a body section (everything else, the actual visible content).
+ * In React 19, Helmet renders these as JSX elements at the start of the tree.
+ */
+function splitSSR(html) {
+  const headEnd = findHeadEnd(html);
+  const head = html.substring(0, headEnd);
+  const body = html.substring(headEnd);
+  return { head, body };
+}
 
-    page.on('pageerror', (err) => {
-      process.stdout.write(`\n  [PAGE ERROR] ${err.message}\n`);
-    });
+function findHeadEnd(html) {
+  let i = 0;
+  while (i < html.length) {
+    const next = html.indexOf('<', i);
+    if (next === -1) break;
+    const tagEnd = html.indexOf('>', next);
+    if (tagEnd === -1) break;
+    const tag = html.substring(next, tagEnd + 1);
+    // Head-like tags
+    if (tag.startsWith('<title') || tag.startsWith('<meta') || tag.startsWith('<link') || tag.startsWith('<script') || tag.startsWith('</')) {
+      i = tagEnd + 1;
+    } else {
+      return next;
+    }
+  }
+  return html.length;
+}
 
-    try {
-      await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+async function prerenderHomepage(htmlTemplate) {
+  console.log('  Rendering homepage with react-dom/server...');
+  const ssrModule = await import(pathToFileURL(join(SSR_OUT, 'ssr.mjs')).href);
+  const { html: renderedHtml, helmet } = ssrModule.renderHomepage();
+  const { head, body } = splitSSR(renderedHtml);
 
-      await page.waitForSelector('h1, article, main, .blog-content, .landing-nav, [id]', { timeout: 30000 });
+  // Inject the SSR-rendered head tags into the existing template's <head>
+  // and put the body content inside <div id="root">
+  const output = htmlTemplate
+    .replace('</head>', `${head}</head>`)
+    .replace('<div id="root"></div>', `<div id="root">${body}</div>`);
 
-      await new Promise((r) => setTimeout(r, 2000));
+  return output;
+}
 
-      const html = await page.content();
-
-      const outputPath = route === '/'
-        ? join(DIST, 'index.html')
-        : join(DIST, route, 'index.html');
-
-      mkdirSync(dirname(outputPath), { recursive: true });
-      writeFileSync(outputPath, html);
-
-      process.stdout.write(`saved\n`);
-    } catch (err) {
-      process.stdout.write(`FAILED: ${err.message}\n`);
-    } finally {
-      await page.close();
+function buildStaticRoute(route, meta, htmlTemplate) {
+  const headInjections = [
+    `<title>${escapeHtml(meta.title)}</title>`,
+    `<meta name="description" content="${escapeHtml(meta.description)}" />`,
+    `<link rel="canonical" href="${meta.canonical}" />`,
+    `<meta property="og:type" content="${meta.ogType || 'website'}" />`,
+    `<meta property="og:url" content="${meta.canonical}" />`,
+    `<meta property="og:title" content="${escapeHtml(meta.title)}" />`,
+    `<meta property="og:description" content="${escapeHtml(meta.description)}" />`,
+    `<meta property="og:site_name" content="Somyra" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${escapeHtml(meta.title)}" />`,
+    `<meta name="twitter:description" content="${escapeHtml(meta.description)}" />`,
+  ];
+  if (meta.schema) {
+    headInjections.push(`<script type="application/ld+json">${JSON.stringify(meta.schema)}</script>`);
+  }
+  if (meta.schemas && meta.schemas.length) {
+    for (const s of meta.schemas) {
+      headInjections.push(`<script type="application/ld+json">${JSON.stringify(s)}</script>`);
     }
   }
 
-  await browser.close();
-  console.log('\n=== Prerender complete ===\n');
+  const injection = headInjections.join('');
+  return htmlTemplate.replace('</head>', `${injection}</head>`);
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 async function main() {
   try {
     build();
-    const server = await startServer();
-    try {
-      await prerender(server);
-    } finally {
-      server.close();
+    await buildSSR();
+
+    console.log('\n=== Prerendering routes ===\n');
+    const htmlTemplate = readFileSync(join(DIST, 'index.html'), 'utf-8');
+
+    for (const route of ROUTES) {
+      process.stdout.write(`  ${route} ... `);
+
+      let output;
+      if (route === '/') {
+        output = await prerenderHomepage(htmlTemplate);
+      } else {
+        const meta = getMetaForRoute(route);
+        output = buildStaticRoute(route, meta, htmlTemplate);
+      }
+
+      const outPath = route === '/'
+        ? join(DIST, 'index.html')
+        : join(DIST, route, 'index.html');
+      mkdirSync(dirname(outPath), { recursive: true });
+      writeFileSync(outPath, output);
+
+      process.stdout.write(`ok\n`);
     }
-    console.log('All done!');
+
+    console.log(`\n=== Prerender complete: ${ROUTES.length} routes ===\n`);
   } catch (err) {
     console.error('Fatal error:', err);
     process.exit(1);
