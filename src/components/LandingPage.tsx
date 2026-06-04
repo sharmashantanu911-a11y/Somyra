@@ -461,7 +461,7 @@ export function LandingPage({
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
                 poster="/Somyra_postwriter_poster.webp"
                 className="w-full block aspect-video"
                 width={400}
