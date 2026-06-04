@@ -753,6 +753,7 @@
               opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .faq-content-wrap > div {
+  min-height: 0;
   overflow: hidden;
 }
 .faq-card[data-open="true"] .faq-content-wrap {
