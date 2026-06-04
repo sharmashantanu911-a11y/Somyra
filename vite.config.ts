@@ -21,12 +21,24 @@ export default defineConfig(({mode}) => {
     build: {
       sourcemap: false,
       cssMinify: 'lightningcss',
+      modulePreload: {
+        polyfill: false,
+        resolveDependencies: (filename, deps, { hostId, hostType }) => {
+          // Only filter modulepreload for the index.html entry, not for lazy chunks
+          if (hostType !== 'html') return deps;
+          return deps.filter((dep) => {
+            // Don't preload supabase on the landing page (saves 50KB gzip)
+            if (dep.includes('vendor-supabase')) return false;
+            return true;
+          });
+        }
+      },
       rollupOptions: {
         output: {
           entryFileNames: 'assets/[name].[hash].js',
           chunkFileNames: 'assets/[name].[hash].js',
           assetFileNames: 'assets/[name].[hash].[ext]',
-          manualChunks: {
+            manualChunks: {
             'vendor-react': ['react', 'react-dom', 'react-dom/client'],
             'router': ['react-router-dom'],
             'vendor-motion': ['motion'],
