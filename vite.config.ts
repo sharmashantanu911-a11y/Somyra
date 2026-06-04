@@ -35,6 +35,9 @@ export default defineConfig(({mode}) => {
       chunkSizeWarningLimit: 600,
       rollupOptions: {
         output: {
+          entryFileNames: 'assets/[name].[hash].js',
+          chunkFileNames: 'assets/[name].[hash].js',
+          assetFileNames: 'assets/[name].[hash].[ext]',
           manualChunks: {
             'vendor-react': ['react', 'react-dom', 'react-dom/client'],
             'router': ['react-router-dom'],
