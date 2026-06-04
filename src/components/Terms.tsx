@@ -12,8 +12,18 @@ export const Terms: React.FC<TermsProps> = ({ onBack }) => {
     <>
       <SEO
         title="Terms of Service | Somyra"
-        description="Read the Terms of Service for Somyra — the AI-powered LinkedIn copilot for founders and professionals."
+        description="Read the Terms of Service for Somyra, the AI powered LinkedIn copilot for founders and professionals."
         canonical="https://somyra.online/terms"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online" },
+              { "@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "https://somyra.online/terms" }
+            ]
+          }
+        ]}
       />
       <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth">
       <main className="flex flex-col items-center w-full min-h-screen py-20 md:py-32 px-6">

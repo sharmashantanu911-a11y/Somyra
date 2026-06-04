@@ -46,8 +46,18 @@ export const Contact: React.FC<ContactProps> = ({ onBack }) => {
     <>
       <SEO
         title="Contact | Somyra"
-        description="Get in touch with the Somyra team. Support, business inquiries, press, or feedback — we typically respond within 24 to 48 hours."
+        description="Get in touch with the Somyra team. Support, business inquiries, press, or feedback. We typically respond within 24 to 48 hours."
         canonical="https://somyra.online/contact"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online" },
+              { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://somyra.online/contact" }
+            ]
+          }
+        ]}
       />
       <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth w-full h-full">
       <main className="w-full max-w-[800px] mx-auto px-6 py-20 md:py-32">

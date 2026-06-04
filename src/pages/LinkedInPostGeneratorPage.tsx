@@ -84,7 +84,7 @@ const LinkedInPostGeneratorPage: React.FC = () => {
     <SEOPageLayout>
       <SEO
         title="AI LinkedIn Post Generator That Sounds Like You | Somyra"
-        description="Generate LinkedIn posts in your own voice — not robotic AI output. Somyra learns your writing style and creates posts that get real engagement. Free to try."
+        description="Generate LinkedIn posts in your own voice. No robotic AI output. Somyra learns your writing style and creates posts that get real engagement. Free to try."
         canonical="https://somyra.online/linkedin-post-generator"
         schema={schemaData}
       />

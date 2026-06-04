@@ -12,8 +12,18 @@ export const Privacy: React.FC<PrivacyProps> = ({ onBack }) => {
     <>
       <SEO
         title="Privacy Policy | Somyra"
-        description="Read the Privacy Policy for Somyra — how we collect, safeguard, and disclose information resulting from your use of our platform."
+        description="Read the Privacy Policy for Somyra. Learn how we collect, safeguard, and disclose information resulting from your use of our platform."
         canonical="https://somyra.online/privacy"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online" },
+              { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://somyra.online/privacy" }
+            ]
+          }
+        ]}
       />
       <div className="fixed inset-0 z-[120] bg-[#080808] overflow-y-auto scroll-smooth">
       <main className="flex flex-col items-center w-full min-h-screen py-20 md:py-32 px-6">

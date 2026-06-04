@@ -67,8 +67,8 @@ const LinkedInHookGeneratorPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="LinkedIn Hook Generator — First Lines That Stop the Scroll | Somyra"
-        description="Your first line determines if anyone reads your LinkedIn post. Somyra generates scroll-stopping hooks matched to your voice and topic. Free to use."
+        title="LinkedIn Hook Generator: First Lines That Stop the Scroll | Somyra"
+        description="Your first line determines if anyone reads your LinkedIn post. Somyra generates scroll stopping hooks matched to your voice and topic. Free to use."
         canonical="https://somyra.online/linkedin-hook-generator"
         schema={schemaData}
       />

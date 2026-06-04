@@ -176,8 +176,8 @@ const BlogPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="LinkedIn Growth Blog — Strategy, Tips & Insights | Somyra"
-        description="Practical LinkedIn growth strategy for founders and professionals. No generic tips — real tactics for building an audience, writing better content, and running smarter outreach."
+        title="LinkedIn Growth Blog: Strategy, Tips and Insights | Somyra"
+        description="Practical LinkedIn growth strategy for founders and professionals. No generic tips, real tactics for building an audience, writing better content, and running smarter outreach."
         canonical="https://somyra.online/blog"
         schema={schemaData}
       />

@@ -8,9 +8,26 @@ const AlternativesIndexPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="Best LinkedIn Tool Alternatives — Somyra vs Competitors | Somyra"
+        title="Somyra Alternatives: Compare LinkedIn Growth Tools | Somyra"
         description="Looking for alternatives to Taplio, Hootsuite, Buffer, and other LinkedIn tools? Somyra offers AI voice cloning, profile audits, and smart outreach."
         canonical="https://somyra.online/alternatives"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online" },
+              { "@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://somyra.online/alternatives" }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": ["CollectionPage", "ItemList"],
+            "name": "Somyra Alternatives: LinkedIn Growth Tools",
+            "url": "https://somyra.online/alternatives",
+            "numberOfItems": 21
+          }
+        ]}
       />
 
       <section className="relative overflow-hidden py-24 sm:py-32 bg-[#080808]">

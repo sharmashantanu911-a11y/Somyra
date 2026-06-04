@@ -39,6 +39,18 @@ const schemaData = {
           "text": item.answer
         }
       }))
+    },
+    {
+      "@type": "Product",
+      "@id": "https://somyra.online/compare/somyra-vs-taplio#product",
+      "name": "Somyra",
+      "description": "AI-powered LinkedIn growth platform for individuals",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "0",
+        "highPrice": "39",
+        "priceCurrency": "USD"
+      }
     }
   ]
 };
@@ -53,7 +65,7 @@ const CompareTaplioPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="Somyra vs Taplio — Which LinkedIn Tool Is Right for You? | Somyra"
+        title="Somyra vs Taplio: Which LinkedIn Tool Is Right for You | Somyra"
         description="Somyra vs Taplio: honest comparison of features, pricing, and who each tool is built for. Find out which LinkedIn AI tool actually fits your needs."
         canonical="https://somyra.online/compare/somyra-vs-taplio"
         schema={schemaData}

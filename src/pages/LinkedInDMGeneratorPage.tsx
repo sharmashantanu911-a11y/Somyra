@@ -71,8 +71,8 @@ const LinkedInDMGeneratorPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="AI LinkedIn DM Generator — Outreach That Gets Replies | Somyra"
-        description="Write LinkedIn DMs that actually get replies. Somyra generates personalized outreach messages based on the recipient's profile — not copy-paste templates."
+        title="AI LinkedIn DM Generator: Outreach That Gets Replies | Somyra"
+        description="Write LinkedIn DMs that actually get replies. Somyra generates personalized outreach messages based on the recipients profile, not copy paste templates."
         canonical="https://somyra.online/linkedin-dm-generator"
         schema={schemaData}
       />

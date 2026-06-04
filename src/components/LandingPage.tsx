@@ -749,9 +749,41 @@ export function LandingPage({
   return (
     <>
       <SEO
-        title="Somyra | The LinkedIn Copilot That Sounds Like You"
-        description="Elevate your LinkedIn presence with Somyra. AI-powered strategy, profile audits, and smart outreach designed for founders who take LinkedIn seriously."
+        title="Somyra | AI LinkedIn Copilot for Founders and Executives"
+        description="Somyra writes LinkedIn posts in your voice, audits your profile, and automates outreach. Build authority without spending hours on content."
         canonical="https://somyra.online/"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://somyra.online/#organization",
+            "name": "Somyra",
+            "url": "https://somyra.online",
+            "logo": "https://somyra.online/og-image.webp",
+            "description": "Somyra writes LinkedIn posts in your voice, audits your profile, and automates outreach.",
+            "sameAs": ["https://linkedin.com/company/somyra"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": "https://somyra.online/#website",
+            "url": "https://somyra.online",
+            "name": "Somyra",
+            "publisher": { "@id": "https://somyra.online/#organization" }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Somyra",
+            "description": "AI LinkedIn copilot for founders and executives",
+            "offers": {
+              "@type": "AggregateOffer",
+              "lowPrice": "0",
+              "highPrice": "39",
+              "priceCurrency": "USD"
+            }
+          }
+        ]}
       />
       <div className="w-full max-w-full overflow-x-hidden">
       {/* ── NAVBAR ── */}

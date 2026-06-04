@@ -8,9 +8,26 @@ const CompareIndexPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="Somyra vs Competitors — Honest LinkedIn Tool Comparisons | Somyra"
-        description="See how Somyra stacks up against Taplio, Hootsuite, Buffer, and 11 other LinkedIn tools. Honest feature-by-feature comparisons to help you choose."
+        title="Somyra vs Taplio, Buffer and More: LinkedIn Tool Comparison | Somyra"
+        description="How does Somyra compare to Taplio, Buffer, Hootsuite, and other LinkedIn tools? See a feature by feature breakdown and find the right fit for your personal brand."
         canonical="https://somyra.online/compare"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somyra.online" },
+              { "@type": "ListItem", "position": 2, "name": "Compare", "item": "https://somyra.online/compare" }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": ["CollectionPage", "ItemList"],
+            "name": "Somyra vs Competitors: LinkedIn Tool Comparisons",
+            "url": "https://somyra.online/compare",
+            "numberOfItems": 21
+          }
+        ]}
       />
 
       <section className="relative overflow-hidden py-24 sm:py-32 bg-[#080808]">

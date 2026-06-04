@@ -1,0 +1,26 @@
+{
+  "name": "Somyra",
+  "short_name": "Somyra",
+  "description": "AI LinkedIn copilot for founders and executives",
+  "start_url": "https://somyra.online",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#0D0D0D",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

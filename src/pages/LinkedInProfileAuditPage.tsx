@@ -75,8 +75,8 @@ const LinkedInProfileAuditPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="Free LinkedIn Profile Audit Tool — Get a Real Score | Somyra"
-        description="Find out exactly what's wrong with your LinkedIn profile. Somyra's AI audits your headline, About section, experience, and positioning — and shows you how to fix it."
+        title="Free LinkedIn Profile Audit Tool: Get a Real Score | Somyra"
+        description="Find out exactly what is wrong with your LinkedIn profile. Somyra audits your headline, About section, experience, and positioning, then shows you how to fix it."
         canonical="https://somyra.online/linkedin-profile-audit"
         schema={schemaData}
       />

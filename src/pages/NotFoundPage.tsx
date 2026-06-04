@@ -12,6 +12,7 @@ const NotFoundPage: React.FC = () => {
         title="Page Not Found | Somyra"
         description="This page doesn't exist. Head back to Somyra and keep building your LinkedIn presence."
         canonical="https://somyra.online/404"
+        noIndex={true}
       />
 
       <section className="relative min-h-[70vh] flex items-center justify-center bg-[#080808] overflow-hidden py-24">

@@ -71,8 +71,8 @@ const LinkedInTopicGeneratorPage: React.FC = () => {
   return (
     <SEOPageLayout>
       <SEO
-        title="LinkedIn Topic Generator — Never Run Out of Content Ideas | Somyra"
-        description="Get unlimited LinkedIn content ideas tailored to your niche and audience. Somyra generates topics, angles, and hooks — so you always know what to post next."
+        title="LinkedIn Topic Generator: Never Run Out of Content Ideas | Somyra"
+        description="Get unlimited LinkedIn content ideas tailored to your niche and audience. Somyra generates topics, angles, and hooks so you always know what to post next."
         canonical="https://somyra.online/linkedin-topic-generator"
         schema={schemaData}
       />
