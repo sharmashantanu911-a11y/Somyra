@@ -150,6 +150,26 @@ export function LandingPage({
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const start = () => {
+      try {
+        video.load();
+        const p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      } catch {}
+    };
+    const idle = (cb: () => void) => {
+      const w = window as any;
+      if (typeof w.requestIdleCallback === 'function') w.requestIdleCallback(cb, { timeout: 3000 });
+      else window.setTimeout(cb, 1500);
+    };
+    const id = window.setTimeout(() => idle(start), 500);
+    return () => window.clearTimeout(id);
+  }, []);
 
   const MidComponent = _midEager || LazyLandingMid;
   const BelowComponent = _belowEager || LazyLandingBelow;
@@ -362,16 +382,15 @@ export function LandingPage({
             <div className="mt-10 sm:mt-14 max-w-[640px] mx-auto" ref={useAnimationInView()} data-animate="fade-in-up">
               <div className="rounded-[16px] overflow-hidden border border-white/[0.08] bg-[#0D0D0D] shadow-[0_0_60px_rgba(45,212,191,0.06)]" style={{ position: 'relative' }}>
                 <video
-                  autoPlay
+                  ref={videoRef}
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   poster="/Somyra_postwriter_poster.webp"
                   className="w-full block aspect-video"
                   width={400}
                   height={250}
-                  fetchPriority="high"
                 >
                   <source src="/Somyra_postwriter.mp4" type="video/mp4" />
                 </video>
