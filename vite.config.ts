@@ -8,19 +8,7 @@ export default defineConfig(({mode}) => {
   return {
     plugins: [
       react(),
-      tailwindcss(),
-      {
-        name: 'defer-css',
-        transformIndexHtml: {
-          order: 'post',
-          handler(html: string) {
-            return html.replace(
-              /<link rel="stylesheet"(?!\s+preload)([^>]*)>/i,
-              '<link rel="preload" as="style" onload="this.rel=\'stylesheet\'"$1><noscript><link rel="stylesheet"$1></noscript>'
-            );
-          }
-        }
-      }
+      tailwindcss()
     ],
     resolve: {
       alias: {
@@ -31,8 +19,8 @@ export default defineConfig(({mode}) => {
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
-      sourcemap: 'hidden',
-      chunkSizeWarningLimit: 600,
+      sourcemap: false,
+      cssMinify: 'lightningcss',
       rollupOptions: {
         output: {
           entryFileNames: 'assets/[name].[hash].js',

@@ -970,7 +970,7 @@ export function LandingPage({
           </div>
 
           {/* Headline */}
-          <h1 className="text-[clamp(36px,6vw,60px)] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-5 opacity-0 animate-[fadeUp_0.7s_0.35s_ease_forwards]">
+          <h1 className="text-[clamp(36px,6vw,60px)] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-5">
             Your LinkedIn sounds like everyone else.
             <br />
             Somyra makes it sound like{' '}
