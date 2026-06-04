@@ -737,3 +737,75 @@
 [data-animate="fade-in-up-fast"][data-inview] {
   animation: fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+/* FAQ accordion (CSS-only, no motion) */
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.is-open {
+  border-color: rgba(45, 212, 191, 0.2);
+}
+.faq-q {
+  color: #ffffff;
+  transition: color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.is-open .faq-q {
+  color: #2DD4BF;
+}
+.faq-icon {
+  background-color: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.is-open .faq-icon {
+  background-color: rgba(45, 212, 191, 0.08);
+  border-color: rgba(45, 212, 191, 0.2);
+}
+.faq-icon-inner {
+  display: inline-flex;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.is-open .faq-icon-inner {
+  transform: rotate(45deg);
+}
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.is-open .faq-panel {
+  grid-template-rows: 1fr;
+}
+.faq-panel-inner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.is-open .faq-panel-inner {
+  opacity: 1;
+}
+
+/* Bottom bar (CSS-only slide-up, no motion) */
+.bottom-bar {
+  transform: translateY(100%);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.bottom-bar.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Feature tab cross-fade (CSS-only, no motion) */
+.feature-tab-content {
+  animation: feature-tab-fade 0.2s ease forwards;
+}
+@keyframes feature-tab-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
