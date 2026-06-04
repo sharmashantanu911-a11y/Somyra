@@ -710,6 +710,76 @@
   z-index: -1;
 }
 
+/* ── CSS-only FAQ accordion (replaces motion/react) ── */
+.faq-card {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-card[data-open="true"] {
+  border-color: rgba(45, 212, 191, 0.2);
+}
+.faq-question {
+  color: #FFFFFF;
+  transition: color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-card[data-open="true"] .faq-question {
+  color: #2DD4BF;
+}
+.faq-icon-bg {
+  background-color: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-card[data-open="true"] .faq-icon-bg {
+  background-color: rgba(45, 212, 191, 0.08);
+  border-color: rgba(45, 212, 191, 0.2);
+}
+.faq-icon-rotate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(0deg);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-card[data-open="true"] .faq-icon-rotate {
+  transform: rotate(45deg);
+}
+.faq-content-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-content-wrap > div {
+  overflow: hidden;
+}
+.faq-card[data-open="true"] .faq-content-wrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* ── CSS-only feature tab cross-fade (replaces AnimatePresence) ── */
+.feature-tab-fade {
+  animation: fadeIn 0.2s ease both;
+}
+
+/* ── CSS-only bottom bar slide (replaces AnimatePresence + spring) ── */
+.bottom-bar {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+.bottom-bar[data-bottom-bar-open="true"] {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* ── IntersectionObserver Animations ── */
 
 @keyframes fade-in-up {
