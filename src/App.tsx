@@ -139,6 +139,11 @@ const getTimeUntilMidnightUTC = () => {
   return { hours, minutes };
 };
 
+// Module-level testimonials cache (client-only, never touched during SSR because
+// the prerender script never imports App.tsx — see src/ssr.tsx).
+let _testimonialsCache: { data: any[]; ts: number } | null = null;
+const TESTIMONIALS_CACHE_TTL = 5 * 60 * 1000;
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -247,10 +252,26 @@ export default function App() {
   const [showReviewModal, setShowReviewModal] = useState(false);
 
   useEffect(() => {
-    fetchTestimonials();
+    let cancelled = false;
+    const run = () => {
+      if (!cancelled) fetchTestimonials();
+    };
+    if (typeof window === 'undefined') return;
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+    if (typeof w.requestIdleCallback === 'function') {
+      w.requestIdleCallback(run, { timeout: 2000 });
+    } else {
+      setTimeout(run, 2000);
+    }
+    return () => { cancelled = true; };
   }, []);
 
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = async (force = false) => {
+    if (!force && _testimonialsCache && Date.now() - _testimonialsCache.ts < TESTIMONIALS_CACHE_TTL) {
+      setTestimonials(_testimonialsCache.data);
+      setLoadingTestimonials(false);
+      return;
+    }
     try {
       setLoadingTestimonials(true);
       const { data, error } = await supabase
@@ -259,7 +280,10 @@ export default function App() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      if (data) setTestimonials(data);
+      if (data) {
+        setTestimonials(data);
+        _testimonialsCache = { data, ts: Date.now() };
+      }
     } catch (err) {
       console.error('Error fetching testimonials:', err);
     } finally {
@@ -2064,7 +2088,7 @@ export default function App() {
         isOpen={showReviewModal}
         onClose={() => setShowReviewModal(false)}
         user={user}
-        onSuccess={fetchTestimonials}
+        onSuccess={() => { fetchTestimonials(true); }}
       />
 
 
