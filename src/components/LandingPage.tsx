@@ -19,7 +19,6 @@ import {
   Menu,
   ChevronRight,
   Star,
-  Minus,
   Plus,
   Mail,
   Users,
@@ -416,34 +415,60 @@ const hardcodedReviewsRow2 = [
 /* ─────────────────────────────────────────────
    FAQ ACCORDION ITEM
    ───────────────────────────────────────────── */
-const FaqItem = ({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) => (
-  <div className="bg-[#0D0D0D] rounded-[12px] ds:rounded-[16px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-    <button
-      onClick={onToggle}
-      className="w-full flex items-center justify-between p-4 ds:p-[20px_24px] text-left cursor-pointer transition-all duration-200 hover:bg-[rgba(255,255,255,0.02)]"
+const FaqItem = ({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <motion.div
+      className="bg-[#0D0D0D] rounded-[12px] ds:rounded-[16px] overflow-hidden"
+      style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+      animate={{ borderColor: isOpen ? 'rgba(45,212,191,0.2)' : 'rgba(255,255,255,0.06)' }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     >
-      <span className={`text-[14px] ds:text-[15px] font-medium leading-[1.4] pr-4 transition-colors duration-200 ${isOpen ? 'text-[#2DD4BF]' : 'text-white'}`}>
-        {q}
-      </span>
-      <div
-        className={`shrink-0 w-6 h-6 ds:w-7 ds:h-7 rounded-full flex items-center justify-center transition-all duration-200 ${isOpen ? 'bg-[#2DD4BF]/[0.08]' : 'bg-[#141414]'}`}
-        style={{ border: isOpen ? '1px solid rgba(45,212,191,0.2)' : '1px solid rgba(255,255,255,0.08)' }}
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between p-4 ds:p-[20px_24px] text-left cursor-pointer"
       >
-        {isOpen ? <Minus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#2DD4BF]" /> : <Plus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#999]" />}
-      </div>
-    </button>
-    <div
-      className="overflow-hidden transition-all duration-[350ms] ease"
-      style={{
-        maxHeight: isOpen ? '400px' : '0',
-        opacity: isOpen ? 1 : 0,
-        transition: 'max-height 0.35s ease, opacity 0.2s ease'
-      }}
-    >
-      <p className="text-[13px] ds:text-[14px] text-[#888] leading-[1.8] px-4 ds:px-6 pb-4 ds:pb-5">{a}</p>
-    </div>
-  </div>
-);
+        <motion.span
+          className="text-[14px] ds:text-[15px] font-medium leading-[1.4] pr-4"
+          animate={{ color: isOpen ? '#2DD4BF' : '#FFFFFF' }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {q}
+        </motion.span>
+        <motion.div
+          className="shrink-0 w-6 h-6 ds:w-7 ds:h-7 rounded-full flex items-center justify-center"
+          animate={{
+            backgroundColor: isOpen ? 'rgba(45,212,191,0.08)' : '#141414',
+            borderColor: isOpen ? 'rgba(45,212,191,0.2)' : 'rgba(255,255,255,0.08)',
+          }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          style={{ border: '1px solid' }}
+        >
+          <motion.div
+            animate={{ rotate: isOpen ? 45 : 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Plus className="w-3 h-3 ds:w-3.5 ds:h-3.5 text-[#999]" />
+          </motion.div>
+        </motion.div>
+      </button>
+      <motion.div
+        className="overflow-hidden"
+        initial={false}
+        animate={{
+          height: isOpen ? contentRef.current?.scrollHeight ?? 'auto' : 0,
+          opacity: isOpen ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div ref={contentRef}>
+          <p className="text-[13px] ds:text-[14px] text-[#888] leading-[1.8] px-4 ds:px-6 pb-4 ds:pb-5">{a}</p>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 /* ─────────────────────────────────────────────
    PRICING CARD
