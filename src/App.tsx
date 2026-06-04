@@ -76,7 +76,7 @@ const PostWriter = React.lazy(() => import('./features/PostWriter').then(m => ({
 const BioGenerator = React.lazy(() => import('./features/BioGenerator').then(m => ({ default: m.BioGenerator })));
 const SmartOutreach = React.lazy(() => import('./features/SmartOutreach').then(m => ({ default: m.SmartOutreach })));
 const SavedLibrary = React.lazy(() => import('./features/SavedLibrary').then(m => ({ default: m.SavedLibrary })));
-const LandingPage = React.lazy(() => import('./components/LandingPage').then(m => ({ default: m.LandingPage })));
+import { LandingPage } from './components/LandingPage';
 import SomyraFooter from './components/SomyraFooter';
 
 const dailyTips = [

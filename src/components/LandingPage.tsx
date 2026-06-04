@@ -385,14 +385,12 @@ export function LandingPage({
           <div className="relative z-10 max-w-[720px] w-full">
             <div className="flex justify-center mb-6 sm:mb-8" style={{ animation: 'none' }}>
               <div className="inline-flex items-center gap-[10px] w-auto max-w-[calc(100vw-48px)] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] rounded-[999px] p-[6px_14px_6px_6px] shadow-[0_0_30px_rgba(45,212,191,0.04)] hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] hover:border-[rgba(255,255,255,0.15)] transition-all duration-300" style={{ animation: 'trustPillDrop 0.6s ease-out 0.2s forwards', opacity: 0 }}>
-                <div className="flex flex-row items-center pl-[4px]">
-                  <img src="/user-images/Alex.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                  <img src="/user-images/Ama.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                  <img src="/user-images/Arora.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                  <img src="/user-images/Charlie.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                  <img src="/user-images/Lisa.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                  <img src="/user-images/Mark.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="lazy" />
-                </div>
+                  <img src="/user-images/Alex.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover shadow-[0_0_0_2px_#0D0D0D]" loading="eager" fetchpriority="high" />
+                  <img src="/user-images/Ama.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="eager" fetchpriority="high" />
+                  <img src="/user-images/Arora.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="eager" fetchpriority="high" />
+                  <img src="/user-images/Charlie.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="eager" fetchpriority="high" />
+                  <img src="/user-images/Lisa.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="eager" fetchpriority="high" />
+                  <img src="/user-images/Mark.webp" alt="" width={28} height={28} className="w-[28px] h-[28px] max-[360px]:w-[24px] max-[360px]:h-[24px] rounded-full object-cover -ml-[10px] max-[360px]:-ml-[8px] shadow-[0_0_0_2px_#0D0D0D]" loading="eager" fetchpriority="high" />
                 <div className="w-[1px] h-[16px] bg-[rgba(255,255,255,0.1)] shrink-0" />
                 <div className="flex flex-col gap-[1px] shrink-0">
                   <span className="text-white text-[13px] max-[360px]:text-[12px] font-bold leading-[1.3] whitespace-nowrap">2,400+ founders</span>
@@ -460,7 +458,7 @@ export function LandingPage({
                 loop
                 muted
                 playsInline
-                preload="none"
+                preload="auto"
                 poster="/Somyra_postwriter_poster.webp"
                 className="w-full block aspect-video"
                 width={400}
