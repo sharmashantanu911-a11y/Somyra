@@ -24,10 +24,11 @@ export default defineConfig(({mode}) => {
       modulePreload: {
         polyfill: false,
         resolveDependencies: (filename, deps, { hostId, hostType }) => {
+          // Only filter modulepreload for the index.html entry, not for lazy chunks
           if (hostType !== 'html') return deps;
           return deps.filter((dep) => {
+            // Don't preload supabase on the landing page (saves 50KB gzip)
             if (dep.includes('vendor-supabase')) return false;
-            if (dep.includes('vendor-motion')) return false;
             return true;
           });
         }

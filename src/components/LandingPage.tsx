@@ -14,6 +14,7 @@
  */
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import { SEO } from './SEO';
 import { useAnimationInView } from '../hooks/useAnimationInView';
 import {
@@ -149,26 +150,6 @@ export function LandingPage({
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const start = () => {
-      try {
-        video.load();
-        const p = video.play();
-        if (p && typeof p.catch === 'function') p.catch(() => {});
-      } catch {}
-    };
-    const idle = (cb: () => void) => {
-      const w = window as any;
-      if (typeof w.requestIdleCallback === 'function') w.requestIdleCallback(cb, { timeout: 3000 });
-      else window.setTimeout(cb, 1500);
-    };
-    const id = window.setTimeout(() => idle(start), 500);
-    return () => window.clearTimeout(id);
-  }, []);
 
   const MidComponent = _midEager || LazyLandingMid;
   const BelowComponent = _belowEager || LazyLandingBelow;
@@ -381,15 +362,16 @@ export function LandingPage({
             <div className="mt-10 sm:mt-14 max-w-[640px] mx-auto" ref={useAnimationInView()} data-animate="fade-in-up">
               <div className="rounded-[16px] overflow-hidden border border-white/[0.08] bg-[#0D0D0D] shadow-[0_0_60px_rgba(45,212,191,0.06)]" style={{ position: 'relative' }}>
                 <video
-                  ref={videoRef}
+                  autoPlay
                   loop
                   muted
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   poster="/Somyra_postwriter_poster.webp"
                   className="w-full block aspect-video"
                   width={400}
                   height={250}
+                  fetchpriority="high"
                 >
                   <source src="/Somyra_postwriter.mp4" type="video/mp4" />
                 </video>
@@ -407,24 +389,30 @@ export function LandingPage({
         </Suspense>
       </main>
 
-      {showBottomBar && !bottomBarDismissed && !user && (
-        <div
-          className="bottom-bar is-visible fixed bottom-0 left-0 right-0 z-50 bg-[#141414] border-t border-white/5 border-l-4 border-l-[#2DD4BF] px-4 md:px-6 py-3 md:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 shadow-[0_-4px_30px_rgba(0,0,0,0.5)]"
-        >
-          <p className="text-white text-[13px] sm:text-sm font-medium text-center sm:text-left">Start building your brand today for free.</p>
-          <div className="flex items-center gap-3 shrink-0">
-            <button
-              onClick={() => { dismissBottomBar(); scrollToHero(); }}
-              className="px-5 py-2 bg-[#2DD4BF] text-black font-bold rounded-lg text-xs hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all"
-            >
-              Claim Them
-            </button>
-            <button onClick={dismissBottomBar} className="p-1.5 text-[#888] hover:text-white transition-colors">
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showBottomBar && !bottomBarDismissed && !user && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed bottom-0 left-0 right-0 z-50 bg-[#141414] border-t border-white/5 border-l-4 border-l-[#2DD4BF] px-4 md:px-6 py-3 md:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 shadow-[0_-4px_30px_rgba(0,0,0,0.5)]"
+          >
+            <p className="text-white text-[13px] sm:text-sm font-medium text-center sm:text-left">Start building your brand today for free.</p>
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={() => { dismissBottomBar(); scrollToHero(); }}
+                className="px-5 py-2 bg-[#2DD4BF] text-black font-bold rounded-lg text-xs hover:shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all"
+              >
+                Claim Them
+              </button>
+              <button onClick={dismissBottomBar} className="p-1.5 text-[#888] hover:text-white transition-colors">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

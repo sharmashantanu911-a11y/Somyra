@@ -4,6 +4,7 @@
  * Wraps the Social Proof, Six Tools (Features), How It Works, and Comparison sections.
  */
 import React from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { FileText, UserCircle, MessageSquare, Check, X, AlertTriangle, Play } from 'lucide-react';
 import { useAnimationInView } from '../../hooks/useAnimationInView';
 import { featureTabs, type FeatureTabData } from './shared';
@@ -118,11 +119,15 @@ export const LandingMid: React.FC<LandingMidProps> = ({
               className="bg-[#0D0D0D] rounded-[16px] p-5 sm:p-8 md:p-9"
               style={{ border: '1px solid rgba(255,255,255,0.06)', borderTop: '2px solid #2DD4BF' }}
             >
-              <div
-                key={activeFeature.id}
-                className="feature-tab-content"
-              >
-                <span className="text-[#2DD4BF] uppercase type-overline mb-3 block">{activeFeature.tag}</span>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeFeature.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2, ease: 'ease' }}
+                >
+                  <span className="text-[#2DD4BF] uppercase type-overline mb-3 block">{activeFeature.tag}</span>
                   <h3 className="font-semibold text-[18px] md:text-2xl text-white mb-4 leading-tight">{activeFeature.title}</h3>
                   <p className="text-[#A0A0A0] text-[14px] md:text-[15px] leading-[1.7] mb-6 max-w-full">{activeFeature.body}</p>
                   <div className="space-y-3">
@@ -133,7 +138,8 @@ export const LandingMid: React.FC<LandingMidProps> = ({
                       </div>
                     ))}
                   </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
