@@ -454,7 +454,7 @@ export const LandingBelow: React.FC<LandingBelowProps> = ({
             </button>
           </div>
           <div className="mt-4">
-            <div className="flex flex-row items-center justify-center gap-4 flex-nowrap max-[360px]:gap-[10px]">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-x-4 gap-y-2 max-[360px]:gap-x-[10px]">
               <div className="inline-flex items-center gap-[5px] whitespace-nowrap text-[12px] max-[360px]:text-[11px] text-[#999]">
                 <Lock className="w-[13px] h-[13px] max-[360px]:w-[11px] max-[360px]:h-[11px] text-[#2DD4BF] shrink-0" />
                 <span>No credit card required</span>

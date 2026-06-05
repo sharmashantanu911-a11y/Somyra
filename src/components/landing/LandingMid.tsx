@@ -99,7 +99,7 @@ export const LandingMid: React.FC<LandingMidProps> = ({
                 </button>
               ))}
             </div>
-            <div className="flex ds:hidden overflow-x-auto gap-2 snap-x no-scrollbar pb-2 -mx-4 px-4">
+            <div className="flex ds:hidden w-full max-w-full overflow-x-auto gap-2 snap-x no-scrollbar pb-2 -mx-4 px-4">
               {featureTabs.map(tab => (
                 <button
                   key={tab.id}
@@ -223,6 +223,7 @@ export const LandingMid: React.FC<LandingMidProps> = ({
             data-animate="fade-in-up"
             className="w-full max-w-4xl mx-auto text-center mb-4"
           >
+            <div className="w-full overflow-x-auto -mx-4 px-4 custom-scrollbar">
             <div className="min-w-[580px]">
               <div className="bg-[#0D0D0D] rounded-[16px] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] bg-[#141414] text-[13px] font-semibold" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
@@ -298,6 +299,7 @@ export const LandingMid: React.FC<LandingMidProps> = ({
                   <div className="p-[16px_20px] flex flex-col items-center justify-center"><span className="text-[13px] text-[#999]">$27/mo</span></div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
           <div className="text-right mt-2 ds:hidden">

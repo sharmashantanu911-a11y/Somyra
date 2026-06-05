@@ -161,6 +161,7 @@
     scroll-behavior: smooth;
     font-feature-settings: "liga" 1, "calt" 1, "cv11" 1, "tnum" 1, "ss02" 1;
     font-variation-settings: "opsz" 16;
+    overflow-x: clip;
   }
   body {
     @apply bg-bg-main text-white antialiased selection:bg-teal-accent/30 selection:text-teal-accent;
