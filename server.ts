@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import { createServer as createViteServer } from "vite";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -161,6 +162,16 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     app.use(express.static(path.join(__dirname, "dist")));
+    // cleanUrls-like middleware for prerendered flat .html files
+    app.use((req, res, next) => {
+      if (!path.extname(req.path)) {
+        const htmlPath = path.join(__dirname, "dist", req.path.slice(1) + '.html');
+        if (fs.existsSync(htmlPath)) {
+          return res.sendFile(htmlPath);
+        }
+      }
+      next();
+    });
     app.get("*", (_req, res) => {
       res.sendFile(path.join(__dirname, "dist", "index.html"));
     });

@@ -56,7 +56,33 @@ const ROUTES = [
   '/terms',
   '/privacy',
   '/contact',
+  '/404',
 ];
+
+const SITEMAP_CHANGEFREQ = {
+  '/': 'weekly',
+  '/blog': 'weekly',
+  '/compare': 'weekly',
+  '/alternatives': 'weekly',
+  '/terms': 'yearly',
+  '/privacy': 'yearly',
+  '/contact': 'yearly',
+};
+
+const SITEMAP_PRIORITY = {
+  '/': '1.0',
+  '/linkedin-post-generator': '0.9',
+  '/linkedin-profile-audit': '0.9',
+  '/linkedin-dm-generator': '0.8',
+  '/linkedin-hook-generator': '0.8',
+  '/linkedin-topic-generator': '0.8',
+  '/compare': '0.8',
+  '/alternatives': '0.8',
+  '/blog': '0.8',
+  '/terms': '0.3',
+  '/privacy': '0.3',
+  '/contact': '0.3',
+};
 
 /**
  * Route-specific metadata for static prerender of non-homepage routes.
@@ -83,6 +109,12 @@ const ROUTE_META = {
     title: 'Contact Somyra | Get in Touch',
     description: 'Have a question or feedback? Reach out to the Somyra team. We are here to help founders and professionals grow on LinkedIn.',
     ogType: 'website',
+  },
+  '/404': {
+    title: 'Page Not Found | Somyra',
+    description: "This page doesn't exist. Head back to Somyra and keep building your LinkedIn presence.",
+    ogType: 'website',
+    noIndex: true,
   },
   '/linkedin-post-generator': {
     title: 'LinkedIn Post Generator: Write Posts in Your Voice | Somyra',
@@ -298,6 +330,10 @@ function buildStaticRoute(route, meta, htmlTemplate) {
     }
   }
 
+  if (meta.noIndex) {
+    headInjections.push('<meta name="robots" content="noindex, nofollow" />');
+  }
+
   const injection = headInjections.join('');
   return htmlTemplate.replace('</head>', `${injection}</head>`);
 }
@@ -332,14 +368,40 @@ async function main() {
 
       const outPath = route === '/'
         ? join(DIST, 'index.html')
-        : join(DIST, route, 'index.html');
+        : join(DIST, route.slice(1) + '.html');
       mkdirSync(dirname(outPath), { recursive: true });
       writeFileSync(outPath, output);
 
       process.stdout.write(`ok\n`);
     }
 
-    console.log(`\n=== Prerender complete: ${ROUTES.length} routes ===\n`);
+    // Auto-generate sitemap
+    console.log('\n=== Generating sitemap ===\n');
+    const today = new Date().toISOString().split('T')[0];
+    const sitemapRoutes = ROUTES.filter(r => r !== '/404');
+    const sitemap = [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      ...sitemapRoutes.map(r => {
+        const segs = r.split('/').filter(Boolean);
+        const pri = SITEMAP_PRIORITY[r] ||
+          (segs[0] === 'blog' ? '0.6' : '0.7');
+        const freq = SITEMAP_CHANGEFREQ[r] || 'monthly';
+        return [
+          '  <url>',
+          `    <loc>${BASE_URL}${r}</loc>`,
+          `    <lastmod>${today}</lastmod>`,
+          `    <changefreq>${freq}</changefreq>`,
+          `    <priority>${pri}</priority>`,
+          '  </url>',
+        ].join('\n');
+      }),
+      '</urlset>',
+    ].join('\n');
+    writeFileSync(join(DIST, 'sitemap.xml'), sitemap);
+    console.log(`  sitemap.xml generated: ${sitemapRoutes.length} URLs\n`);
+
+    console.log(`=== Prerender complete: ${ROUTES.length} routes ===\n`);
   } catch (err) {
     console.error('Fatal error:', err);
     process.exit(1);
