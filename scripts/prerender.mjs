@@ -321,6 +321,14 @@ function buildStaticRoute(route, meta, htmlTemplate) {
     `<meta name="twitter:title" content="${escapeHtml(meta.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(meta.description)}" />`,
   ];
+  const ogImage = meta.ogImage || `${BASE_URL}/og-image.webp`;
+  headInjections.push(`<meta property="og:image" content="${ogImage}" />`);
+  headInjections.push(`<meta property="og:image:width" content="1200" />`);
+  headInjections.push(`<meta property="og:image:height" content="630" />`);
+  headInjections.push(`<meta property="og:image:alt" content="${escapeHtml(meta.title)}" />`);
+  headInjections.push(`<meta name="twitter:image" content="${ogImage}" />`);
+  headInjections.push(`<meta name="twitter:image:alt" content="${escapeHtml(meta.title)}" />`);
+
   if (meta.schema) {
     headInjections.push(`<script type="application/ld+json">${JSON.stringify(meta.schema)}</script>`);
   }
