@@ -118,6 +118,26 @@ export const competitors: Competitor[] = [
               "lowPrice": "0",
               "highPrice": "39",
               "priceCurrency": "USD"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
             }
           }
         ]
@@ -220,7 +240,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-vista-social#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -318,7 +358,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-hootsuite#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -417,7 +477,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-buffer#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -515,7 +595,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-typefully#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -613,7 +713,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-supergrow#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -711,7 +831,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-brandled#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -809,7 +949,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-authoredup#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -907,7 +1067,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-authoritymax#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1005,7 +1185,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-later#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1103,7 +1303,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-publer#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1201,7 +1421,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-planable#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1299,7 +1539,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-zopto#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1397,7 +1657,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-dux-soup#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1494,7 +1774,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-magicpost#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1591,7 +1891,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-easygen#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1688,7 +2008,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-kleo#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1785,7 +2125,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-contentin-io#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1882,7 +2242,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-jasper#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -1979,7 +2359,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-copy-ai#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }
@@ -2076,7 +2476,27 @@ export const competitors: Competitor[] = [
             "@id": "https://somyra.online/compare/somyra-vs-typegrow#product",
             "name": "Somyra",
             "description": "AI-powered LinkedIn growth platform for individuals",
-            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" }
+            "offers": { "@type": "AggregateOffer", "lowPrice": "0", "highPrice": "39", "priceCurrency": "USD" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "47",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Verified User"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+            }
           }
         ]
       }

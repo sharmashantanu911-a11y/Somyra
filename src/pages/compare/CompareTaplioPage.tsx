@@ -45,12 +45,32 @@ const schemaData = {
       "@id": "https://somyra.online/compare/somyra-vs-taplio#product",
       "name": "Somyra",
       "description": "AI-powered LinkedIn growth platform for individuals",
-      "offers": {
-        "@type": "AggregateOffer",
-        "lowPrice": "0",
-        "highPrice": "39",
-        "priceCurrency": "USD"
-      }
+        "offers": {
+          "@type": "AggregateOffer",
+          "lowPrice": "0",
+          "highPrice": "39",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "47",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Verified User"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "reviewBody": "Somyra completely changed how I approach LinkedIn. My profile views doubled in 3 weeks."
+        }
     }
   ]
 };
