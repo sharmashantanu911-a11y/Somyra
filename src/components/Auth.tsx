@@ -108,18 +108,19 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: 'spring', duration: 0.5, bounce: 0.2 }}
-        className="relative w-full max-w-[420px] rounded-[24px] bg-bg-card/80 backdrop-blur-xl border border-white/5 shadow-premium p-6 md:p-8 mx-auto"
+        className="relative w-full max-w-[420px] rounded-[24px] bg-bg-card/80 backdrop-blur-xl border border-white/5 shadow-premium mx-auto"
       >
         {onClose && (
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-2 hover:bg-white/5 rounded-full text-muted transition-colors"
+            className="absolute z-10 top-5 right-5 p-2 hover:bg-white/5 rounded-full text-muted transition-colors"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         )}
 
+        <div className="max-h-[85vh] overflow-y-auto overscroll-contain p-6 md:p-8">
         <AnimatePresence mode="wait">
           {mode === 'check_email' ? (
             <motion.div
@@ -402,6 +403,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </motion.div>
     </div>
   );
