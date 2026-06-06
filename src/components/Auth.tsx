@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Mail, Lock as LockIcon, Loader2, ArrowRight, X, Eye, EyeOff, CheckCircle2, User } from 'lucide-react';
+import { Loader2, ArrowRight, X, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { supabase, signInWithGoogle } from '../lib/supabase';
 
 type AuthMode = 'login' | 'signup' | 'forgot' | 'check_email';
@@ -94,54 +94,56 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
-      <div
-        className="absolute inset-0 bg-[rgba(8,8,8,0.85)] backdrop-blur-[8px]"
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="absolute inset-0 bg-black/80 backdrop-blur-md"
         onClick={onClose}
       />
 
       <motion.div
         key={mode}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 12 }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="relative w-full max-w-[420px] rounded-[20px] bg-[#111111] border border-[rgba(255,255,255,0.07)] shadow-[0_32px_64px_rgba(0,0,0,0.7)]"
-        style={{ padding: '40px 36px' }}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ type: 'spring', duration: 0.5, bounce: 0.2 }}
+        className="relative w-full max-w-[420px] rounded-[24px] bg-bg-card/80 backdrop-blur-xl border border-white/5 shadow-premium p-6 md:p-8"
       >
         {onClose && (
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-lg bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.08)] text-[#555] hover:text-white transition-all"
+            className="absolute top-5 right-5 p-2 hover:bg-white/5 rounded-full text-muted transition-colors"
             aria-label="Close modal"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         )}
 
-        {/* Check email / Reset sent confirmation states */}
         <AnimatePresence mode="wait">
           {mode === 'check_email' ? (
             <motion.div
               key="check_email"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               className="space-y-6"
             >
               <div className="flex flex-col items-center gap-4 py-8 text-center">
-                <div className="w-14 h-14 rounded-full bg-[#1a1a1a] flex items-center justify-center border border-white/[0.06]">
-                  <CheckCircle2 className="w-7 h-7 text-[#2DD4BF]" />
+                <div className="w-14 h-14 rounded-full bg-bg-sidebar flex items-center justify-center border border-border-card">
+                  <CheckCircle2 className="w-7 h-7 text-teal-accent" />
                 </div>
-                <h2 className="text-white font-bold text-2xl">Check your inbox</h2>
-                <p className="text-sm text-[#555] max-w-[280px]">
+                <h2 className="text-white font-bold text-2xl tracking-tight">Check your inbox</h2>
+                <p className="text-sm text-muted max-w-[280px]">
                   We sent a confirmation link to <span className="text-white">{email}</span>. Click it to activate your account.
                 </p>
-                <p className="text-xs text-[#3a3a3a]">
+                <p className="text-xs text-[#555]">
                   Once confirmed, come back and sign in.
                 </p>
               </div>
               <button
                 onClick={() => switchMode('login')}
-                className="w-full rounded-xl bg-[#2DD4BF] px-4 py-3.5 text-[15px] font-bold text-[#080808] hover:bg-[#29bfac] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                className="btn-gradient w-full"
               >
                 Go to Sign In <ArrowRight className="w-4 h-4" />
               </button>
@@ -152,20 +154,21 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
               key="reset_sent"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               className="space-y-6"
             >
               <div className="flex flex-col items-center gap-4 py-8 text-center">
-                <div className="w-14 h-14 rounded-full bg-[#1a1a1a] flex items-center justify-center border border-white/[0.06]">
-                  <CheckCircle2 className="w-7 h-7 text-[#2DD4BF]" />
+                <div className="w-14 h-14 rounded-full bg-bg-sidebar flex items-center justify-center border border-border-card">
+                  <CheckCircle2 className="w-7 h-7 text-teal-accent" />
                 </div>
-                <h2 className="text-white font-bold text-2xl">Check your inbox</h2>
-                <p className="text-sm text-[#555] max-w-[280px]">
+                <h2 className="text-white font-bold text-2xl tracking-tight">Check your inbox</h2>
+                <p className="text-sm text-muted max-w-[280px]">
                   Password reset link sent to <span className="text-white">{email}</span>.
                 </p>
               </div>
               <button
                 onClick={() => switchMode('login')}
-                className="w-full rounded-xl bg-[#2DD4BF] px-4 py-3.5 text-[15px] font-bold text-[#080808] hover:bg-[#29bfac] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                className="btn-gradient w-full"
               >
                 Back to Sign In <ArrowRight className="w-4 h-4" />
               </button>
@@ -175,15 +178,15 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
             <motion.div key={mode} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               {/* Header */}
               <div className="flex flex-col items-center text-center mb-8">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#1a1a1a] border border-white/[0.05]">
-                  <svg className="w-6 h-6 text-[#2DD4BF]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 border border-white/10">
+                  <svg className="w-6 h-6 text-teal-accent" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 3h18v6H9v2h12v10H3v-6h12v-2H3V3z" />
                   </svg>
                 </div>
                 <h2 className="text-white font-bold text-2xl tracking-tight">
                   {mode === 'login' ? 'Welcome back' : 'Create your account'}
                 </h2>
-                <p className="text-[#555] text-sm mt-1.5">
+                <p className="text-muted text-sm mt-1.5">
                   {feature
                     ? `Your ${feature} is one step away`
                     : mode === 'login'
@@ -196,7 +199,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
               {/* Google Button */}
               <button
                 onClick={signInWithGoogle}
-                className="w-full rounded-xl bg-white px-4 py-3 text-[14px] font-medium text-[#111111] hover:bg-[#f0f0f0] active:scale-[0.99] transition-all flex items-center justify-center gap-2.5"
+                className="btn-secondary w-full"
               >
                 <svg viewBox="0 0 48 48" className="w-5 h-5" aria-hidden="true">
                   <path fill="#4285F4" d="M44.5 20H24v8.5h11.8c-1.1 5.4-5.7 9.5-11.8 9.5-7.2 0-13-5.8-13-13s5.8-13 13-13c3.3 0 6.3 1.2 8.6 3.2l6.4-6.4C34.9 3.7 29.8 1.5 24 1.5 11.5 1.5 1.5 11.5 1.5 24S11.5 46.5 24 46.5c11.4 0 20.8-8.3 20.8-22.5 0-1.4-.2-2.7-.5-4z"/>
@@ -209,42 +212,37 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
 
               {/* Divider */}
               <div className="flex items-center gap-3 my-6">
-                <div className="flex-1 h-px bg-[rgba(255,255,255,0.05)]" />
-                <span className="text-[#3a3a3a] text-xs tracking-wide">OR</span>
-                <div className="flex-1 h-px bg-[rgba(255,255,255,0.05)]" />
+                <div className="flex-1 h-px bg-border-card" />
+                <span className="text-[#555] text-xs tracking-wide">OR</span>
+                <div className="flex-1 h-px bg-border-card" />
               </div>
 
               {/* Email Form */}
               {mode === 'forgot' ? (
-                /* Forgot password — email only */
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="block text-[11px] font-semibold tracking-[0.08em] text-[#555] uppercase mb-1.5">
+                    <label className="type-overline text-muted block mb-1.5">
                       Email Address
                     </label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333] pointer-events-none" />
-                      <input
-                        type="email"
-                        required
-                        autoFocus
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-xl bg-[#0D0D0D] border border-[rgba(255,255,255,0.06)] px-4 py-[13px] pl-11 text-[14px] text-white placeholder:text-[#333] focus:border-[rgba(45,212,191,0.35)] focus:shadow-[0_0_0_3px_rgba(45,212,191,0.06)] focus:outline-none transition-all"
-                        style={{ fontFamily: "'DM Sans', sans-serif" }}
-                        placeholder="name@company.com"
-                        autoComplete="email"
-                      />
-                    </div>
+                    <input
+                      type="email"
+                      required
+                      autoFocus
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="input-field"
+                      placeholder="name@company.com"
+                      autoComplete="email"
+                    />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full rounded-xl bg-[#2DD4BF] px-4 py-3.5 text-[15px] font-bold text-[#080808] hover:bg-[#29bfac] active:scale-[0.99] transition-all mt-2 flex items-center justify-center gap-2"
+                    className="btn-gradient w-full mt-2"
                   >
                     {loading ? (
-                      <div className="w-4 h-4 border-2 border-[#080808]/30 border-t-[#080808] rounded-full animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
                       <>
                         Send Reset Link <ArrowRight className="w-4 h-4" />
@@ -257,60 +255,50 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                   {/* Full Name (signup only) */}
                   {mode === 'signup' && (
                     <div className="space-y-1.5">
-                      <label className="block text-[11px] font-semibold tracking-[0.08em] text-[#555] uppercase mb-1.5">
+                      <label className="type-overline text-muted block mb-1.5">
                         Full Name
                       </label>
-                      <div className="relative">
-                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333] pointer-events-none" />
-                        <input
-                          type="text"
-                          required
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
-                          className="w-full rounded-xl bg-[#0D0D0D] border border-[rgba(255,255,255,0.06)] px-4 py-[13px] pl-11 text-[14px] text-white placeholder:text-[#333] focus:border-[rgba(45,212,191,0.35)] focus:shadow-[0_0_0_3px_rgba(45,212,191,0.06)] focus:outline-none transition-all"
-                          style={{ fontFamily: "'DM Sans', sans-serif" }}
-                          placeholder="Shantanu Sharma"
-                          autoComplete="name"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        required
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        className="input-field"
+                        placeholder="Shantanu Sharma"
+                        autoComplete="name"
+                      />
                     </div>
                   )}
 
                   {/* Email */}
                   <div className="space-y-1.5">
-                    <label className="block text-[11px] font-semibold tracking-[0.08em] text-[#555] uppercase mb-1.5">
+                    <label className="type-overline text-muted block mb-1.5">
                       Email Address
                     </label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333] pointer-events-none" />
-                      <input
-                        type="email"
-                        required
-                        autoFocus={mode === 'login'}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-xl bg-[#0D0D0D] border border-[rgba(255,255,255,0.06)] px-4 py-[13px] pl-11 text-[14px] text-white placeholder:text-[#333] focus:border-[rgba(45,212,191,0.35)] focus:shadow-[0_0_0_3px_rgba(45,212,191,0.06)] focus:outline-none transition-all"
-                        style={{ fontFamily: "'DM Sans', sans-serif" }}
-                        placeholder="name@company.com"
-                        autoComplete="email"
-                      />
-                    </div>
+                    <input
+                      type="email"
+                      required
+                      autoFocus={mode === 'login'}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="input-field"
+                      placeholder="name@company.com"
+                      autoComplete="email"
+                    />
                   </div>
 
                   {/* Password */}
                   <div className="space-y-1.5">
-                    <label className="block text-[11px] font-semibold tracking-[0.08em] text-[#555] uppercase mb-1.5">
+                    <label className="type-overline text-muted block mb-1.5">
                       Password
                     </label>
                     <div className="relative">
-                      <LockIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333] pointer-events-none" />
                       <input
                         type={showPassword ? 'text' : 'password'}
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full rounded-xl bg-[#0D0D0D] border border-[rgba(255,255,255,0.06)] px-4 py-[13px] pl-11 pr-11 text-[14px] text-white placeholder:text-[#333] focus:border-[rgba(45,212,191,0.35)] focus:shadow-[0_0_0_3px_rgba(45,212,191,0.06)] focus:outline-none transition-all"
-                        style={{ fontFamily: "'DM Sans', sans-serif" }}
+                        className="input-field pr-12"
                         placeholder="••••••••"
                         autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                         minLength={mode === 'signup' ? 6 : undefined}
@@ -318,7 +306,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[#333] hover:text-white transition-colors"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-white transition-colors"
                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                       >
                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -332,7 +320,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                       <button
                         type="button"
                         onClick={() => switchMode('forgot')}
-                        className="text-xs text-[#444] hover:text-[#2DD4BF] transition-colors"
+                        className="text-xs text-muted hover:text-teal-accent transition-colors"
                       >
                         Forgot password?
                       </button>
@@ -346,10 +334,9 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -4 }}
-                        className="flex min-w-0 items-center gap-3 rounded-xl border border-[rgba(239,68,68,0.4)] bg-[rgba(239,68,68,0.06)] p-3 text-xs text-[#ef4444]"
+                        className="rounded-2xl bg-red-500/5 border border-red-500/10 p-3"
                       >
-                        <div className="w-1.5 h-1.5 bg-[#ef4444] rounded-full shrink-0" />
-                        <span className="min-w-0 break-words">{error}</span>
+                        <p className="text-xs text-red-400 text-center">{error}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -358,10 +345,10 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full rounded-xl bg-[#2DD4BF] px-4 py-3.5 text-[15px] font-bold text-[#080808] hover:bg-[#29bfac] active:scale-[0.99] transition-all mt-2 flex items-center justify-center gap-2"
+                    className="btn-gradient w-full mt-2"
                   >
                     {loading ? (
-                      <div className="w-4 h-4 border-2 border-[#080808]/30 border-t-[#080808] rounded-full animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
                       <>
                         {mode === 'login' ? 'Sign In' : 'Start for Free'} <ArrowRight className="w-4 h-4" />
@@ -374,11 +361,11 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
               {/* Switch mode */}
               <div className="text-center mt-5">
                 {mode === 'login' && (
-                  <p className="text-xs text-[#3a3a3a]">
+                  <p className="text-xs text-muted/60">
                     New to Somyra?{' '}
                     <span
                       onClick={() => switchMode('signup')}
-                      className="text-[#2DD4BF] cursor-pointer hover:underline"
+                      className="text-teal-accent cursor-pointer hover:underline"
                     >
                       Create a free account
                     </span>
@@ -386,27 +373,27 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
                 )}
                 {mode === 'signup' && (
                   <div>
-                    <p className="text-xs text-[#3a3a3a]">
+                    <p className="text-xs text-muted/60">
                       Already have an account?{' '}
                       <span
                         onClick={() => switchMode('login')}
-                        className="text-[#2DD4BF] cursor-pointer hover:underline"
+                        className="text-teal-accent cursor-pointer hover:underline"
                       >
                         Sign in
                       </span>
                     </p>
-                    <p className="text-[11px] text-[#2a2a2a] mt-4">
+                    <p className="text-[11px] text-[#555] mt-4">
                       By continuing you agree to our{' '}
-                      <a href="/terms" className="hover:text-[#555] transition-colors">Terms</a>
+                      <a href="/terms" className="hover:text-muted transition-colors">Terms</a>
                       {' '}and{' '}
-                      <a href="/privacy" className="hover:text-[#555] transition-colors">Privacy Policy</a>
+                      <a href="/privacy" className="hover:text-muted transition-colors">Privacy Policy</a>
                     </p>
                   </div>
                 )}
                 {mode === 'forgot' && (
                   <button
                     onClick={() => switchMode('login')}
-                    className="text-xs text-[#444] hover:text-[#2DD4BF] transition-colors font-medium"
+                    className="text-xs text-muted hover:text-teal-accent transition-colors font-medium"
                   >
                     ← Back to Sign In
                   </button>
