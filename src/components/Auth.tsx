@@ -93,12 +93,12 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
   };
 
   return (
-    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 dl:pb-[5vh]">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+        className="fixed inset-0 bg-[rgba(8,8,8,0.85)] backdrop-blur-[8px]"
         onClick={onClose}
       />
 
@@ -108,7 +108,7 @@ export default function Auth({ onAuthSuccess, onClose, feature, initialMode }: A
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: 'spring', duration: 0.5, bounce: 0.2 }}
-        className="relative w-full max-w-[420px] rounded-[24px] bg-bg-card/80 backdrop-blur-xl border border-white/5 shadow-premium p-6 md:p-8"
+        className="relative w-full max-w-[420px] rounded-[24px] bg-bg-card/80 backdrop-blur-xl border border-white/5 shadow-premium p-6 md:p-8 mx-auto"
       >
         {onClose && (
           <button
