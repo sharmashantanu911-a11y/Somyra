@@ -13,6 +13,7 @@ const ComparePage = lazy(() => import('./pages/compare/ComparePage'));
 const AlternativesIndexPage = lazy(() => import('./pages/alternatives'));
 const AlternativePage = lazy(() => import('./pages/alternatives/AlternativePage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
+const AuthCallback = lazy(() => import('./pages/AuthCallback'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
 const Privacy = lazy(() => import('./components/Privacy').then(m => ({ default: m.Privacy })));
@@ -89,6 +90,12 @@ export const AppRoutes: React.FC = () => {
         ))}
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogRouter />} />
+        <Route path="/auth/callback" element={
+          <Suspense fallback={<div style={{background:'#080808',minHeight:'100vh'}}/>}>
+            <AuthCallback />
+          </Suspense>
+        } />
+        <Route path="/dashboard" element={<App />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

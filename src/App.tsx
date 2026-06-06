@@ -218,6 +218,8 @@ export default function App() {
               id: currentUserId, 
               is_pro: false, 
               is_max: false,
+              email: session?.user?.email || null,
+              full_name: session?.user?.user_metadata?.full_name || '',
               created_at: new Date().toISOString() 
             });
         }
