@@ -1,47 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Loader2, Check, AlertCircle, Zap } from 'lucide-react';
 
-type ConnectState = 'checking' | 'not_logged_in' | 'sending' | 'connected' | 'error';
+type ConnectState = 'checking' | 'not_logged_in' | 'detecting' | 'sending' | 'connected' | 'error';
 
 export function EngageConnect() {
   const [state, setState] = useState<ConnectState>('checking');
   const [errorMsg, setErrorMsg] = useState('');
+  const tokenRef = useRef<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const connect = async () => {
-      try {
-        const { supabase } = await import('../lib/supabase');
-        const { data: { session } } = await supabase.auth.getSession();
+    const init = async () => {
+      const { supabase } = await import('../lib/supabase');
+      const { data: { session } } = await supabase.auth.getSession();
 
-        if (!session?.access_token) {
-          setState('not_logged_in');
-          return;
-        }
+      if (!session?.access_token) {
+        setState('not_logged_in');
+        return;
+      }
 
+      tokenRef.current = session.access_token;
+      setState('detecting');
+    };
+    init();
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.source !== window) return;
+
+      if (event.data?.type === 'SOMYRA_EXTENSION_DETECTED') {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
         setState('sending');
+        window.postMessage({ type: 'SOMYRA_AUTH_TOKEN', token: tokenRef.current }, '*');
+      }
 
-        const extensionId = window.__SOMYRA_EXTENSION_ID__;
-        if (!extensionId) {
-          setState('error');
-          setErrorMsg('Extension not found. Make sure Somyra Engage is installed and enabled, then refresh this page.');
-          return;
-        }
-
-        try {
-          await chrome.runtime.sendMessage(extensionId, { type: 'SOMYRA_AUTH_TOKEN', token: session.access_token });
+      if (event.data?.type === 'SOMYRA_EXTENSION_CONNECTED') {
+        if (event.data.ok) {
           setState('connected');
           setTimeout(() => window.close(), 2000);
-        } catch {
+        } else {
           setState('error');
-          setErrorMsg('Could not connect to the extension. Make sure it is installed and enabled.');
+          setErrorMsg('Extension rejected the connection. Try refreshing.');
         }
-      } catch (err: any) {
-        setState('error');
-        setErrorMsg(err.message || 'Something went wrong.');
       }
     };
 
-    connect();
+    window.addEventListener('message', handleMessage);
+
+    timeoutRef.current = window.setTimeout(() => {
+      if (state === 'detecting' || state === 'checking') {
+        setState('error');
+        setErrorMsg('Extension not found. Make sure Somyra Engage is installed and enabled, then refresh this page.');
+      }
+    }, 3000);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   return (
@@ -56,6 +71,14 @@ export function EngageConnect() {
             <div className="space-y-3">
               <Loader2 className="w-6 h-6 text-teal-accent animate-spin mx-auto" />
               <p className="text-white font-bold">Checking your session...</p>
+            </div>
+          )}
+
+          {state === 'detecting' && (
+            <div className="space-y-3">
+              <Loader2 className="w-6 h-6 text-teal-accent animate-spin mx-auto" />
+              <p className="text-white font-bold">Looking for Extension...</p>
+              <p className="text-muted text-xs">Make sure Somyra Engage is installed</p>
             </div>
           )}
 
@@ -112,10 +135,4 @@ export function EngageConnect() {
       </div>
     </div>
   );
-}
-
-declare global {
-  interface Window {
-    __SOMYRA_EXTENSION_ID__?: string;
-  }
 }
