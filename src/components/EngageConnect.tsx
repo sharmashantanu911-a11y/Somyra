@@ -1,61 +1,40 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader2, Check, AlertCircle, Zap } from 'lucide-react';
 
-type ConnectState = 'checking' | 'not_logged_in' | 'detecting' | 'sending' | 'connected' | 'error';
+type ConnectState = 'checking' | 'connected' | 'error';
 
 export function EngageConnect() {
   const [state, setState] = useState<ConnectState>('checking');
   const [errorMsg, setErrorMsg] = useState('');
-  const tokenRef = useRef<string | null>(null);
-  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const init = async () => {
-      const { supabase } = await import('../lib/supabase');
-      const { data: { session } } = await supabase.auth.getSession();
+    let cancelled = false;
 
-      if (!session?.access_token) {
-        setState('not_logged_in');
-        return;
-      }
+    const check = async () => {
+      try {
+        const { supabase } = await import('../lib/supabase');
+        const { data: { session } } = await supabase.auth.getSession();
 
-      tokenRef.current = session.access_token;
-      setState('detecting');
-    };
-    init();
-
-    const handleMessage = (event: MessageEvent) => {
-      if (event.source !== window) return;
-
-      if (event.data?.type === 'SOMYRA_EXTENSION_DETECTED') {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        setState('sending');
-        window.postMessage({ type: 'SOMYRA_AUTH_TOKEN', token: tokenRef.current }, '*');
-      }
-
-      if (event.data?.type === 'SOMYRA_EXTENSION_CONNECTED') {
-        if (event.data.ok) {
-          setState('connected');
-          setTimeout(() => window.close(), 2000);
-        } else {
+        setState(session?.access_token ? 'connected' : 'error');
+        setErrorMsg(session?.access_token
+          ? ''
+          : 'You are not logged in. Sign in to Somyra and try again.'
+        );
+      } catch (err: any) {
+        if (!cancelled) {
           setState('error');
-          setErrorMsg('Extension rejected the connection. Try refreshing.');
+          setErrorMsg(err.message || 'Something went wrong.');
         }
       }
     };
 
-    window.addEventListener('message', handleMessage);
+    check();
 
-    timeoutRef.current = window.setTimeout(() => {
-      if (state === 'detecting' || state === 'checking') {
-        setState('error');
-        setErrorMsg('Extension not found. Make sure Somyra Engage is installed and enabled, then refresh this page.');
-      }
-    }, 3000);
+    const interval = setInterval(check, 3000);
 
     return () => {
-      window.removeEventListener('message', handleMessage);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      cancelled = true;
+      clearInterval(interval);
     };
   }, []);
 
@@ -70,39 +49,11 @@ export function EngageConnect() {
           {state === 'checking' && (
             <div className="space-y-3">
               <Loader2 className="w-6 h-6 text-teal-accent animate-spin mx-auto" />
-              <p className="text-white font-bold">Checking your session...</p>
-            </div>
-          )}
-
-          {state === 'detecting' && (
-            <div className="space-y-3">
-              <Loader2 className="w-6 h-6 text-teal-accent animate-spin mx-auto" />
-              <p className="text-white font-bold">Looking for Extension...</p>
-              <p className="text-muted text-xs">Make sure Somyra Engage is installed</p>
-            </div>
-          )}
-
-          {state === 'not_logged_in' && (
-            <div className="space-y-4">
-              <AlertCircle className="w-10 h-10 text-yellow-400 mx-auto" />
-              <div>
-                <p className="text-white font-bold mb-1">Not logged in</p>
-                <p className="text-muted text-sm">Please sign in to Somyra first, then try connecting again.</p>
-              </div>
-              <a
-                href="https://somyra.online"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-teal-accent text-black font-bold rounded-xl text-sm"
-              >
-                Go to Somyra
-              </a>
-            </div>
-          )}
-
-          {state === 'sending' && (
-            <div className="space-y-3">
-              <Loader2 className="w-6 h-6 text-teal-accent animate-spin mx-auto" />
-              <p className="text-white font-bold">Connecting to Extension...</p>
-              <p className="text-muted text-xs">Sending your session token to Somyra Engage</p>
+              <p className="text-white font-bold">Waiting for Extension...</p>
+              <p className="text-muted text-xs">The Somyra Engage extension will handle the connection automatically.</p>
+              <p className="text-muted text-xs">
+                Open the browser console (F12) to check for <span className="text-teal-accent">[Somyra Engage]</span> logs.
+              </p>
             </div>
           )}
 
@@ -111,23 +62,27 @@ export function EngageConnect() {
               <div className="w-12 h-12 mx-auto bg-teal-accent/20 rounded-full flex items-center justify-center">
                 <Check className="w-6 h-6 text-teal-accent" />
               </div>
-              <p className="text-white font-bold">Connected!</p>
-              <p className="text-teal-accent text-sm">You can close this tab.</p>
+              <p className="text-white font-bold">Session Active</p>
+              <p className="text-teal-accent text-sm">The extension should connect automatically. If not, refresh the page.</p>
             </div>
           )}
 
           {state === 'error' && (
             <div className="space-y-4">
-              <AlertCircle className="w-10 h-10 text-red-400 mx-auto" />
+              <AlertCircle className="w-10 h-10 text-yellow-400 mx-auto" />
               <div>
-                <p className="text-white font-bold mb-1">Connection Failed</p>
-                <p className="text-muted text-sm">{errorMsg}</p>
+                <p className="text-white font-bold mb-1">Waiting for Connection</p>
+                <p className="text-muted text-sm">
+                  {errorMsg}
+                  {' '}If you have the Somyra Engage extension installed, the connection happens automatically.
+                  Make sure the extension is enabled and has permission to access somyra.online.
+                </p>
               </div>
               <button
                 onClick={() => window.location.reload()}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-teal-accent text-black font-bold rounded-xl text-sm"
               >
-                Try Again
+                Refresh Page
               </button>
             </div>
           )}
