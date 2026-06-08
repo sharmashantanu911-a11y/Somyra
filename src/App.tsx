@@ -76,6 +76,7 @@ const PostWriter = React.lazy(() => import('./features/PostWriter').then(m => ({
 const BioGenerator = React.lazy(() => import('./features/BioGenerator').then(m => ({ default: m.BioGenerator })));
 const SmartOutreach = React.lazy(() => import('./features/SmartOutreach').then(m => ({ default: m.SmartOutreach })));
 const SavedLibrary = React.lazy(() => import('./features/SavedLibrary').then(m => ({ default: m.SavedLibrary })));
+const Engage = React.lazy(() => import('./features/Engage').then(m => ({ default: m.Engage })));
 import { LandingPage } from './components/LandingPage';
 import SomyraFooter from './components/SomyraFooter';
 
@@ -96,6 +97,7 @@ const tabs = [
   { id: 'topics', label: 'Topics', icon: Lightbulb, isPro: false },
   { id: 'writer', label: 'Writer', icon: PenTool, isPro: false },
   { id: 'outreach', label: 'Smart Outreach', icon: Send, isPro: false },
+  { id: 'engage', label: 'Engage', icon: Zap, isPro: false },
   { id: 'saved', label: 'Saved Library', icon: Bookmark, isPro: false },
   { id: 'settings', label: 'Settings', icon: Bolt, isPro: false }
 ];
@@ -104,10 +106,11 @@ const sidebarGroups = [
   { label: 'Personal Brand', items: ['voice', 'profile'] },
   { label: 'Content Factory', items: ['topics', 'writer'] },
   { label: 'Sales & Outreach', items: ['outreach'] },
+  { label: 'Automation', items: ['engage'] },
   { label: 'Account', items: ['saved', 'settings'] }
 ];
 
-type Tab = 'home' | 'voice' | 'profile' | 'topics' | 'writer' | 'bio' | 'outreach' | 'saved' | 'settings'; // 'bio' kept in type for backward compat but removed from tabs/sidebar
+type Tab = 'home' | 'voice' | 'profile' | 'topics' | 'writer' | 'bio' | 'outreach' | 'engage' | 'saved' | 'settings'; // 'bio' kept in type for backward compat but removed from tabs/sidebar
 
 interface VoicePost {
   id: string;
@@ -1650,6 +1653,20 @@ export default function App() {
                       usageLimits={usageLimits}
                       user={user}
                       onRequireAuth={handleRequireAuth}
+                    />
+                  </Suspense>
+                )}
+
+                {/* Tab Content: Signal Engage */}
+                {activeTab === 'engage' && (
+                  <Suspense fallback={<PostWriterLoading />}>
+                    <Engage
+                      user={user}
+                      isMax={isMax}
+                      isPro={isPro}
+                      showToast={showToast}
+                      trackEvent={trackEvent}
+                      usageLimits={usageLimits}
                     />
                   </Suspense>
                 )}
