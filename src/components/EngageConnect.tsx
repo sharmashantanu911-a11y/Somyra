@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { Loader2, Check, AlertCircle, Zap, ExternalLink } from 'lucide-react';
 import {
   listenForExtensionId,
-  listenForSyncComplete,
-  listenForExtensionConnected,
   connectToExtension,
   isExtensionInstalled,
 } from '../lib/extension-bridge';
@@ -19,24 +17,6 @@ export function EngageConnect() {
   useEffect(() => {
     const unsub = listenForExtensionId((id) => {
       setExtensionId(id);
-    });
-    return unsub;
-  }, []);
-
-  useEffect(() => {
-    const unsub = listenForSyncComplete((data) => {
-      if (data.settingsLoaded) {
-        setState('connected');
-        setDisplayName(data.displayName || '');
-      }
-    });
-    return unsub;
-  }, []);
-
-  useEffect(() => {
-    const unsub = listenForExtensionConnected((data) => {
-      setState('connected');
-      setDisplayName(data.displayName || '');
     });
     return unsub;
   }, []);
@@ -92,6 +72,7 @@ export function EngageConnect() {
       );
 
       if (result.success) {
+        setState('connected');
         setDisplayName(displayName);
       } else {
         setState('error');

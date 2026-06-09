@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getCachedExtensionId } from '../../lib/extension-bridge';
+import { supabase } from '../../lib/supabase';
 
 interface DebugState {
   extensionId: string | null;
@@ -32,27 +32,30 @@ export function EngageDebugPanel() {
   useEffect(() => {
     const update = async () => {
       if (!mountedRef.current) return;
-      const extId = getCachedExtensionId();
-      let installed = false;
-      let status = null;
       try {
-        const { isExtensionInstalled, queryExtensionStatus } = await import('../../lib/extension-bridge');
-        installed = extId ? await isExtensionInstalled() : false;
-        status = installed ? await queryExtensionStatus() : null;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) return;
+
+        const { data } = await supabase
+          .from('engage_state')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+
+        if (!mountedRef.current) return;
+        setState({
+          extensionId: data?.extension_id ?? null,
+          extensionInstalled: !!(data?.connected || data?.extension_id),
+          authTokenPresent: !!data?.connected,
+          userDisplayName: session.user?.user_metadata?.full_name || '',
+          isActive: !!data?.linkedin_tab_open,
+          linkedinOpen: !!data?.linkedin_tab_open,
+          lastHeartbeat: data?.last_heartbeat ? new Date(data.last_heartbeat).getTime() : null,
+        });
       } catch {}
-      if (!mountedRef.current) return;
-      setState({
-        extensionId: extId,
-        extensionInstalled: installed,
-        authTokenPresent: status?.connected ?? false,
-        userDisplayName: status?.displayName ?? '',
-        isActive: status?.isActive ?? false,
-        linkedinOpen: status?.linkedinOpen ?? false,
-        lastHeartbeat: status?.lastActionAt ?? null,
-      });
     };
     update();
-    const iv = setInterval(update, 5000);
+    const iv = setInterval(update, 10000);
     return () => clearInterval(iv);
   }, []);
 

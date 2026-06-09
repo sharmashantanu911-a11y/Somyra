@@ -80,67 +80,6 @@ export function isExtensionInstalled(): Promise<boolean> {
   });
 }
 
-export function listenForSyncComplete(
-  callback: (data: any) => void
-): () => void {
-  const handler = (event: MessageEvent) => {
-    if (
-      event.data?.type === 'SYNC_COMPLETE' &&
-      event.data?.source === 'somyra-extension'
-    ) {
-      callback(event.data);
-    }
-  };
-  window.addEventListener('message', handler);
-  return () => window.removeEventListener('message', handler);
-}
-
-export function listenForConnectionStatus(
-  callback: (status: string) => void
-): () => void {
-  const handler = (event: MessageEvent) => {
-    if (
-      event.data?.type === 'CONNECTION_STATUS' &&
-      event.data?.source === 'somyra-extension'
-    ) {
-      callback(event.data.status);
-    }
-  };
-  window.addEventListener('message', handler);
-  return () => window.removeEventListener('message', handler);
-}
-
-export function listenForExtensionConnected(
-  callback: (data: { userId: string; displayName: string; isActive?: boolean }) => void
-): () => void {
-  const handler = (event: MessageEvent) => {
-    if (
-      event.data?.type === 'EXTENSION_CONNECTED' &&
-      event.data?.source === 'somyra-extension'
-    ) {
-      callback(event.data);
-    }
-  };
-  window.addEventListener('message', handler);
-  return () => window.removeEventListener('message', handler);
-}
-
-export async function queryExtensionStatus(): Promise<any | null> {
-  try {
-    return await sendToExtension({ type: 'GET_STATUS' });
-  } catch {
-    return null;
-  }
-}
-
-export async function sendSettingsUpdated(isActive: boolean, settings: any): Promise<any> {
-  try {
-    return await sendToExtension({ type: 'SETTINGS_UPDATED', isActive, settings });
-  } catch {
-    return { success: false, error: 'extension_not_reachable' };
-  }
-}
-
 export async function connectToExtension(
   token: string,
   userId: string,

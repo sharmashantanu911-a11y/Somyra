@@ -6,7 +6,7 @@ import { EngageActivityLog } from './EngageActivityLog';
 import { EngageAnalytics } from './EngageAnalytics';
 import { ExtensionStatusBanner } from './ExtensionStatusBanner';
 import { EngageDebugPanel } from './EngageDebugPanel';
-import { listenForExtensionConnected } from '../../lib/extension-bridge';
+import { supabase } from '../../lib/supabase';
 
 interface EngageProps {
   user: any;
@@ -33,31 +33,27 @@ export function Engage(props: EngageProps) {
   const [extActive, setExtActive] = useState(false);
 
   useEffect(() => {
-    const unsub = listenForExtensionConnected((data) => {
-      setExtConnected(true);
-      if (data.isActive !== undefined) setExtActive(data.isActive);
-    });
-
     const check = async () => {
       try {
-        const { getCachedExtensionId, isExtensionInstalled, queryExtensionStatus } = await import('../../lib/extension-bridge');
-        const id = getCachedExtensionId();
-        if (!id) { setExtConnected(false); return; }
-        const installed = await isExtensionInstalled();
-        if (!installed) { setExtConnected(false); return; }
-        const status = await queryExtensionStatus();
-        if (status?.connected) {
+        const { data, error } = await supabase
+          .from('engage_state')
+          .select('connected,linkedin_tab_open,last_heartbeat')
+          .eq('user_id', props.user.id)
+          .maybeSingle();
+        if (error) throw error;
+        if (data?.connected && data.last_heartbeat && Date.now() - new Date(data.last_heartbeat).getTime() < 70000) {
           setExtConnected(true);
-          setExtActive(status.isActive ?? false);
-          return;
+          setExtActive(!!data.linkedin_tab_open);
+        } else {
+          setExtConnected(false);
+          setExtActive(false);
         }
-        setExtConnected(false);
       } catch { setExtConnected(false); }
     };
     check();
-    const interval = setInterval(check, 15000);
-    return () => { unsub(); clearInterval(interval); };
-  }, []);
+    const interval = setInterval(check, 10000);
+    return () => clearInterval(interval);
+  }, [props.user.id]);
 
   if (!props.isMax && !props.isPro) {
     return (

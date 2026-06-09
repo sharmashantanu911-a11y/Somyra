@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, AlertCircle, CheckCircle, XCircle, ExternalLink } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 import {
   listenForExtensionId,
-  listenForSyncComplete,
-  listenForExtensionConnected,
   connectToExtension,
   isExtensionInstalled,
   getCachedExtensionId,
-  queryExtensionStatus,
 } from '../../lib/extension-bridge';
 
 type PillState = 'grey' | 'yellow' | 'green' | 'red';
@@ -35,52 +33,20 @@ export function ExtensionStatusBanner() {
   }, []);
 
   useEffect(() => {
-    const unsub = listenForSyncComplete((data) => {
-      if (mountedRef.current) {
-        setPill('green');
-        setDisplayName(data.displayName || '');
-        setLastSyncAt(Date.now());
-      }
-    });
-    return unsub;
-  }, []);
-
-  useEffect(() => {
-    const unsub = listenForExtensionConnected((data) => {
-      if (!mountedRef.current) return;
-      setPill('green');
-      setDisplayName(data.displayName || '');
-      setLastSyncAt(Date.now());
-      if (data.isActive !== undefined) {
-        setMessage(data.isActive ? 'Connected and active' : 'Connected — inactive');
-      }
-    });
-    return unsub;
-  }, []);
-
-  useEffect(() => {
+    const interval = setInterval(() => {
+      if (mountedRef.current) checkConnection();
+    }, 10000);
     const timer = setTimeout(() => {
-      if (getCachedExtensionId()) {
-        checkConnection();
-      } else {
+      if (!getCachedExtensionId() && mountedRef.current) {
         setPill('grey');
         setMessage('Extension not installed');
       }
     }, 3000);
-    const interval = setInterval(() => {
-      if (getCachedExtensionId() && mountedRef.current) {
-        checkConnection();
-      }
-    }, 30000);
-    return () => {
-      clearTimeout(timer);
-      clearInterval(interval);
-    };
+    return () => { clearInterval(interval); clearTimeout(timer); };
   }, []);
 
   async function checkConnection() {
     try {
-      const { supabase } = await import('../../lib/supabase');
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         setPill('grey');
@@ -88,23 +54,35 @@ export function ExtensionStatusBanner() {
         return;
       }
 
-      const installed = await isExtensionInstalled();
-      if (!installed) {
+      const { data, error } = await supabase
+        .from('engage_state')
+        .select('connected,last_heartbeat,linkedin_tab_open')
+        .eq('user_id', session.user.id)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data?.connected) {
+        const heartbeatAge = data.last_heartbeat ? Date.now() - new Date(data.last_heartbeat).getTime() : Infinity;
+        if (heartbeatAge < 70000) {
+          setPill('green');
+          setLastSyncAt(Date.now());
+          setMessage(data.linkedin_tab_open ? 'Connected and active' : 'Connected — waiting for LinkedIn');
+          return;
+        }
+        setPill('red');
+        setMessage('Connection lost — extension unreachable');
+        return;
+      }
+
+      const installed = getCachedExtensionId() ? await isExtensionInstalled() : false;
+      if (installed) {
+        setPill('yellow');
+        setMessage('Extension detected, connect your account');
+      } else {
         setPill('grey');
         setMessage('Extension not installed');
-        return;
       }
-
-      const extStatus = await queryExtensionStatus();
-      if (extStatus?.connected) {
-        setPill('green');
-        setDisplayName(extStatus.displayName || '');
-        setMessage(extStatus.isActive ? 'Connected and active' : 'Connected — inactive');
-        return;
-      }
-
-      setPill('yellow');
-      setMessage('Extension detected, connect your account');
     } catch {
       if (getCachedExtensionId()) {
         setPill('red');
@@ -119,7 +97,6 @@ export function ExtensionStatusBanner() {
   async function handleConnect() {
     setConnecting(true);
     try {
-      const { supabase } = await import('../../lib/supabase');
       const { data: { session } } = await supabase.auth.getSession();
       if (!session?.access_token) {
         setPill('yellow');
