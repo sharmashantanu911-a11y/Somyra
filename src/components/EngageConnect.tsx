@@ -3,6 +3,7 @@ import { Loader2, Check, AlertCircle, Zap, ExternalLink } from 'lucide-react';
 import {
   listenForExtensionId,
   listenForSyncComplete,
+  listenForExtensionConnected,
   connectToExtension,
   isExtensionInstalled,
 } from '../lib/extension-bridge';
@@ -28,6 +29,14 @@ export function EngageConnect() {
         setState('connected');
         setDisplayName(data.displayName || '');
       }
+    });
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = listenForExtensionConnected((data) => {
+      setState('connected');
+      setDisplayName(data.displayName || '');
     });
     return unsub;
   }, []);

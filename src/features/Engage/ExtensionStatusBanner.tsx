@@ -3,9 +3,11 @@ import { Zap, AlertCircle, CheckCircle, XCircle, ExternalLink } from 'lucide-rea
 import {
   listenForExtensionId,
   listenForSyncComplete,
+  listenForExtensionConnected,
   connectToExtension,
   isExtensionInstalled,
   getCachedExtensionId,
+  queryExtensionStatus,
 } from '../../lib/extension-bridge';
 
 type PillState = 'grey' | 'yellow' | 'green' | 'red';
@@ -26,10 +28,8 @@ export function ExtensionStatusBanner() {
   }, []);
 
   useEffect(() => {
-    const unsub = listenForExtensionId((id) => {
-      if (mountedRef.current) {
-        checkConnection();
-      }
+    const unsub = listenForExtensionId(() => {
+      if (mountedRef.current) checkConnection();
     });
     return unsub;
   }, []);
@@ -40,6 +40,19 @@ export function ExtensionStatusBanner() {
         setPill('green');
         setDisplayName(data.displayName || '');
         setLastSyncAt(Date.now());
+      }
+    });
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = listenForExtensionConnected((data) => {
+      if (!mountedRef.current) return;
+      setPill('green');
+      setDisplayName(data.displayName || '');
+      setLastSyncAt(Date.now());
+      if (data.isActive !== undefined) {
+        setMessage(data.isActive ? 'Connected and active' : 'Connected — inactive');
       }
     });
     return unsub;
@@ -82,20 +95,16 @@ export function ExtensionStatusBanner() {
         return;
       }
 
-      const { data: settings } = await supabase
-        .from('engage_settings')
-        .select('is_active')
-        .eq('user_id', session.user.id)
-        .maybeSingle();
-
-      if (settings?.is_active) {
+      const extStatus = await queryExtensionStatus();
+      if (extStatus?.connected) {
         setPill('green');
-        setDisplayName(session.user?.user_metadata?.full_name || '');
-        setMessage('Connected and active');
-      } else {
-        setPill('yellow');
-        setMessage('Extension installed, not connected');
+        setDisplayName(extStatus.displayName || '');
+        setMessage(extStatus.isActive ? 'Connected and active' : 'Connected — inactive');
+        return;
       }
+
+      setPill('yellow');
+      setMessage('Extension detected, connect your account');
     } catch {
       if (getCachedExtensionId()) {
         setPill('red');

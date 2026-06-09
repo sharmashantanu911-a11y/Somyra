@@ -110,11 +110,34 @@ export function listenForConnectionStatus(
   return () => window.removeEventListener('message', handler);
 }
 
-export async function sendSettingsUpdated(isActive: boolean, settings: any): Promise<void> {
+export function listenForExtensionConnected(
+  callback: (data: { userId: string; displayName: string; isActive?: boolean }) => void
+): () => void {
+  const handler = (event: MessageEvent) => {
+    if (
+      event.data?.type === 'EXTENSION_CONNECTED' &&
+      event.data?.source === 'somyra-extension'
+    ) {
+      callback(event.data);
+    }
+  };
+  window.addEventListener('message', handler);
+  return () => window.removeEventListener('message', handler);
+}
+
+export async function queryExtensionStatus(): Promise<any | null> {
   try {
-    await sendToExtension({ type: 'SETTINGS_UPDATED', isActive, settings });
+    return await sendToExtension({ type: 'GET_STATUS' });
   } catch {
-    // Extension not connected — settings saved to Supabase, that's the source of truth
+    return null;
+  }
+}
+
+export async function sendSettingsUpdated(isActive: boolean, settings: any): Promise<any> {
+  try {
+    return await sendToExtension({ type: 'SETTINGS_UPDATED', isActive, settings });
+  } catch {
+    return { success: false, error: 'extension_not_reachable' };
   }
 }
 

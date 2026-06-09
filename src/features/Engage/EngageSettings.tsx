@@ -66,14 +66,18 @@ export function EngageSettings({ user, showToast, userContext, setUserContext }:
         }, { onConflict: 'user_id' });
 
       if (error) throw error;
-      showToast({ message: 'Settings saved successfully', type: 'success' });
-      sendSettingsUpdated(isActive, {
+      const result = await sendSettingsUpdated(isActive, {
         topics,
         target_accounts: targetAccounts,
         active_hours_start: activeHoursStart,
         active_hours_end: activeHoursEnd,
         review_mode: reviewMode,
       });
+      if (result?.success) {
+        showToast({ message: 'Settings saved and synced to extension', type: 'success' });
+      } else {
+        showToast({ message: 'Settings saved — extension not reachable (is it enabled?)', type: 'warning' });
+      }
     } catch (err: any) {
       showToast({ message: 'Failed to save settings', type: 'error', headline: err.message });
     } finally {

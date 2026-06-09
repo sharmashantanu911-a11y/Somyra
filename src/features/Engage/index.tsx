@@ -5,6 +5,8 @@ import { EngageQueue } from './EngageQueue';
 import { EngageActivityLog } from './EngageActivityLog';
 import { EngageAnalytics } from './EngageAnalytics';
 import { ExtensionStatusBanner } from './ExtensionStatusBanner';
+import { EngageDebugPanel } from './EngageDebugPanel';
+import { listenForExtensionConnected } from '../../lib/extension-bridge';
 
 interface EngageProps {
   user: any;
@@ -31,28 +33,30 @@ export function Engage(props: EngageProps) {
   const [extActive, setExtActive] = useState(false);
 
   useEffect(() => {
+    const unsub = listenForExtensionConnected((data) => {
+      setExtConnected(true);
+      if (data.isActive !== undefined) setExtActive(data.isActive);
+    });
+
     const check = async () => {
       try {
-        const { getCachedExtensionId, isExtensionInstalled } = await import('../../lib/extension-bridge');
+        const { getCachedExtensionId, isExtensionInstalled, queryExtensionStatus } = await import('../../lib/extension-bridge');
         const id = getCachedExtensionId();
         if (!id) { setExtConnected(false); return; }
         const installed = await isExtensionInstalled();
         if (!installed) { setExtConnected(false); return; }
-        const { supabase } = await import('../../lib/supabase');
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) { setExtConnected(false); return; }
-        const { data: settings } = await supabase
-          .from('engage_settings')
-          .select('is_active')
-          .eq('user_id', session.user.id)
-          .maybeSingle();
-        setExtConnected(true);
-        setExtActive(settings?.is_active ?? false);
+        const status = await queryExtensionStatus();
+        if (status?.connected) {
+          setExtConnected(true);
+          setExtActive(status.isActive ?? false);
+          return;
+        }
+        setExtConnected(false);
       } catch { setExtConnected(false); }
     };
     check();
     const interval = setInterval(check, 15000);
-    return () => clearInterval(interval);
+    return () => { unsub(); clearInterval(interval); };
   }, []);
 
   if (!props.isMax && !props.isPro) {
@@ -121,6 +125,8 @@ export function Engage(props: EngageProps) {
         {activeTab === 'activity' && <EngageActivityLog {...props} />}
         {activeTab === 'analytics' && <EngageAnalytics {...props} />}
       </div>
+
+      <EngageDebugPanel />
     </div>
   );
 }
