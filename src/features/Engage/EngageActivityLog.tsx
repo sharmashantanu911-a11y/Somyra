@@ -15,8 +15,31 @@ export function EngageActivityLog({ user }: EngageActivityLogProps) {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    if (user) fetchLogs();
-  }, [user]);
+    if (!user) return;
+    fetchLogs();
+
+    const channel = supabase
+      .channel(`engage-comments-${user.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'engage_comments',
+          filter: `user_id=eq.${user.id}`,
+        },
+        (payload: any) => {
+          if (payload.new) {
+            setLogs((prev) => [payload.new, ...prev].slice(0, 50));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?.id]);
 
   const fetchLogs = async () => {
     try {
