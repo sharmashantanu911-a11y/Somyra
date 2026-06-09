@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Loader2, Save, Clock, Globe, PauseCircle, PlayCircle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { sendSettingsUpdated } from '../../lib/extension-bridge';
 
 interface EngageSettingsProps {
   user: any;
@@ -66,6 +67,13 @@ export function EngageSettings({ user, showToast, userContext, setUserContext }:
 
       if (error) throw error;
       showToast({ message: 'Settings saved successfully', type: 'success' });
+      sendSettingsUpdated(isActive, {
+        topics,
+        target_accounts: targetAccounts,
+        active_hours_start: activeHoursStart,
+        active_hours_end: activeHoursEnd,
+        review_mode: reviewMode,
+      });
     } catch (err: any) {
       showToast({ message: 'Failed to save settings', type: 'error', headline: err.message });
     } finally {

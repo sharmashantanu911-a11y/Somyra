@@ -169,6 +169,8 @@ export function ExtensionStatusBanner() {
     ? `Synced ${Math.floor((Date.now() - lastSyncAt) / 60000)}m ago`
     : '';
 
+  if (pill === 'green') return null;
+
   return (
     <div className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border ${cfg.bg} ${cfg.border}`}>
       <span className={`w-2 h-2 rounded-full ${cfg.dot} shrink-0`} />

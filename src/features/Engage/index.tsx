@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Zap, Settings, ListOrdered, Activity, BarChart3, MessageCircle } from 'lucide-react';
 import { EngageSettings } from './EngageSettings';
 import { EngageQueue } from './EngageQueue';
@@ -27,14 +27,32 @@ type EngageSubTab = typeof ENGAGE_SUB_TABS[number]['id'];
 export function Engage(props: EngageProps) {
   const [activeTab, setActiveTab] = useState<EngageSubTab>('settings');
   const [userContext, setUserContext] = useState<any>(null);
+  const [extConnected, setExtConnected] = useState(false);
+  const [extActive, setExtActive] = useState(false);
 
-  React.useEffect(() => {
-    const checkExtension = async () => {
+  useEffect(() => {
+    const check = async () => {
       try {
-        const { data } = await import('../../lib/supabase').then(m => m.supabase);
-      } catch {}
+        const { getCachedExtensionId, isExtensionInstalled } = await import('../../lib/extension-bridge');
+        const id = getCachedExtensionId();
+        if (!id) { setExtConnected(false); return; }
+        const installed = await isExtensionInstalled();
+        if (!installed) { setExtConnected(false); return; }
+        const { supabase } = await import('../../lib/supabase');
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { setExtConnected(false); return; }
+        const { data: settings } = await supabase
+          .from('engage_settings')
+          .select('is_active')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+        setExtConnected(true);
+        setExtActive(settings?.is_active ?? false);
+      } catch { setExtConnected(false); }
     };
-    checkExtension();
+    check();
+    const interval = setInterval(check, 15000);
+    return () => clearInterval(interval);
   }, []);
 
   if (!props.isMax && !props.isPro) {
@@ -64,6 +82,14 @@ export function Engage(props: EngageProps) {
               <span className="type-overline font-bold bg-teal-accent/10 text-teal-accent px-2 py-0.5 rounded border border-teal-accent/20">
                 {props.isMax ? 'MAX' : 'PRO'}
               </span>
+              {extConnected && (
+                <span className={`ml-auto flex items-center gap-1 text-xs font-medium ${
+                  extActive ? 'text-teal-accent' : 'text-muted'
+                }`}>
+                  <span className={`w-1.5 h-1.5 rounded-full ${extActive ? 'bg-teal-accent' : 'bg-gray-400'}`} />
+                  {extActive ? 'Connected · Active' : 'Connected'}
+                </span>
+              )}
             </div>
             <p className="type-sm text-muted">Auto-engage on LinkedIn with AI comments in your voice.</p>
           </div>

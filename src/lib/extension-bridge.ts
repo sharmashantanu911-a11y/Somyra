@@ -110,6 +110,14 @@ export function listenForConnectionStatus(
   return () => window.removeEventListener('message', handler);
 }
 
+export async function sendSettingsUpdated(isActive: boolean, settings: any): Promise<void> {
+  try {
+    await sendToExtension({ type: 'SETTINGS_UPDATED', isActive, settings });
+  } catch {
+    // Extension not connected — settings saved to Supabase, that's the source of truth
+  }
+}
+
 export async function connectToExtension(
   token: string,
   userId: string,
