@@ -31,7 +31,7 @@ export function EngageSettings({ user, showToast, userContext, setUserContext }:
         .from('engage_settings')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (data) {
         setTopics(data.topics || []);

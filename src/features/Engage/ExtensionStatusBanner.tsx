@@ -22,7 +22,7 @@ export function ExtensionStatusBanner() {
           .from('engage_settings')
           .select('is_active')
           .eq('user_id', session.user.id)
-          .single();
+          .maybeSingle();
 
         if (settings?.is_active) {
           setState('connected');

@@ -44,7 +44,7 @@ export function EngageAnalytics({ user }: EngageAnalyticsProps) {
           .from('engage_settings')
           .select('topics')
           .eq('user_id', user.id)
-          .single(),
+          .maybeSingle(),
       ]);
 
       setTotalComments(totalRes.count || 0);
