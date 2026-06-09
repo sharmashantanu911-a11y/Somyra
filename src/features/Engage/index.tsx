@@ -37,6 +37,24 @@ export function Engage(props: EngageProps) {
   }, []);
 
   useEffect(() => {
+    const handleMessage = async (event: MessageEvent) => {
+      if (event.data?.type === 'SOMYRA_ENGAGE_PRESENT') {
+        const extensionId = event.data.extensionId;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          await supabase.from('engage_config').upsert({
+            user_id: session.user.id,
+            extension_id: extensionId,
+            last_detected: new Date().toISOString(),
+          }, { onConflict: 'user_id' });
+        }
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  useEffect(() => {
     const check = async () => {
       try {
         const { data, error } = await supabase
