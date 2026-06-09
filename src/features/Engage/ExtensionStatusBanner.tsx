@@ -3,9 +3,10 @@ import { Zap, AlertCircle, CheckCircle, XCircle, ExternalLink } from 'lucide-rea
 import { supabase } from '../../lib/supabase';
 import {
   listenForExtensionId,
-  connectToExtension,
+  connectViaBridge,
   isExtensionInstalled,
   getCachedExtensionId,
+  setCachedExtensionId,
 } from '../../lib/extension-bridge';
 
 type PillState = 'grey' | 'yellow' | 'green' | 'red';
@@ -33,16 +34,11 @@ export function ExtensionStatusBanner() {
   }, []);
 
   useEffect(() => {
+    checkConnection();
     const interval = setInterval(() => {
       if (mountedRef.current) checkConnection();
     }, 10000);
-    const timer = setTimeout(() => {
-      if (!getCachedExtensionId() && mountedRef.current) {
-        setPill('grey');
-        setMessage('Extension not installed');
-      }
-    }, 3000);
-    return () => { clearInterval(interval); clearTimeout(timer); };
+    return () => clearInterval(interval);
   }, []);
 
   async function checkConnection() {
@@ -75,10 +71,30 @@ export function ExtensionStatusBanner() {
         return;
       }
 
-      const installed = getCachedExtensionId() ? await isExtensionInstalled() : false;
+      const installed = getCachedExtensionId() ? await isExtensionInstalled() : null;
       if (installed) {
         setPill('yellow');
         setMessage('Extension detected, connect your account');
+      } else if (installed === null) {
+        const { data: stateData } = await supabase
+          .from('engage_state')
+          .select('extension_id')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+        if (stateData?.extension_id) {
+          setCachedExtensionId(stateData.extension_id);
+          const retry = await isExtensionInstalled();
+          if (retry) {
+            setPill('yellow');
+            setMessage('Extension detected, connect your account');
+          } else {
+            setPill('grey');
+            setMessage('Extension not installed');
+          }
+        } else {
+          setPill('yellow');
+          setMessage('Detecting extension...');
+        }
       } else {
         setPill('grey');
         setMessage('Extension not installed');
@@ -88,8 +104,8 @@ export function ExtensionStatusBanner() {
         setPill('red');
         setMessage('Connection lost');
       } else {
-        setPill('grey');
-        setMessage('Extension not installed');
+        setPill('yellow');
+        setMessage('Detecting extension...');
       }
     }
   }
@@ -111,7 +127,7 @@ export function ExtensionStatusBanner() {
         session.user?.email?.split('@')[0] ||
         'User';
 
-      const result = await connectToExtension(session.access_token, session.user.id, name);
+      const result = await connectViaBridge(session.access_token, session.user.id, name);
       if (result.success) {
         setPill('green');
         setDisplayName(name);

@@ -23,6 +23,10 @@ export function getCachedExtensionId(): string | null {
   return cachedExtensionId;
 }
 
+export function setCachedExtensionId(id: string): void {
+  cachedExtensionId = id;
+}
+
 export async function fetchExtensionIdFromConfig(
   supabaseUrl: string,
   anonKey: string
@@ -46,7 +50,7 @@ export function sendToExtension(
 ): Promise<any> {
   return new Promise((resolve, reject) => {
     if (!cachedExtensionId) {
-      reject(new Error('Extension ID not known'));
+      resolve(null);
       return;
     }
     chrome.runtime.sendMessage(cachedExtensionId, message, (response: any) => {
@@ -59,8 +63,8 @@ export function sendToExtension(
   });
 }
 
-export function isExtensionInstalled(): Promise<boolean> {
-  if (!cachedExtensionId) return Promise.resolve(false);
+export function isExtensionInstalled(): Promise<boolean | null> {
+  if (!cachedExtensionId) return Promise.resolve(null);
   return new Promise((resolve) => {
     try {
       chrome.runtime.sendMessage(
@@ -96,4 +100,34 @@ export async function connectToExtension(
   } catch (err: any) {
     return { success: false, error: err.message };
   }
+}
+
+export function connectViaBridge(
+  token: string,
+  userId: string,
+  displayName: string
+): Promise<{ success: boolean; error?: string }> {
+  return new Promise((resolve) => {
+    const TIMEOUT_MS = 10000;
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'SOMYRA_CONNECT_RESULT') {
+        window.removeEventListener('message', handler);
+        resolve({
+          success: event.data.success,
+          error: event.data.error,
+        });
+      }
+    };
+    window.addEventListener('message', handler);
+    window.postMessage({
+      type: 'SOMYRA_CONNECT',
+      token,
+      userId,
+      displayName,
+    }, '*');
+    setTimeout(() => {
+      window.removeEventListener('message', handler);
+      resolve({ success: false, error: 'Connection timeout — extension not responding' });
+    }, TIMEOUT_MS);
+  });
 }

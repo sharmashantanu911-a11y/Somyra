@@ -33,6 +33,10 @@ export function Engage(props: EngageProps) {
   const [extActive, setExtActive] = useState(false);
 
   useEffect(() => {
+    window.postMessage({ type: 'SOMYRA_DASHBOARD_READY' }, '*');
+  }, []);
+
+  useEffect(() => {
     const check = async () => {
       try {
         const { data, error } = await supabase

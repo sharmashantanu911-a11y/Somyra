@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Loader2, Check, AlertCircle, Zap, ExternalLink } from 'lucide-react';
 import {
   listenForExtensionId,
-  connectToExtension,
+  connectViaBridge,
   isExtensionInstalled,
 } from '../lib/extension-bridge';
 
@@ -18,7 +18,10 @@ export function EngageConnect() {
     const unsub = listenForExtensionId((id) => {
       setExtensionId(id);
     });
-    return unsub;
+    const fallback = setTimeout(() => {
+      setState(prev => prev === 'checking' ? 'no_extension' : prev);
+    }, 18000);
+    return () => { unsub(); clearTimeout(fallback); };
   }, []);
 
   useEffect(() => {
@@ -38,12 +41,13 @@ export function EngageConnect() {
       }
 
       const installed = await isExtensionInstalled();
-      if (!installed) {
+      if (installed === true) {
+        setState('ready');
+      } else if (installed === null) {
         setState('no_extension');
-        return;
+      } else {
+        setState('no_extension');
       }
-
-      setState('ready');
     } catch {
       setState('no_session');
     }
@@ -65,7 +69,7 @@ export function EngageConnect() {
         session.user?.email?.split('@')[0] ||
         'User';
 
-      const result = await connectToExtension(
+      const result = await connectViaBridge(
         session.access_token,
         session.user.id,
         displayName
