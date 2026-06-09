@@ -30,13 +30,9 @@ export function Engage(props: EngageProps) {
   const [activeTab, setActiveTab] = useState<EngageSubTab>('settings');
   const [userContext, setUserContext] = useState<any>(null);
   const [extConnected, setExtConnected] = useState(false);
-  const [extActive, setExtActive] = useState(false);
+
   const [extIsActive, setExtIsActive] = useState(false);
   const [extLastSync, setExtLastSync] = useState<string | null>(null);
-
-  useEffect(() => {
-    window.postMessage({ type: 'SOMYRA_DASHBOARD_READY' }, '*');
-  }, []);
 
   useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
@@ -48,11 +44,19 @@ export function Engage(props: EngageProps) {
             user_id: session.user.id,
             extension_id: extensionId,
             last_detected: new Date().toISOString(),
+            connected: true,
           }, { onConflict: 'user_id' });
+          setExtConnected(true);
         }
+        window.postMessage({ type: 'SOMYRA_CONNECTION_CONFIRMED' }, '*');
       }
     };
     window.addEventListener('message', handleMessage);
+
+    setTimeout(() => {
+      window.postMessage({ type: 'SOMYRA_DASHBOARD_READY' }, '*');
+    }, 100);
+
     return () => window.removeEventListener('message', handleMessage);
   }, []);
 
@@ -84,7 +88,7 @@ export function Engage(props: EngageProps) {
     };
 
     checkConnection();
-    const interval = setInterval(checkConnection, 10000);
+    const interval = setInterval(checkConnection, 30000);
     return () => clearInterval(interval);
   }, [props.user?.id]);
 
