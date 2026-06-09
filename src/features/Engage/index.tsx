@@ -31,6 +31,8 @@ export function Engage(props: EngageProps) {
   const [userContext, setUserContext] = useState<any>(null);
   const [extConnected, setExtConnected] = useState(false);
   const [extActive, setExtActive] = useState(false);
+  const [extIsActive, setExtIsActive] = useState(false);
+  const [extLastSync, setExtLastSync] = useState<string | null>(null);
 
   useEffect(() => {
     window.postMessage({ type: 'SOMYRA_DASHBOARD_READY' }, '*');
@@ -55,27 +57,67 @@ export function Engage(props: EngageProps) {
   }, []);
 
   useEffect(() => {
-    const check = async () => {
+    if (!props.user?.id) return;
+
+    const checkConnection = async () => {
       try {
-        const { data, error } = await supabase
-          .from('engage_state')
-          .select('connected,linkedin_tab_open,last_heartbeat')
+        const { data } = await supabase
+          .from('engage_config')
+          .select('connected,last_sync,is_active,extension_id')
           .eq('user_id', props.user.id)
-          .maybeSingle();
-        if (error) throw error;
-        if (data?.connected && data.last_heartbeat && Date.now() - new Date(data.last_heartbeat).getTime() < 70000) {
+          .single();
+
+        if (data?.connected && data?.extension_id) {
           setExtConnected(true);
-          setExtActive(!!data.linkedin_tab_open);
+          setExtIsActive(!!data.is_active);
+          setExtLastSync(data.last_sync);
         } else {
           setExtConnected(false);
-          setExtActive(false);
+          setExtIsActive(false);
+          setExtLastSync(null);
         }
-      } catch { setExtConnected(false); }
+      } catch {
+        setExtConnected(false);
+        setExtIsActive(false);
+        setExtLastSync(null);
+      }
     };
-    check();
-    const interval = setInterval(check, 10000);
+
+    checkConnection();
+    const interval = setInterval(checkConnection, 10000);
     return () => clearInterval(interval);
-  }, [props.user.id]);
+  }, [props.user?.id]);
+
+  useEffect(() => {
+    if (!props.user?.id) return;
+
+    const channel = supabase
+      .channel('engage-config-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'engage_config',
+          filter: `user_id=eq.${props.user.id}`,
+        },
+        (payload) => {
+          const data = payload.new as any;
+          if (data?.connected) {
+            setExtConnected(true);
+            setExtIsActive(!!data.is_active);
+            setExtLastSync(data.last_sync);
+          } else {
+            setExtConnected(false);
+            setExtIsActive(false);
+            setExtLastSync(null);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [props.user?.id]);
 
   if (!props.isMax && !props.isPro) {
     return (
@@ -106,10 +148,10 @@ export function Engage(props: EngageProps) {
               </span>
               {extConnected && (
                 <span className={`ml-auto flex items-center gap-1 text-xs font-medium ${
-                  extActive ? 'text-teal-accent' : 'text-muted'
+                  extIsActive ? 'text-teal-accent' : 'text-muted'
                 }`}>
-                  <span className={`w-1.5 h-1.5 rounded-full ${extActive ? 'bg-teal-accent' : 'bg-gray-400'}`} />
-                  {extActive ? 'Connected · Active' : 'Connected'}
+                  <span className={`w-1.5 h-1.5 rounded-full ${extIsActive ? 'bg-teal-accent' : 'bg-gray-400'}`} />
+                  {extIsActive ? 'Connected · Active' : 'Connected'}
                 </span>
               )}
             </div>
