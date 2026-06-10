@@ -37,22 +37,22 @@ export function Engage(props: EngageProps) {
   const [extLastSync, setExtLastSync] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
+    const handleMessage = (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return;
       if (event.data?.type === 'SOMYRA_ENGAGE_PRESENT') {
         const extensionId = event.data.extensionId;
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
-          await supabase.from('engage_config').upsert({
-            key: session.user.id,
-            value: '',
-            user_id: session.user.id,
-            extension_id: extensionId,
-            last_detected: new Date().toISOString(),
-            connected: true,
-          });
-          setExtConnected(true);
-        }
+        supabase.auth.getSession().then(({ data: { session } }) => {
+          if (session) {
+            supabase.from('engage_config').upsert({
+              key: session.user.id,
+              value: '',
+              user_id: session.user.id,
+              extension_id: extensionId,
+              last_detected: new Date().toISOString(),
+              connected: true,
+            }).then(() => setExtConnected(true), () => {});
+          }
+        }, () => {});
         window.postMessage({ type: 'SOMYRA_CONNECTION_CONFIRMED' }, window.location.origin);
       }
     };

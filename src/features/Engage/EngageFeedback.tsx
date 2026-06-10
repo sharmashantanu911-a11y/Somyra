@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Loader2, ThumbsUp, ThumbsDown, Filter, Search } from 'lucide-react';
+import { Loader2, ThumbsUp, ThumbsDown, Search } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface EngageFeedbackProps {
@@ -142,7 +142,7 @@ export function EngageFeedback({ user }: EngageFeedbackProps) {
                     {entry.rating}
                   </span>
                   <span className="type-overline text-muted ml-auto">
-                    {new Date(entry.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                    {entry.created_at ? new Date(entry.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
                   </span>
                 </div>
                 <p className="text-xs text-slate-400 line-clamp-2">{entry.comment_text}</p>

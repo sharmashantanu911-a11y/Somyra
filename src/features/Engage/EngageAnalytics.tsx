@@ -59,12 +59,10 @@ export function EngageAnalytics({ user }: EngageAnalyticsProps) {
         },
       );
 
-      if (res.ok) {
-        const result = await res.json();
-        setData(result);
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const result = await res.json();
+      setData(result);
     } catch {
-      // fallback: query engage_comments directly
       await fetchLocalAnalytics();
     } finally {
       setLoading(false);

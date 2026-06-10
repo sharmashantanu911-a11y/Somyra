@@ -177,11 +177,7 @@ export function ExtensionStatusBanner() {
     <div className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border ${cfg.bg} ${cfg.border}`}>
       <span className={`w-2 h-2 rounded-full ${cfg.dot} shrink-0`} />
       <span className={`text-xs font-medium ${cfg.text} flex-1`}>
-        {pill === 'green' && displayName ? `${displayName} — ` : ''}
         {message}
-        {pill === 'green' && syncText && (
-          <span className="text-muted ml-1">({syncText})</span>
-        )}
       </span>
 
       {pill === 'grey' && (

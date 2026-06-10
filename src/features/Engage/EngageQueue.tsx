@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Loader2, Edit2, Trash2, SkipForward, MessageCircle } from 'lucide-react';
+import { Loader2, MessageCircle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface EngageQueueProps {
@@ -83,7 +83,7 @@ export function EngageQueue({ user }: EngageQueueProps) {
                       {item.status}
                     </span>
                     <span className="type-overline text-muted ml-auto shrink-0">
-                      {new Date(item.posted_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                      {item.posted_at ? new Date(item.posted_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
                     </span>
                   </div>
                   {item.post_snippet && (

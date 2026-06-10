@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Loader2, Search, CheckCircle, XCircle, SkipForward, Filter } from 'lucide-react';
+import { Loader2, Search, CheckCircle, XCircle, SkipForward } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface EngageActivityLogProps {
@@ -122,7 +122,7 @@ export function EngageActivityLog({ user }: EngageActivityLogProps) {
                 <div className="flex items-center gap-2 mb-0.5">
                   <span className="text-xs font-bold text-white">{log.post_author}</span>
                   <span className="type-overline text-muted">
-                    {new Date(log.posted_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                    {log.posted_at ? new Date(log.posted_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
                   </span>
                 </div>
                 <p className="text-xs text-slate-400 line-clamp-1">{log.comment_text}</p>
