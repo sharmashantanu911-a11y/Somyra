@@ -64,8 +64,22 @@ export function EngageAnalytics({ user }: EngageAnalyticsProps) {
       }
 
       if (settingsRes.data?.topics) {
+        const { data: strategyData } = await supabase
+          .from('engage_comments')
+          .select('strategy_used')
+          .eq('user_id', user.id)
+          .eq('status', 'posted');
+        const strategyCounts = new Map<string, number>();
+        (strategyData || []).forEach(c => {
+          const key = c.strategy_used || 'other';
+          strategyCounts.set(key, (strategyCounts.get(key) || 0) + 1);
+        });
+        const total = Array.from(strategyCounts.values()).reduce((a, b) => a + b, 0) || 1;
         setTopicBreakdown(
-          settingsRes.data.topics.map((topic: string) => ({ topic, count: Math.floor(Math.random() * 20) }))
+          settingsRes.data.topics.map((topic: string) => ({
+            topic,
+            count: Math.floor(((strategyCounts.get(topic) || 0) / total) * 20),
+          }))
         );
       }
     } catch {

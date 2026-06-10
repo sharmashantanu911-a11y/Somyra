@@ -86,7 +86,10 @@ export function EngageSettings({ user, showToast, userContext, setUserContext }:
   const addAccount = () => {
     const trimmed = newAccount.trim();
     if (!trimmed || targetAccounts.length >= 10) return;
-    const url = trimmed.startsWith('http') ? trimmed : `https://www.linkedin.com/in/${trimmed}`;
+    const url = trimmed.startsWith('http') ? trimmed
+      : trimmed.startsWith('www.') ? `https://${trimmed}`
+      : trimmed.includes('linkedin.com') ? `https://${trimmed}`
+      : `https://www.linkedin.com/in/${trimmed}`;
     setTargetAccounts([...targetAccounts, url]);
     setNewAccount('');
   };

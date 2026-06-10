@@ -124,7 +124,7 @@ export function connectViaBridge(
       token,
       userId,
       displayName,
-    }, '*');
+    }, window.location.origin);
     setTimeout(() => {
       window.removeEventListener('message', handler);
       resolve({ success: false, error: 'Connection timeout — extension not responding' });

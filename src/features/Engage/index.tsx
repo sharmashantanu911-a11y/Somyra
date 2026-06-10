@@ -36,6 +36,7 @@ export function Engage(props: EngageProps) {
 
   useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return;
       if (event.data?.type === 'SOMYRA_ENGAGE_PRESENT') {
         const extensionId = event.data.extensionId;
         const { data: { session } } = await supabase.auth.getSession();
@@ -48,13 +49,13 @@ export function Engage(props: EngageProps) {
           }, { onConflict: 'user_id' });
           setExtConnected(true);
         }
-        window.postMessage({ type: 'SOMYRA_CONNECTION_CONFIRMED' }, '*');
+        window.postMessage({ type: 'SOMYRA_CONNECTION_CONFIRMED' }, window.location.origin);
       }
     };
     window.addEventListener('message', handleMessage);
 
     setTimeout(() => {
-      window.postMessage({ type: 'SOMYRA_DASHBOARD_READY' }, '*');
+      window.postMessage({ type: 'SOMYRA_DASHBOARD_READY' }, window.location.origin);
     }, 100);
 
     return () => window.removeEventListener('message', handleMessage);
@@ -69,7 +70,7 @@ export function Engage(props: EngageProps) {
           .from('engage_config')
           .select('connected,last_sync,is_active,extension_id')
           .eq('user_id', props.user.id)
-          .single();
+          .maybeSingle();
 
         if (data?.connected && data?.extension_id) {
           setExtConnected(true);
