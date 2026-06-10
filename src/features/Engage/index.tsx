@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Zap, Settings, ListOrdered, Activity, BarChart3, MessageCircle } from 'lucide-react';
+import { Zap, Settings, ListOrdered, Activity, BarChart3, ThumbsUp } from 'lucide-react';
 import { EngageSettings } from './EngageSettings';
 import { EngageQueue } from './EngageQueue';
 import { EngageActivityLog } from './EngageActivityLog';
 import { EngageAnalytics } from './EngageAnalytics';
+import { EngageFeedback } from './EngageFeedback';
 import { ExtensionStatusBanner } from './ExtensionStatusBanner';
 import { EngageDebugPanel } from './EngageDebugPanel';
 import { supabase } from '../../lib/supabase';
@@ -22,6 +23,7 @@ const ENGAGE_SUB_TABS = [
   { id: 'queue', label: 'Queue', icon: ListOrdered },
   { id: 'activity', label: 'Activity', icon: Activity },
   { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { id: 'feedback', label: 'Feedback', icon: ThumbsUp },
 ] as const;
 
 type EngageSubTab = typeof ENGAGE_SUB_TABS[number]['id'];
@@ -191,6 +193,7 @@ export function Engage(props: EngageProps) {
         {activeTab === 'queue' && <EngageQueue {...props} />}
         {activeTab === 'activity' && <EngageActivityLog {...props} />}
         {activeTab === 'analytics' && <EngageAnalytics {...props} />}
+        {activeTab === 'feedback' && <EngageFeedback {...props} />}
       </div>
 
       <EngageDebugPanel />
