@@ -42,11 +42,13 @@ export function Engage(props: EngageProps) {
         const { data: { session } } = await supabase.auth.getSession();
         if (session) {
           await supabase.from('engage_config').upsert({
+            key: session.user.id,
+            value: '',
             user_id: session.user.id,
             extension_id: extensionId,
             last_detected: new Date().toISOString(),
             connected: true,
-          }, { onConflict: 'user_id' });
+          });
           setExtConnected(true);
         }
         window.postMessage({ type: 'SOMYRA_CONNECTION_CONFIRMED' }, window.location.origin);

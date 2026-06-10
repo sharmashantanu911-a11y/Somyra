@@ -51,7 +51,7 @@ export function ExtensionStatusBanner() {
       }
 
       const { data, error } = await supabase
-        .from('engage_state')
+        .from('engage_config')
         .select('connected,last_heartbeat,linkedin_tab_open')
         .eq('user_id', session.user.id)
         .maybeSingle();
@@ -77,7 +77,7 @@ export function ExtensionStatusBanner() {
         setMessage('Extension detected, connect your account');
       } else if (installed === null) {
         const { data: stateData } = await supabase
-          .from('engage_state')
+          .from('engage_config')
           .select('extension_id')
           .eq('user_id', session.user.id)
           .maybeSingle();

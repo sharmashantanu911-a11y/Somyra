@@ -37,7 +37,7 @@ export function EngageDebugPanel() {
         if (!session) return;
 
         const { data } = await supabase
-          .from('engage_state')
+          .from('engage_config')
           .select('*')
           .eq('user_id', session.user.id)
           .maybeSingle();
