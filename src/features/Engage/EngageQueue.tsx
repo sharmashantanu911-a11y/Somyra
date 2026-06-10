@@ -11,7 +11,24 @@ export function EngageQueue({ user }: EngageQueueProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) fetchRecentComments();
+    if (!user) return;
+    fetchRecentComments();
+
+    const channel = supabase
+      .channel('engage-queue-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'engage_comments',
+          filter: `user_id=eq.${user.id}`,
+        },
+        () => fetchRecentComments(),
+      )
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
   }, [user]);
 
   const fetchRecentComments = async () => {
