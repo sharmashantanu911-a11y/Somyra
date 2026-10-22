@@ -1,13 +1,13 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// MODEL CHAINS — Groq only. Every tier ends with a lightweight emergency
-// fallback so no generation ever hard-fails due to rate limits.
+// MODEL CHAINS — Groq only. Single model across every tier; repeated slots
+// are retry attempts so a transient failure never hard-fails a generation.
 // ─────────────────────────────────────────────────────────────────────────────
 const MODEL_CHAINS: Record<string, string[]> = {
-  Free: ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'],
-  Pro:  ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama-3.1-8b-instant'],
-  Max:  ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama-3.1-8b-instant'],
+  Free: ['qwen/qwen3.8-27b', 'qwen/qwen3.8-27b'],
+  Pro:  ['qwen/qwen3.8-27b', 'qwen/qwen3.8-27b', 'qwen/qwen3.8-27b'],
+  Max:  ['qwen/qwen3.8-27b', 'qwen/qwen3.8-27b', 'qwen/qwen3.8-27b'],
 };
 
 // Small delay helper — gives Groq rate limiter time to reset between models

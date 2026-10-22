@@ -29,7 +29,7 @@ const CHANGELOG_DATA: ChangelogVersion[] = [
       {
         badge: 'FIXED',
         title: 'AI Intelligence Restored',
-        description: 'Successfully migrated to GPT OSS 120B with automatic fallback to Llama 3.3. Reliability and \"human-like\" quality are now 100% restored across all features.'
+        description: 'Successfully migrated to Qwen 3.8 27B. Reliability and "human-like" quality are now 100% restored across all features.'
       },
       {
         badge: 'NEW',
@@ -90,7 +90,7 @@ const CHANGELOG_DATA: ChangelogVersion[] = [
       {
         badge: 'IMPROVED',
         title: 'Post Writer',
-        description: 'Switched to openai/gpt-oss-120b model for significantly better output quality. Less generic more human.'
+        description: 'Switched to Qwen 3.8 27B model for significantly better output quality. Less generic more human.'
       },
       {
         badge: 'IMPROVED',

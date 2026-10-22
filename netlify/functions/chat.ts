@@ -14,7 +14,7 @@ export const handler: Handler = async (event, context) => {
     const { messages, temperature, max_tokens, tier = 'Free' } = body;
     
     // Use the primary model for the tier
-    const primaryModel = tier === 'Pro' || tier === 'Max' ? 'gemini-3.1-pro' : 'gemini-2.5-flash';
+    const primaryModel = 'qwen/qwen3.8-27b';
 
     const response = await fetch("http://localhost:3001/api/chat", {
       method: "POST",
